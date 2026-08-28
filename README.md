@@ -88,6 +88,10 @@ MVTec AD 2 must be obtained directly from MVTec and kept outside Git. See
 [the local dataset setup and audit guide](docs/dataset-setup.md) for licensing,
 placement, configuration, and command examples. Audit reports are generated from
 the supplied filesystem; the repository contains no invented dataset statistics.
+The [real-dataset validation record](docs/real-dataset-validation.md) documents
+the Phase 1 full audit and its limitations. A separate
+[Phase 2 proposal](docs/phase-2-proposal.md) is available for review; it contains
+no model results and authorizes no training by itself.
 
 ## License
 

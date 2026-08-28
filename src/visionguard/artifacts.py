@@ -30,7 +30,7 @@ def capture_git_state(repository: Path) -> dict[str, Any]:
 
     def git(*arguments: str) -> str:
         completed = subprocess.run(
-            ["git", "-c", f"safe.directory={repository}", *arguments],
+            ["git", "-c", f"safe.directory={repository.as_posix()}", *arguments],
             cwd=repository,
             check=True,
             capture_output=True,
@@ -43,6 +43,9 @@ def capture_git_state(repository: Path) -> dict[str, Any]:
         revision = git("rev-parse", "HEAD")
         status = git("status", "--porcelain")
         branch = git("branch", "--show-current")
+    except subprocess.CalledProcessError as exc:
+        detail = exc.stderr.strip() or type(exc).__name__
+        raise ArtifactError(f"Unable to capture Git state: {detail}") from exc
     except (OSError, subprocess.SubprocessError) as exc:
         raise ArtifactError(
             f"Unable to capture Git state: {type(exc).__name__}"

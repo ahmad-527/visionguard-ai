@@ -7,6 +7,7 @@ import pytest
 
 from visionguard.artifacts import (
     ArtifactError,
+    capture_git_state,
     dataset_audit_identity,
     new_experiment_artifact,
     validate_artifact,
@@ -27,6 +28,13 @@ def artifact() -> dict[str, object]:
 
 def test_artifact_schema_accepts_unmeasured_skeleton() -> None:
     validate_artifact(artifact())
+
+
+def test_git_state_capture_handles_repository_path() -> None:
+    state = capture_git_state(Path.cwd().resolve())
+
+    assert len(state["commit"]) == 40
+    assert isinstance(state["dirty"], bool)
 
 
 def test_artifact_cannot_claim_benchmark() -> None:

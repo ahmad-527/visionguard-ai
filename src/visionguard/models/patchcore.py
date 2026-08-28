@@ -89,7 +89,7 @@ class AnomalibPatchCoreAdapter:
             accelerator=accelerator,
             devices=1,
             logger=False,
-            enable_checkpointing=False,
+            default_root_dir=self.config.output_dir.as_posix(),
         )
         self.engine.fit(model=self.model, datamodule=datamodule)
 

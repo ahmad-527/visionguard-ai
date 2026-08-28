@@ -80,6 +80,6 @@ def test_cpu_policy_is_passed_through_adapter(
         "accelerator": "cpu",
         "devices": 1,
         "logger": False,
-        "enable_checkpointing": False,
+        "default_root_dir": "outputs/patchcore_phase2a_smoke",
     }
     assert calls["model"]["post_processor"] is False  # type: ignore[index]

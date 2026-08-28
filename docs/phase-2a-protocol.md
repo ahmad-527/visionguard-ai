@@ -75,3 +75,7 @@ operations.
 Generated artifacts, predictions, model caches, weights, checkpoints, and run
 outputs remain ignored and outside Git. Runtime and memory may be reported only
 when written by instrumentation; missing measurements remain missing.
+
+Anomalib's fit lifecycle creates its framework checkpoint under the configured,
+ignored output directory. It is a run artifact, not a source asset, and must not
+be committed or redistributed.

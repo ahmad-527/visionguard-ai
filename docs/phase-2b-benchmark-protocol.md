@@ -266,6 +266,12 @@ is reported only if observed. Otherwise maximum absolute/relative differences
 and map differences are recorded with declared tolerances. It is engineering
 evidence, not a benchmark result.
 
+The completed same-machine outcome is recorded in
+[`phase-2b-repeatability.md`](phase-2b-repeatability.md). The compared memory
+bank, validation scores, approved order-statistic thresholds, and all stored map
+hashes were exact across two runs; the record states the limited scope and does
+not generalize this observation across environments.
+
 ## Protocol amendment rule
 
 Any benchmark-relevant change after Phase 2C begins invalidates the affected

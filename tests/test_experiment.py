@@ -163,6 +163,17 @@ def test_incompatible_determinism_settings_are_rejected(tmp_path: Path) -> None:
         load_experiment_config(path)
 
 
+def test_center_crop_can_be_disabled_for_border_preserving_protocol(
+    tmp_path: Path,
+) -> None:
+    path = write_changed(
+        tmp_path,
+        lambda data: data["experiment"]["preprocessing"].update({"center_crop": None}),
+    )
+
+    assert load_experiment_config(path).preprocessing.center_crop is None
+
+
 def test_boundary_policy_rejects_validation_training() -> None:
     with pytest.raises(DataBoundaryError, match="cannot be used"):
         DataBoundaryPolicy().authorize("validation", SplitRole.TRAIN)

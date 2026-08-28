@@ -11,6 +11,14 @@ from pathlib import Path
 from typing import Any
 
 from visionguard.paths import portable_relative_path
+from visionguard.protocol import (
+    OFFICIAL_CATEGORIES,
+    PROTOCOL_ID,
+    PROTOCOL_SEEDS,
+    ProtocolError,
+    protocol_fingerprint,
+    validate_protocol_snapshot,
+)
 
 
 class ArtifactError(ValueError):
@@ -136,6 +144,7 @@ def new_experiment_artifact(
         "environment": environment,
         "reproducibility": reproducibility,
         "weights": [],
+        "model_state": {},
         "thresholds": {},
         "predictions": [],
         "metrics": [],
@@ -146,8 +155,55 @@ def new_experiment_artifact(
     }
 
 
+def new_benchmark_artifact(
+    *,
+    protocol_document: dict[str, Any],
+    experiment_id: str,
+    git: dict[str, Any],
+    dataset: dict[str, Any],
+    category: str,
+    seed: int,
+    environment: dict[str, Any],
+    weight: dict[str, Any],
+    calibration: dict[str, Any],
+) -> dict[str, Any]:
+    """Create a protocol-bound benchmark artifact after an external gate passes."""
+
+    protocol = protocol_document["protocol"]
+    return {
+        "artifact_schema_version": 2,
+        "protocol_id": protocol["id"],
+        "protocol_fingerprint": protocol_fingerprint(protocol_document),
+        "protocol_snapshot": protocol,
+        "experiment_id": experiment_id,
+        "generated_at": datetime.now(UTC).isoformat(),
+        "run_kind": "protocol_authorized_public_benchmark",
+        "benchmark_claim": True,
+        "git": git,
+        "dataset": dataset,
+        "category": category,
+        "seed": seed,
+        "environment": environment,
+        "weight": weight,
+        "calibration": calibration,
+        "thresholds": {},
+        "predictions": [],
+        "metric_implementation": {},
+        "category_metrics": {},
+        "aggregation": protocol["metrics"]["official_ranking"]["category_aggregation"],
+        "resources": {},
+        "warnings": [],
+        "failures": [],
+        "status": "initialized",
+    }
+
+
 def validate_artifact(artifact: dict[str, Any]) -> None:
     """Validate required fields and measured-value types for schema version 1."""
+
+    if artifact.get("artifact_schema_version") == 2:
+        _validate_benchmark_artifact(artifact)
+        return
 
     required = {
         "artifact_schema_version",
@@ -161,6 +217,7 @@ def validate_artifact(artifact: dict[str, Any]) -> None:
         "environment",
         "reproducibility",
         "weights",
+        "model_state",
         "thresholds",
         "predictions",
         "metrics",
@@ -194,6 +251,87 @@ def validate_artifact(artifact: dict[str, Any]) -> None:
         score = prediction.get("anomaly_score")
         if not isinstance(score, (int, float)) or not math.isfinite(float(score)):
             raise ArtifactError("Prediction anomaly_score must be finite")
+
+
+def _validate_benchmark_artifact(artifact: dict[str, Any]) -> None:
+    required = {
+        "artifact_schema_version",
+        "protocol_id",
+        "protocol_fingerprint",
+        "protocol_snapshot",
+        "experiment_id",
+        "generated_at",
+        "run_kind",
+        "benchmark_claim",
+        "git",
+        "dataset",
+        "category",
+        "seed",
+        "environment",
+        "weight",
+        "calibration",
+        "thresholds",
+        "predictions",
+        "metric_implementation",
+        "category_metrics",
+        "aggregation",
+        "resources",
+        "warnings",
+        "failures",
+        "status",
+    }
+    missing = required - set(artifact)
+    if missing:
+        raise ArtifactError(
+            f"Benchmark artifact is missing: {', '.join(sorted(missing))}"
+        )
+    if (
+        artifact["protocol_id"] != PROTOCOL_ID
+        or artifact["run_kind"] != "protocol_authorized_public_benchmark"
+        or artifact["benchmark_claim"] is not True
+    ):
+        raise ArtifactError("Benchmark artifact has an invalid protocol identity")
+    document = {"protocol": artifact["protocol_snapshot"]}
+    try:
+        validate_protocol_snapshot(artifact["protocol_snapshot"])
+    except ProtocolError as exc:
+        raise ArtifactError(
+            "Benchmark artifact protocol snapshot is not frozen"
+        ) from exc
+    if artifact["protocol_fingerprint"] != protocol_fingerprint(document):
+        raise ArtifactError("Benchmark artifact protocol fingerprint does not match")
+    if artifact["category"] not in OFFICIAL_CATEGORIES:
+        raise ArtifactError("Benchmark artifact category is outside the protocol")
+    if artifact["seed"] not in PROTOCOL_SEEDS:
+        raise ArtifactError("Benchmark artifact seed is outside the protocol")
+    if (
+        not isinstance(artifact["git"], dict)
+        or artifact["git"].get("dirty") is not False
+    ):
+        raise ArtifactError("Benchmark artifacts require a clean Git state")
+    if (
+        not isinstance(artifact["dataset"], dict)
+        or artifact["dataset"].get("status") != "passed"
+    ):
+        raise ArtifactError("Benchmark artifacts require a passing dataset audit")
+    weight = artifact["weight"]
+    if not isinstance(weight, dict) or len(str(weight.get("sha256", ""))) != 64:
+        raise ArtifactError("Benchmark artifacts require verified weight identity")
+    if not isinstance(artifact["predictions"], list):
+        raise ArtifactError("Benchmark artifact predictions must be a list")
+    for prediction in artifact["predictions"]:
+        if not isinstance(prediction, dict):
+            raise ArtifactError("Each benchmark prediction must be a mapping")
+        _artifact_relative_path(prediction.get("sample_id"), "Prediction sample_id")
+        score = prediction.get("anomaly_score")
+        if not isinstance(score, (int, float)) or not math.isfinite(float(score)):
+            raise ArtifactError("Prediction anomaly_score must be finite")
+        anomaly_map = prediction.get("anomaly_map")
+        if not isinstance(anomaly_map, dict):
+            raise ArtifactError("Benchmark prediction requires an anomaly map")
+        _artifact_relative_path(anomaly_map.get("path"), "Prediction anomaly_map.path")
+        if len(str(anomaly_map.get("sha256", ""))) != 64:
+            raise ArtifactError("Benchmark anomaly map requires SHA-256 identity")
 
 
 def write_artifact(path: Path, artifact: dict[str, Any]) -> None:

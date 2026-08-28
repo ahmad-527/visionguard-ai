@@ -49,7 +49,7 @@ class PreprocessingConfig:
     """Deterministic input preprocessing contract."""
 
     resize: tuple[int, int]
-    center_crop: tuple[int, int]
+    center_crop: tuple[int, int] | None
     normalization: str
     augmentation: str
 
@@ -140,6 +140,10 @@ def _image_size(value: Any, location: str) -> tuple[int, int]:
     ):
         raise ConfigurationError(f"{location} must contain two positive integers")
     return value[0], value[1]
+
+
+def _optional_image_size(value: Any, location: str) -> tuple[int, int] | None:
+    return None if value is None else _image_size(value, location)
 
 
 def _threshold(value: Any, location: str) -> ThresholdConfig:
@@ -336,7 +340,7 @@ def load_experiment_config(path: Path) -> ExperimentConfig:
         resize=_image_size(
             preprocessing_data.get("resize"), "experiment.preprocessing.resize"
         ),
-        center_crop=_image_size(
+        center_crop=_optional_image_size(
             preprocessing_data.get("center_crop"),
             "experiment.preprocessing.center_crop",
         ),
@@ -353,7 +357,7 @@ def load_experiment_config(path: Path) -> ExperimentConfig:
         raise ConfigurationError("Phase 2A normalization must be 'imagenet'")
     if preprocessing.augmentation != "none":
         raise ConfigurationError("Phase 2A augmentation must be 'none'")
-    if any(
+    if preprocessing.center_crop is not None and any(
         crop > resize
         for crop, resize in zip(
             preprocessing.center_crop, preprocessing.resize, strict=True

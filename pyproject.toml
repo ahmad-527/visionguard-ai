@@ -28,6 +28,7 @@ ml = [
 [project.scripts]
 visionguard-audit = "visionguard.cli:main"
 visionguard-patchcore-smoke = "visionguard.runner:main"
+visionguard-repeatability-compare = "visionguard.repeatability:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/visionguard"]

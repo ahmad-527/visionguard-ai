@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import importlib
 import importlib.metadata
 from dataclasses import dataclass
@@ -123,3 +124,18 @@ class AnomalibPatchCoreAdapter:
                     )
                 )
         return tuple(predictions)
+
+    def memory_bank_identity(self) -> dict[str, Any]:
+        """Hash the fitted coreset bytes for controlled repeatability checks."""
+
+        memory_bank = getattr(getattr(self.model, "model", None), "memory_bank", None)
+        if memory_bank is None:
+            raise RuntimeError("PatchCore memory bank is unavailable after fitting")
+        contiguous = memory_bank.detach().cpu().contiguous()
+        payload = contiguous.numpy().tobytes(order="C")
+        return {
+            "sha256": hashlib.sha256(payload).hexdigest(),
+            "shape": list(contiguous.shape),
+            "dtype": str(contiguous.dtype),
+            "byte_order": "native",
+        }

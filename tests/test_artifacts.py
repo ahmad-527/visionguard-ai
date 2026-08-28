@@ -9,10 +9,12 @@ from visionguard.artifacts import (
     ArtifactError,
     capture_git_state,
     dataset_audit_identity,
+    new_benchmark_artifact,
     new_experiment_artifact,
     validate_artifact,
     write_artifact,
 )
+from visionguard.protocol import load_protocol
 
 
 def artifact() -> dict[str, object]:
@@ -175,3 +177,37 @@ def test_dataset_audit_must_match_runtime_root(tmp_path: Path) -> None:
 
     with pytest.raises(ArtifactError, match="does not match"):
         dataset_audit_identity(report_path, expected_root=tmp_path / "different")
+
+
+def benchmark_artifact() -> dict[str, object]:
+    return new_benchmark_artifact(
+        protocol_document=load_protocol(
+            Path("configs/protocols/patchcore-mvtecad2-v1.yaml")
+        ),
+        experiment_id="benchmark-can-42",
+        git={"commit": "a" * 40, "branch": "benchmark", "dirty": False},
+        dataset={"sha256": "b" * 64, "status": "passed"},
+        category="can",
+        seed=42,
+        environment={"resolved_packages": {}},
+        weight={"sha256": "c" * 64},
+        calibration={"normal_only": True},
+    )
+
+
+def test_benchmark_artifact_is_bound_to_protocol_fingerprint() -> None:
+    value = benchmark_artifact()
+
+    validate_artifact(value)
+    value["protocol_snapshot"]["model"]["num_neighbors"] = 1  # type: ignore[index]
+    with pytest.raises(ArtifactError, match="protocol"):
+        validate_artifact(value)
+
+
+@pytest.mark.parametrize(("field", "value"), [("category", "easy"), ("seed", 7)])
+def test_benchmark_artifact_rejects_protocol_drift(field: str, value: object) -> None:
+    artifact_value = benchmark_artifact()
+    artifact_value[field] = value
+
+    with pytest.raises(ArtifactError, match=field):
+        validate_artifact(artifact_value)

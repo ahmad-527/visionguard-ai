@@ -239,6 +239,9 @@ def run_smoke(*, repository: Path, dataset_root: Path, config_path: Path) -> Pat
         datamodule = build_smoke_datamodule(dataset_root, config, repository=repository)
         adapter = AnomalibPatchCoreAdapter(config)
         adapter.fit(datamodule)
+        artifact["model_state"] = {
+            "memory_bank": adapter.memory_bank_identity(),
+        }
         predictions = adapter.predict(datamodule)
         artifact["weights"] = [_weight_identity(config.model.weight_revision)]
         artifact_predictions = []

@@ -2,9 +2,9 @@
 
 Production-grade deep learning platform for industrial visual anomaly detection, defect localization, benchmarking, and real-time quality inspection.
 
-> **Project status:** Phase 3A — the proposed EfficientAD comparison protocol is
-> frozen for pull-request review. EfficientAD `test_public` has not been run;
-> Phase 3B remains locked.
+> **Project status:** Phase 3B — the reviewed EfficientAD protocol is frozen and
+> the interruption-safe public benchmark implementation is under verification.
+> No EfficientAD `test_public` result is reported yet.
 
 ## Mission
 
@@ -116,7 +116,9 @@ predeclares the maintained implementation, PDN-S model, training and penalty
 data, native map normalization, VisionGuard calibration/evaluation contracts,
 artifact schema, failure policy, and deliberate public-evaluation lock. Its
 recorded train/validation-normal engineering probe contains no benchmark
-performance claim.
+performance claim. Phase 3B's pre-run checkpoint, resume, and evidence rules are
+recorded in the
+[interruption-safe execution contract](docs/phase-3b-execution-contract.md).
 
 ## License
 

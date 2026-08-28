@@ -1,0 +1,158 @@
+schema_version: 1
+protocol:
+  id: efficientad-mvtecad2-v1
+  status: proposed_frozen_phase3a
+  phase3a_public_evaluation_lock: true
+  dataset:
+    name: mvtec_ad_2
+    version: official_release
+    categories: [can, fabric, fruit_jelly, rice, sheet_metal, vial, wallplugs, walnuts]
+    train_split: train
+    calibration_split: validation
+    future_public_evaluation_split: test_public
+    private_splits: [test_private, test_private_mixed]
+  model:
+    implementation: anomalib
+    implementation_version: 2.6.0
+    implementation_revision: 3759687e76395c4d6d239552d3bf6d72e003da78
+    algorithm: efficient_ad
+    variant: pdn_small
+    rejected_variant: pdn_medium
+    teacher_out_channels: 384
+    padding: false
+    pad_maps: true
+    teacher_pretrained: true
+    teacher_weight_filename: pretrained_teacher_small.pth
+    teacher_weight_sha256: a16ded54719674435576aee641152616a640dfc6dc2b83115dab6e226610ae7d
+    teacher_weight_archive_sha256: c09aeaa2b33f244b3261a5efdaeae8f8284a949470a4c5a526c61275fe62684a
+    teacher_weight_source: https://github.com/open-edge-platform/anomalib/releases/download/efficientad_pretrained_weights/efficientad_pretrained_weights.zip
+    teacher_weight_license: Apache-2.0
+    anomaly_map_combination: equal_mean_student_teacher_and_student_autoencoder
+  preprocessing:
+    decoder: pillow_via_torchvision_default_loader
+    color_mode: RGB
+    resize: [256, 256]
+    resize_interpolation: bilinear
+    resize_antialias: true
+    aspect_ratio: distort_to_exact_size
+    center_crop: null
+    tensor_layout: CHW
+    tensor_dtype: float32
+    tensor_range: [0.0, 1.0]
+    model_internal_normalization_mean: [0.485, 0.456, 0.406]
+    model_internal_normalization_std: [0.229, 0.224, 0.225]
+    train_augmentation:
+      autoencoder_student_branch: one_of_brightness_contrast_saturation_uniform_0.8_1.2
+      penalty_stream_random_grayscale_probability: 0.3
+    inference_augmentation: none
+    anomaly_map_internal_interpolation: bilinear
+    anomaly_map_internal_align_corners: false
+    anomaly_map_restoration_interpolation: bilinear
+    anomaly_map_restoration_align_corners: false
+    anomaly_map_output_coordinates: original_image_height_width
+  training:
+    optimizer: adam
+    learning_rate: 0.0001
+    weight_decay: 0.00001
+    scheduler: step_lr
+    scheduler_step_fraction: 0.95
+    scheduler_gamma: 0.1
+    max_steps: 70000
+    max_epochs: -1
+    batch_size: 1
+    accumulate_grad_batches: 1
+    gradient_clipping: none
+    precision: float32
+    mixed_precision: false
+    checkpoint_selection: final_step
+    early_stopping: false
+    teacher_behavior: frozen_pretrained_channel_standardized
+    student_initialization: pytorch_default_under_seed
+    autoencoder_initialization: pytorch_default_under_seed
+    hard_feature_quantile: 0.999
+    loss_combination: sum_student_teacher_autoencoder_student_autoencoder
+    device: cuda
+    num_workers: 0
+    shuffle_train: true
+  auxiliary_data:
+    required: true
+    role: student_penalty_loss
+    dataset: imagenette2
+    publisher: fastai
+    source: https://s3.amazonaws.com/fast-ai-imageclas/imagenette2.tgz
+    archive_filename: imagenette2.tgz
+    archive_sha256: 6cbfac238434d89fe99e651496f0812ebc7a10fa62bd42d6874042bf01de4efd
+    content_origin: ImageNet_subset
+    use_restriction: noncommercial_research
+    redistribution: prohibited_by_visionguard
+    batch_size: 1
+    shuffle: true
+    resize: [512, 512]
+    center_crop: [256, 256]
+    random_grayscale_probability: 0.3
+  internal_map_normalization:
+    required: true
+    source_split: validation
+    normal_only: true
+    student_teacher_lower_quantile: 0.9
+    student_teacher_upper_quantile: 0.995
+    student_autoencoder_lower_quantile: 0.9
+    student_autoencoder_upper_quantile: 0.995
+    scale: 0.1
+  calibration:
+    normal_only: true
+    split: validation
+    comparison: score_strictly_greater_than_threshold
+    image:
+      method: highest_order_statistic
+      calibration_unit: normalized_image_anomaly_score
+      minimum_samples: 19
+    pixel:
+      method: highest_order_statistic
+      calibration_unit: per_image_maximum_normalized_restored_map_score
+      minimum_samples: 19
+  metrics:
+    official_ranking:
+      name: au_pro
+      fpr_limit: 0.05
+      ground_truth_connectivity: 8
+      representation: original_coordinate_float16_tiff
+      category_aggregation: unweighted_arithmetic_mean
+    official_thresholded:
+      names: [pixel_f1, image_f1]
+      threshold_source: validation_normal_only
+      category_aggregation: unweighted_arithmetic_mean
+    visionguard_supplemental: [image_auroc]
+  reproducibility:
+    seeds: [42, 123, 2026]
+    report_every_seed: true
+    deterministic_algorithms: true
+    cudnn_benchmark: false
+    cublas_workspace_config: ':4096:8'
+    seed_python: true
+    seed_numpy: true
+    seed_torch: true
+    seed_cuda: true
+    seed_dataloader: true
+  artifacts:
+    schema_version: 3
+    checkpoint_identity: canonical_tensor_sha256
+    anomaly_map_identity: sha256
+    predictions_order: lexical_portable_sample_id
+  resources:
+    inference_batch_size: 1
+    inference_dtype: float32
+    warmup_repetitions: 1000
+    timed_repetitions: 1000
+    cuda_synchronize: true
+    timing_start: before_host_to_device_transfer
+    timing_end: after_anomaly_map_returned_to_cpu
+    report: [mean, sample_standard_deviation, minimum, maximum]
+    cuda_memory: [peak_allocated, peak_reserved]
+  dependencies:
+    python: [3.11, 3.12]
+    anomalib: 2.6.0
+    lightning: 2.6.5
+    torch: 2.9.1
+    torchvision: 0.24.1
+    cuda_runtime: '12.6'

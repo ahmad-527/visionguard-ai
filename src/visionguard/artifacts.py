@@ -205,6 +205,11 @@ def new_benchmark_artifact(
 def validate_artifact(artifact: dict[str, Any]) -> None:
     """Validate required fields and measured-value types for schema version 1."""
 
+    if artifact.get("artifact_schema_version") == 3:
+        from visionguard.efficientad_artifacts import validate_efficientad_artifact
+
+        validate_efficientad_artifact(artifact)
+        return
     if artifact.get("artifact_schema_version") == 2:
         _validate_benchmark_artifact(artifact)
         return

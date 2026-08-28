@@ -2,8 +2,8 @@
 
 Production-grade deep learning platform for industrial visual anomaly detection, defect localization, benchmarking, and real-time quality inspection.
 
-> **Project status:** Phase 2A — PatchCore baseline infrastructure and a limited
-> non-benchmark engineering smoke test. No benchmark result is published.
+> **Project status:** Phase 2B — the PatchCore benchmark protocol is being frozen
+> before evaluation. No benchmark result is published.
 
 ## Mission
 
@@ -99,6 +99,9 @@ no model results and authorizes no training by itself. Phase 2A's enforced data,
 threshold, metric, artifact, and reproducibility decisions are documented in the
 [engineering protocol](docs/phase-2a-protocol.md). The checked-in PatchCore smoke
 configuration is deliberately non-benchmark and does not enable `test_public`.
+The [Phase 2B frozen benchmark protocol](docs/phase-2b-benchmark-protocol.md)
+predeclares the future public evaluation methodology; it does not authorize or
+report a benchmark run.
 
 ## License
 

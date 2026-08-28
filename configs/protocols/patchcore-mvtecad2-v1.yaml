@@ -1,0 +1,88 @@
+schema_version: 1
+protocol:
+  id: patchcore-mvtecad2-v1
+  status: frozen
+  dataset:
+    name: mvtec_ad_2
+    version: official_release
+    categories: [can, fabric, fruit_jelly, rice, sheet_metal, vial, wallplugs, walnuts]
+    train_split: train
+    calibration_split: validation
+    authorized_public_evaluation_split: test_public
+    private_splits: [test_private, test_private_mixed]
+  model:
+    implementation: anomalib
+    implementation_version: 2.6.0
+    algorithm: patchcore
+    backbone: wide_resnet50_2.racm_in1k
+    layers: [layer2, layer3]
+    pretrained: true
+    weight_source: https://huggingface.co/timm/wide_resnet50_2.racm_in1k
+    weight_revision: 30f73aceaaa1911830a9795b83ab1908dba18719
+    coreset_sampling_ratio: 0.01
+    num_neighbors: 9
+    feature_pooling: avg_pool_3x3_stride1_padding1
+    anomaly_map_gaussian_sigma: 4
+  preprocessing:
+    decoder: pillow_via_torchvision_default_loader
+    color_mode: RGB
+    resize: [256, 256]
+    resize_interpolation: bilinear
+    resize_antialias: true
+    aspect_ratio: distort_to_exact_size
+    center_crop: null
+    tensor_layout: CHW
+    tensor_dtype: float32
+    tensor_range: [0.0, 1.0]
+    normalization_mean: [0.485, 0.456, 0.406]
+    normalization_std: [0.229, 0.224, 0.225]
+    normalization_source: ImageNet
+    augmentation: none
+    anomaly_map_interpolation: bilinear
+    anomaly_map_align_corners: false
+    anomaly_map_output_coordinates: original_image_height_width
+  calibration:
+    normal_only: true
+    split: validation
+    comparison: score_strictly_greater_than_threshold
+    image:
+      method: highest_order_statistic
+      calibration_unit: image_anomaly_score
+      minimum_samples: 19
+    pixel:
+      method: highest_order_statistic
+      calibration_unit: per_image_maximum_pixel_score
+      minimum_samples: 19
+    exchangeability_required_for_marginal_coverage: true
+    operational_false_positive_guarantee: none
+  metrics:
+    official_ranking:
+      name: au_pro
+      level: pixel_region
+      fpr_limit: 0.05
+      anomaly_score_direction: higher_is_more_anomalous
+      ground_truth_connectivity: 4
+      category_aggregation: unweighted_arithmetic_mean
+    official_thresholded:
+      names: [pixel_f1, image_f1]
+      threshold_source: validation_normal_only
+      category_aggregation: unweighted_arithmetic_mean
+    visionguard_supplemental: [image_auroc]
+  reproducibility:
+    seeds: [42, 123, 2026]
+    report_every_seed: true
+    seed_aggregation: unweighted_mean_and_sample_standard_deviation
+    deterministic_algorithms: true
+    cudnn_benchmark: false
+  data_loader:
+    train_batch_size: 1
+    evaluation_batch_size: 1
+    num_workers: 0
+    shuffle_train: false
+  dependencies:
+    python: [3.11, 3.12]
+    anomalib: 2.6.0
+    timm: 1.0.28
+    torch: 2.9.1
+    torchvision: 0.24.1
+    cuda_runtime: "12.6"

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Any
 
 import pytest
 import yaml
@@ -39,16 +40,69 @@ def test_unknown_configuration_key_is_rejected(tmp_path: Path) -> None:
         load_experiment_config(path)
 
 
-def test_absolute_dataset_path_is_rejected(tmp_path: Path) -> None:
+@pytest.mark.parametrize(
+    "invalid_path",
+    [
+        "/private/file.yaml",
+        "C:/private/file.yaml",
+        r"C:\private\file.yaml",
+        "C:private/file.yaml",
+        r"\server\share\file.yaml",
+        r"\\server\share\file.yaml",
+        "//server/share/file.yaml",
+        "../file.yaml",
+        "configs/../../file.yaml",
+        r"..\file.yaml",
+        r"configs\..\..\file.yaml",
+    ],
+)
+def test_non_relative_dataset_paths_are_rejected(
+    tmp_path: Path, invalid_path: str
+) -> None:
     path = write_changed(
         tmp_path,
-        lambda data: data["experiment"]["dataset"].update(
-            {"config": "C:/private/mvtec.yaml"}
-        ),
+        lambda data: data["experiment"]["dataset"].update({"config": invalid_path}),
     )
 
     with pytest.raises(ConfigurationError, match="repository-relative"):
         load_experiment_config(path)
+
+
+@pytest.mark.parametrize(
+    ("field", "invalid_path"),
+    [
+        ("dataset.audit_report", "//server/share/audit.json"),
+        ("output_dir", r"outputs\..\..\private"),
+    ],
+)
+def test_all_configured_repository_paths_use_portable_validation(
+    tmp_path: Path, field: str, invalid_path: str
+) -> None:
+    def change(data: Any) -> None:
+        experiment = data["experiment"]
+        if field == "dataset.audit_report":
+            experiment["dataset"]["audit_report"] = invalid_path
+        else:
+            experiment[field] = invalid_path
+
+    with pytest.raises(ConfigurationError, match="repository-relative"):
+        load_experiment_config(write_changed(tmp_path, change))
+
+
+def test_repository_paths_allow_relative_paths_with_either_slash_convention(
+    tmp_path: Path,
+) -> None:
+    def change(data: Any) -> None:
+        experiment = data["experiment"]
+        experiment["dataset"]["config"] = r"configs\datasets\mvtec_ad_2.yaml"
+        experiment["dataset"]["audit_report"] = "audit-reports/example.json"
+        experiment["output_dir"] = r"outputs\run-001"
+
+    config = load_experiment_config(write_changed(tmp_path, change))
+
+    assert config.dataset.config_path == Path("configs/datasets/mvtec_ad_2.yaml")
+    assert config.dataset.audit_report == Path("audit-reports/example.json")
+    assert config.output_dir == Path("outputs/run-001")
 
 
 def test_private_split_is_rejected(tmp_path: Path) -> None:

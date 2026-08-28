@@ -10,6 +10,7 @@ import yaml
 
 from visionguard.boundaries import DataBoundaryPolicy, SplitRole
 from visionguard.config import ConfigurationError
+from visionguard.paths import portable_relative_path
 
 DevicePolicy = Literal["auto", "cpu", "cuda"]
 
@@ -109,12 +110,13 @@ def _nonempty_string(value: Any, location: str) -> str:
 
 
 def _relative_path(value: Any, location: str) -> Path:
-    path = Path(_nonempty_string(value, location))
-    if path.is_absolute() or ".." in path.parts:
+    raw_path = _nonempty_string(value, location)
+    try:
+        return portable_relative_path(raw_path)
+    except ValueError as exc:
         raise ConfigurationError(
             f"{location} must be a repository-relative path without '..'"
-        )
-    return path
+        ) from exc
 
 
 def _string_list(value: Any, location: str) -> tuple[str, ...]:

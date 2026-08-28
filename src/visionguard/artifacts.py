@@ -10,9 +10,22 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+from visionguard.paths import portable_relative_path
+
 
 class ArtifactError(ValueError):
     """Raised when artifact data is incomplete, malformed, or mutable."""
+
+
+def _artifact_relative_path(value: Any, location: str) -> None:
+    if not isinstance(value, str) or not value.strip():
+        raise ArtifactError(f"{location} must be a non-empty relative path")
+    try:
+        portable_relative_path(value.strip())
+    except ValueError as exc:
+        raise ArtifactError(
+            f"{location} must be a portable relative path without '..'"
+        ) from exc
 
 
 def sha256_file(path: Path) -> str:
@@ -170,6 +183,14 @@ def validate_artifact(artifact: dict[str, Any]) -> None:
     for prediction in artifact["predictions"]:
         if not isinstance(prediction, dict):
             raise ArtifactError("Each prediction must be a mapping")
+        _artifact_relative_path(prediction.get("sample_id"), "Prediction sample_id")
+        anomaly_map = prediction.get("anomaly_map")
+        if anomaly_map is not None:
+            if not isinstance(anomaly_map, dict):
+                raise ArtifactError("Prediction anomaly_map must be a mapping")
+            _artifact_relative_path(
+                anomaly_map.get("path"), "Prediction anomaly_map.path"
+            )
         score = prediction.get("anomaly_score")
         if not isinstance(score, (int, float)) or not math.isfinite(float(score)):
             raise ArtifactError("Prediction anomaly_score must be finite")

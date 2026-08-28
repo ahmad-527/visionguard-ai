@@ -53,6 +53,56 @@ def test_artifact_rejects_nonfinite_prediction() -> None:
         validate_artifact(value)
 
 
+@pytest.mark.parametrize(
+    "invalid_path",
+    [
+        "/private/sample.png",
+        "C:/private/sample.png",
+        r"C:\private\sample.png",
+        r"\\server\share\sample.png",
+        "../sample.png",
+        r"images\..\..\sample.png",
+    ],
+)
+def test_artifact_rejects_nonportable_sample_paths(invalid_path: str) -> None:
+    value = artifact()
+    value["predictions"] = [{"sample_id": invalid_path, "anomaly_score": 0.1}]
+
+    with pytest.raises(ArtifactError, match="portable relative path"):
+        validate_artifact(value)
+
+
+@pytest.mark.parametrize(
+    "invalid_path",
+    ["//server/share/map.npy", "C:/private/map.npy", "maps/../../map.npy"],
+)
+def test_artifact_rejects_nonportable_anomaly_map_paths(invalid_path: str) -> None:
+    value = artifact()
+    value["predictions"] = [
+        {
+            "sample_id": "test/widget.png",
+            "anomaly_score": 0.1,
+            "anomaly_map": {"path": invalid_path},
+        }
+    ]
+
+    with pytest.raises(ArtifactError, match="portable relative path"):
+        validate_artifact(value)
+
+
+def test_artifact_accepts_relative_paths_with_either_slash_convention() -> None:
+    value = artifact()
+    value["predictions"] = [
+        {
+            "sample_id": r"test\widget.png",
+            "anomaly_score": 0.1,
+            "anomaly_map": {"path": "anomaly-maps/widget.npy"},
+        }
+    ]
+
+    validate_artifact(value)
+
+
 def test_artifact_writer_refuses_overwrite(tmp_path: Path) -> None:
     path = tmp_path / "artifact.json"
     write_artifact(path, artifact())

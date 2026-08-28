@@ -52,6 +52,44 @@ environments between machines. The regular CI deliberately installs only
 `.[dev]`; it requires neither network downloads, pretrained weights, GPU, nor a
 dataset.
 
+## Phase 2B lock strategy
+
+The frozen protocol separates three concerns instead of claiming one universal
+lock can select incompatible PyTorch builds:
+
+- `requirements/locks/audit-dev-py311-py312.txt` constrains the complete
+  lightweight audit/development resolution used by ordinary CI.
+- `requirements/locks/ml-common-py311-py312.txt` constrains the reviewed
+  non-PyTorch ML resolution.
+- `requirements/environments/torch-cpu.txt` and `torch-cu126.txt` pin the
+  hardware-specific pair installed from the matching official PyTorch index.
+
+Create a fresh environment, install exactly one hardware manifest from its
+stated index, then install `.[ml,dev]` using the common and audit constraints.
+For example, CUDA 12.6 uses:
+
+```powershell
+python -m pip install -r requirements/environments/torch-cu126.txt `
+  --index-url https://download.pytorch.org/whl/cu126
+python -m pip install -e ".[ml,dev]" `
+  -c requirements/locks/ml-common-py311-py312.txt `
+  -c requirements/locks/audit-dev-py311-py312.txt
+python -m pip check
+```
+
+CPU substitutes `torch-cpu.txt` and the `/whl/cpu` index. These constraints are
+reviewed for CPython 3.11/3.12; a different Python, accelerator, or unsupported
+platform requires a separately resolved lock and a new environment identity.
+Linux CUDA wheels may add NVIDIA runtime distributions that do not exist in the
+Windows resolution, so they must be captured from that Linux environment rather
+than copied into a fake cross-platform file.
+
+Every benchmark artifact stores the sorted installed distribution mapping,
+Python/OS identity, PyTorch build suffix, CUDA runtime, and hashes of the lock
+and hardware manifest used. The benchmark gate verifies the frozen direct
+versions. CI tests keep the direct pins synchronized with the protocol without
+installing the ML stack or requiring a GPU.
+
 ## PatchCore API and VisionGuard boundary
 
 Anomalib 2.6.0 exposes `anomalib.models.Patchcore`, accepts a backbone, feature

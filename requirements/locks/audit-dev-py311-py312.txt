@@ -1,0 +1,11 @@
+# VisionGuard lightweight audit/development lock for CPython 3.11 and 3.12.
+# Install with: python -m pip install -e ".[dev]" -c <this-file>
+colorama==0.4.6; sys_platform == "win32"
+iniconfig==2.3.0
+packaging==26.3
+pillow==12.3.0
+pluggy==1.6.0
+pygments==2.21.0
+pytest==9.1.1
+pyyaml==6.0.3
+ruff==0.16.4

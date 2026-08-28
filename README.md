@@ -2,7 +2,7 @@
 
 Production-grade deep learning platform for industrial visual anomaly detection, defect localization, benchmarking, and real-time quality inspection.
 
-> **Project status:** Phase 0 — research, dataset validation, experimental protocol, and system design.
+> **Project status:** Phase 1 — reproducible project foundation and local dataset audit tooling.
 
 ## Mission
 
@@ -56,6 +56,42 @@ PASS / REVIEW / REJECT
 ## Results
 
 No benchmark results are published yet. This section will only contain values produced by committed code and traceable experiment artifacts.
+
+## Development setup
+
+Python 3.11 or newer is required. From a fresh clone, create an isolated
+environment and install the package with its development tools:
+
+```bash
+python -m venv .venv
+```
+
+Activate it (`.venv\Scripts\Activate.ps1` on PowerShell or
+`source .venv/bin/activate` on macOS/Linux), then run:
+
+```bash
+python -m pip install --upgrade pip
+python -m pip install -e ".[dev]"
+python -m ruff format --check .
+python -m ruff check .
+python -m pytest
+```
+
+The runtime dependency set is intentionally small: Pillow performs real image
+decoding and PyYAML loads explicit dataset contracts. Pytest and Ruff are
+development-only dependencies. No deep-learning framework is required or used
+in Phase 1.
+
+## Dataset audit
+
+MVTec AD 2 must be obtained directly from MVTec and kept outside Git. See
+[the local dataset setup and audit guide](docs/dataset-setup.md) for licensing,
+placement, configuration, and command examples. Audit reports are generated from
+the supplied filesystem; the repository contains no invented dataset statistics.
+The [real-dataset validation record](docs/real-dataset-validation.md) documents
+the Phase 1 full audit and its limitations. A separate
+[Phase 2 proposal](docs/phase-2-proposal.md) is available for review; it contains
+no model results and authorizes no training by itself.
 
 ## License
 

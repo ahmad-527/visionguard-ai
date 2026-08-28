@@ -1,0 +1,44 @@
+dataset:
+  name: mvtec_ad_2
+  version: official_release
+  categories:
+    - can
+    - fabric
+    - fruit_jelly
+    - rice
+    - sheet_metal
+    - vial
+    - wallplugs
+    - walnuts
+  image_extensions:
+    - .png
+  required_root_files:
+    - license.txt
+    - readme.txt
+  expected_hash_overlaps:
+    - splits: [test_private, test_private_mixed]
+      reason: >-
+        The official MVTec AD 2 paper defines test_private_mixed as the same
+        scenes as test_private with a randomly selected mix of seen and unseen
+        lighting conditions, so exact matches are intentional when regular
+        lighting is selected.
+  splits:
+    train:
+      layout: classified
+      conditions: [good]
+    validation:
+      layout: classified
+      conditions: [good]
+    test_public:
+      layout: classified
+      conditions: [good, bad]
+      mask:
+        image_condition: bad
+        directory: ground_truth
+        suffix: _mask
+    test_private:
+      layout: flat
+      conditions: []
+    test_private_mixed:
+      layout: flat
+      conditions: []

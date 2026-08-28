@@ -1,0 +1,51 @@
+# Python environments and caches
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Secrets and machine-local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+config/local/
+
+# Datasets and downloaded assets
+/data/
+/datasets/
+/mvtec_ad*/
+/MVTec_AD*/
+/visa/
+/VisA*/
+
+# Models and experiment outputs
+checkpoints/
+weights/
+models/*.pt
+models/*.pth
+models/*.ckpt
+*.onnx
+*.safetensors
+runs/
+outputs/
+artifacts/
+mlruns/
+wandb/
+audit-reports/

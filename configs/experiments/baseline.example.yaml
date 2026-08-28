@@ -1,0 +1,15 @@
+experiment:
+  id: baseline_example
+  seed: 42
+  dataset_config: configs/datasets/mvtec_ad_2.yaml
+  categories: all
+  model:
+    name: not_selected
+    pretrained_weights: null
+  preprocessing:
+    input_size: null
+    normalization: null
+  threshold:
+    calibration_split: validation
+    method: not_selected
+  output_dir: outputs/baseline_example

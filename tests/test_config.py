@@ -87,15 +87,21 @@ def test_expected_overlap_requires_documented_reason(tmp_path: Path) -> None:
         load_dataset_config(config_path)
 
 
-def test_root_file_path_traversal_is_rejected(tmp_path: Path) -> None:
+@pytest.mark.parametrize(
+    "invalid_path",
+    ["../license.txt", r"..\license.txt", "C:/license.txt", r"C:\license.txt"],
+)
+def test_root_file_non_component_paths_are_rejected(
+    tmp_path: Path, invalid_path: str
+) -> None:
     config_path = tmp_path / "path-traversal.yaml"
     config_path.write_text(
-        """dataset:
+        f"""dataset:
   name: sample
   version: one
   categories: [widget]
   image_extensions: [.png]
-  required_root_files: [../license.txt]
+  required_root_files: [{invalid_path!r}]
   splits:
     train:
       layout: classified

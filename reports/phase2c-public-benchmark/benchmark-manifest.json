@@ -1,0 +1,298 @@
+{
+  "benchmark_git_commit": "8848e8defb1f734a319168fd597b4252b606fff7",
+  "cells": {
+    "can:123": {
+      "artifact_path": "runs/can/seed-123/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "4424dbe152ff29bd51b35106c9c7a3389b2b0cf38cc0f52a0dd8c0d3a8683438",
+      "attempt": 1,
+      "category": "can",
+      "failed_attempts": [],
+      "finished_at": "2026-08-28T09:44:42.449043+00:00",
+      "seed": 123,
+      "started_at": "2026-08-28T09:42:45.778954+00:00",
+      "status": "completed"
+    },
+    "can:2026": {
+      "artifact_path": "runs/can/seed-2026/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "34135438e8343981bd392a90085474adf9991d6086b659d311a230f452c413f5",
+      "attempt": 1,
+      "category": "can",
+      "failed_attempts": [],
+      "finished_at": "2026-08-28T09:46:38.635737+00:00",
+      "seed": 2026,
+      "started_at": "2026-08-28T09:44:42.469201+00:00",
+      "status": "completed"
+    },
+    "can:42": {
+      "artifact_path": "runs/can/seed-42/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "2e773c306a6506e160139df1fd58b448105539d2205e32435f93eb549a73461d",
+      "attempt": 1,
+      "category": "can",
+      "failed_attempts": [],
+      "finished_at": "2026-08-28T09:42:45.759226+00:00",
+      "seed": 42,
+      "started_at": "2026-08-28T09:40:42.389271+00:00",
+      "status": "completed"
+    },
+    "fabric:123": {
+      "artifact_path": "runs/fabric/seed-123/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "bf82db292d636f8b9a70852146a5c6f6327dbcbbaa81d18d8ff75126d4992bef",
+      "attempt": 1,
+      "category": "fabric",
+      "failed_attempts": [],
+      "finished_at": "2026-08-28T09:54:06.536815+00:00",
+      "seed": 123,
+      "started_at": "2026-08-28T09:50:23.095163+00:00",
+      "status": "completed"
+    },
+    "fabric:2026": {
+      "artifact_path": "runs/fabric/seed-2026/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "196c50f8fd3f3da1822d1901f035e486840fde8c89a2e2aef91a81f5150a71f6",
+      "attempt": 1,
+      "category": "fabric",
+      "failed_attempts": [],
+      "finished_at": "2026-08-28T09:57:44.305226+00:00",
+      "seed": 2026,
+      "started_at": "2026-08-28T09:54:06.552044+00:00",
+      "status": "completed"
+    },
+    "fabric:42": {
+      "artifact_path": "runs/fabric/seed-42/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "df37e1c741a45989e4e6d8e06baf51c2207d245fc064b09d7451d8cdaf17a0ab",
+      "attempt": 1,
+      "category": "fabric",
+      "failed_attempts": [],
+      "finished_at": "2026-08-28T09:50:23.082190+00:00",
+      "seed": 42,
+      "started_at": "2026-08-28T09:46:38.652998+00:00",
+      "status": "completed"
+    },
+    "fruit_jelly:123": {
+      "artifact_path": "runs/fruit_jelly/seed-123/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "a0209fce0c8b60d62b866ed35f68f1d8dc800eb5e7d13af9a281b5e4cf0019a6",
+      "attempt": 1,
+      "category": "fruit_jelly",
+      "failed_attempts": [],
+      "finished_at": "2026-08-28T10:00:02.692636+00:00",
+      "seed": 123,
+      "started_at": "2026-08-28T09:58:54.299270+00:00",
+      "status": "completed"
+    },
+    "fruit_jelly:2026": {
+      "artifact_path": "runs/fruit_jelly/seed-2026/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "60e8f00cf866e9a4abad8e14b49d27085674d6aed995d3dab0aec543db596321",
+      "attempt": 1,
+      "category": "fruit_jelly",
+      "failed_attempts": [],
+      "finished_at": "2026-08-28T10:01:11.698608+00:00",
+      "seed": 2026,
+      "started_at": "2026-08-28T10:00:02.706084+00:00",
+      "status": "completed"
+    },
+    "fruit_jelly:42": {
+      "artifact_path": "runs/fruit_jelly/seed-42/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "654001d04bc43b862c1cd4ad26fbea9abf719fde73bffcfe8769d025a87848f8",
+      "attempt": 1,
+      "category": "fruit_jelly",
+      "failed_attempts": [],
+      "finished_at": "2026-08-28T09:58:54.286509+00:00",
+      "seed": 42,
+      "started_at": "2026-08-28T09:57:44.319366+00:00",
+      "status": "completed"
+    },
+    "rice:123": {
+      "artifact_path": "runs/rice/seed-123/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "57a5a40c7a86acfbd009cbdb2e89172820a74f1750f6d2973ece849a8bda2dc3",
+      "attempt": 1,
+      "category": "rice",
+      "failed_attempts": [],
+      "finished_at": "2026-08-28T10:07:14.828793+00:00",
+      "seed": 123,
+      "started_at": "2026-08-28T10:04:16.552005+00:00",
+      "status": "completed"
+    },
+    "rice:2026": {
+      "artifact_path": "runs/rice/seed-2026/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "05db540c06c7bda498e9ec8361435090202b2052b280aa86ebf5d589e8d2124e",
+      "attempt": 1,
+      "category": "rice",
+      "failed_attempts": [],
+      "finished_at": "2026-08-28T10:10:13.121410+00:00",
+      "seed": 2026,
+      "started_at": "2026-08-28T10:07:14.846766+00:00",
+      "status": "completed"
+    },
+    "rice:42": {
+      "artifact_path": "runs/rice/seed-42/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "c4e3b84038db1dfbaf59486d393126b73c5a5a37bcbc36b35a0bdaa12ff642c2",
+      "attempt": 1,
+      "category": "rice",
+      "failed_attempts": [],
+      "finished_at": "2026-08-28T10:04:16.542013+00:00",
+      "seed": 42,
+      "started_at": "2026-08-28T10:01:11.712435+00:00",
+      "status": "completed"
+    },
+    "sheet_metal:123": {
+      "artifact_path": "runs/sheet_metal/seed-123/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "9a29a2d7e79d34131e08036b3b768c87495e9ee586fd85e366bc4da7ff917fe3",
+      "attempt": 1,
+      "category": "sheet_metal",
+      "failed_attempts": [],
+      "finished_at": "2026-08-28T10:12:20.293201+00:00",
+      "seed": 123,
+      "started_at": "2026-08-28T10:11:19.228898+00:00",
+      "status": "completed"
+    },
+    "sheet_metal:2026": {
+      "artifact_path": "runs/sheet_metal/seed-2026/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "a6a288ac607a53e169cf5c54b6a112188def2fb206b382b1f661b954bcd44ae6",
+      "attempt": 1,
+      "category": "sheet_metal",
+      "failed_attempts": [],
+      "finished_at": "2026-08-28T10:13:21.535953+00:00",
+      "seed": 2026,
+      "started_at": "2026-08-28T10:12:20.305907+00:00",
+      "status": "completed"
+    },
+    "sheet_metal:42": {
+      "artifact_path": "runs/sheet_metal/seed-42/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "f302b764ec6c0dad8b15d3c01e58515b6c5f7052768cd32b9ff2052b382eb636",
+      "attempt": 1,
+      "category": "sheet_metal",
+      "failed_attempts": [],
+      "finished_at": "2026-08-28T10:11:19.209227+00:00",
+      "seed": 42,
+      "started_at": "2026-08-28T10:10:13.135917+00:00",
+      "status": "completed"
+    },
+    "vial:123": {
+      "artifact_path": "runs/vial/seed-123/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "787b583ee2746e4ab86d51fdff5e501fa0960919fe225e8f372bef57b3c99a76",
+      "attempt": 1,
+      "category": "vial",
+      "failed_attempts": [],
+      "finished_at": "2026-08-28T10:15:33.166568+00:00",
+      "seed": 123,
+      "started_at": "2026-08-28T10:14:28.841975+00:00",
+      "status": "completed"
+    },
+    "vial:2026": {
+      "artifact_path": "runs/vial/seed-2026/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "ecb43c70a4436156adf9be5d2232344e0ac561e9e9acb2d10e6e540b516952c8",
+      "attempt": 1,
+      "category": "vial",
+      "failed_attempts": [],
+      "finished_at": "2026-08-28T10:16:37.136078+00:00",
+      "seed": 2026,
+      "started_at": "2026-08-28T10:15:33.186498+00:00",
+      "status": "completed"
+    },
+    "vial:42": {
+      "artifact_path": "runs/vial/seed-42/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "f91f2a56d1fb62295281b0f918f0a8c254602615b0d4ae349aed7604570f2336",
+      "attempt": 1,
+      "category": "vial",
+      "failed_attempts": [],
+      "finished_at": "2026-08-28T10:14:28.822952+00:00",
+      "seed": 42,
+      "started_at": "2026-08-28T10:13:21.545897+00:00",
+      "status": "completed"
+    },
+    "wallplugs:123": {
+      "artifact_path": "runs/wallplugs/seed-123/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "22aa7a475ad280e313841e1c49b256f2bd1a44854b2ee79bf719b1049521d7d9",
+      "attempt": 1,
+      "category": "wallplugs",
+      "failed_attempts": [],
+      "finished_at": "2026-08-28T10:20:21.486543+00:00",
+      "seed": 123,
+      "started_at": "2026-08-28T10:18:32.403275+00:00",
+      "status": "completed"
+    },
+    "wallplugs:2026": {
+      "artifact_path": "runs/wallplugs/seed-2026/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "66555876f538ecb15219483d9e65ec8789d1483b898092d76aa0e6f685521177",
+      "attempt": 1,
+      "category": "wallplugs",
+      "failed_attempts": [],
+      "finished_at": "2026-08-28T10:22:11.549266+00:00",
+      "seed": 2026,
+      "started_at": "2026-08-28T10:20:21.502782+00:00",
+      "status": "completed"
+    },
+    "wallplugs:42": {
+      "artifact_path": "runs/wallplugs/seed-42/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "00db2a47203194a49b14aec42a57d0a168d80459281f832b408e340428cc7d43",
+      "attempt": 1,
+      "category": "wallplugs",
+      "failed_attempts": [],
+      "finished_at": "2026-08-28T10:18:32.392343+00:00",
+      "seed": 42,
+      "started_at": "2026-08-28T10:16:37.160198+00:00",
+      "status": "completed"
+    },
+    "walnuts:123": {
+      "artifact_path": "runs/walnuts/seed-123/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "f13b909a54c5d0b394c948efc96c5bea53cbe7bcf2779e9f56f4041838f06ec2",
+      "attempt": 1,
+      "category": "walnuts",
+      "failed_attempts": [],
+      "finished_at": "2026-08-28T14:01:02.938177+00:00",
+      "seed": 123,
+      "started_at": "2026-08-28T13:56:33.611016+00:00",
+      "status": "completed"
+    },
+    "walnuts:2026": {
+      "artifact_path": "runs/walnuts/seed-2026/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "c5dfae38de055d9b4b0ee2410d7c6db177ec18045fe00f2706eb9e88fa75cdd9",
+      "attempt": 1,
+      "category": "walnuts",
+      "failed_attempts": [],
+      "finished_at": "2026-08-28T14:05:36.592513+00:00",
+      "seed": 2026,
+      "started_at": "2026-08-28T14:01:02.948217+00:00",
+      "status": "completed"
+    },
+    "walnuts:42": {
+      "artifact_path": "runs/walnuts/seed-42/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "07235a36950345edc0d8daa3b13d55abcecdc271a17bcf1fe832396da2bd9ac4",
+      "attempt": 1,
+      "category": "walnuts",
+      "failed_attempts": [],
+      "finished_at": "2026-08-28T13:56:33.599173+00:00",
+      "seed": 42,
+      "started_at": "2026-08-28T10:22:11.560598+00:00",
+      "status": "completed"
+    }
+  },
+  "completed_at": "2026-08-28T14:05:36.606004+00:00",
+  "created_at": "2026-08-28T09:40:42.385663+00:00",
+  "dataset_audit_sha256": "8c0f71f0a7dc81436b7bd3affed0ba7f97ea3844213d487c2d9886befa055a92",
+  "matrix": {
+    "categories": [
+      "can",
+      "fabric",
+      "fruit_jelly",
+      "rice",
+      "sheet_metal",
+      "vial",
+      "wallplugs",
+      "walnuts"
+    ],
+    "expected_run_count": 24,
+    "seeds": [
+      42,
+      123,
+      2026
+    ]
+  },
+  "protocol_fingerprint": "03f545ea23b1bd00206cb919aece6972502712aa9f981e8a3f11dbd1be1f0c2b",
+  "protocol_id": "patchcore-mvtecad2-v1",
+  "schema_version": 1,
+  "status": "completed",
+  "summary_path": "benchmark-summary.json",
+  "summary_sha256": "cef20151986bbfb554b59286b1b23c971d5027e6bd3dd2a1aa035fa0232e62c8",
+  "updated_at": "2026-08-28T14:05:36.802446+00:00",
+  "weight_sha256": "03b71d65fb2c73bb0de079a1781009f27a782ec481d2f64ab3bde9b1cdec3000"
+}

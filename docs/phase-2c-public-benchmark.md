@@ -97,5 +97,72 @@ inference-speed benchmark and must not be published as model latency.
 
 ## Results
 
-Not yet generated. This section is populated only after all 24 authorized cells
-complete and their artifacts pass validation.
+### Completion and provenance
+
+The authorized matrix completed on 2026-08-28 with all 24 category/seed cells
+successful on their first attempt. The machine manifest records 3,252 ordered
+public predictions and corresponding continuous/thresholded map identities.
+Independent post-run validation re-hashed all 24 artifacts and all 3,252 map
+pairs successfully.
+
+- benchmark implementation Git commit:
+  `8848e8defb1f734a319168fd597b4252b606fff7`;
+- protocol fingerprint:
+  `03f545ea23b1bd00206cb919aece6972502712aa9f981e8a3f11dbd1be1f0c2b`;
+- dataset audit SHA-256:
+  `8c0f71f0a7dc81436b7bd3affed0ba7f97ea3844213d487c2d9886befa055a92`;
+- pretrained-weight SHA-256:
+  `03b71d65fb2c73bb0de079a1781009f27a782ec481d2f64ab3bde9b1cdec3000`;
+- committed machine summary SHA-256:
+  `cef20151986bbfb554b59286b1b23c971d5027e6bd3dd2a1aa035fa0232e62c8`;
+- complete local evidence size: 27.584 GiB across 6,554 files;
+- failed attempts: 0.
+
+The exact machine-generated [manifest](../reports/phase2c-public-benchmark/benchmark-manifest.json)
+and [summary](../reports/phase2c-public-benchmark/benchmark-summary.json) are
+committed. Full per-image artifacts and maps remain ignored under `outputs/`
+because of their size; their hashes are retained in the manifest and per-run
+artifacts.
+
+### Public candidate results
+
+Values are fractions in `[0, 1]`. Each category entry is the predeclared
+unweighted mean across seeds 42, 123, and 2026, followed by the sample standard
+deviation. The overall row is the unweighted mean of the eight category means;
+it does not select a seed or category.
+
+| Category | AU-PRO@0.05 | Pixel F1 | Image F1 | Image AUROC |
+| --- | ---: | ---: | ---: | ---: |
+| can | 0.008988 ± 0.011756 | 0.000000 ± 0.000000 | 0.442763 ± 0.081228 | 0.477109 ± 0.020834 |
+| fabric | 0.036633 ± 0.014266 | 0.112113 ± 0.009081 | 0.289170 ± 0.067848 | 0.631987 ± 0.061078 |
+| fruit_jelly | 0.392454 ± 0.005442 | 0.165390 ± 0.101984 | 0.396079 ± 0.096298 | 0.841944 ± 0.032214 |
+| rice | 0.132654 ± 0.002838 | 0.103237 ± 0.015816 | 0.210134 ± 0.018140 | 0.536772 ± 0.003704 |
+| sheet_metal | 0.078845 ± 0.005252 | 0.329499 ± 0.031502 | 0.383967 ± 0.128668 | 0.693827 ± 0.041435 |
+| vial | 0.471360 ± 0.028954 | 0.127071 ± 0.038786 | 0.533415 ± 0.102278 | 0.878277 ± 0.019134 |
+| wallplugs | 0.088729 ± 0.019282 | 0.000000 ± 0.000000 | 0.072756 ± 0.012586 | 0.476975 ± 0.027939 |
+| walnuts | 0.378767 ± 0.012053 | 0.477443 ± 0.011691 | 0.747128 ± 0.040877 | 0.815370 ± 0.008432 |
+| **Unweighted category mean** | **0.198554** | **0.164344** | **0.384427** | **0.669033** |
+
+AU-PRO@0.05, pixel F1, and image F1 are the protocol's official/local metrics.
+Image AUROC is the explicitly labeled VisionGuard-local supplemental metric.
+F1 uses only validation-normal thresholds and was not optimized against public
+labels. In particular, the measured zero pixel F1 for `can` and `wallplugs` is
+retained rather than hidden or recalibrated.
+
+### Interpretation boundaries and execution note
+
+These are preliminary public-split measurements of the frozen PatchCore
+baseline, not private-server results and not evidence that a final VisionGuard
+model is effective. Category variation and weak aggregate localization are
+visible limitations. The public outcomes were not used to change the protocol.
+
+The user requested a pause while `walnuts`, seed 42 was running. That process
+was suspended and resumed in place. Its stored wall-clock duration
+(`12,868.55` seconds) includes approximately 3.5 hours of suspension and is
+invalid for runtime interpretation. No model inputs, state, scores, maps, or
+metrics were changed by the pause. All execution wall times remain operational
+records only; no inference-speed benchmark was performed or claimed.
+
+Private labels were not accessed, no private archive was evaluated, and no
+submission was made to the MVTec server. Private evaluation still requires
+separate human authorization.

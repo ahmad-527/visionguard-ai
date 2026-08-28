@@ -40,6 +40,14 @@ report are measurements of the supplied filesystem. If MVTec changes the
 release layout, update the dataset configuration only after verifying the new
 official structure.
 
+The official archive also contains `license.txt` and `readme.txt`; the checked-in
+configuration requires both. It documents the intentional relationship between
+the regular and mixed private evaluation views. Exact matches for that narrowly
+configured pair remain visible in JSON as expected overlaps, while any other
+cross-split hash overlap fails the audit. See the
+[real-dataset validation record](real-dataset-validation.md) for the evidence and
+rationale.
+
 ## Configure the local path
 
 Pass the dataset root on each command. This avoids committing a developer's
@@ -73,8 +81,9 @@ or `--fail-on never` for exploratory inspection.
 - public anomalous-image to segmentation-mask naming and dimensions;
 - missing and orphan masks;
 - duplicate content within a split;
-- identical content crossing split boundaries, reported as leakage errors;
-- actual counts by split and category in deterministic JSON.
+- unexpected identical content crossing split boundaries, reported as leakage
+  errors;
+- actual counts by split and category in stable-order JSON.
 
 The tool is read-only with respect to the dataset. It does not validate the
 private labels (which are unavailable), download data, assess license compliance,

@@ -13,7 +13,12 @@ from typing import Any, Literal
 
 from PIL import Image, UnidentifiedImageError
 
-from visionguard.config import DatasetConfig, MaskConfig, SplitConfig
+from visionguard.config import (
+    DatasetConfig,
+    ExpectedHashOverlap,
+    MaskConfig,
+    SplitConfig,
+)
 
 LOGGER = logging.getLogger(__name__)
 Severity = Literal["error", "warning"]
@@ -72,7 +77,9 @@ def _image_paths(directory: Path, extensions: tuple[str, ...]) -> list[Path]:
     return sorted(
         path
         for path in directory.iterdir()
-        if path.is_file() and path.suffix.lower() in extensions
+        if path.is_file()
+        and not path.is_symlink()
+        and path.suffix.lower() in extensions
     )
 
 
@@ -153,7 +160,17 @@ def _check_directory_contents(
     root: Path,
     *,
     allowed_files: bool = False,
-) -> None:
+) -> bool:
+    if directory.is_symlink():
+        _issue(
+            issues,
+            "error",
+            "symlink_not_allowed",
+            "Dataset directories must not be symbolic links",
+            directory,
+            root,
+        )
+        return False
     if not directory.is_dir():
         _issue(
             issues,
@@ -163,7 +180,7 @@ def _check_directory_contents(
             directory,
             root,
         )
-        return
+        return False
     unexpected = sorted(
         item
         for item in directory.iterdir()
@@ -188,6 +205,7 @@ def _check_directory_contents(
                 item,
                 root,
             )
+    return True
 
 
 def _validate_masks(
@@ -202,7 +220,18 @@ def _validate_masks(
     issues: list[AuditIssue],
 ) -> None:
     image_dir = split_dir / mask.image_condition
-    mask_dir = split_dir / mask.directory / mask.image_condition
+    mask_root = split_dir / mask.directory
+    mask_dir = mask_root / mask.image_condition
+    if mask_root.is_symlink() or mask_dir.is_symlink():
+        _issue(
+            issues,
+            "error",
+            "symlink_not_allowed",
+            "Mask directories must not be symbolic links",
+            mask_dir,
+            root,
+        )
+        return
     if not mask_dir.is_dir():
         _issue(
             issues,
@@ -216,6 +245,15 @@ def _validate_masks(
 
     image_paths = _image_paths(image_dir, extensions)
     mask_paths = _image_paths(mask_dir, extensions)
+    for linked_mask in sorted(path for path in mask_dir.iterdir() if path.is_symlink()):
+        _issue(
+            issues,
+            "error",
+            "symlink_not_allowed",
+            "Mask files must not be symbolic links",
+            linked_mask,
+            root,
+        )
     masks_by_name = {path.name: path for path in mask_paths}
     expected_names: set[str] = set()
     for image_path in image_paths:
@@ -295,14 +333,14 @@ def _audit_split(
     allowed = set(split.conditions)
     if split.mask:
         allowed.add(split.mask.directory)
-    _check_directory_contents(
+    split_is_safe = _check_directory_contents(
         split_dir,
         allowed,
         issues,
         root,
         allowed_files=split.layout == "flat",
     )
-    if not split_dir.is_dir():
+    if not split_is_safe:
         return
 
     locations: Iterable[tuple[str | None, Path]]
@@ -314,6 +352,16 @@ def _audit_split(
         )
 
     for condition, directory in locations:
+        if directory.is_symlink():
+            _issue(
+                issues,
+                "error",
+                "symlink_not_allowed",
+                "Image directories must not be symbolic links",
+                directory,
+                root,
+            )
+            continue
         if not directory.is_dir():
             _issue(
                 issues,
@@ -324,6 +372,17 @@ def _audit_split(
                 root,
             )
             continue
+        for linked_file in sorted(
+            path for path in directory.iterdir() if path.is_symlink()
+        ):
+            _issue(
+                issues,
+                "error",
+                "symlink_not_allowed",
+                "Image files must not be symbolic links",
+                linked_file,
+                root,
+            )
         paths = _image_paths(directory, config.image_extensions)
         for unsupported in sorted(
             path
@@ -374,7 +433,9 @@ def _audit_split(
 
 
 def _duplicates_and_leakage(
-    records: list[ImageRecord], issues: list[AuditIssue]
+    records: list[ImageRecord],
+    issues: list[AuditIssue],
+    expected_overlaps: tuple[ExpectedHashOverlap, ...],
 ) -> list[dict[str, Any]]:
     by_hash: dict[str, list[ImageRecord]] = defaultdict(list)
     for record in records:
@@ -382,21 +443,38 @@ def _duplicates_and_leakage(
             by_hash[record.sha256].append(record)
 
     groups: list[dict[str, Any]] = []
+    expected_by_splits = {
+        overlap.splits: overlap.reason for overlap in expected_overlaps
+    }
     for digest, group in sorted(by_hash.items()):
         if len(group) < 2:
             continue
         paths = sorted(record.path for record in group)
         splits = sorted({record.split for record in group})
         categories = sorted({record.category for record in group})
+        expected_reason = expected_by_splits.get(frozenset(splits))
+        if len(splits) == 1:
+            classification = "within_split_duplicate"
+        elif (
+            expected_reason is not None
+            and len(group) == 2
+            and len(splits) == 2
+            and len(categories) == 1
+        ):
+            classification = "expected_cross_split_overlap"
+        else:
+            classification = "unexpected_cross_split_overlap"
         groups.append(
             {
                 "sha256": digest,
                 "paths": paths,
                 "splits": splits,
                 "categories": categories,
+                "classification": classification,
+                "policy_reason": expected_reason,
             }
         )
-        if len(splits) > 1:
+        if classification == "unexpected_cross_split_overlap":
             issues.append(
                 AuditIssue(
                     severity="error",
@@ -407,7 +485,7 @@ def _duplicates_and_leakage(
                     path=paths[0],
                 )
             )
-        else:
+        elif classification == "within_split_duplicate":
             issues.append(
                 AuditIssue(
                     severity="warning",
@@ -431,6 +509,36 @@ def audit_dataset(root: Path, config: DatasetConfig) -> dict[str, Any]:
         raise NotADirectoryError(f"Dataset root is not a directory: {root}")
 
     expected_categories = set(config.categories)
+    for required_file in config.required_root_files:
+        required_path = root / required_file
+        if required_path.is_symlink():
+            _issue(
+                issues,
+                "error",
+                "symlink_not_allowed",
+                "Required metadata files must not be symbolic links",
+                required_path,
+                root,
+            )
+        elif not required_path.is_file():
+            _issue(
+                issues,
+                "error",
+                "missing_root_file",
+                "Required dataset metadata file is missing",
+                required_path,
+                root,
+            )
+    for root_file in sorted(path for path in root.iterdir() if path.is_file()):
+        if root_file.name not in config.required_root_files:
+            _issue(
+                issues,
+                "warning",
+                "unexpected_root_file",
+                "File is not part of the configured dataset root structure",
+                root_file,
+                root,
+            )
     actual_categories = {path.name for path in root.iterdir() if path.is_dir()}
     for category in sorted(expected_categories - actual_categories):
         _issue(
@@ -455,7 +563,10 @@ def audit_dataset(root: Path, config: DatasetConfig) -> dict[str, Any]:
         category_dir = root / category
         if not category_dir.is_dir():
             continue
-        _check_directory_contents(category_dir, set(config.splits), issues, root)
+        if not _check_directory_contents(
+            category_dir, set(config.splits), issues, root
+        ):
+            continue
         for split_name, split in config.splits.items():
             _audit_split(
                 category_dir=category_dir,
@@ -467,7 +578,12 @@ def audit_dataset(root: Path, config: DatasetConfig) -> dict[str, Any]:
                 issues=issues,
             )
 
-    duplicate_groups = _duplicates_and_leakage(records, issues)
+    duplicate_groups = _duplicates_and_leakage(
+        records, issues, config.expected_hash_overlaps
+    )
+    duplicate_class_counts = Counter(
+        group["classification"] for group in duplicate_groups
+    )
     issues.sort(key=lambda item: (item.severity, item.code, item.path or ""))
     records.sort(key=lambda item: item.path)
     counts_by_split = Counter(
@@ -484,7 +600,7 @@ def audit_dataset(root: Path, config: DatasetConfig) -> dict[str, Any]:
         root,
     )
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "generated_at": datetime.now(UTC).isoformat(),
         "dataset": {"name": config.name, "version": config.version},
         "root": str(root),
@@ -497,6 +613,15 @@ def audit_dataset(root: Path, config: DatasetConfig) -> dict[str, Any]:
             "counts_by_split": dict(sorted(counts_by_split.items())),
             "counts_by_category": dict(sorted(counts_by_category.items())),
             "duplicate_group_count": len(duplicate_groups),
+            "expected_overlap_group_count": duplicate_class_counts[
+                "expected_cross_split_overlap"
+            ],
+            "unexpected_overlap_group_count": duplicate_class_counts[
+                "unexpected_cross_split_overlap"
+            ],
+            "within_split_duplicate_group_count": duplicate_class_counts[
+                "within_split_duplicate"
+            ],
         },
         "issues": [asdict(issue) for issue in issues],
         "duplicates": duplicate_groups,

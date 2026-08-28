@@ -22,8 +22,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--config",
         type=Path,
-        default=Path("configs/datasets/mvtec_ad_2.yaml"),
-        help="Dataset structure configuration",
+        required=True,
+        help="Dataset structure configuration (explicit for path portability)",
     )
     parser.add_argument(
         "--output",

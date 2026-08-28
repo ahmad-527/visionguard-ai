@@ -34,6 +34,14 @@ class SplitConfig:
 
 
 @dataclass(frozen=True)
+class ExpectedHashOverlap:
+    """Documented dataset relationship where exact split overlap is intentional."""
+
+    splits: frozenset[str]
+    reason: str
+
+
+@dataclass(frozen=True)
 class DatasetConfig:
     """Dataset structure contract used by the filesystem auditor."""
 
@@ -42,6 +50,8 @@ class DatasetConfig:
     categories: tuple[str, ...]
     image_extensions: tuple[str, ...]
     splits: dict[str, SplitConfig]
+    required_root_files: tuple[str, ...] = ()
+    expected_hash_overlaps: tuple[ExpectedHashOverlap, ...] = ()
 
 
 def _mapping(value: Any, location: str) -> dict[str, Any]:
@@ -63,6 +73,17 @@ def _strings(
     return result
 
 
+def _path_names(
+    value: Any, location: str, *, allow_empty: bool = False
+) -> tuple[str, ...]:
+    result = _strings(value, location, allow_empty=allow_empty)
+    if any(name in {".", ".."} or "/" in name or "\\" in name for name in result):
+        raise ConfigurationError(
+            f"{location} entries must be single relative path components"
+        )
+    return result
+
+
 def load_dataset_config(path: Path) -> DatasetConfig:
     """Load a dataset audit configuration from YAML and validate its schema."""
 
@@ -80,7 +101,7 @@ def load_dataset_config(path: Path) -> DatasetConfig:
     if not isinstance(version, str) or not version.strip():
         raise ConfigurationError("dataset.version must be a non-empty string")
 
-    categories = _strings(dataset.get("categories"), "dataset.categories")
+    categories = _path_names(dataset.get("categories"), "dataset.categories")
     extensions = tuple(
         extension.lower()
         for extension in _strings(
@@ -95,15 +116,23 @@ def load_dataset_config(path: Path) -> DatasetConfig:
         raise ConfigurationError("dataset.splits must not be empty")
     splits: dict[str, SplitConfig] = {}
     for split_name, split_value in split_values.items():
-        if not isinstance(split_name, str) or not split_name:
-            raise ConfigurationError("dataset.splits keys must be non-empty strings")
+        if (
+            not isinstance(split_name, str)
+            or not split_name
+            or split_name in {".", ".."}
+            or "/" in split_name
+            or "\\" in split_name
+        ):
+            raise ConfigurationError(
+                "dataset.splits keys must be single relative path components"
+            )
         split = _mapping(split_value, f"dataset.splits.{split_name}")
         layout = split.get("layout")
         if layout not in {"classified", "flat"}:
             raise ConfigurationError(
                 f"dataset.splits.{split_name}.layout must be 'classified' or 'flat'"
             )
-        conditions = _strings(
+        conditions = _path_names(
             split.get("conditions", []),
             f"dataset.splits.{split_name}.conditions",
             allow_empty=layout == "flat",
@@ -133,6 +162,10 @@ def load_dataset_config(path: Path) -> DatasetConfig:
                 directory=mask_data["directory"],
                 suffix=suffix,
             )
+            _path_names(
+                [mask.directory],
+                f"dataset.splits.{split_name}.mask.directory",
+            )
             if layout != "classified" or mask.image_condition not in conditions:
                 raise ConfigurationError(
                     f"dataset.splits.{split_name}.mask image_condition must name a "
@@ -143,10 +176,47 @@ def load_dataset_config(path: Path) -> DatasetConfig:
             layout=layout, conditions=conditions, mask=mask
         )
 
+    required_root_files = _path_names(
+        dataset.get("required_root_files", []),
+        "dataset.required_root_files",
+        allow_empty=True,
+    )
+    overlap_values = dataset.get("expected_hash_overlaps", [])
+    if not isinstance(overlap_values, list):
+        raise ConfigurationError("dataset.expected_hash_overlaps must be a list")
+    expected_hash_overlaps: list[ExpectedHashOverlap] = []
+    seen_overlap_pairs: set[frozenset[str]] = set()
+    for index, overlap_value in enumerate(overlap_values):
+        location = f"dataset.expected_hash_overlaps[{index}]"
+        overlap = _mapping(overlap_value, location)
+        overlap_splits = _strings(overlap.get("splits"), f"{location}.splits")
+        if len(overlap_splits) != 2:
+            raise ConfigurationError(f"{location}.splits must contain exactly 2 splits")
+        unknown_splits = set(overlap_splits) - set(splits)
+        if unknown_splits:
+            raise ConfigurationError(
+                f"{location}.splits contains unknown splits: "
+                f"{', '.join(sorted(unknown_splits))}"
+            )
+        reason = overlap.get("reason")
+        if not isinstance(reason, str) or not reason.strip():
+            raise ConfigurationError(f"{location}.reason must be a non-empty string")
+        split_pair = frozenset(overlap_splits)
+        if split_pair in seen_overlap_pairs:
+            raise ConfigurationError(
+                f"{location}.splits duplicates an earlier expected overlap"
+            )
+        seen_overlap_pairs.add(split_pair)
+        expected_hash_overlaps.append(
+            ExpectedHashOverlap(splits=split_pair, reason=reason.strip())
+        )
+
     return DatasetConfig(
         name=name,
         version=version,
         categories=categories,
         image_extensions=extensions,
         splits=splits,
+        required_root_files=required_root_files,
+        expected_hash_overlaps=tuple(expected_hash_overlaps),
     )

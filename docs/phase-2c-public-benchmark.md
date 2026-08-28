@@ -113,8 +113,10 @@ pairs successfully.
   `8c0f71f0a7dc81436b7bd3affed0ba7f97ea3844213d487c2d9886befa055a92`;
 - pretrained-weight SHA-256:
   `03b71d65fb2c73bb0de079a1781009f27a782ec481d2f64ab3bde9b1cdec3000`;
-- committed machine summary SHA-256:
+- local machine summary SHA-256:
   `cef20151986bbfb554b59286b1b23c971d5027e6bd3dd2a1aa035fa0232e62c8`;
+- committed LF-normalized summary SHA-256:
+  `8a0adb2991a5cf47ae75b941828c45f39e5195c5f41e4b32a6d2b2300036cccf`;
 - complete local evidence size: 27.584 GiB across 6,554 files;
 - failed attempts: 0.
 

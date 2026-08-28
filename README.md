@@ -2,9 +2,9 @@
 
 Production-grade deep learning platform for industrial visual anomaly detection, defect localization, benchmarking, and real-time quality inspection.
 
-> **Project status:** Phase 2C — the first frozen PatchCore public evaluation is
-> complete and awaiting pull-request review. It is not a private-server result
-> or a final-model effectiveness claim.
+> **Project status:** Phase 3A — the proposed EfficientAD comparison protocol is
+> frozen for pull-request review. EfficientAD `test_public` has not been run;
+> Phase 3B remains locked.
 
 ## Mission
 
@@ -89,7 +89,8 @@ are development-only dependencies. The PatchCore stack is isolated in the `ml`
 optional group so dataset-audit users do not install a deep-learning framework.
 See the [reviewed ML installation and provenance guide](docs/patchcore-dependencies.md)
 before installing it; PyTorch and torchvision must come from the documented
-official hardware-specific wheel index.
+official hardware-specific wheel index. The same reviewed ML lock supports the
+Phase 3A EfficientAD adapter without changing lightweight CI.
 
 ## Dataset audit
 
@@ -109,6 +110,13 @@ predeclares the public evaluation methodology. The
 [Phase 2C execution contract](docs/phase-2c-public-benchmark.md) defines the
 resumable 24-run workflow and evidence policy without authorizing private
 evaluation.
+
+The [Phase 3A EfficientAD protocol](docs/phase-3a-efficientad-protocol.md)
+predeclares the maintained implementation, PDN-S model, training and penalty
+data, native map normalization, VisionGuard calibration/evaluation contracts,
+artifact schema, failure policy, and deliberate public-evaluation lock. Its
+recorded train/validation-normal engineering probe contains no benchmark
+performance claim.
 
 ## License
 

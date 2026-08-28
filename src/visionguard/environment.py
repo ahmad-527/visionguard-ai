@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import importlib.metadata
 import json
+import os
 import platform
 import subprocess
 from typing import Any
@@ -116,7 +117,10 @@ def capture_environment(configured_device_policy: str) -> dict[str, Any]:
         "resolved_packages": dict(sorted(resolved_packages.items())),
         "nvidia": _nvidia_smi(),
         "torch_backend": _torch_environment(),
-        "configured": {"device_policy": configured_device_policy},
+        "configured": {
+            "device_policy": configured_device_policy,
+            "hf_hub_offline": os.environ.get("HF_HUB_OFFLINE") == "1",
+        },
     }
 
 

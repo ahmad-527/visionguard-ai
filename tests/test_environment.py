@@ -3,16 +3,24 @@ from __future__ import annotations
 import importlib
 import json
 
+import pytest
+
 from visionguard.environment import capture_environment, environment_json
 from visionguard.experiment import ReproducibilityConfig
 from visionguard.reproducibility import configure_reproducibility
 
 
-def test_environment_capture_distinguishes_configured_values() -> None:
+def test_environment_capture_distinguishes_configured_values(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv("HF_HUB_OFFLINE", "1")
     capture = capture_environment("cpu")
 
     assert capture["schema_version"] == 1
-    assert capture["configured"] == {"device_policy": "cpu"}
+    assert capture["configured"] == {
+        "device_policy": "cpu",
+        "hf_hub_offline": True,
+    }
     assert capture["python"]["status"] == "detected"
     assert capture["resolved_packages"]["visionguard-ai"] == "0.1.0"
     assert "executable" not in json.loads(environment_json("cpu"))["python"]["value"]

@@ -185,6 +185,10 @@ def new_benchmark_artifact(
         "seed": seed,
         "environment": environment,
         "weight": weight,
+        "configuration": {},
+        "reproducibility": {},
+        "evaluation_split": "test_public",
+        "model_state": {},
         "calibration": calibration,
         "thresholds": {},
         "predictions": [],
@@ -269,6 +273,10 @@ def _validate_benchmark_artifact(artifact: dict[str, Any]) -> None:
         "seed",
         "environment",
         "weight",
+        "configuration",
+        "reproducibility",
+        "evaluation_split",
+        "model_state",
         "calibration",
         "thresholds",
         "predictions",
@@ -304,6 +312,8 @@ def _validate_benchmark_artifact(artifact: dict[str, Any]) -> None:
         raise ArtifactError("Benchmark artifact category is outside the protocol")
     if artifact["seed"] not in PROTOCOL_SEEDS:
         raise ArtifactError("Benchmark artifact seed is outside the protocol")
+    if artifact["evaluation_split"] != "test_public":
+        raise ArtifactError("Benchmark artifact evaluation split must be test_public")
     if (
         not isinstance(artifact["git"], dict)
         or artifact["git"].get("dirty") is not False
@@ -332,6 +342,35 @@ def _validate_benchmark_artifact(artifact: dict[str, Any]) -> None:
         _artifact_relative_path(anomaly_map.get("path"), "Prediction anomaly_map.path")
         if len(str(anomaly_map.get("sha256", ""))) != 64:
             raise ArtifactError("Benchmark anomaly map requires SHA-256 identity")
+        if anomaly_map.get("dtype") not in {None, "float16"}:
+            raise ArtifactError("Benchmark anomaly maps must use official float16")
+        thresholded_path = anomaly_map.get("thresholded_path")
+        if thresholded_path is not None:
+            _artifact_relative_path(
+                thresholded_path, "Prediction anomaly_map.thresholded_path"
+            )
+            if len(str(anomaly_map.get("thresholded_sha256", ""))) != 64:
+                raise ArtifactError(
+                    "Benchmark thresholded anomaly map requires SHA-256 identity"
+                )
+    if artifact["status"] == "completed":
+        if not artifact["predictions"]:
+            raise ArtifactError("Completed benchmark artifacts require predictions")
+        if not isinstance(artifact["model_state"], dict) or not artifact[
+            "model_state"
+        ].get("memory_bank"):
+            raise ArtifactError("Completed benchmark artifacts require model state")
+        if not isinstance(artifact["thresholds"], dict) or set(
+            artifact["thresholds"]
+        ) != {"image", "pixel"}:
+            raise ArtifactError("Completed benchmark artifacts require both thresholds")
+        if (
+            not isinstance(artifact["category_metrics"], dict)
+            or not artifact["category_metrics"]
+        ):
+            raise ArtifactError(
+                "Completed benchmark artifacts require category metrics"
+            )
 
 
 def write_artifact(path: Path, artifact: dict[str, Any]) -> None:

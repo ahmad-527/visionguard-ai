@@ -124,6 +124,13 @@ def test_au_pro_handles_single_pixel_regions_equally() -> None:
     assert au_pro(labels, scores).value == 1.0
 
 
+def test_au_pro_uses_official_eight_connected_regions() -> None:
+    labels = [[[1, 1, 0], [0, 0, 1]]]
+    scores = [[[0.9, 0.8, 0.1], [0.1, 0.1, 0.0]]]
+
+    assert au_pro(labels, scores).value == pytest.approx(2 / 3)
+
+
 def test_au_pro_undefined_and_invalid_cases_are_explicit() -> None:
     assert au_pro([[[0, 0]]], [[[0.1, 0.2]]]).status == "undefined"
     assert au_pro([[[1, 1]]], [[[0.1, 0.2]]]).status == "undefined"

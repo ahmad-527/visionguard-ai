@@ -13,7 +13,7 @@ import yaml
 
 PROTOCOL_ID = "patchcore-mvtecad2-v1"
 EXPECTED_PROTOCOL_FINGERPRINT = (
-    "106a668e9fac47afd6746b7337b276ecb6f02999822da92ac95f650d4b5f99af"
+    "03f545ea23b1bd00206cb919aece6972502712aa9f981e8a3f11dbd1be1f0c2b"
 )
 OFFICIAL_CATEGORIES = (
     "can",

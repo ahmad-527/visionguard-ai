@@ -61,7 +61,7 @@ protocol:
       level: pixel_region
       fpr_limit: 0.05
       anomaly_score_direction: higher_is_more_anomalous
-      ground_truth_connectivity: 4
+      ground_truth_connectivity: 8
       category_aggregation: unweighted_arithmetic_mean
     official_thresholded:
       names: [pixel_f1, image_f1]

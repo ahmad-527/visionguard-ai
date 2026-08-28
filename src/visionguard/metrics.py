@@ -174,10 +174,10 @@ def _components(image: list[list[int]]) -> list[set[tuple[int, int]]]:
         while stack:
             row, col = stack.pop()
             for neighbor in (
-                (row - 1, col),
-                (row + 1, col),
-                (row, col - 1),
-                (row, col + 1),
+                (row + row_delta, col + col_delta)
+                for row_delta in (-1, 0, 1)
+                for col_delta in (-1, 0, 1)
+                if row_delta != 0 or col_delta != 0
             ):
                 if neighbor in unseen:
                     unseen.remove(neighbor)
@@ -193,7 +193,7 @@ def au_pro(
     *,
     fpr_limit: float = 0.05,
 ) -> MetricResult:
-    """Compute tie-grouped, four-connected AU-PRO normalized over an FPR range."""
+    """Compute tie-grouped, eight-connected AU-PRO normalized over an FPR range."""
 
     if not 0.0 < fpr_limit <= 1.0:
         raise MetricInputError("fpr_limit must be in (0, 1]")

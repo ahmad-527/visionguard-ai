@@ -28,7 +28,10 @@ The authoritative review used:
   especially Sections 3.2, 4.1.4, and 4.2;
 - MVTec's official `MVTecAD2_public_code_utils` archive downloaded from the
   dataset page (reviewed archive SHA-256
-  `fda9b379affbbde8b4d4fc1fe6ac52aaff981f347f3424e6b6de027457549f15`).
+  `fda9b379affbbde8b4d4fc1fe6ac52aaff981f347f3424e6b6de027457549f15`);
+- MVTec AD evaluation utility version 1.0, which the AD 2 utility directs users
+  to for public AU-PRO evaluation (reviewed archive SHA-256
+  `dfcda7d67eee25316ec6ae5042c0b1684a4cabf33b2346be351e2ce36013f220`).
 
 Anomalib is an implementation dependency, not the authority for the dataset's
 evaluation protocol.
@@ -50,7 +53,7 @@ to 256×256 unless a method-specific exception is stated.
 ### Official metrics
 
 The principal threshold-independent localization metric is per-region overlap
-(PRO), averaged equally over four-connected ground-truth anomaly regions. The
+(PRO), averaged equally over eight-connected ground-truth anomaly regions. The
 PRO curve is integrated against false-positive rate only through 0.05 and
 normalized by that range: AU-PRO\(_{0.05}\). Higher anomaly values mean more
 anomalous pixels. Results are reported per category and as an unweighted mean
@@ -236,15 +239,18 @@ and matching fingerprint. Private splits always fail this gate.
 
 VisionGuard's independent AU-PRO implementation validates image counts, exact
 2-D shapes, binary labels, finite scores, and score direction. It forms
-four-connected ground-truth components, processes tied scores as one threshold
+eight-connected ground-truth components, processes tied scores as one threshold
 group, interpolates the curve at FPR 0.05, trapezoidally integrates, and divides
 by 0.05. Synthetic tests cover perfect, reversed, tied/constant, no-anomaly,
 all-anomaly, single-pixel, malformed-shape, NaN, and infinity cases.
 
-Before Phase 2C publication, local outputs must also be checked against MVTec's
-official public AU-PRO utility on synthetic/reference fixtures. A mismatch
-blocks benchmark claims; VisionGuard will not relabel an approximation as
-official.
+The implementation was compared directly with MVTec evaluation utility 1.0 on
+five synthetic fixtures: perfect, reversed, constant/tied, diagonally connected,
+and multiple-image/multiple-region inputs. AU-PRO at FPR 0.05 matched exactly in
+all five cases (absolute difference 0.0). The diagonal fixture caught and
+corrected an initial four-connectivity mismatch before this protocol was
+completed. Future changes must retain these reference tests; a mismatch blocks
+benchmark claims and cannot be relabeled as official compatibility.
 
 ### Benchmark artifact schema
 

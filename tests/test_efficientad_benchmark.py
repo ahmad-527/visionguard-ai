@@ -104,9 +104,8 @@ def test_stream_position_resumes_exactly(tmp_path: Path) -> None:
 
 
 def test_rng_state_resumes_python_numpy_torch_and_cuda() -> None:
-    import numpy as np
-
     torch = pytest.importorskip("torch")
+    np = pytest.importorskip("numpy")
 
     random.seed(42)
     np.random.seed(42)

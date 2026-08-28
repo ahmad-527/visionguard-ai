@@ -70,7 +70,9 @@ Environment fields distinguish detected, unavailable, and configured values.
 Seed handling covers Python, NumPy when installed, PyTorch, CUDA seed-all behavior,
 deterministic algorithms, and cuDNN settings. These controls improve repeatability
 but do not claim bitwise determinism across devices, versions, or unsupported
-operations.
+operations. When deterministic algorithms are requested, VisionGuard configures
+`CUBLAS_WORKSPACE_CONFIG=:4096:8` before importing PyTorch so CUDA 10.2+ cuBLAS
+matrix multiplication follows PyTorch's deterministic execution requirement.
 
 Generated artifacts, predictions, model caches, weights, checkpoints, and run
 outputs remain ignored and outside Git. Runtime and memory may be reported only

@@ -328,6 +328,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     ) as exc:
         LOGGER.error("%s", exc)
         return 2
+    except Exception as exc:
+        LOGGER.error("Smoke run failed with %s: %s", type(exc).__name__, exc)
+        return 1
     LOGGER.info("Smoke run completed; artifact: %s", artifact)
     return 0
 

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import random
 from typing import Any
 
@@ -12,10 +13,22 @@ def configure_reproducibility(config: ReproducibilityConfig) -> dict[str, Any]:
     """Apply available seed/backend controls and report what was configured."""
 
     random.seed(config.seed)
+    cublas_workspace = None
+    if config.deterministic_algorithms:
+        cublas_workspace = os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
+        if cublas_workspace not in {":4096:8", ":16:8"}:
+            raise ValueError(
+                "CUBLAS_WORKSPACE_CONFIG must be ':4096:8' or ':16:8' when "
+                "deterministic algorithms are enabled"
+            )
     report: dict[str, Any] = {
         "python": {"status": "configured", "seed": config.seed},
         "numpy": {"status": "unavailable", "reason": "numpy not installed"},
         "torch": {"status": "unavailable", "reason": "torch not installed"},
+        "cublas_workspace_config": {
+            "status": "configured" if cublas_workspace else "not_required",
+            "value": cublas_workspace,
+        },
         "limitations": [
             "Seed and deterministic backend settings do not prove bitwise "
             "reproducibility across devices, package versions, or operations."
@@ -45,5 +58,6 @@ def configure_reproducibility(config: ReproducibilityConfig) -> dict[str, Any]:
         "deterministic_algorithms": config.deterministic_algorithms,
         "cudnn_benchmark": config.cudnn_benchmark,
         "cudnn_deterministic": config.deterministic_algorithms,
+        "cublas_workspace_config": cublas_workspace,
     }
     return report

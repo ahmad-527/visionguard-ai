@@ -2,7 +2,8 @@
 
 Production-grade deep learning platform for industrial visual anomaly detection, defect localization, benchmarking, and real-time quality inspection.
 
-> **Project status:** Phase 1 — reproducible project foundation and local dataset audit tooling.
+> **Project status:** Phase 2A — PatchCore baseline infrastructure and a limited
+> non-benchmark engineering smoke test. No benchmark result is published.
 
 ## Mission
 
@@ -77,10 +78,13 @@ python -m ruff check .
 python -m pytest
 ```
 
-The runtime dependency set is intentionally small: Pillow performs real image
-decoding and PyYAML loads explicit dataset contracts. Pytest and Ruff are
-development-only dependencies. No deep-learning framework is required or used
-in Phase 1.
+The default runtime dependency set remains intentionally small: Pillow performs
+real image decoding and PyYAML loads explicit dataset contracts. Pytest and Ruff
+are development-only dependencies. The PatchCore stack is isolated in the `ml`
+optional group so dataset-audit users do not install a deep-learning framework.
+See the [reviewed ML installation and provenance guide](docs/patchcore-dependencies.md)
+before installing it; PyTorch and torchvision must come from the documented
+official hardware-specific wheel index.
 
 ## Dataset audit
 
@@ -91,7 +95,10 @@ the supplied filesystem; the repository contains no invented dataset statistics.
 The [real-dataset validation record](docs/real-dataset-validation.md) documents
 the Phase 1 full audit and its limitations. A separate
 [Phase 2 proposal](docs/phase-2-proposal.md) is available for review; it contains
-no model results and authorizes no training by itself.
+no model results and authorizes no training by itself. Phase 2A's enforced data,
+threshold, metric, artifact, and reproducibility decisions are documented in the
+[engineering protocol](docs/phase-2a-protocol.md). The checked-in PatchCore smoke
+configuration is deliberately non-benchmark and does not enable `test_public`.
 
 ## License
 

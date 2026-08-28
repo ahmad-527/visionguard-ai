@@ -1,0 +1,45 @@
+schema_version: 1
+experiment:
+  id: patchcore_phase2a_smoke
+  git:
+    require_clean: true
+  dataset:
+    config: configs/datasets/mvtec_ad_2.yaml
+    audit_report: config/local/mvtec-ad-2-audit.json
+    categories: [can]
+    train_split: train
+    calibration_split: validation
+    evaluation_split: null
+    configuration_frozen: false
+  model:
+    name: patchcore
+    implementation: anomalib
+    implementation_version: 2.6.0
+    backbone: wide_resnet50_2.racm_in1k
+    layers: [layer2, layer3]
+    pretrained: true
+    weight_id: wide_resnet50_2.racm_in1k
+    weight_source: https://huggingface.co/timm/wide_resnet50_2.racm_in1k
+    weight_revision: 30f73aceaaa1911830a9795b83ab1908dba18719
+    coreset_sampling_ratio: 0.01
+    num_neighbors: 9
+  preprocessing:
+    resize: [256, 256]
+    center_crop: [224, 224]
+    normalization: imagenet
+    augmentation: none
+  reproducibility:
+    seed: 42
+    deterministic_algorithms: true
+    cudnn_benchmark: false
+  device_policy: auto
+  thresholds:
+    image:
+      method: empirical_quantile
+      quantile: 0.995
+      minimum_samples: 20
+    pixel:
+      method: empirical_quantile
+      quantile: 0.999
+      minimum_samples: 1000
+  output_dir: outputs/patchcore_phase2a_smoke

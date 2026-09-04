@@ -1,0 +1,850 @@
+{
+  "benchmark_git_commit": "9e477389530743f8a7cf4caa8c48214e5c63ec28",
+  "cells": {
+    "can:123": {
+      "artifact_path": "runs/can/seed-123/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "f48d89aefe024c600ff9b59532ad1d5f2b69541a2fedd2f1b04bcfa4426e4b29",
+      "attempts": [
+        {
+          "attempt": 1,
+          "completed_at": "2026-08-29T03:27:34.557504+00:00",
+          "started_at": "2026-08-29T00:25:09.787084+00:00",
+          "status": "completed"
+        }
+      ],
+      "category": "can",
+      "checkpoint_sha256": "9f1245360724ad22eabe6dfc1b887eb8ce64ee891e081be52477a2b7ba171183",
+      "completed_at": "2026-08-29T03:27:34.557504+00:00",
+      "failure_history": [],
+      "interruption_history": [],
+      "latest_valid_checkpoint": {
+        "path": "runs/can/seed-123/attempt-1/latest-checkpoint.pt",
+        "recorded_at": "2026-08-29T03:26:38.887551+00:00",
+        "sha256": "9f1245360724ad22eabe6dfc1b887eb8ce64ee891e081be52477a2b7ba171183",
+        "step": 70000
+      },
+      "seed": 123,
+      "status": "completed"
+    },
+    "can:2026": {
+      "artifact_path": "runs/can/seed-2026/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "975e825c3bf0cbf878c3f5fbdf777882d159b8bd2223f60afa185928a2fee483",
+      "attempts": [
+        {
+          "attempt": 1,
+          "completed_at": "2026-08-29T06:28:54.335637+00:00",
+          "started_at": "2026-08-29T03:27:34.560919+00:00",
+          "status": "completed"
+        }
+      ],
+      "category": "can",
+      "checkpoint_sha256": "80ed4ac2c7410c2965e73b7c7a811cef9f9d201cda15638156037b9f1f7eee08",
+      "completed_at": "2026-08-29T06:28:54.332266+00:00",
+      "failure_history": [],
+      "interruption_history": [],
+      "latest_valid_checkpoint": {
+        "path": "runs/can/seed-2026/attempt-1/latest-checkpoint.pt",
+        "recorded_at": "2026-08-29T06:27:58.366135+00:00",
+        "sha256": "80ed4ac2c7410c2965e73b7c7a811cef9f9d201cda15638156037b9f1f7eee08",
+        "step": 70000
+      },
+      "seed": 2026,
+      "status": "completed"
+    },
+    "can:42": {
+      "artifact_path": "runs/can/seed-42/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "df3a1d96bbf5a19feebc1815e2c9c6e6ec94117643a9f4180d974fa4f30ed990",
+      "attempts": [
+        {
+          "attempt": 1,
+          "completed_at": "2026-08-29T00:25:09.783726+00:00",
+          "started_at": "2026-08-28T16:07:44.286232+00:00",
+          "status": "completed"
+        }
+      ],
+      "category": "can",
+      "checkpoint_sha256": "d53006beda9aa7f4fe6f1c02f40b97cc9d41b014abad8ae9e169da96e00eaf7b",
+      "completed_at": "2026-08-29T00:25:09.783726+00:00",
+      "failure_history": [],
+      "interruption_history": [
+        {
+          "checkpoint_step": 3000,
+          "reason": "user_requested_pause_forced_termination_after_ctrl_c_timeout",
+          "recorded_at": "2026-08-28T16:20:01.709335+00:00",
+          "stage": "training"
+        }
+      ],
+      "latest_valid_checkpoint": {
+        "path": "runs/can/seed-42/attempt-1/latest-checkpoint.pt",
+        "recorded_at": "2026-08-29T00:24:15.994335+00:00",
+        "sha256": "d53006beda9aa7f4fe6f1c02f40b97cc9d41b014abad8ae9e169da96e00eaf7b",
+        "step": 70000
+      },
+      "seed": 42,
+      "status": "completed"
+    },
+    "fabric:123": {
+      "artifact_path": "runs/fabric/seed-123/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "9bdbb86441fd7e0055c2fd14c69bc14126593a2db6a262353433895bdd5dac62",
+      "attempts": [
+        {
+          "attempt": 1,
+          "completed_at": "2026-08-29T16:42:28.954204+00:00",
+          "started_at": "2026-08-29T11:30:00.001806+00:00",
+          "status": "completed"
+        }
+      ],
+      "category": "fabric",
+      "checkpoint_sha256": "9fd5b7dddb9135f4ed7e0cf7bc0708656f3f5e720f947c78710e3bebb2eea158",
+      "completed_at": "2026-08-29T16:42:28.954204+00:00",
+      "failure_history": [],
+      "interruption_history": [],
+      "latest_valid_checkpoint": {
+        "path": "runs/fabric/seed-123/attempt-1/latest-checkpoint.pt",
+        "recorded_at": "2026-08-29T16:40:52.317264+00:00",
+        "sha256": "9fd5b7dddb9135f4ed7e0cf7bc0708656f3f5e720f947c78710e3bebb2eea158",
+        "step": 70000
+      },
+      "seed": 123,
+      "status": "completed"
+    },
+    "fabric:2026": {
+      "artifact_path": "runs/fabric/seed-2026/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "30d118c02eadf8d33067a276d53e683ef0d39157fe32bce9ba7c5b5106590551",
+      "attempts": [
+        {
+          "attempt": 1,
+          "completed_at": "2026-08-29T23:52:28.426267+00:00",
+          "started_at": "2026-08-29T16:42:28.964443+00:00",
+          "status": "completed"
+        }
+      ],
+      "category": "fabric",
+      "checkpoint_sha256": "bbcaba6bd2b7f66931f007aae030d729859b8338ab5013faca806b30aab55c91",
+      "completed_at": "2026-08-29T23:52:28.426267+00:00",
+      "failure_history": [],
+      "interruption_history": [
+        {
+          "checkpoint_step": 20000,
+          "reason": "user_requested_pause_after_forced_process_stop",
+          "recorded_at": "2026-08-29T18:26:57.618016+00:00",
+          "stage": "training"
+        }
+      ],
+      "latest_valid_checkpoint": {
+        "path": "runs/fabric/seed-2026/attempt-1/latest-checkpoint.pt",
+        "recorded_at": "2026-08-29T23:50:48.107909+00:00",
+        "sha256": "bbcaba6bd2b7f66931f007aae030d729859b8338ab5013faca806b30aab55c91",
+        "step": 70000
+      },
+      "seed": 2026,
+      "status": "completed"
+    },
+    "fabric:42": {
+      "artifact_path": "runs/fabric/seed-42/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "8ac64d771fce79215b02f9c1919ebfa9e401edb36f0d5285535f975d23843fa4",
+      "attempts": [
+        {
+          "attempt": 1,
+          "completed_at": "2026-08-29T11:29:59.998518+00:00",
+          "started_at": "2026-08-29T06:28:54.342456+00:00",
+          "status": "completed"
+        }
+      ],
+      "category": "fabric",
+      "checkpoint_sha256": "51cf7e54522adff6c0c3ee98b6604776bcafd1e7d917038285ee6e331c9d037c",
+      "completed_at": "2026-08-29T11:29:59.998518+00:00",
+      "failure_history": [],
+      "interruption_history": [],
+      "latest_valid_checkpoint": {
+        "path": "runs/fabric/seed-42/attempt-1/latest-checkpoint.pt",
+        "recorded_at": "2026-08-29T11:28:21.372663+00:00",
+        "sha256": "51cf7e54522adff6c0c3ee98b6604776bcafd1e7d917038285ee6e331c9d037c",
+        "step": 70000
+      },
+      "seed": 42,
+      "status": "completed"
+    },
+    "fruit_jelly:123": {
+      "artifact_path": "runs/fruit_jelly/seed-123/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "03c805987b45d56611d52310b85719fdba10099283c268a600e93ad5fced4dee",
+      "attempts": [
+        {
+          "attempt": 1,
+          "completed_at": "2026-08-30T07:04:33.670645+00:00",
+          "started_at": "2026-08-30T03:25:15.271968+00:00",
+          "status": "completed"
+        }
+      ],
+      "category": "fruit_jelly",
+      "checkpoint_sha256": "76fb57d23014a571d9b6f47a99cffd78df02b44d49f98b9f06007e3fceebdb67",
+      "completed_at": "2026-08-30T07:04:33.670645+00:00",
+      "failure_history": [],
+      "interruption_history": [],
+      "latest_valid_checkpoint": {
+        "path": "runs/fruit_jelly/seed-123/attempt-1/latest-checkpoint.pt",
+        "recorded_at": "2026-08-30T07:03:43.714128+00:00",
+        "sha256": "76fb57d23014a571d9b6f47a99cffd78df02b44d49f98b9f06007e3fceebdb67",
+        "step": 70000
+      },
+      "seed": 123,
+      "status": "completed"
+    },
+    "fruit_jelly:2026": {
+      "artifact_path": "runs/fruit_jelly/seed-2026/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "377e729486b13e89c15420111822acb193236dd640e0549f6f7ae1516addf421",
+      "attempts": [
+        {
+          "attempt": 1,
+          "completed_at": "2026-08-30T10:32:41.774868+00:00",
+          "started_at": "2026-08-30T07:04:33.670645+00:00",
+          "status": "completed"
+        }
+      ],
+      "category": "fruit_jelly",
+      "checkpoint_sha256": "6fe4a294148195dad2efdf512072ad8bc90d35839003409ea1e99fffc6112547",
+      "completed_at": "2026-08-30T10:32:41.774868+00:00",
+      "failure_history": [],
+      "interruption_history": [],
+      "latest_valid_checkpoint": {
+        "path": "runs/fruit_jelly/seed-2026/attempt-1/latest-checkpoint.pt",
+        "recorded_at": "2026-08-30T10:32:07.884147+00:00",
+        "sha256": "6fe4a294148195dad2efdf512072ad8bc90d35839003409ea1e99fffc6112547",
+        "step": 70000
+      },
+      "seed": 2026,
+      "status": "completed"
+    },
+    "fruit_jelly:42": {
+      "artifact_path": "runs/fruit_jelly/seed-42/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "6949f7095df3af82e9f21d680214c244cbc54f4efe9fd039e5f1bdf155891e8b",
+      "attempts": [
+        {
+          "attempt": 1,
+          "completed_at": "2026-08-30T03:25:15.267501+00:00",
+          "started_at": "2026-08-29T23:52:28.426267+00:00",
+          "status": "completed"
+        }
+      ],
+      "category": "fruit_jelly",
+      "checkpoint_sha256": "ffbbd2035fc4c0a3a93c9be8beacb26fcc8a473b74edd134bf52b7c031bd81cf",
+      "completed_at": "2026-08-30T03:25:15.267501+00:00",
+      "failure_history": [],
+      "interruption_history": [],
+      "latest_valid_checkpoint": {
+        "path": "runs/fruit_jelly/seed-42/attempt-1/latest-checkpoint.pt",
+        "recorded_at": "2026-08-30T03:24:24.377023+00:00",
+        "sha256": "ffbbd2035fc4c0a3a93c9be8beacb26fcc8a473b74edd134bf52b7c031bd81cf",
+        "step": 70000
+      },
+      "seed": 42,
+      "status": "completed"
+    },
+    "rice:123": {
+      "artifact_path": "runs/rice/seed-123/attempt-2/benchmark-artifact.json",
+      "artifact_sha256": "7e3281a9f6a0db7c62e53b3d58de0f788e64a5ffdc14fca35cf340a52d6de7f8",
+      "attempts": [
+        {
+          "attempt": 1,
+          "failure": {
+            "attempt": 1,
+            "message": "[Errno 2] No such file or directory: '<local-dataset-root>\\\\rice\\\\train\\\\good\\\\193_regular.png'",
+            "recorded_at": "2026-08-30T20:11:28.207125+00:00",
+            "type": "FileNotFoundError"
+          },
+          "started_at": "2026-08-30T16:21:24.441378+00:00",
+          "status": "failed"
+        },
+        {
+          "attempt": 2,
+          "completed_at": "2026-09-02T04:23:56.817678+00:00",
+          "started_at": "2026-08-30T21:38:18.405787+00:00",
+          "status": "completed"
+        }
+      ],
+      "category": "rice",
+      "checkpoint_sha256": "5b8edc723c653f195f65203727867776461769aec2b0415a878ef561d89af894",
+      "completed_at": "2026-09-02T04:23:56.817678+00:00",
+      "failure_history": [
+        {
+          "attempt": 1,
+          "message": "[Errno 2] No such file or directory: '<local-dataset-root>\\\\rice\\\\train\\\\good\\\\193_regular.png'",
+          "recorded_at": "2026-08-30T20:11:28.207125+00:00",
+          "type": "FileNotFoundError"
+        }
+      ],
+      "interruption_history": [
+        {
+          "checkpoint_step": 27000,
+          "reason": "user_requested_pause_for_external_gpu_task_after_forced_process_stop",
+          "recorded_at": "2026-08-31T00:06:42.764039+00:00",
+          "stage": "training"
+        }
+      ],
+      "latest_valid_checkpoint": {
+        "path": "runs/rice/seed-123/attempt-2/latest-checkpoint.pt",
+        "recorded_at": "2026-09-02T04:21:59.242960+00:00",
+        "sha256": "5b8edc723c653f195f65203727867776461769aec2b0415a878ef561d89af894",
+        "step": 70000
+      },
+      "seed": 123,
+      "status": "completed"
+    },
+    "rice:2026": {
+      "artifact_path": "runs/rice/seed-2026/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "b0ef908adfe4c9a13a0d26d1f35353aa9e490421538b6367f64966994bdd3970",
+      "attempts": [
+        {
+          "attempt": 1,
+          "completed_at": "2026-09-02T11:14:31.971103+00:00",
+          "started_at": "2026-09-02T04:23:56.819228+00:00",
+          "status": "completed"
+        }
+      ],
+      "category": "rice",
+      "checkpoint_sha256": "8fc91547e1eecfb2c5789e89877582d7354eff99d773e28e11c8d0c070d60ce7",
+      "completed_at": "2026-09-02T11:14:31.971103+00:00",
+      "failure_history": [],
+      "interruption_history": [],
+      "latest_valid_checkpoint": {
+        "path": "runs/rice/seed-2026/attempt-1/latest-checkpoint.pt",
+        "recorded_at": "2026-09-02T11:13:10.565322+00:00",
+        "sha256": "8fc91547e1eecfb2c5789e89877582d7354eff99d773e28e11c8d0c070d60ce7",
+        "step": 70000
+      },
+      "seed": 2026,
+      "status": "completed"
+    },
+    "rice:42": {
+      "artifact_path": "runs/rice/seed-42/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "356bbabb557f3f4fdaaae18267e0e6acec589a0ca7eac24fafb675436e069699",
+      "attempts": [
+        {
+          "attempt": 1,
+          "completed_at": "2026-08-30T16:21:24.438020+00:00",
+          "started_at": "2026-08-30T10:32:41.782659+00:00",
+          "status": "completed"
+        }
+      ],
+      "category": "rice",
+      "checkpoint_sha256": "72618b6698f6bf31b54227fd129186f5f31fb4fcc7850b2dc4e9890e8881eaf3",
+      "completed_at": "2026-08-30T16:21:24.438020+00:00",
+      "failure_history": [],
+      "interruption_history": [],
+      "latest_valid_checkpoint": {
+        "path": "runs/rice/seed-42/attempt-1/latest-checkpoint.pt",
+        "recorded_at": "2026-08-30T16:19:28.721065+00:00",
+        "sha256": "72618b6698f6bf31b54227fd129186f5f31fb4fcc7850b2dc4e9890e8881eaf3",
+        "step": 70000
+      },
+      "seed": 42,
+      "status": "completed"
+    },
+    "sheet_metal:123": {
+      "artifact_path": "runs/sheet_metal/seed-123/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "e6c26e896483a5a967467efbbc06a7e113e300313c081e022d1c5489e8861ce5",
+      "attempts": [
+        {
+          "attempt": 1,
+          "completed_at": "2026-09-02T17:06:40.989749+00:00",
+          "started_at": "2026-09-02T14:04:23.132740+00:00",
+          "status": "completed"
+        }
+      ],
+      "category": "sheet_metal",
+      "checkpoint_sha256": "f3f5d0afe28481dbc769d845214166084bab6aa3f213808a8e6277f8058923f6",
+      "completed_at": "2026-09-02T17:06:40.989749+00:00",
+      "failure_history": [],
+      "interruption_history": [],
+      "latest_valid_checkpoint": {
+        "path": "runs/sheet_metal/seed-123/attempt-1/latest-checkpoint.pt",
+        "recorded_at": "2026-09-02T17:05:35.854366+00:00",
+        "sha256": "f3f5d0afe28481dbc769d845214166084bab6aa3f213808a8e6277f8058923f6",
+        "step": 70000
+      },
+      "seed": 123,
+      "status": "completed"
+    },
+    "sheet_metal:2026": {
+      "artifact_path": "runs/sheet_metal/seed-2026/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "774ef963fa86c3597333cb5fb8117eca936ade76d80aef45591a1edae33d62d3",
+      "attempts": [
+        {
+          "attempt": 1,
+          "completed_at": "2026-09-02T20:06:32.009065+00:00",
+          "started_at": "2026-09-02T17:06:40.999889+00:00",
+          "status": "completed"
+        }
+      ],
+      "category": "sheet_metal",
+      "checkpoint_sha256": "b60566c1bbc7c19823bb71eff6045baf3edb8449bfc6e5cb7f5a0cc3f0bf8323",
+      "completed_at": "2026-09-02T20:06:32.009065+00:00",
+      "failure_history": [],
+      "interruption_history": [],
+      "latest_valid_checkpoint": {
+        "path": "runs/sheet_metal/seed-2026/attempt-1/latest-checkpoint.pt",
+        "recorded_at": "2026-09-02T20:05:24.876319+00:00",
+        "sha256": "b60566c1bbc7c19823bb71eff6045baf3edb8449bfc6e5cb7f5a0cc3f0bf8323",
+        "step": 70000
+      },
+      "seed": 2026,
+      "status": "completed"
+    },
+    "sheet_metal:42": {
+      "artifact_path": "runs/sheet_metal/seed-42/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "f29b7f1d5a351017e5930b65bd5b40fe4ccd402df08677faaac4b7da13e17867",
+      "attempts": [
+        {
+          "attempt": 1,
+          "completed_at": "2026-09-02T14:04:23.132740+00:00",
+          "started_at": "2026-09-02T11:14:31.971103+00:00",
+          "status": "completed"
+        }
+      ],
+      "category": "sheet_metal",
+      "checkpoint_sha256": "15fb2b8028cc14fad176760b274dd16c150289f42ba28aa24ba365f0230ea8d2",
+      "completed_at": "2026-09-02T14:04:23.132740+00:00",
+      "failure_history": [],
+      "interruption_history": [],
+      "latest_valid_checkpoint": {
+        "path": "runs/sheet_metal/seed-42/attempt-1/latest-checkpoint.pt",
+        "recorded_at": "2026-09-02T14:03:15.347249+00:00",
+        "sha256": "15fb2b8028cc14fad176760b274dd16c150289f42ba28aa24ba365f0230ea8d2",
+        "step": 70000
+      },
+      "seed": 42,
+      "status": "completed"
+    },
+    "vial:123": {
+      "artifact_path": "runs/vial/seed-123/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "4f4019ee6fd0a0799c470b4b62fed78f9a0124dfdbc7512cb34997e0ad86203a",
+      "attempts": [
+        {
+          "attempt": 1,
+          "completed_at": "2026-09-03T01:00:37.279784+00:00",
+          "started_at": "2026-09-02T22:34:42.535549+00:00",
+          "status": "completed"
+        }
+      ],
+      "category": "vial",
+      "checkpoint_sha256": "1562d99b53b01c8d28a75402de630d87654d15efad8fb0c706310bd582c31fe2",
+      "completed_at": "2026-09-03T01:00:37.279784+00:00",
+      "failure_history": [],
+      "interruption_history": [],
+      "latest_valid_checkpoint": {
+        "path": "runs/vial/seed-123/attempt-1/latest-checkpoint.pt",
+        "recorded_at": "2026-09-03T00:59:51.036255+00:00",
+        "sha256": "1562d99b53b01c8d28a75402de630d87654d15efad8fb0c706310bd582c31fe2",
+        "step": 70000
+      },
+      "seed": 123,
+      "status": "completed"
+    },
+    "vial:2026": {
+      "artifact_path": "runs/vial/seed-2026/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "5fc54d9cee73f71790b9c895f95af0e1bd556d7d76b7a72f4a9934ad855fe213",
+      "attempts": [
+        {
+          "attempt": 1,
+          "completed_at": "2026-09-03T03:26:42.613340+00:00",
+          "started_at": "2026-09-03T01:00:37.279784+00:00",
+          "status": "completed"
+        }
+      ],
+      "category": "vial",
+      "checkpoint_sha256": "0313c58d4c79b9bd580c47d6b463e93c17de9969582f52d777832a5fd9661e85",
+      "completed_at": "2026-09-03T03:26:42.613340+00:00",
+      "failure_history": [],
+      "interruption_history": [],
+      "latest_valid_checkpoint": {
+        "path": "runs/vial/seed-2026/attempt-1/latest-checkpoint.pt",
+        "recorded_at": "2026-09-03T03:25:56.855120+00:00",
+        "sha256": "0313c58d4c79b9bd580c47d6b463e93c17de9969582f52d777832a5fd9661e85",
+        "step": 70000
+      },
+      "seed": 2026,
+      "status": "completed"
+    },
+    "vial:42": {
+      "artifact_path": "runs/vial/seed-42/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "0ad5a9245485cbbc65d81dedf874caff34ac08eeb4cc238bb4e6d7fe8505af8d",
+      "attempts": [
+        {
+          "attempt": 1,
+          "completed_at": "2026-09-02T22:34:42.535549+00:00",
+          "started_at": "2026-09-02T20:06:32.019070+00:00",
+          "status": "completed"
+        }
+      ],
+      "category": "vial",
+      "checkpoint_sha256": "e9c915a70c08789eabb47d56cad52a1a4f6ec7ee6fdf7c5974da4a7aa5027d98",
+      "completed_at": "2026-09-02T22:34:42.535549+00:00",
+      "failure_history": [],
+      "interruption_history": [],
+      "latest_valid_checkpoint": {
+        "path": "runs/vial/seed-42/attempt-1/latest-checkpoint.pt",
+        "recorded_at": "2026-09-02T22:33:55.558324+00:00",
+        "sha256": "e9c915a70c08789eabb47d56cad52a1a4f6ec7ee6fdf7c5974da4a7aa5027d98",
+        "step": 70000
+      },
+      "seed": 42,
+      "status": "completed"
+    },
+    "wallplugs:123": {
+      "artifact_path": "runs/wallplugs/seed-123/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "d8847c7c390248ba3b30fd01f67ea521fe32cd43fce8dd30f6fa17c2f931b921",
+      "attempts": [
+        {
+          "attempt": 1,
+          "completed_at": "2026-09-03T10:01:25.317241+00:00",
+          "started_at": "2026-09-03T06:42:41.608384+00:00",
+          "status": "completed"
+        }
+      ],
+      "category": "wallplugs",
+      "checkpoint_sha256": "c6d3e6bc4062074d07355bf56bac16b916f85190a997548626969bc828ffa0c8",
+      "completed_at": "2026-09-03T10:01:25.317241+00:00",
+      "failure_history": [],
+      "interruption_history": [],
+      "latest_valid_checkpoint": {
+        "path": "runs/wallplugs/seed-123/attempt-1/latest-checkpoint.pt",
+        "recorded_at": "2026-09-03T09:59:51.800523+00:00",
+        "sha256": "c6d3e6bc4062074d07355bf56bac16b916f85190a997548626969bc828ffa0c8",
+        "step": 70000
+      },
+      "seed": 123,
+      "status": "completed"
+    },
+    "wallplugs:2026": {
+      "artifact_path": "runs/wallplugs/seed-2026/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "60b3984c366189fc64e30bd673da58547aa3aec5db47b40cc0a689daaa6b703f",
+      "attempts": [
+        {
+          "attempt": 1,
+          "completed_at": "2026-09-03T21:41:43.473159+00:00",
+          "started_at": "2026-09-03T10:01:25.327563+00:00",
+          "status": "completed"
+        }
+      ],
+      "category": "wallplugs",
+      "checkpoint_sha256": "026a68a19d034b13a937f29c89489fdde03116c52629565cfa1001b438de55d3",
+      "completed_at": "2026-09-03T21:41:43.473159+00:00",
+      "failure_history": [],
+      "interruption_history": [
+        {
+          "checkpoint_step": 28000,
+          "reason": "user_requested_pause_after_forced_process_stop",
+          "recorded_at": "2026-09-03T11:24:08.015201+00:00",
+          "stage": "training"
+        },
+        {
+          "checkpoint_step": 30000,
+          "reason": "resume_after_external_or_unclean_interruption",
+          "recorded_at": "2026-09-03T19:54:03.336909+00:00",
+          "stage": "training"
+        }
+      ],
+      "latest_valid_checkpoint": {
+        "path": "runs/wallplugs/seed-2026/attempt-1/latest-checkpoint.pt",
+        "recorded_at": "2026-09-03T21:40:34.222414+00:00",
+        "sha256": "026a68a19d034b13a937f29c89489fdde03116c52629565cfa1001b438de55d3",
+        "step": 70000
+      },
+      "seed": 2026,
+      "status": "completed"
+    },
+    "wallplugs:42": {
+      "artifact_path": "runs/wallplugs/seed-42/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "41999440e37ad0c289d84f60629545b1fec232bb24e7de7ce9f9b821292aa7ce",
+      "attempts": [
+        {
+          "attempt": 1,
+          "completed_at": "2026-09-03T06:42:41.608384+00:00",
+          "started_at": "2026-09-03T03:26:42.623465+00:00",
+          "status": "completed"
+        }
+      ],
+      "category": "wallplugs",
+      "checkpoint_sha256": "3d19500381a21000abf433b8adc90cfe30788f2e33e55f53e98fd8dce06cffeb",
+      "completed_at": "2026-09-03T06:42:41.608384+00:00",
+      "failure_history": [],
+      "interruption_history": [],
+      "latest_valid_checkpoint": {
+        "path": "runs/wallplugs/seed-42/attempt-1/latest-checkpoint.pt",
+        "recorded_at": "2026-09-03T06:41:31.270681+00:00",
+        "sha256": "3d19500381a21000abf433b8adc90cfe30788f2e33e55f53e98fd8dce06cffeb",
+        "step": 70000
+      },
+      "seed": 42,
+      "status": "completed"
+    },
+    "walnuts:123": {
+      "artifact_path": "runs/walnuts/seed-123/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "3ebf66b002c10b8d517cd6d29208ce2d389ab7e1b09fcc4ed572e64e5759c386",
+      "attempts": [
+        {
+          "attempt": 1,
+          "completed_at": "2026-09-04T08:40:26.489727+00:00",
+          "started_at": "2026-09-04T03:10:56.899291+00:00",
+          "status": "completed"
+        }
+      ],
+      "category": "walnuts",
+      "checkpoint_sha256": "549552116791895333ef09d43df13733a61be0d8f689ac5827b1b06247cce2f9",
+      "completed_at": "2026-09-04T08:40:26.489727+00:00",
+      "failure_history": [],
+      "interruption_history": [],
+      "latest_valid_checkpoint": {
+        "path": "runs/walnuts/seed-123/attempt-1/latest-checkpoint.pt",
+        "recorded_at": "2026-09-04T08:38:10.240252+00:00",
+        "sha256": "549552116791895333ef09d43df13733a61be0d8f689ac5827b1b06247cce2f9",
+        "step": 70000
+      },
+      "seed": 123,
+      "status": "completed"
+    },
+    "walnuts:2026": {
+      "artifact_path": "runs/walnuts/seed-2026/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "5a6e01dacef22d731c21452b7610ab874800bd3d98cfce909b4cf3bb60d70842",
+      "attempts": [
+        {
+          "attempt": 1,
+          "completed_at": "2026-09-04T13:56:52.360245+00:00",
+          "started_at": "2026-09-04T08:40:26.489727+00:00",
+          "status": "completed"
+        }
+      ],
+      "category": "walnuts",
+      "checkpoint_sha256": "1e35eec90ae8fbd0ca3553786c15a961593d526ac1a217956c8aebf5c75b382a",
+      "completed_at": "2026-09-04T13:56:52.360245+00:00",
+      "failure_history": [],
+      "interruption_history": [],
+      "latest_valid_checkpoint": {
+        "path": "runs/walnuts/seed-2026/attempt-1/latest-checkpoint.pt",
+        "recorded_at": "2026-09-04T13:55:17.512177+00:00",
+        "sha256": "1e35eec90ae8fbd0ca3553786c15a961593d526ac1a217956c8aebf5c75b382a",
+        "step": 70000
+      },
+      "seed": 2026,
+      "status": "completed"
+    },
+    "walnuts:42": {
+      "artifact_path": "runs/walnuts/seed-42/attempt-1/benchmark-artifact.json",
+      "artifact_sha256": "3ef798ee733c6351163711c952cacf47daef07db72b6969710108285baf90c09",
+      "attempts": [
+        {
+          "attempt": 1,
+          "completed_at": "2026-09-04T03:10:56.893245+00:00",
+          "started_at": "2026-09-03T21:41:43.473159+00:00",
+          "status": "completed"
+        }
+      ],
+      "category": "walnuts",
+      "checkpoint_sha256": "9349c9befc35621dd1b87bd8739d04dceb5def8fc9d04321707cc2af38d38892",
+      "completed_at": "2026-09-04T03:10:56.893245+00:00",
+      "failure_history": [],
+      "interruption_history": [],
+      "latest_valid_checkpoint": {
+        "path": "runs/walnuts/seed-42/attempt-1/latest-checkpoint.pt",
+        "recorded_at": "2026-09-04T03:09:12.128875+00:00",
+        "sha256": "9349c9befc35621dd1b87bd8739d04dceb5def8fc9d04321707cc2af38d38892",
+        "step": 70000
+      },
+      "seed": 42,
+      "status": "completed"
+    }
+  },
+  "checkpoint_interval_steps": 1000,
+  "completed_at": "2026-09-04T13:56:52.365700+00:00",
+  "created_at": "2026-08-28T16:07:44.279452+00:00",
+  "dataset_audit_sha256": "8c0f71f0a7dc81436b7bd3affed0ba7f97ea3844213d487c2d9886befa055a92",
+  "environment": {
+    "configured": {
+      "device_policy": "cuda",
+      "hf_hub_offline": false
+    },
+    "nvidia": {
+      "status": "detected",
+      "value": [
+        {
+          "driver_version": "561.17",
+          "memory_mib": 8192,
+          "name": "NVIDIA GeForce RTX 3070 Ti Laptop GPU"
+        }
+      ]
+    },
+    "operating_system": {
+      "status": "detected",
+      "value": {
+        "machine": "AMD64",
+        "release": "10",
+        "system": "Windows",
+        "version": "10.0.26200"
+      }
+    },
+    "packages": {
+      "anomalib": {
+        "status": "detected",
+        "value": "2.6.0"
+      },
+      "timm": {
+        "status": "detected",
+        "value": "1.0.28"
+      },
+      "torch": {
+        "status": "detected",
+        "value": "2.9.1+cu126"
+      },
+      "torchvision": {
+        "status": "detected",
+        "value": "0.24.1+cu126"
+      },
+      "visionguard-ai": {
+        "status": "detected",
+        "value": "0.1.0"
+      }
+    },
+    "python": {
+      "status": "detected",
+      "value": {
+        "implementation": "CPython",
+        "version": "3.11.6"
+      }
+    },
+    "resolved_packages": {
+      "FrEIA": "0.2",
+      "ImageIO": "2.37.4",
+      "Jinja2": "3.1.6",
+      "MarkupSafe": "3.0.3",
+      "PyYAML": "6.0.3",
+      "Pygments": "2.21.0",
+      "aiohappyeyeballs": "2.7.1",
+      "aiohttp": "3.14.3",
+      "aiosignal": "1.4.0",
+      "anomalib": "2.6.0",
+      "antlr4-python3-runtime": "4.9.3",
+      "anyio": "4.14.2",
+      "attrs": "26.1.0",
+      "certifi": "2026.7.22",
+      "click": "8.5.0",
+      "colorama": "0.4.6",
+      "contourpy": "1.3.3",
+      "cycler": "0.12.1",
+      "docstring_parser": "0.18.0",
+      "einops": "0.8.2",
+      "filelock": "3.32.3",
+      "fonttools": "4.63.0",
+      "frozenlist": "1.8.0",
+      "fsspec": "2026.7.0",
+      "h11": "0.16.0",
+      "hf-xet": "1.6.0",
+      "httpcore": "1.0.9",
+      "httpx": "0.28.1",
+      "huggingface_hub": "1.29.0",
+      "idna": "3.19",
+      "imagecodecs": "2026.3.6",
+      "iniconfig": "2.3.0",
+      "joblib": "1.5.3",
+      "jsonargparse": "4.46.0",
+      "kiwisolver": "1.5.0",
+      "kornia": "0.8.3",
+      "kornia_rs": "0.1.14",
+      "lazy-loader": "0.5",
+      "lightning": "2.6.5",
+      "lightning-utilities": "0.15.3",
+      "markdown-it-py": "4.2.0",
+      "matplotlib": "3.11.1",
+      "mdurl": "0.1.2",
+      "mpmath": "1.3.0",
+      "multidict": "6.7.1",
+      "narwhals": "2.25.0",
+      "networkx": "3.6.1",
+      "numpy": "2.4.6",
+      "omegaconf": "2.3.1",
+      "opencv-python-headless": "5.0.0.93",
+      "packaging": "26.3",
+      "pandas": "3.0.5",
+      "pillow": "12.3.0",
+      "pip": "26.2.1",
+      "platformdirs": "4.11.5",
+      "pluggy": "1.6.0",
+      "propcache": "0.5.2",
+      "pyparsing": "3.3.2",
+      "pytest": "9.1.1",
+      "python-dateutil": "2.9.0.post0",
+      "pytorch-lightning": "2.6.5",
+      "rich": "15.0.0",
+      "rich-argparse": "1.8.0",
+      "ruff": "0.16.4",
+      "safetensors": "0.8.0",
+      "scikit-image": "0.26.0",
+      "scikit-learn": "1.9.0",
+      "scipy": "1.17.1",
+      "setuptools": "65.5.0",
+      "six": "1.17.0",
+      "sympy": "1.14.0",
+      "threadpoolctl": "3.6.0",
+      "tifffile": "2026.3.3",
+      "timm": "1.0.28",
+      "torch": "2.9.1+cu126",
+      "torchmetrics": "1.9.0",
+      "torchvision": "0.24.1+cu126",
+      "tqdm": "4.70.0",
+      "typeshed_client": "2.13.0",
+      "typing_extensions": "4.16.0",
+      "tzdata": "2026.3",
+      "visionguard-ai": "0.1.0",
+      "yarl": "1.24.5"
+    },
+    "schema_version": 1,
+    "torch_backend": {
+      "status": "detected",
+      "value": {
+        "cuda_available": true,
+        "cuda_devices": [
+          {
+            "index": 0,
+            "name": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+            "total_memory_bytes": 8589410304
+          }
+        ],
+        "cuda_runtime": "12.6",
+        "cudnn_benchmark": false,
+        "cudnn_deterministic": false,
+        "cudnn_enabled": true,
+        "deterministic_algorithms": false,
+        "version": "2.9.1+cu126"
+      }
+    }
+  },
+  "environment_sha256": "ff013d8d026eb5cdc7ed643b6f56bcbc48669680236c94639e8a8627281e3093",
+  "imagenette_archive_sha256": "6cbfac238434d89fe99e651496f0812ebc7a10fa62bd42d6874042bf01de4efd",
+  "matrix": {
+    "categories": [
+      "can",
+      "fabric",
+      "fruit_jelly",
+      "rice",
+      "sheet_metal",
+      "vial",
+      "wallplugs",
+      "walnuts"
+    ],
+    "expected_run_count": 24,
+    "order": "category_major",
+    "seeds": [
+      42,
+      123,
+      2026
+    ]
+  },
+  "protocol_fingerprint": "e9d6a66e7a52f2993e984ec20278c4ca4c710198cc466df15f947adff763f69f",
+  "protocol_id": "efficientad-mvtecad2-v1",
+  "schema_version": 2,
+  "status": "completed",
+  "summary_path": "benchmark-summary.json",
+  "summary_sha256": "61e51bd43ff0c7c41557d07438d4ec9782bf7b9f2ac12adf39a87e481f4b8a61",
+  "teacher_archive_sha256": "c09aeaa2b33f244b3261a5efdaeae8f8284a949470a4c5a526c61275fe62684a",
+  "teacher_weight_sha256": "a16ded54719674435576aee641152616a640dfc6dc2b83115dab6e226610ae7d",
+  "updated_at": "2026-09-04T13:57:28.636675+00:00"
+}

@@ -218,45 +218,61 @@ the machine-readable report.
 
 ### Overall unweighted category means
 
-| Metric | Family | PatchCore | EfficientAD | EfficientAD - PatchCore |
+| Metric | Family | PatchCore | EfficientAD | EfficientAD - PatchCore, mean +/- paired-seed SD |
 | --- | --- | ---: | ---: | ---: |
-| Image AUROC | ranking | PENDING MACHINE EVIDENCE | PENDING MACHINE EVIDENCE | PENDING MACHINE EVIDENCE |
-| AU-PRO@0.05 | ranking | PENDING MACHINE EVIDENCE | PENDING MACHINE EVIDENCE | PENDING MACHINE EVIDENCE |
-| Pixel AUROC diagnostic | diagnostic ranking | PENDING MACHINE EVIDENCE | PENDING MACHINE EVIDENCE | PENDING MACHINE EVIDENCE |
-| Sensitivity | frozen image threshold | PENDING MACHINE EVIDENCE | PENDING MACHINE EVIDENCE | PENDING MACHINE EVIDENCE |
-| Specificity | frozen image threshold | PENDING MACHINE EVIDENCE | PENDING MACHINE EVIDENCE | PENDING MACHINE EVIDENCE |
-| Precision | frozen image threshold | PENDING MACHINE EVIDENCE | PENDING MACHINE EVIDENCE | PENDING MACHINE EVIDENCE |
-| Image F1 | frozen image threshold | PENDING MACHINE EVIDENCE | PENDING MACHINE EVIDENCE | PENDING MACHINE EVIDENCE |
-| Pixel precision | frozen pixel threshold | PENDING MACHINE EVIDENCE | PENDING MACHINE EVIDENCE | PENDING MACHINE EVIDENCE |
-| Pixel sensitivity | frozen pixel threshold | PENDING MACHINE EVIDENCE | PENDING MACHINE EVIDENCE | PENDING MACHINE EVIDENCE |
-| Pixel specificity | frozen pixel threshold | PENDING MACHINE EVIDENCE | PENDING MACHINE EVIDENCE | PENDING MACHINE EVIDENCE |
-| Pixel F1 | frozen pixel threshold | PENDING MACHINE EVIDENCE | PENDING MACHINE EVIDENCE | PENDING MACHINE EVIDENCE |
+| Image AUROC | ranking | 0.669033 | 0.636711 | -0.032322 +/- 0.012306 |
+| AU-PRO@0.05 | ranking | 0.198554 | 0.176150 | -0.022404 +/- 0.004810 |
+| Pixel AUROC diagnostic | diagnostic ranking | 0.827284 | 0.738442 | -0.088842 +/- 0.013843 |
+| Sensitivity | frozen image threshold | 0.276819 | 0.547321 | +0.270503 +/- 0.026926 |
+| Specificity | frozen image threshold | 0.903671 | 0.550222 | -0.353448 +/- 0.016696 |
+| Precision | frozen image threshold | 0.796871 | 0.740939 | -0.055932 +/- 0.015797 |
+| Image F1 | frozen image threshold | 0.384427 | 0.566058 | +0.181632 +/- 0.029024 |
+| Pixel precision | frozen pixel threshold | 0.389731 | 0.181006 | -0.208725 +/- 0.009320 |
+| Pixel sensitivity | frozen pixel threshold | 0.145720 | 0.199270 | +0.053550 +/- 0.013655 |
+| Pixel specificity | frozen pixel threshold | 0.997726 | 0.906386 | -0.091340 +/- 0.001220 |
+| Pixel F1 | frozen pixel threshold | 0.164344 | 0.046186 | -0.118158 +/- 0.008714 |
+
+The model columns are unweighted means over category means. For each delta, the
+pipeline first pairs the two models within each category and seed, then reports
+the mean and sample standard deviation of the three per-seed unweighted
+category-mean differences. The consistent signs across the paired seeds do not
+remove the category-level trade-offs below.
+
+For traceability, pooling all category/seed image decisions gives the following
+counts. These 3,252 observations repeat each public image for the three frozen
+seeds and are therefore not 3,252 independent images; the table does not replace
+the protocol's unweighted category aggregation.
+
+| Model | TP | FP | TN | FN |
+| --- | ---: | ---: | ---: | ---: |
+| PatchCore | 592 | 149 | 988 | 1,523 |
+| EfficientAD | 1,185 | 578 | 559 | 930 |
 
 ### Category-level ranking comparison
 
 | Category | PatchCore image AUROC | EfficientAD image AUROC | PatchCore AU-PRO@0.05 | EfficientAD AU-PRO@0.05 |
 | --- | ---: | ---: | ---: | ---: |
-| can | PENDING | PENDING | PENDING | PENDING |
-| fabric | PENDING | PENDING | PENDING | PENDING |
-| fruit_jelly | PENDING | PENDING | PENDING | PENDING |
-| rice | PENDING | PENDING | PENDING | PENDING |
-| sheet_metal | PENDING | PENDING | PENDING | PENDING |
-| vial | PENDING | PENDING | PENDING | PENDING |
-| wallplugs | PENDING | PENDING | PENDING | PENDING |
-| walnuts | PENDING | PENDING | PENDING | PENDING |
+| can | 0.477109 | 0.489763 | 0.008988 | 0.017550 |
+| fabric | 0.631987 | 0.541077 | 0.036633 | 0.063512 |
+| fruit_jelly | 0.841944 | 0.830000 | 0.392454 | 0.332994 |
+| rice | 0.536772 | 0.528571 | 0.132654 | 0.020303 |
+| sheet_metal | 0.693827 | 0.600617 | 0.078845 | 0.065037 |
+| vial | 0.878277 | 0.811066 | 0.471360 | 0.678785 |
+| wallplugs | 0.476975 | 0.530185 | 0.088729 | 0.031852 |
+| walnuts | 0.815370 | 0.762407 | 0.378767 | 0.199166 |
 
 ### Category-level frozen-threshold comparison
 
 | Category | PatchCore image F1 | EfficientAD image F1 | PatchCore pixel F1 | EfficientAD pixel F1 |
 | --- | ---: | ---: | ---: | ---: |
-| can | PENDING | PENDING | PENDING | PENDING |
-| fabric | PENDING | PENDING | PENDING | PENDING |
-| fruit_jelly | PENDING | PENDING | PENDING | PENDING |
-| rice | PENDING | PENDING | PENDING | PENDING |
-| sheet_metal | PENDING | PENDING | PENDING | PENDING |
-| vial | PENDING | PENDING | PENDING | PENDING |
-| wallplugs | PENDING | PENDING | PENDING | PENDING |
-| walnuts | PENDING | PENDING | PENDING | PENDING |
+| can | 0.442763 | 0.649383 | 0.000000 | 0.000130 |
+| fabric | 0.289170 | 0.668475 | 0.112113 | 0.022091 |
+| fruit_jelly | 0.396079 | 0.293306 | 0.165390 | 0.058645 |
+| rice | 0.210134 | 0.725721 | 0.103237 | 0.004038 |
+| sheet_metal | 0.383967 | 0.773431 | 0.329499 | 0.207488 |
+| vial | 0.533415 | 0.566148 | 0.127071 | 0.070376 |
+| wallplugs | 0.072756 | 0.602118 | 0.000000 | 0.006692 |
+| walnuts | 0.747128 | 0.249884 | 0.477443 | 0.000027 |
 
 Category/seed confusion counts, sensitivity, specificity, precision, image F1,
 image AUROC, AU-PRO@0.05, pixel confusion and rates, score distributions, and
@@ -279,10 +295,15 @@ bucket, so every aggregate and example remains traceable.
 
 | Bucket | All category/seed observations |
 | --- | ---: |
-| Both correct | PENDING MACHINE EVIDENCE |
-| PatchCore only correct | PENDING MACHINE EVIDENCE |
-| EfficientAD only correct | PENDING MACHINE EVIDENCE |
-| Both wrong | PENDING MACHINE EVIDENCE |
+| Both correct | 931 |
+| PatchCore only correct | 649 |
+| EfficientAD only correct | 813 |
+| Both wrong | 859 |
+
+The 1,462 one-model-only cases demonstrate complementary errors, but they do
+not demonstrate that a deployable router can identify the better model before
+seeing the public label. Any routing or hybrid rule would need a separately
+approved design and non-public tuning/evaluation plan.
 
 The category and seed breakdown is retained in the machine-readable summary.
 Disagreement is descriptive evidence, not an authorization to construct or
@@ -309,6 +330,31 @@ They do not assign an undocumented visual or causal label:
 An image may carry multiple indicators. Counts and per-image TP/FP/TN/FN,
 continuous extrema, predicted area, and label are preserved so future reviewers
 can audit every assignment.
+
+Across all category/seed observations, the deterministic indicators total:
+
+| Indicator | PatchCore | EfficientAD |
+| --- | ---: | ---: |
+| Missed anomaly | 1,742 | 1,529 |
+| Under-localization | 207 | 255 |
+| Over-localization | 129 | 439 |
+| Diffuse false-positive map | 3 | 852 |
+| Threshold collapse | 1,516 | 930 |
+
+These counts are non-exclusive and repeat each image across three seeds.
+EfficientAD misses fewer anomalous masks at its more permissive frozen
+threshold, but it has substantially more over-localization and diffuse
+false-positive responses. PatchCore more often produces an empty anomalous
+binary map, consistent with its lower pixel sensitivity and much higher pixel
+specificity. Neither pattern is reduced to a single scalar metric.
+
+The stored float16 maps and authoritative binary PNGs also differ at the exact
+threshold because the PNGs were created from pre-cast float32 maps. PatchCore
+has 285,735 such pixels across 749 image/seed observations; EfficientAD has
+176,541 across 1,579. In every case the PNG is positive while the float16 value
+no longer strictly exceeds the threshold; the inverse count is zero. This is a
+storage-precision diagnostic, not a corrected prediction, and all reported
+pixel confusion/F1 values continue to use the frozen PNG.
 
 ## Targeted EfficientAD localization investigation
 
@@ -388,25 +434,40 @@ panel hash. The PNG panels remain ignored because they contain licensed dataset
 imagery and are large derived artifacts. Only the compact selection metadata is
 committed.
 
-Generated panel count: **PENDING MACHINE EVIDENCE**.
+Generated panel count: **16**. All 16 panel hashes match the committed
+`panel-index.json`; the image-bearing PNGs remain ignored.
 
 ## Model-selection assessment
 
-**PENDING HUMAN-REVIEWED SYNTHESIS OF THE VERIFIED MACHINE EVIDENCE.**
+**Assessment: task-dependent routing or a hybrid merits further study.** The
+frozen public evidence does not support a universal winner.
 
-The final statement must be limited to one evidence-supported conclusion:
+PatchCore is stronger on all three ranking summaries: image AUROC by 0.032322,
+AU-PRO@0.05 by 0.022404, and diagnostic pixel AUROC by 0.088842. It also leads
+pixel F1 by 0.118158, pixel precision by 0.208725, pixel specificity by
+0.091340, image specificity by 0.353448, and image precision by 0.055932. Its
+category means are higher in six of eight categories for image AUROC and pixel
+F1, and five of eight for AU-PRO@0.05. This is broad evidence for stronger
+ranking, localization, and false-positive control rather than one favorable
+metric.
 
-- prefer PatchCore;
-- prefer EfficientAD;
-- task-dependent routing or a hybrid merits further study; or
-- the evidence is currently insufficient.
+EfficientAD, however, leads image sensitivity by 0.270503, image F1 by
+0.181632, and pixel sensitivity by 0.053550. Across the repeated category/seed
+observations it produces 1,185 image true positives versus PatchCore's 592 and
+930 false negatives versus 1,523, at the cost of 578 false positives versus
+149. It is the only correct model in 813 paired observations, while PatchCore
+is the only correct model in 649. The paired-seed delta signs are stable, so the
+trade-off is not explained by selecting one favorable seed.
 
-The assessment must consider ranking, frozen-threshold behavior, localization,
-normal/anomalous score separation, category and seed stability, and failure
-patterns together. No winner may be inferred from image F1 alone, from a single
-category, or from informal panel appearance. The current evidence contains no
-formal matched inference-speed measurement, so EfficientAD's intended
-efficiency cannot be used as a locally measured advantage.
+Those complementary outcomes justify studying a routing or hybrid hypothesis;
+they do not validate one. No pre-label routing signal, ensemble rule, shared
+calibration, inference-time cost, or held-out performance has been evaluated.
+PatchCore remains the stronger localization and false-positive-control
+candidate, while EfficientAD remains the stronger frozen-threshold recall
+candidate. Choosing either as a single deployment model would require an
+explicit cost function and human review that this phase did not assume. Panel
+appearance was not used in this assessment, and EfficientAD's intended speed
+was not counted because there is no matched local speed benchmark.
 
 ## Limitations
 
@@ -461,11 +522,16 @@ python -m pip check
 Secret scanning, large-file hygiene, a complete diff review, and the repository
 CI matrix are also required. Record the verified local and CI outcomes here:
 
-- pytest: **PENDING VERIFIED RUN**;
-- Ruff format/lint: **PENDING VERIFIED RUN**;
-- pip check: **PENDING VERIFIED RUN**;
-- secret and large-file hygiene: **PENDING VERIFIED RUN**; and
-- CI: **PENDING VERIFIED RUN**.
+- pytest: **218 passed, 1 skipped**; the skip is the documented Windows
+  privilege limitation for creating a symbolic link;
+- Ruff format/lint: **passed** across all 61 checked files;
+- pip check: **passed**, with no broken requirements;
+- secret and large-file hygiene: **passed**; no credential-assignment pattern,
+  dataset/model artifact extension, or intended file above 5 MiB was found (the
+  largest is the 4,027,490-byte compact per-image JSONL); and
+- CI: the pull request's final commit must have passing Python 3.11, 3.12, and
+  3.13 jobs before review or merge; the live outcome is recorded on the pull
+  request rather than frozen into this report before the PR exists.
 
 Phase 4A ends with a focused pull request and human review. It must not be
 merged automatically, and Phase 4B or another benchmark must not begin from

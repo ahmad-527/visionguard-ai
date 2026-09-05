@@ -31,6 +31,7 @@ visionguard-patchcore-smoke = "visionguard.runner:main"
 visionguard-patchcore-benchmark = "visionguard.benchmark:main"
 visionguard-repeatability-compare = "visionguard.repeatability:main"
 visionguard-efficientad-smoke = "visionguard.efficientad_smoke:main"
+visionguard-efficientad-benchmark = "visionguard.efficientad_benchmark:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/visionguard"]

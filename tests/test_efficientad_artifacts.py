@@ -65,6 +65,54 @@ def test_schema_v3_accepts_nonbenchmark_engineering_evidence() -> None:
     validate_artifact(artifact())
 
 
+def test_schema_v3_accepts_completed_phase3b_public_evidence() -> None:
+    value = artifact()
+    value.update(
+        {
+            "experiment_id": "phase3b-can-seed-42",
+            "run_kind": "phase3b_protocol_authorized_public_benchmark",
+            "benchmark_claim": True,
+            "evaluation_split": "test_public",
+            "training": {"final_optimization_step": 70000},
+            "calibration": {"normal_only": True, "split": "validation"},
+            "thresholds": {"image": 0.1, "pixel": 0.2},
+            "category_metrics": {
+                name: {"status": "defined", "value": 0.5}
+                for name in ("au_pro_0.05", "pixel_f1", "image_f1", "image_auroc")
+            },
+        }
+    )
+    value["predictions"][0].update(  # type: ignore[index]
+        {
+            "sample_id": "can/test_public/good/000.png",
+            "anomaly_map": {
+                "path": "maps/continuous.tiff",
+                "sha256": "f" * 64,
+                "thresholded_path": "maps/binary.png",
+                "thresholded_sha256": "a" * 64,
+            },
+        }
+    )
+
+    validate_efficientad_artifact(value)
+    validate_artifact(value)
+
+
+def test_completed_phase3b_requires_all_metrics_and_predictions() -> None:
+    value = artifact()
+    value.update(
+        {
+            "run_kind": "phase3b_protocol_authorized_public_benchmark",
+            "benchmark_claim": True,
+            "evaluation_split": "test_public",
+            "training": {"final_optimization_step": 70000},
+            "category_metrics": {},
+        }
+    )
+    with pytest.raises(EfficientAdArtifactError, match="every frozen metric"):
+        validate_efficientad_artifact(value)
+
+
 def test_schema_v3_rejects_public_evaluation_and_benchmark_claim() -> None:
     value = artifact()
     value["evaluation_split"] = "test_public"

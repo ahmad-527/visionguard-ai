@@ -97,11 +97,12 @@ def test_phase3a_rejects_public_and_private_splits(split: str) -> None:
         authorize_engineering_split(split)
 
 
-def test_complete_future_gate_remains_deliberately_locked() -> None:
+def test_complete_phase3b_gate_is_authorized() -> None:
     document = load_efficientad_protocol(PROTOCOL)
 
-    with pytest.raises(EfficientAdProtocolError, match="Phase 3A lock"):
-        validate_future_benchmark_prerequisites(document, valid_gate(document))
+    assert validate_future_benchmark_prerequisites(
+        document, valid_gate(document)
+    ) == efficientad_protocol_fingerprint(document)
 
 
 @pytest.mark.parametrize(

@@ -31,7 +31,7 @@ class EfficientAdProtocolError(ValueError):
 
 @dataclass(frozen=True)
 class EfficientAdGateInputs:
-    """Future Phase 3B prerequisites, validated while execution remains locked."""
+    """Phase 3B prerequisites required by the frozen public benchmark gate."""
 
     explicit_benchmark_mode: bool
     evaluation_split: str
@@ -131,7 +131,7 @@ def validate_efficientad_snapshot(protocol: Mapping[str, Any]) -> None:
 def validate_future_benchmark_prerequisites(
     document: Mapping[str, Any], inputs: EfficientAdGateInputs
 ) -> str:
-    """Validate future prerequisites, then deny execution under the Phase 3A lock."""
+    """Authorize Phase 3B only when every frozen prerequisite matches."""
 
     protocol = _mapping(document.get("protocol"), "protocol")
     validate_efficientad_snapshot(protocol)
@@ -165,10 +165,7 @@ def validate_future_benchmark_prerequisites(
         raise EfficientAdProtocolError(
             "Benchmark prerequisites denied: " + "; ".join(failures)
         )
-    raise EfficientAdProtocolError(
-        "Phase 3A lock: EfficientAD test_public execution is disabled until "
-        "the protocol is reviewed, merged, and Phase 3B is explicitly authorized"
-    )
+    return fingerprint
 
 
 def authorize_engineering_split(split: str) -> None:

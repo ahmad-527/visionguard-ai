@@ -2,10 +2,10 @@
 
 Production-grade deep learning platform for industrial visual anomaly detection, defect localization, benchmarking, and real-time quality inspection.
 
-> **Project status:** Phase 3B — the frozen EfficientAD public benchmark matrix
-> completed with 24/24 cells and its candidate results are documented for pull-
-> request review. No private evaluation or formal inference-speed benchmark has
-> been performed.
+> **Project status:** Phase 4A — a reproducible, model-free comparative failure
+> analysis of the frozen PatchCore and EfficientAD public evidence is documented
+> for pull-request review. No private evaluation, new training, threshold
+> tuning, or formal inference-speed benchmark has been performed.
 
 ## Mission
 
@@ -70,6 +70,12 @@ the complete frozen 8-category × 3-seed matrix. See the
 The outcomes did not change the frozen protocol and do not authorize private
 evaluation or establish a final model winner.
 
+Phase 4A compares the two frozen evidence sets without training, inference, or
+threshold changes. See the
+[comparative failure analysis, deterministic examples, and model-selection boundaries](docs/phase-4a-comparative-failure-analysis.md).
+Its public-split assessment remains subject to human review and does not
+authorize private evaluation or Phase 4B.
+
 ## Development setup
 
 Python 3.11 or newer is required. From a fresh clone, create an isolated
@@ -128,6 +134,9 @@ recorded in the
 [interruption-safe execution contract](docs/phase-3b-execution-contract.md).
 The completed public-split evidence and its interpretation boundaries are in
 the [Phase 3B benchmark report](docs/phase-3b-public-benchmark.md).
+The model-free Phase 4A methodology, provenance gates, comparative evidence,
+failure taxonomy, and review boundary are documented in the
+[comparative failure-analysis report](docs/phase-4a-comparative-failure-analysis.md).
 
 ## License
 

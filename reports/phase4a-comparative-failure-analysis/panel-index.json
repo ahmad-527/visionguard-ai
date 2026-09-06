@@ -1,0 +1,404 @@
+{
+  "analysis_id": "phase4a-comparative-failure-analysis-v1",
+  "panel_output_role": "ignored_local_artifact",
+  "panels": [
+    {
+      "category": "can",
+      "disagreement": "both_correct",
+      "display_scaling": "Each continuous map is independently min-max scaled for display only; numeric analysis uses stored values.",
+      "efficientad_continuous_sha256": "1188f64d11b67e5b254f201e90289881fcdf0d9fbe0a670beb3262594ce42abb",
+      "efficientad_thresholded_sha256": "0a79e40e5c28fff486202e0f8c7cff6db7f1ea5f9e44977538fc25bd0aa9b4dc",
+      "ground_truth_mask": {
+        "generated_zero_mask": false,
+        "sample_id": "can/test_public/ground_truth/bad/009_shift_2_mask.png",
+        "sha256": "a7ec169b4659e9b82faa509b70f8a5ab9d8962672fa1324d2e5bb4dccda334de"
+      },
+      "label": 1,
+      "panel_filename": "can__seed-42__label-1__04ff14cdc205.png",
+      "panel_sha256": "439774e12643f5ea2a4f48b6ee65ab85660658e9a9a4f76b51d40cc42ae79cac",
+      "patchcore_continuous_sha256": "8523ad5a739e25e373f52fadcca1ddfe03107c4291bcca44bc68e8ae3965ba5e",
+      "patchcore_thresholded_sha256": "0e9ac9732397d66d5724fa378434850e424cd2e60b73edcb7caf96b503808db5",
+      "reasons": [
+        "minimum_sha256_for_category=can,label=1,seed=42"
+      ],
+      "sample_id": "can/test_public/bad/009_shift_2.png",
+      "seed": 42,
+      "selection_sha256": "04ff14cdc205fd8a8cab3c1adb31ffc4d7b90d210f2506c545fb25f46b4bc228",
+      "source_image_sha256": "232a57fa90d3f8d407bafced1150f0f8250efb1b1e40b036e2f9a446aae008ef"
+    },
+    {
+      "category": "can",
+      "disagreement": "patchcore_only_correct",
+      "display_scaling": "Each continuous map is independently min-max scaled for display only; numeric analysis uses stored values.",
+      "efficientad_continuous_sha256": "0e3e405627e33d0607953df781f9480fffadb73b24d1db5a5df7aafac64138f2",
+      "efficientad_thresholded_sha256": "350837978c4f87067a58cc17badaa8fb578724cc7fb5e661da9e8f901c85bcde",
+      "ground_truth_mask": {
+        "generated_zero_mask": true,
+        "sample_id": null,
+        "sha256": null
+      },
+      "label": 0,
+      "panel_filename": "can__seed-42__label-0__04bb450f2ca0.png",
+      "panel_sha256": "e4eb208bc6a07814cfddfb89f2417b1a1089d46dcb18e6f7b68aaa9cafc46f1e",
+      "patchcore_continuous_sha256": "dc3872352fe550253204920f502a476152ff627d52cb5ff7e0902c0bbd2f9c93",
+      "patchcore_thresholded_sha256": "5b56f452584d6a98c85eeee438672f62b7e3687fa0f08331f8ad965b2b3fbd09",
+      "reasons": [
+        "minimum_sha256_for_category=can,label=0,seed=42"
+      ],
+      "sample_id": "can/test_public/good/009_shift_1.png",
+      "seed": 42,
+      "selection_sha256": "04bb450f2ca061da467c9498cd857bc90b5045e8bf78f789be954c77b2e98f80",
+      "source_image_sha256": "99abb6b470004e15bfbd24cf1a12c508275e4014106cfa6f0205ef66f4661ee2"
+    },
+    {
+      "category": "fabric",
+      "disagreement": "both_correct",
+      "display_scaling": "Each continuous map is independently min-max scaled for display only; numeric analysis uses stored values.",
+      "efficientad_continuous_sha256": "be97990f9c14f53fc09eea0c496e1c960bde576163cda25b9b9319dc3fb1ec08",
+      "efficientad_thresholded_sha256": "5d73a0f1061f533c4e0cacc2559c9ebfc99fcb6eead69e521685e6c8f74a427b",
+      "ground_truth_mask": {
+        "generated_zero_mask": false,
+        "sample_id": "fabric/test_public/ground_truth/bad/007_shift_3_mask.png",
+        "sha256": "d845747e6234ac5ecf808e105ccf79421b0086ce13fa0c2c20c731650cdb3f03"
+      },
+      "label": 1,
+      "panel_filename": "fabric__seed-42__label-1__023c3dfcc1db.png",
+      "panel_sha256": "4d4b9a89729b7c8d1f7c4ed5fa0c518b3b87ea0ea3ea47c2ebdc251c00d7fdc9",
+      "patchcore_continuous_sha256": "0ee67f784272053d4a9f3ea1771899e9c4f12e1c889429e9137c2b84ff99ba77",
+      "patchcore_thresholded_sha256": "c59ace2fec71bbfe983b0c774da79372d7a79133ddd6564d1b8324635b8b3d43",
+      "reasons": [
+        "minimum_sha256_for_category=fabric,label=1,seed=42"
+      ],
+      "sample_id": "fabric/test_public/bad/007_shift_3.png",
+      "seed": 42,
+      "selection_sha256": "023c3dfcc1dbcdd674e651bafc0d6ddd97771c15ff283de8573130ff729a693a",
+      "source_image_sha256": "2ad8b194499a654089840c0d6195d5d9f76178f2b2f4dee2314c4a882472e9e6"
+    },
+    {
+      "category": "fabric",
+      "disagreement": "patchcore_only_correct",
+      "display_scaling": "Each continuous map is independently min-max scaled for display only; numeric analysis uses stored values.",
+      "efficientad_continuous_sha256": "ae4427fc39a5986162c0d66af91daaee25f7bbf89b17092eefad87a648d18ebe",
+      "efficientad_thresholded_sha256": "f8b630cf3e2c0efe7e9d0ec62a096abbe884ff1752807ae3050256e34b247777",
+      "ground_truth_mask": {
+        "generated_zero_mask": true,
+        "sample_id": null,
+        "sha256": null
+      },
+      "label": 0,
+      "panel_filename": "fabric__seed-42__label-0__02cf3524b2c9.png",
+      "panel_sha256": "7dcc167de20427a33bc69f81d6ad884eec625f270cc4f0a2761b40532725caf8",
+      "patchcore_continuous_sha256": "6e83a7ba167b678b8086cc6104d15fff4fa1b116f67f2633131bd8a140905976",
+      "patchcore_thresholded_sha256": "17edfe334f513e8240091c5da6ba24018ec2b206bd7bc1c171665b5f06bb0837",
+      "reasons": [
+        "minimum_sha256_for_category=fabric,label=0,seed=42"
+      ],
+      "sample_id": "fabric/test_public/good/009_overexposed.png",
+      "seed": 42,
+      "selection_sha256": "02cf3524b2c94e4e9b800156cb2a9797d0b6d4bc17546ebd3027c844010cccd6",
+      "source_image_sha256": "055ed7968ba758046febff05be27a2a01fb5c64d54cafe26dc457bebaff1b568"
+    },
+    {
+      "category": "fruit_jelly",
+      "disagreement": "both_wrong",
+      "display_scaling": "Each continuous map is independently min-max scaled for display only; numeric analysis uses stored values.",
+      "efficientad_continuous_sha256": "8356b30f5505f5a6b213e171a2ed9b9703c8d0748c4bfec5d1e1fdfca0eff588",
+      "efficientad_thresholded_sha256": "7ae97cfb3916da63eb5ac9c7e7fa83ee74153a43995fd18c860aae348661c08f",
+      "ground_truth_mask": {
+        "generated_zero_mask": false,
+        "sample_id": "fruit_jelly/test_public/ground_truth/bad/003_overexposed_mask.png",
+        "sha256": "17c9a0c7db0a0bcbf4928e37ebb51606f5ce3393eaf76638bb23331adab1520f"
+      },
+      "label": 1,
+      "panel_filename": "fruit_jelly__seed-42__label-1__0cbe05f6a221.png",
+      "panel_sha256": "8911db23847004864935a6a519dfacca56692b47be3f3231c8c5476bd1f63d10",
+      "patchcore_continuous_sha256": "f4fc9a719b31453c267c98e5b4c709e4bddc81eea1128fcb3ca31d0852d4cc6e",
+      "patchcore_thresholded_sha256": "7ae97cfb3916da63eb5ac9c7e7fa83ee74153a43995fd18c860aae348661c08f",
+      "reasons": [
+        "minimum_sha256_for_category=fruit_jelly,label=1,seed=42"
+      ],
+      "sample_id": "fruit_jelly/test_public/bad/003_overexposed.png",
+      "seed": 42,
+      "selection_sha256": "0cbe05f6a221455ed1231d5e77adc77416f81960467e0b29e3480576738aaf92",
+      "source_image_sha256": "9853e74da04c5452541c0cc590f8802251a1f69c0607a82dfb60cdc9fc35383c"
+    },
+    {
+      "category": "fruit_jelly",
+      "disagreement": "both_correct",
+      "display_scaling": "Each continuous map is independently min-max scaled for display only; numeric analysis uses stored values.",
+      "efficientad_continuous_sha256": "6c289b84e3b22c89385217a52050fd1fd605afc76b484157827d4c5d2f875302",
+      "efficientad_thresholded_sha256": "7ae97cfb3916da63eb5ac9c7e7fa83ee74153a43995fd18c860aae348661c08f",
+      "ground_truth_mask": {
+        "generated_zero_mask": true,
+        "sample_id": null,
+        "sha256": null
+      },
+      "label": 0,
+      "panel_filename": "fruit_jelly__seed-42__label-0__0a1ea5c47ec5.png",
+      "panel_sha256": "e44226014ead989a8cff993a993af2f5be599cf451be6be87e9a37bee87b2e1c",
+      "patchcore_continuous_sha256": "ca9de7812f9931a2d0e93deba105f33414aee41fcf160064a2bcba2e5d70ee64",
+      "patchcore_thresholded_sha256": "7ae97cfb3916da63eb5ac9c7e7fa83ee74153a43995fd18c860aae348661c08f",
+      "reasons": [
+        "minimum_sha256_for_category=fruit_jelly,label=0,seed=42"
+      ],
+      "sample_id": "fruit_jelly/test_public/good/000_shift_1.png",
+      "seed": 42,
+      "selection_sha256": "0a1ea5c47ec524d94cf483e9121223e074134408da5e36dfb57d5663cfdaf481",
+      "source_image_sha256": "9fe1e7b23553170c667e382261703923d7e93a6dd7674a5ea1b7e64102119715"
+    },
+    {
+      "category": "rice",
+      "disagreement": "both_wrong",
+      "display_scaling": "Each continuous map is independently min-max scaled for display only; numeric analysis uses stored values.",
+      "efficientad_continuous_sha256": "32765e85ceeda86c10ab9130dc2499a540b2fb32e95f923fac1156c1e1dd833f",
+      "efficientad_thresholded_sha256": "17edfe334f513e8240091c5da6ba24018ec2b206bd7bc1c171665b5f06bb0837",
+      "ground_truth_mask": {
+        "generated_zero_mask": false,
+        "sample_id": "rice/test_public/ground_truth/bad/004_regular_mask.png",
+        "sha256": "2ff62efd6fd6819ed136fd6cf2c03eae90454e69ef9c76f228283c8a0cdb253e"
+      },
+      "label": 1,
+      "panel_filename": "rice__seed-42__label-1__016c7c8745c8.png",
+      "panel_sha256": "846340f95ad73059ad6259990bb389f82995b1edba41e4798c27c66992bfaf28",
+      "patchcore_continuous_sha256": "1ee7bc11c1319b8548e5c7f791692b526097f3a9b1b53e0b9ed5792342607ef6",
+      "patchcore_thresholded_sha256": "17edfe334f513e8240091c5da6ba24018ec2b206bd7bc1c171665b5f06bb0837",
+      "reasons": [
+        "minimum_sha256_for_category=rice,label=1,seed=42",
+        "minimum_sha256_for_disagreement=both_wrong,seed=42"
+      ],
+      "sample_id": "rice/test_public/bad/004_regular.png",
+      "seed": 42,
+      "selection_sha256": "016c7c8745c8c37b6fd867837a56b2af77243994672e0e3811d6011abd149b97",
+      "source_image_sha256": "f27847d1b680263efb7574bfbacb55c1b69a128af70be162fadfed7a94ce9609"
+    },
+    {
+      "category": "rice",
+      "disagreement": "patchcore_only_correct",
+      "display_scaling": "Each continuous map is independently min-max scaled for display only; numeric analysis uses stored values.",
+      "efficientad_continuous_sha256": "927b8cbd0f8a33fd96844e71dec14a6ea6834fbb504ca789088fdd9205c56c56",
+      "efficientad_thresholded_sha256": "f2aa55a8f1114704343aac93539e1a6172bfc2989c7180ec78077d8c170e6f02",
+      "ground_truth_mask": {
+        "generated_zero_mask": true,
+        "sample_id": null,
+        "sha256": null
+      },
+      "label": 0,
+      "panel_filename": "rice__seed-42__label-0__082c4f56ebe3.png",
+      "panel_sha256": "90a6a7ab37ff4c3d87d84086435040852f32e655008edc5674fdccf98ebc0499",
+      "patchcore_continuous_sha256": "ada0fd51ee76dbcaf6a955ee1cb005324d9fd30c315db78394453ce281b4fbc6",
+      "patchcore_thresholded_sha256": "17edfe334f513e8240091c5da6ba24018ec2b206bd7bc1c171665b5f06bb0837",
+      "reasons": [
+        "minimum_sha256_for_category=rice,label=0,seed=42"
+      ],
+      "sample_id": "rice/test_public/good/005_shift_1.png",
+      "seed": 42,
+      "selection_sha256": "082c4f56ebe3289817c5a1995d559e15ec66f71281baa1b8a13d6f905910b1c1",
+      "source_image_sha256": "81eb69f17c101c293bd11001bf715d173400763baa982be38f86eec461426fbb"
+    },
+    {
+      "category": "sheet_metal",
+      "disagreement": "both_correct",
+      "display_scaling": "Each continuous map is independently min-max scaled for display only; numeric analysis uses stored values.",
+      "efficientad_continuous_sha256": "7ba50eb0d75a90bdb411252b4aabe62277ef0d0df478e6741b7a9f48aa6f1d5a",
+      "efficientad_thresholded_sha256": "798ef470953659f52e422c6833976d00eb4488f5ce9e4fe1f5a86d637eec3802",
+      "ground_truth_mask": {
+        "generated_zero_mask": false,
+        "sample_id": "sheet_metal/test_public/ground_truth/bad/004_overexposed_mask.png",
+        "sha256": "734af60930bec884ff5df78ef8fb82505fa424394456c9e216dd5c861d131b62"
+      },
+      "label": 1,
+      "panel_filename": "sheet_metal__seed-42__label-1__00c0c9cc3684.png",
+      "panel_sha256": "4ef902dc63a59c3ae11dbecab13783bae04a3486f3ab21d9b62223fe3250deb4",
+      "patchcore_continuous_sha256": "a0560712fb2752713f22727019b27cdbfc64894826e3805e69af801d507b4bac",
+      "patchcore_thresholded_sha256": "ca98813a411dc20f4815a1da6d13408bcc71b07c43e4aeb97d04abc966522414",
+      "reasons": [
+        "minimum_sha256_for_category=sheet_metal,label=1,seed=42",
+        "minimum_sha256_for_disagreement=both_correct,seed=42"
+      ],
+      "sample_id": "sheet_metal/test_public/bad/004_overexposed.png",
+      "seed": 42,
+      "selection_sha256": "00c0c9cc3684c0904532fe1e651545e2c5a63289a560cf816fa288fd0efbde3c",
+      "source_image_sha256": "41f3cf5fc70e787e92fb802b2a66d358cb870ef34eb843569af45c972a188414"
+    },
+    {
+      "category": "sheet_metal",
+      "disagreement": "patchcore_only_correct",
+      "display_scaling": "Each continuous map is independently min-max scaled for display only; numeric analysis uses stored values.",
+      "efficientad_continuous_sha256": "ed2e8b819e338c426fb126bc55e9d574e1db25014fb96b6aaaad9cf734a6f9cd",
+      "efficientad_thresholded_sha256": "30b25dfcb9b984485131b9ab407817c45ddc98045bd91e9433a9a9553985c5ef",
+      "ground_truth_mask": {
+        "generated_zero_mask": true,
+        "sample_id": null,
+        "sha256": null
+      },
+      "label": 0,
+      "panel_filename": "sheet_metal__seed-42__label-0__027b0c2b281b.png",
+      "panel_sha256": "084fcb452bbcc0f650a4496e5095eedaf2f0fd109f46f67169078d98b47c2c67",
+      "patchcore_continuous_sha256": "d1221b79214d11e072fcba8bdf9aa624f124e7bb513a7c469548e233ff961c59",
+      "patchcore_thresholded_sha256": "be4ab3414813d934a15c3f08dcc3126dec9b283aa4ed7117910c8d1e6b27dddb",
+      "reasons": [
+        "minimum_sha256_for_category=sheet_metal,label=0,seed=42"
+      ],
+      "sample_id": "sheet_metal/test_public/good/000_shift_3.png",
+      "seed": 42,
+      "selection_sha256": "027b0c2b281b5e20622a66271537ede90b70960ceb576f329e73c4f2efb64bf6",
+      "source_image_sha256": "8cee0b2542354d0e1bbb1949b4479c4c171e8f2ed080edbb3b8804f18f969435"
+    },
+    {
+      "category": "vial",
+      "disagreement": "both_correct",
+      "display_scaling": "Each continuous map is independently min-max scaled for display only; numeric analysis uses stored values.",
+      "efficientad_continuous_sha256": "cac3e9ef3de778a9c815d17dcbdacb6ebc327a5ce781f1ce9f5524c7b0bfeeec",
+      "efficientad_thresholded_sha256": "20cbc3101aa9e2696d24d29a079b2260b6df2f6ff351ca22b4b303327a8d4ef1",
+      "ground_truth_mask": {
+        "generated_zero_mask": false,
+        "sample_id": "vial/test_public/ground_truth/bad/001_shift_2_mask.png",
+        "sha256": "ca8386a9ffbe968bfe2db77d3a8e4e131c2462a6503af2d2420af4f0dfa2a185"
+      },
+      "label": 1,
+      "panel_filename": "vial__seed-42__label-1__03a70fcb85fa.png",
+      "panel_sha256": "4d441b9249ca3b6e3f0548de006c78d2e90c6ef562b0a312f098a5bde334c2ac",
+      "patchcore_continuous_sha256": "c70b4a7367bbf485fa44a727a23bc2a221ed8ef5ec125655918a1fbe38ff0a11",
+      "patchcore_thresholded_sha256": "8335b14ae04eafe2c93be2c7cf36df7aa205ddf1d8b941e02695b38e8c60e951",
+      "reasons": [
+        "minimum_sha256_for_category=vial,label=1,seed=42"
+      ],
+      "sample_id": "vial/test_public/bad/001_shift_2.png",
+      "seed": 42,
+      "selection_sha256": "03a70fcb85fa6d381d58f163b63de92b3df21e447bccd2ff5f145b594fec820f",
+      "source_image_sha256": "7024c3573f90172f35da8cb0219e16493615e9be94556ee389028376115a4537"
+    },
+    {
+      "category": "vial",
+      "disagreement": "both_correct",
+      "display_scaling": "Each continuous map is independently min-max scaled for display only; numeric analysis uses stored values.",
+      "efficientad_continuous_sha256": "e7d1254a09f6d6da388fad33dfee29cace62ca8735159d8664a1104a8ad665ab",
+      "efficientad_thresholded_sha256": "259d7bbafa352577db4510a0330d497a9b33d147e7cd128fdee8258cbd4fe315",
+      "ground_truth_mask": {
+        "generated_zero_mask": true,
+        "sample_id": null,
+        "sha256": null
+      },
+      "label": 0,
+      "panel_filename": "vial__seed-42__label-0__02a3e84d46e4.png",
+      "panel_sha256": "9dc88c354e3fd6adfa44505b2514a6cac9d8f106d87210392982c78239f11352",
+      "patchcore_continuous_sha256": "908d7201130e56a178f5c3d675dfd93e9e506cca956576c4eb536476bd1e0ca0",
+      "patchcore_thresholded_sha256": "259d7bbafa352577db4510a0330d497a9b33d147e7cd128fdee8258cbd4fe315",
+      "reasons": [
+        "minimum_sha256_for_category=vial,label=0,seed=42"
+      ],
+      "sample_id": "vial/test_public/good/004_overexposed.png",
+      "seed": 42,
+      "selection_sha256": "02a3e84d46e449b61d523d18c96e7d370297e9cfe545338fc23af3b70af23f63",
+      "source_image_sha256": "44707fc87b18f9b96f37f27f441297caa62997b8e66d07dbb69a41bda839172d"
+    },
+    {
+      "category": "wallplugs",
+      "disagreement": "efficientad_only_correct",
+      "display_scaling": "Each continuous map is independently min-max scaled for display only; numeric analysis uses stored values.",
+      "efficientad_continuous_sha256": "4f30cd4fe460933301430aa322eae84ef3a1b82bfd5e5dae5835418b8ce00f78",
+      "efficientad_thresholded_sha256": "96656f06734a977e09d9b98fd87886464b7e10d72a6c2af64a02d82ac0522926",
+      "ground_truth_mask": {
+        "generated_zero_mask": false,
+        "sample_id": "wallplugs/test_public/ground_truth/bad/014_shift_1_mask.png",
+        "sha256": "bcc19902c889111a0e28d99708026ca229590c5339c1fff9e185137bae46abe9"
+      },
+      "label": 1,
+      "panel_filename": "wallplugs__seed-42__label-1__01003104ec4c.png",
+      "panel_sha256": "6c2ff3197e56c14ebeb9391398d4062ee9a5b36695c10912026235707cbb721f",
+      "patchcore_continuous_sha256": "b849d16538e037a1794355b4fd9f3d41cc293f98ec425c8b848de683d230b99c",
+      "patchcore_thresholded_sha256": "17edfe334f513e8240091c5da6ba24018ec2b206bd7bc1c171665b5f06bb0837",
+      "reasons": [
+        "minimum_sha256_for_category=wallplugs,label=1,seed=42",
+        "minimum_sha256_for_disagreement=efficientad_only_correct,seed=42"
+      ],
+      "sample_id": "wallplugs/test_public/bad/014_shift_1.png",
+      "seed": 42,
+      "selection_sha256": "01003104ec4cf1ec6ef1555d48859fb94a8eaa532f405ca8892b1e86af202586",
+      "source_image_sha256": "b1a88583f92456fed7355fcbd3906067a221fc780af9386d0a56435ef65c4761"
+    },
+    {
+      "category": "wallplugs",
+      "disagreement": "patchcore_only_correct",
+      "display_scaling": "Each continuous map is independently min-max scaled for display only; numeric analysis uses stored values.",
+      "efficientad_continuous_sha256": "75dfe23e5a4a9453ee01c73f8423a7a4e33cb4e4620919d7510e7bb00d73c742",
+      "efficientad_thresholded_sha256": "8386b6515d031dc35ffad4388b90b8f32281a94d9645c110e5dfb1fd11980375",
+      "ground_truth_mask": {
+        "generated_zero_mask": true,
+        "sample_id": null,
+        "sha256": null
+      },
+      "label": 0,
+      "panel_filename": "wallplugs__seed-42__label-0__00be1254cb06.png",
+      "panel_sha256": "81175e83acbae900ac6b3ca6aec66bd130d1bcbd8e0f1b67b39090224d45075f",
+      "patchcore_continuous_sha256": "0000b09ed571effbee692307eb19ee5357954e779f4fc40bd749105d6822d9b5",
+      "patchcore_thresholded_sha256": "17edfe334f513e8240091c5da6ba24018ec2b206bd7bc1c171665b5f06bb0837",
+      "reasons": [
+        "minimum_sha256_for_category=wallplugs,label=0,seed=42",
+        "minimum_sha256_for_disagreement=patchcore_only_correct,seed=42"
+      ],
+      "sample_id": "wallplugs/test_public/good/009_shift_2.png",
+      "seed": 42,
+      "selection_sha256": "00be1254cb0612c23dbf55521819c3bf1b7224b84be519edcf03d265aebf020e",
+      "source_image_sha256": "2db243db61b945bb536a2a3f2d8407d0db3d513e3ffcf8b86ca2b08a1fdd2967"
+    },
+    {
+      "category": "walnuts",
+      "disagreement": "both_wrong",
+      "display_scaling": "Each continuous map is independently min-max scaled for display only; numeric analysis uses stored values.",
+      "efficientad_continuous_sha256": "d55e04df0a8bcde7ff671f95864540473a8685fc89d5d15061f613c327bee479",
+      "efficientad_thresholded_sha256": "17edfe334f513e8240091c5da6ba24018ec2b206bd7bc1c171665b5f06bb0837",
+      "ground_truth_mask": {
+        "generated_zero_mask": false,
+        "sample_id": "walnuts/test_public/ground_truth/bad/012_underexposed_mask.png",
+        "sha256": "a303eb8012453171a4f576b14e0dab1400328cf61d783b0c91dd921e64e9da77"
+      },
+      "label": 1,
+      "panel_filename": "walnuts__seed-42__label-1__05ff24d04c13.png",
+      "panel_sha256": "80479651495db6cdd26106057d5343d170a04fffe4f8a1ca477ee7f5df47d987",
+      "patchcore_continuous_sha256": "7783b1b04dfa1be5d4ca4d061d2960155138749bc228c1c1107b37af18534112",
+      "patchcore_thresholded_sha256": "17edfe334f513e8240091c5da6ba24018ec2b206bd7bc1c171665b5f06bb0837",
+      "reasons": [
+        "minimum_sha256_for_category=walnuts,label=1,seed=42"
+      ],
+      "sample_id": "walnuts/test_public/bad/012_underexposed.png",
+      "seed": 42,
+      "selection_sha256": "05ff24d04c13d8498468a008f4cfd11cdd4c79286f73ba057b45071839213e60",
+      "source_image_sha256": "96286049b168ecf07dca0fb6448dd1d2e78e37e7e11bbdfe4ed17b0914a2d567"
+    },
+    {
+      "category": "walnuts",
+      "disagreement": "both_correct",
+      "display_scaling": "Each continuous map is independently min-max scaled for display only; numeric analysis uses stored values.",
+      "efficientad_continuous_sha256": "1d25e99b63d88b71de5760641f1202fc80292259c0268448f51cd46236feeebf",
+      "efficientad_thresholded_sha256": "17edfe334f513e8240091c5da6ba24018ec2b206bd7bc1c171665b5f06bb0837",
+      "ground_truth_mask": {
+        "generated_zero_mask": true,
+        "sample_id": null,
+        "sha256": null
+      },
+      "label": 0,
+      "panel_filename": "walnuts__seed-42__label-0__04672073d7e0.png",
+      "panel_sha256": "f04d20abcba340ee5e6d141328d608b33028401be7e3ace7ae00f331f55c8a03",
+      "patchcore_continuous_sha256": "583500ffb2b769f01b72ddb44aabb302a297ab06a76ff729a6b7594116e463da",
+      "patchcore_thresholded_sha256": "17edfe334f513e8240091c5da6ba24018ec2b206bd7bc1c171665b5f06bb0837",
+      "reasons": [
+        "minimum_sha256_for_category=walnuts,label=0,seed=42"
+      ],
+      "sample_id": "walnuts/test_public/good/001_overexposed.png",
+      "seed": 42,
+      "selection_sha256": "04672073d7e070e91ee9bf4826eddcc75bbee08b9a57ca08043e1ad3544417f2",
+      "source_image_sha256": "a066d56fd0d0d865773a3f16a984e899dd886602a2c0f19bb68c9a91c5823544"
+    }
+  ],
+  "panels_committed": false,
+  "schema_version": 1,
+  "selection_rule": {
+    "license_and_size_policy": "Panels remain under ignored outputs; only hashes and selection metadata are committed.",
+    "panel_count": 16,
+    "panels_committed": false,
+    "rule": "At seed 42, select the minimum SHA-256 key per category and true image label, plus the minimum key per nonempty global disagreement class; deduplicate while retaining every reason.",
+    "seed": 42,
+    "selection_inputs": "Strata use category, fixed seed, public image label, and model disagreement; the within-stratum SHA-256 tie-break key uses category, seed, label, and sample_id. Scores and pixel metrics are excluded."
+  }
+}

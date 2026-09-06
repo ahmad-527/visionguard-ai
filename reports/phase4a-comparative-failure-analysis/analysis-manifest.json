@@ -1,0 +1,24 @@
+{
+  "analysis_id": "phase4a-comparative-failure-analysis-v1",
+  "artifacts": {
+    "analysis-summary.json": {
+      "sha256": "236c69e5233df5593eb09afde254d4c0bb55e9957d9a9d80b08a973b5d2b8445",
+      "size_bytes": 817464
+    },
+    "panel-index.json": {
+      "sha256": "ed106e5516e7d83f12725328fcf63ea21eeafc65b5662a8766ffb474d971d41e",
+      "size_bytes": 23015
+    },
+    "per-image-analysis.jsonl": {
+      "sha256": "39bc0ff36ef1341de21c190e9975d889d5c2db6956c49c28b2d0cbb905dfac1d",
+      "size_bytes": 4027490
+    }
+  },
+  "input_manifest_sha256": {
+    "efficientad": "e2ac8e3f050271458b9d1aa04afb3543f7792b38906a2e3e73c872cce8e8841a",
+    "patchcore": "762c693616cbb02d9e215264c589497ef97cc07b29c1bf2ba2e661d6e7d2e171"
+  },
+  "panel_record_count": 16,
+  "per_image_record_count": 3252,
+  "schema_version": 1
+}

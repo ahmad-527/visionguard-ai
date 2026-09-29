@@ -131,3 +131,20 @@ def test_scientific_builder_rejects_failed_audit():
 def test_nonfinite_fingerprint_forbidden():
     with pytest.raises(ValueError):
         canonical_fingerprint({"value": float("nan")})
+
+
+def test_exact_committed_membership_matches_predata_allocation():
+    from visionguard.visa import VisaSample, allocate_normals
+
+    path = REPORTS / "development-membership.json"
+    assert sha256_file(path) == FREEZE["membership_sha256"]
+    document = json.loads(path.read_text())
+    assert document["audit_sha256"] == FREEZE["audit_sha256"]
+    samples = tuple(
+        VisaSample(r["category"], "train", "normal", r["sample_id"], None)
+        for r in document["records"]
+    )
+    expected = allocate_normals(samples)
+    assert expected == {r["sample_id"]: r["role"] for r in document["records"]}
+    audit = json.loads((REPORTS / "audit-summary.json").read_text())
+    assert sha256_file(REPORTS / "acquisition.json") == audit["acquisition_sha256"]

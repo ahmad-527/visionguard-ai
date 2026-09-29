@@ -41,3 +41,10 @@ jobs:
 
       - name: Check dependency consistency
         run: python -m pip check
+
+      - name: Verify VisA freeze and lightweight command interfaces
+        run: |
+          visionguard-visa-protocol
+          visionguard-visa-audit --help
+          visionguard-visa-plan --help
+          visionguard-visa-smoke --help

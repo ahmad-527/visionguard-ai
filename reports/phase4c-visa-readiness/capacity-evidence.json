@@ -1,0 +1,376 @@
+{
+  "extrapolated": {
+    "efficientad_checkpoint_bytes_36_cells": 2709128556,
+    "map_formula": "total_pixels * 2_models * 3_seeds * (2_float16+1_binary)",
+    "map_uncompressed_payload_bytes_two_models_three_seeds": 58381569936,
+    "model_cells": 72,
+    "patchcore_coreset_payload_bytes_all_cells": 1471168512,
+    "patchcore_max_cell_embedding_bytes": 5127536640,
+    "patchcore_stack_peak_lower_bound_bytes": 10255073280
+  },
+  "final_test_lock": "closed",
+  "historical": {
+    "efficientad": {
+      "measurement": "active_training_time_not_wall_time",
+      "naive_36_cell_hours_min_median_max": [
+        86.84165887700394,
+        125.46201945499953,
+        244.66671379699955
+      ],
+      "observations": [
+        {
+          "artifact_sha256": "f48d89aefe024c600ff9b59532ad1d5f2b69541a2fedd2f1b04bcfa4426e4b29",
+          "cell": "can:123",
+          "checkpoint_size_bytes": 75253379,
+          "cuda_peak_allocated_bytes": 460252672,
+          "seconds": 10845.670337299933
+        },
+        {
+          "artifact_sha256": "975e825c3bf0cbf878c3f5fbdf777882d159b8bd2223f60afa185928a2fee483",
+          "cell": "can:2026",
+          "checkpoint_size_bytes": 75253379,
+          "cuda_peak_allocated_bytes": 460252672,
+          "seconds": 10780.037946699958
+        },
+        {
+          "artifact_sha256": "df3a1d96bbf5a19feebc1815e2c9c6e6ec94117643a9f4180d974fa4f30ed990",
+          "cell": "can:42",
+          "checkpoint_size_bytes": 75253507,
+          "cuda_peak_allocated_bytes": 382690304,
+          "seconds": 13650.064862500076
+        },
+        {
+          "artifact_sha256": "9bdbb86441fd7e0055c2fd14c69bc14126593a2db6a262353433895bdd5dac62",
+          "cell": "fabric:123",
+          "checkpoint_size_bytes": 75253315,
+          "cuda_peak_allocated_bytes": 460252672,
+          "seconds": 18568.164045500016
+        },
+        {
+          "artifact_sha256": "30d118c02eadf8d33067a276d53e683ef0d39157fe32bce9ba7c5b5106590551",
+          "cell": "fabric:2026",
+          "checkpoint_size_bytes": 75253571,
+          "cuda_peak_allocated_bytes": 382690304,
+          "seconds": 20677.58439269995
+        },
+        {
+          "artifact_sha256": "8ac64d771fce79215b02f9c1919ebfa9e401edb36f0d5285535f975d23843fa4",
+          "cell": "fabric:42",
+          "checkpoint_size_bytes": 75253315,
+          "cuda_peak_allocated_bytes": 460252672,
+          "seconds": 17878.567973200028
+        },
+        {
+          "artifact_sha256": "03c805987b45d56611d52310b85719fdba10099283c268a600e93ad5fced4dee",
+          "cell": "fruit_jelly:123",
+          "checkpoint_size_bytes": 75252995,
+          "cuda_peak_allocated_bytes": 460252672,
+          "seconds": 13068.681761199987
+        },
+        {
+          "artifact_sha256": "377e729486b13e89c15420111822acb193236dd640e0549f6f7ae1516addf421",
+          "cell": "fruit_jelly:2026",
+          "checkpoint_size_bytes": 75252931,
+          "cuda_peak_allocated_bytes": 460252672,
+          "seconds": 12415.254413900082
+        },
+        {
+          "artifact_sha256": "6949f7095df3af82e9f21d680214c244cbc54f4efe9fd039e5f1bdf155891e8b",
+          "cell": "fruit_jelly:42",
+          "checkpoint_size_bytes": 75252931,
+          "cuda_peak_allocated_bytes": 460252672,
+          "seconds": 12677.149477099825
+        },
+        {
+          "artifact_sha256": "7e3281a9f6a0db7c62e53b3d58de0f788e64a5ffdc14fca35cf340a52d6de7f8",
+          "cell": "rice:123",
+          "checkpoint_size_bytes": 75253379,
+          "cuda_peak_allocated_bytes": 382690304,
+          "seconds": 23663.81901360015
+        },
+        {
+          "artifact_sha256": "b0ef908adfe4c9a13a0d26d1f35353aa9e490421538b6367f64966994bdd3970",
+          "cell": "rice:2026",
+          "checkpoint_size_bytes": 75253059,
+          "cuda_peak_allocated_bytes": 460252672,
+          "seconds": 24466.671379699954
+        },
+        {
+          "artifact_sha256": "356bbabb557f3f4fdaaae18267e0e6acec589a0ca7eac24fafb675436e069699",
+          "cell": "rice:42",
+          "checkpoint_size_bytes": 75253059,
+          "cuda_peak_allocated_bytes": 460252672,
+          "seconds": 20730.941024699976
+        },
+        {
+          "artifact_sha256": "e6c26e896483a5a967467efbbc06a7e113e300313c081e022d1c5489e8861ce5",
+          "cell": "sheet_metal:123",
+          "checkpoint_size_bytes": 75252675,
+          "cuda_peak_allocated_bytes": 460252672,
+          "seconds": 10847.39722179994
+        },
+        {
+          "artifact_sha256": "774ef963fa86c3597333cb5fb8117eca936ade76d80aef45591a1edae33d62d3",
+          "cell": "sheet_metal:2026",
+          "checkpoint_size_bytes": 75252675,
+          "cuda_peak_allocated_bytes": 460252672,
+          "seconds": 10698.492218100117
+        },
+        {
+          "artifact_sha256": "f29b7f1d5a351017e5930b65bd5b40fe4ccd402df08677faaac4b7da13e17867",
+          "cell": "sheet_metal:42",
+          "checkpoint_size_bytes": 75252675,
+          "cuda_peak_allocated_bytes": 460252672,
+          "seconds": 10100.321598199953
+        },
+        {
+          "artifact_sha256": "4f4019ee6fd0a0799c470b4b62fed78f9a0124dfdbc7512cb34997e0ad86203a",
+          "cell": "vial:123",
+          "checkpoint_size_bytes": 75253059,
+          "cuda_peak_allocated_bytes": 460252672,
+          "seconds": 8684.165887700394
+        },
+        {
+          "artifact_sha256": "5fc54d9cee73f71790b9c895f95af0e1bd556d7d76b7a72f4a9934ad855fe213",
+          "cell": "vial:2026",
+          "checkpoint_size_bytes": 75252995,
+          "cuda_peak_allocated_bytes": 460252672,
+          "seconds": 8695.709513299924
+        },
+        {
+          "artifact_sha256": "0ad5a9245485cbbc65d81dedf874caff34ac08eeb4cc238bb4e6d7fe8505af8d",
+          "cell": "vial:42",
+          "checkpoint_size_bytes": 75252995,
+          "cuda_peak_allocated_bytes": 460252672,
+          "seconds": 8818.025300599867
+        },
+        {
+          "artifact_sha256": "d8847c7c390248ba3b30fd01f67ea521fe32cd43fce8dd30f6fa17c2f931b921",
+          "cell": "wallplugs:123",
+          "checkpoint_size_bytes": 75253059,
+          "cuda_peak_allocated_bytes": 460252672,
+          "seconds": 11791.251760200714
+        },
+        {
+          "artifact_sha256": "60b3984c366189fc64e30bd673da58547aa3aec5db47b40cc0a689daaa6b703f",
+          "cell": "wallplugs:2026",
+          "checkpoint_size_bytes": 75253443,
+          "cuda_peak_allocated_bytes": 382690304,
+          "seconds": 11438.539736800129
+        },
+        {
+          "artifact_sha256": "41999440e37ad0c289d84f60629545b1fec232bb24e7de7ce9f9b821292aa7ce",
+          "cell": "wallplugs:42",
+          "checkpoint_size_bytes": 75252995,
+          "cuda_peak_allocated_bytes": 460252672,
+          "seconds": 11649.920287000248
+        },
+        {
+          "artifact_sha256": "3ebf66b002c10b8d517cd6d29208ce2d389ab7e1b09fcc4ed572e64e5759c386",
+          "cell": "walnuts:123",
+          "checkpoint_size_bytes": 75253443,
+          "cuda_peak_allocated_bytes": 460252672,
+          "seconds": 19535.054848399595
+        },
+        {
+          "artifact_sha256": "5a6e01dacef22d731c21452b7610ab874800bd3d98cfce909b4cf3bb60d70842",
+          "cell": "walnuts:2026",
+          "checkpoint_size_bytes": 75253379,
+          "cuda_peak_allocated_bytes": 460252672,
+          "seconds": 18787.042724999716
+        },
+        {
+          "artifact_sha256": "3ef798ee733c6351163711c952cacf47daef07db72b6969710108285baf90c09",
+          "cell": "walnuts:42",
+          "checkpoint_size_bytes": 75253443,
+          "cuda_peak_allocated_bytes": 460252672,
+          "seconds": 19541.87255269999
+        }
+      ],
+      "observed_cells": 24,
+      "seconds_min_median_max": [
+        8684.165887700394,
+        12546.201945499954,
+        24466.671379699954
+      ]
+    },
+    "patchcore": {
+      "measurement": "whole_cell_wall_time",
+      "naive_36_cell_hours_min_median_max": [
+        0.604471899,
+        1.1504532015,
+        128.685539393
+      ],
+      "observations": [
+        {
+          "artifact_sha256": "4424dbe152ff29bd51b35106c9c7a3389b2b0cf38cc0f52a0dd8c0d3a8683438",
+          "cell": "can:123",
+          "cuda_peak_allocated_bytes": 5285893632,
+          "seconds": 115.997214
+        },
+        {
+          "artifact_sha256": "34135438e8343981bd392a90085474adf9991d6086b659d311a230f452c413f5",
+          "cell": "can:2026",
+          "cuda_peak_allocated_bytes": 5285893632,
+          "seconds": 115.5115464
+        },
+        {
+          "artifact_sha256": "2e773c306a6506e160139df1fd58b448105539d2205e32435f93eb549a73461d",
+          "cell": "can:42",
+          "cuda_peak_allocated_bytes": 5285893632,
+          "seconds": 122.683972
+        },
+        {
+          "artifact_sha256": "bf82db292d636f8b9a70852146a5c6f6327dbcbbaa81d18d8ff75126d4992bef",
+          "cell": "fabric:123",
+          "cuda_peak_allocated_bytes": 5095300096,
+          "seconds": 222.7836842
+        },
+        {
+          "artifact_sha256": "196c50f8fd3f3da1822d1901f035e486840fde8c89a2e2aef91a81f5150a71f6",
+          "cell": "fabric:2026",
+          "cuda_peak_allocated_bytes": 5095300096,
+          "seconds": 217.0992906
+        },
+        {
+          "artifact_sha256": "df37e1c741a45989e4e6d8e06baf51c2207d245fc064b09d7451d8cdaf17a0ab",
+          "cell": "fabric:42",
+          "cuda_peak_allocated_bytes": 4971320832,
+          "seconds": 223.7013748
+        },
+        {
+          "artifact_sha256": "a0209fce0c8b60d62b866ed35f68f1d8dc800eb5e7d13af9a281b5e4cf0019a6",
+          "cell": "fruit_jelly:123",
+          "cuda_peak_allocated_bytes": 3411039744,
+          "seconds": 67.7216243
+        },
+        {
+          "artifact_sha256": "60e8f00cf866e9a4abad8e14b49d27085674d6aed995d3dab0aec543db596321",
+          "cell": "fruit_jelly:2026",
+          "cuda_peak_allocated_bytes": 3528532992,
+          "seconds": 68.3491007
+        },
+        {
+          "artifact_sha256": "654001d04bc43b862c1cd4ad26fbea9abf719fde73bffcfe8769d025a87848f8",
+          "cell": "fruit_jelly:42",
+          "cuda_peak_allocated_bytes": 3411039744,
+          "seconds": 69.3291299
+        },
+        {
+          "artifact_sha256": "57a5a40c7a86acfbd009cbdb2e89172820a74f1750f6d2973ece849a8bda2dc3",
+          "cell": "rice:123",
+          "cuda_peak_allocated_bytes": 4157678592,
+          "seconds": 177.6412275
+        },
+        {
+          "artifact_sha256": "05db540c06c7bda498e9ec8361435090202b2052b280aa86ebf5d589e8d2124e",
+          "cell": "rice:2026",
+          "cuda_peak_allocated_bytes": 4157678592,
+          "seconds": 177.6359574
+        },
+        {
+          "artifact_sha256": "c4e3b84038db1dfbaf59486d393126b73c5a5a37bcbc36b35a0bdaa12ff642c2",
+          "cell": "rice:42",
+          "cuda_peak_allocated_bytes": 4157678592,
+          "seconds": 184.2012674
+        },
+        {
+          "artifact_sha256": "9a29a2d7e79d34131e08036b3b768c87495e9ee586fd85e366bc4da7ff917fe3",
+          "cell": "sheet_metal:123",
+          "cuda_peak_allocated_bytes": 1943086080,
+          "seconds": 60.4471899
+        },
+        {
+          "artifact_sha256": "a6a288ac607a53e169cf5c54b6a112188def2fb206b382b1f661b954bcd44ae6",
+          "cell": "sheet_metal:2026",
+          "cuda_peak_allocated_bytes": 1943086080,
+          "seconds": 60.5952729
+        },
+        {
+          "artifact_sha256": "f302b764ec6c0dad8b15d3c01e58515b6c5f7052768cd32b9ff2052b382eb636",
+          "cell": "sheet_metal:42",
+          "cuda_peak_allocated_bytes": 1943086080,
+          "seconds": 65.4372926
+        },
+        {
+          "artifact_sha256": "787b583ee2746e4ab86d51fdff5e501fa0960919fe225e8f372bef57b3c99a76",
+          "cell": "vial:123",
+          "cuda_peak_allocated_bytes": 3763361280,
+          "seconds": 63.6474203
+        },
+        {
+          "artifact_sha256": "ecb43c70a4436156adf9be5d2232344e0ac561e9e9acb2d10e6e540b516952c8",
+          "cell": "vial:2026",
+          "cuda_peak_allocated_bytes": 3882920960,
+          "seconds": 63.3010849
+        },
+        {
+          "artifact_sha256": "f91f2a56d1fb62295281b0f918f0a8c254602615b0d4ae349aed7604570f2336",
+          "cell": "vial:42",
+          "cuda_peak_allocated_bytes": 3880854528,
+          "seconds": 66.6141043
+        },
+        {
+          "artifact_sha256": "22aa7a475ad280e313841e1c49b256f2bd1a44854b2ee79bf719b1049521d7d9",
+          "cell": "wallplugs:123",
+          "cuda_peak_allocated_bytes": 3908086784,
+          "seconds": 108.409141
+        },
+        {
+          "artifact_sha256": "66555876f538ecb15219483d9e65ec8789d1483b898092d76aa0e6f685521177",
+          "cell": "wallplugs:2026",
+          "cuda_peak_allocated_bytes": 3908086784,
+          "seconds": 109.3873767
+        },
+        {
+          "artifact_sha256": "00db2a47203194a49b14aec42a57d0a168d80459281f832b408e340428cc7d43",
+          "cell": "wallplugs:42",
+          "cuda_peak_allocated_bytes": 3908086784,
+          "seconds": 114.5790939
+        },
+        {
+          "artifact_sha256": "f13b909a54c5d0b394c948efc96c5bea53cbe7bcf2779e9f56f4041838f06ec2",
+          "cell": "walnuts:123",
+          "cuda_peak_allocated_bytes": 5657111552,
+          "seconds": 268.4883143
+        },
+        {
+          "artifact_sha256": "c5dfae38de055d9b4b0ee2410d7c6db177ec18045fe00f2706eb9e88fa75cdd9",
+          "cell": "walnuts:2026",
+          "cuda_peak_allocated_bytes": 5784447488,
+          "seconds": 273.0140412
+        },
+        {
+          "artifact_sha256": "07235a36950345edc0d8daa3b13d55abcecdc271a17bcf1fe832396da2bd9ac4",
+          "cell": "walnuts:42",
+          "cuda_peak_allocated_bytes": 5657111552,
+          "seconds": 12868.5539393
+        }
+      ],
+      "observed_cells": 24,
+      "seconds_min_median_max": [
+        60.4471899,
+        115.04532015000001,
+        12868.5539393
+      ]
+    }
+  },
+  "purpose": "ENGINEERING_CAPACITY_ESTIMATE_NOT_PERFORMANCE",
+  "schema_version": 1,
+  "test_performance_evaluated": false,
+  "unknown": [
+    "VisA full-cell runtime",
+    "thermal sustained throughput",
+    "PNG compression and metric scratch space",
+    "PatchCore full-category GPU fit feasibility"
+  ],
+  "visa_integrity": {
+    "fit_count_min_max": [
+      405,
+      815
+    ],
+    "inventory_sha256": "4c16ebb13a1546399a28dc1f41aebeb5dfb062ab0c7c9108cc5bfb541c94ccb2",
+    "test_image_count": 2162,
+    "test_total_pixels": 3243420552
+  }
+}

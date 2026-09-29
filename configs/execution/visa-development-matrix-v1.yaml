@@ -1,0 +1,271 @@
+{
+  "execution": {
+    "asset_sha256": {
+      "imagenette_archive": "6cbfac238434d89fe99e651496f0812ebc7a10fa62bd42d6874042bf01de4efd",
+      "teacher": "a16ded54719674435576aee641152616a640dfc6dc2b83115dab6e226610ae7d",
+      "weight": "03b71d65fb2c73bb0de079a1781009f27a782ec481d2f64ab3bde9b1cdec3000"
+    },
+    "audit_sha256": "06e227bb5d2cd26f38010b2c304c62f14f383a81c64f5b2e4c48f1019128f58f",
+    "auxiliary_inventory_sha256": "2629404a3b777b4ce4871df8758cf1880ba00a4047ece5b8ff6d834d1ac53767",
+    "category_order": [
+      "candle",
+      "capsules",
+      "cashew",
+      "chewinggum",
+      "fryum",
+      "macaroni1",
+      "macaroni2",
+      "pcb1",
+      "pcb2",
+      "pcb3",
+      "pcb4",
+      "pipe_fryum"
+    ],
+    "checkpoint_policy": {
+      "efficientad": "one latest complete optimizer/scheduler/RNG/stream checkpoint per attempt",
+      "efficientad_final_step": 70000,
+      "efficientad_interval_steps": 1000,
+      "patchcore": "every image; original coreset restarts from exact chunks/RNG"
+    },
+    "counts": {
+      "candle": {
+        "calibration": 90,
+        "fit": 810
+      },
+      "capsules": {
+        "calibration": 54,
+        "fit": 488
+      },
+      "cashew": {
+        "calibration": 45,
+        "fit": 405
+      },
+      "chewinggum": {
+        "calibration": 45,
+        "fit": 408
+      },
+      "fryum": {
+        "calibration": 45,
+        "fit": 405
+      },
+      "macaroni1": {
+        "calibration": 90,
+        "fit": 810
+      },
+      "macaroni2": {
+        "calibration": 90,
+        "fit": 810
+      },
+      "pcb1": {
+        "calibration": 90,
+        "fit": 814
+      },
+      "pcb2": {
+        "calibration": 90,
+        "fit": 811
+      },
+      "pcb3": {
+        "calibration": 90,
+        "fit": 815
+      },
+      "pcb4": {
+        "calibration": 90,
+        "fit": 814
+      },
+      "pipe_fryum": {
+        "calibration": 45,
+        "fit": 405
+      }
+    },
+    "environment": {
+      "cuda": "12.6",
+      "gpu": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+      "packages": {
+        "Pillow": "12.3.0",
+        "anomalib": "2.6.0",
+        "numpy": "2.4.6",
+        "safetensors": "0.8.0",
+        "scikit-learn": "1.9.0",
+        "scipy": "1.17.1",
+        "timm": "1.0.28",
+        "torch": "2.9.1+cu126",
+        "torchvision": "0.24.1+cu126"
+      },
+      "platform": "Windows",
+      "python": "3.11.6"
+    },
+    "failure_policy": "stop scheduling; preserve state; source change requires human review",
+    "final_test_lock": "closed",
+    "hardware_policy": "one GPU worker; no power/clock changes; disk/CUDA/WHEA/instability stops; no hardware retry",
+    "human_access_history": "UNKNOWN",
+    "id": "visa-development-matrix-v1",
+    "independent_reservation": "NOT ESTABLISHED",
+    "membership_sha256": "10e7a6c898fb18fbd1b93a115a5a94f3e2ebcecb7a1796d99d8c1e6f3567ce0b",
+    "monitor_seconds": 60,
+    "order": [
+      "patchcore:candle:42",
+      "patchcore:candle:123",
+      "patchcore:candle:2026",
+      "patchcore:capsules:42",
+      "patchcore:capsules:123",
+      "patchcore:capsules:2026",
+      "patchcore:cashew:42",
+      "patchcore:cashew:123",
+      "patchcore:cashew:2026",
+      "patchcore:chewinggum:42",
+      "patchcore:chewinggum:123",
+      "patchcore:chewinggum:2026",
+      "patchcore:fryum:42",
+      "patchcore:fryum:123",
+      "patchcore:fryum:2026",
+      "patchcore:macaroni1:42",
+      "patchcore:macaroni1:123",
+      "patchcore:macaroni1:2026",
+      "patchcore:macaroni2:42",
+      "patchcore:macaroni2:123",
+      "patchcore:macaroni2:2026",
+      "patchcore:pcb1:42",
+      "patchcore:pcb1:123",
+      "patchcore:pcb1:2026",
+      "patchcore:pcb2:42",
+      "patchcore:pcb2:123",
+      "patchcore:pcb2:2026",
+      "patchcore:pcb3:42",
+      "patchcore:pcb3:123",
+      "patchcore:pcb3:2026",
+      "patchcore:pcb4:42",
+      "patchcore:pcb4:123",
+      "patchcore:pcb4:2026",
+      "patchcore:pipe_fryum:42",
+      "patchcore:pipe_fryum:123",
+      "patchcore:pipe_fryum:2026",
+      "efficientad:candle:42",
+      "efficientad:candle:123",
+      "efficientad:candle:2026",
+      "efficientad:capsules:42",
+      "efficientad:capsules:123",
+      "efficientad:capsules:2026",
+      "efficientad:cashew:42",
+      "efficientad:cashew:123",
+      "efficientad:cashew:2026",
+      "efficientad:chewinggum:42",
+      "efficientad:chewinggum:123",
+      "efficientad:chewinggum:2026",
+      "efficientad:fryum:42",
+      "efficientad:fryum:123",
+      "efficientad:fryum:2026",
+      "efficientad:macaroni1:42",
+      "efficientad:macaroni1:123",
+      "efficientad:macaroni1:2026",
+      "efficientad:macaroni2:42",
+      "efficientad:macaroni2:123",
+      "efficientad:macaroni2:2026",
+      "efficientad:pcb1:42",
+      "efficientad:pcb1:123",
+      "efficientad:pcb1:2026",
+      "efficientad:pcb2:42",
+      "efficientad:pcb2:123",
+      "efficientad:pcb2:2026",
+      "efficientad:pcb3:42",
+      "efficientad:pcb3:123",
+      "efficientad:pcb3:2026",
+      "efficientad:pcb4:42",
+      "efficientad:pcb4:123",
+      "efficientad:pcb4:2026",
+      "efficientad:pipe_fryum:42",
+      "efficientad:pipe_fryum:123",
+      "efficientad:pipe_fryum:2026"
+    ],
+    "phase4c_acceptance_sha256": "cd4644503dcef120ffdac6ff178e5113bc2f6a03f7f43ba860b6f6f010bdf715",
+    "phase4c_merge": "7bd562d2e5642a3e919805cbcc633acc8a98b941",
+    "phase4d_b_authorized": false,
+    "protocol_ids": {
+      "efficientad": "efficientad-visa-v1",
+      "patchcore": "patchcore-visa-v1"
+    },
+    "protocols": {
+      "efficientad": "78b27feeee044f560287a1ce45000800452344190e7b68003eefb3e2e853f1f9",
+      "patchcore": "3ffcdc37cf3117d319da3e970383c6d0bdb52e2cd42dca87ad3161c5a9bc3191"
+    },
+    "resume_policy": "new immutable attempt; exact origin; only classified ordinary interruption auto-resumes; all failures stop",
+    "seeds": [
+      42,
+      123,
+      2026
+    ],
+    "source_hashes": {
+      "configs/engineering/visa-completion-acceptance-v1.yaml": "7af3fbd699b8b163fea80b9ad211d9111f2db63df88c9e8b2df90cb794f43477",
+      "configs/engineering/visa-dispatcher-acceptance-v1.yaml": "16ad7606dc77e68e1bd61068d7fe69d0e5e89f9884a69757ad6056bf87b831d8",
+      "pyproject.toml": "f992196e90c0fd5d5fefff1bb2f4011fea9cbbd877d08ead80fe163df9b30fb8",
+      "scripts/phase4c_completion_evidence.py": "7ae655f1def06efa8d52bdce0837ec4d94977b9223a6b3a7ba10c80e95978e02",
+      "scripts/phase4c_dispatcher_acceptance.py": "eac4c2f59c8d15f26ca6a9c85f38384b54bdbcb90e1da4378c0b0f958968d095",
+      "scripts/phase4c_patchcore_acceptance.py": "f4387a12dfb9ee07f014227a0d828cf5b13a3125f584bcd982133ca5ab75d55d",
+      "scripts/phase4c_resource_evidence.py": "8b917220b8208cb6a50cb7ffa599e34e9d325b21f4b1c64de5180ea9b47d93bc",
+      "scripts/phase4c_smoke_summary.py": "9c580c2c2d03672867aaf0056d856a89373e3328360649f57a502a63d04e78a6",
+      "scripts/phase4d_a_preflight.py": "25db2ce86d0f521035e6c902156ab09d318782f16f8e946de80f87e9f3bb14d5",
+      "scripts/phase4d_a_publish.py": "68d3e928810c37d4d8ab786e3c2a461581d74410be48fec23fd3fef025c10390",
+      "src/visionguard/__init__.py": "b637750d90a2eb08a92ae22ac6d9d796bf58b56364c1bfb6bffb1b921d46bec4",
+      "src/visionguard/analysis_metrics.py": "90e710de01a4b8da6f8b42f1dc79866e4bf663c53622326ec27f56d2f388a32b",
+      "src/visionguard/artifacts.py": "22aec0269002160ad2e7e54f481360e4369b56c79491291a397b6d6b49e97661",
+      "src/visionguard/audit.py": "312ea137cef36c5a47b17b25307d3ec3d888ee11ca786bfe2453e44493f1218b",
+      "src/visionguard/benchmark.py": "ed69293a5b63890cff3ea3cb1eaf1b7a07f2f095f031afd9f832141e94f8c25f",
+      "src/visionguard/benchmark_metrics.py": "c128c64378fe14a507a2df7b2b08ae021d44d16290ec647070a34749a8258347",
+      "src/visionguard/boundaries.py": "5d6d6c710b2da7b18b35d69269320838419e1d9ff25e2154d5ec272220613d64",
+      "src/visionguard/calibration.py": "43464a87a162d17eeb4bbc9af83e25db8c12469f7fcf7ae1522860b3da2c5519",
+      "src/visionguard/cli.py": "f9b0d21c121208d92136174180c00929fa8ab26c9f70b6570e2c12d2465e9de3",
+      "src/visionguard/comparative_analysis.py": "4cc1c314025a631ef93024b12f7d7edda0480c515ddb67c17531371155a6281d",
+      "src/visionguard/config.py": "9c29831dff304e84ebfbd4cb1018a42d30785f96ec6b5703b7a73c74812ea238",
+      "src/visionguard/efficientad.py": "412833d848c0d620890f311d50680c256282210f26172bc000ea67360d89edea",
+      "src/visionguard/efficientad_artifacts.py": "fd44afcd36a30b37284f4d84d7c5a008299de1d3e989f6a1eac442ca9dd17d91",
+      "src/visionguard/efficientad_benchmark.py": "0f2fc1201d895fa91c2c22af1d0e5cf9ae893f0567db91b95718bbfda03a96bd",
+      "src/visionguard/efficientad_protocol.py": "67fc15013c5ac630c440961ce3937a4158c980e7de97300d902685a49fc3a3a8",
+      "src/visionguard/efficientad_smoke.py": "1af9db59eb1cf01ec4200108dcafaa52a71eb0e66078bac6f77250ba200dc1a1",
+      "src/visionguard/embedding_journal.py": "d5516b6ff65b551ed70c20975e90312a786b11a40e05b11e76d999f0fbd7ac23",
+      "src/visionguard/environment.py": "de2fcfcb74c8246d5eb0ea039dd12cb420c14a9604eb2a3d4d7d9bb4932febb6",
+      "src/visionguard/experiment.py": "a9c375c3a4372274f99e96fb452df65cb60b4779eb477877613d2a30d956d4c8",
+      "src/visionguard/metrics.py": "c8da85f2e3cc9dfabff0b0e6cb2f85dab358c7e0151306c0a1c4f9077ea51a87",
+      "src/visionguard/paths.py": "78be6cdc5eec1b850bb205012c6ccf6997e8cd9e2c6fd78b0e85c189a09fbd3f",
+      "src/visionguard/preprocessing.py": "ea865d1721718913fa7f583e8aa03e3f21053f7710ad0da09d0f0d4de58e1a27",
+      "src/visionguard/protocol.py": "0b66990458e12cef8541f6967612c074ff3f209fb96e31ab801a339015601f5b",
+      "src/visionguard/repeatability.py": "5c8c7e498a7ba6f7184046989cf0413e61234116b93b722d67e05cb13c1835a5",
+      "src/visionguard/reproducibility.py": "bfdb25ff12092e8678cca144b7f05609e773e8a3f0046006f08cb24493cadafe",
+      "src/visionguard/runner.py": "e4d0137de5cd4d4236b7f2985fb7d14eb4972affe2549b9a48eef207d4c969db",
+      "src/visionguard/triage.py": "855a4f37c0c6bac15fc89612596ba3951d0c9bb02bce78efa8163cd4ef5b18d9",
+      "src/visionguard/triage_metrics.py": "916cb95c7db1bcc7bca8674c193f65cce8dcaa929f274b4f48a27b3a02c2fea1",
+      "src/visionguard/triage_protocol.py": "66d6ecac8cc17923049301b176f635674c78c74aaa93aa71191a0dc500ba4204",
+      "src/visionguard/visa.py": "a34d0628dedbcfd091c4e3e9c502897440a1d5b5a77afcbaf63ce87df1085378",
+      "src/visionguard/visa_acquire.py": "77c7634a6d560cb01a55bab223587cfd282f3b8281619c584d48cf340a2bddf6",
+      "src/visionguard/visa_audit.py": "5ef7ad62ea0fcbac5e3d293abf6af018b68eefdcc377d83300f009067466e523",
+      "src/visionguard/visa_development.py": "ac1417863babca7cf9faecfcdf6bcf823d793fd68aa95c051f38cea88cf0ee44",
+      "src/visionguard/visa_development_worker.py": "c1bf1aa469d26b3c406109a137e4d5105b6a7047add637df5e094e1258c15ec5",
+      "src/visionguard/visa_dispatcher.py": "d1d53d137fe1bad65910555e3355394064c5cc8dbaa23ae560dfc8829f63ffac",
+      "src/visionguard/visa_engineering.py": "98e59957083fb9855c31fc392cc2c562f77f56b2ae447e9d2d700abd4708cc34",
+      "src/visionguard/visa_execution.py": "f7599a5478a5f496f332ff2ce09ac02dfad5d9702165c7f1b884c69fbbccd12c",
+      "src/visionguard/visa_guard.py": "3c5c7376973b265363d3a882474429cdab6b0a149484c714f72f01358e5a1920",
+      "src/visionguard/visa_matrix.py": "1c06570a4e96bf67b7e52e8d11998c1425022253b68030915a9ccb7966defb7a",
+      "src/visionguard/visa_matrix_contract.py": "dfd0f1026df116bb9b100c424eb30e298252f964a1e65298d44d3ec9698bcc0c",
+      "src/visionguard/visa_matrix_validation.py": "6b7436dbb92af38bc471294bd1a638ff35c5c3412f90ea6786d9329d899c7857",
+      "src/visionguard/visa_patchcore.py": "0b894e00a8d16320966b949749584d8f2bdba67389217d3aa970e9dd30ea9ec4",
+      "src/visionguard/visa_patchcore_acceptance.py": "607f6ba3f40ef74b74b5c58b15f44d05df22ad3a6a4883e8e71322b60f0d5022",
+      "src/visionguard/visa_protocol.py": "638ad58bc2e41493f33397662e737c8bf36d2ca34eec8ae4796c2f76882eaf2e",
+      "src/visionguard/visa_smoke.py": "1fad20f0e71763232f330c3bdcb0cefb31fa1ee76f336ce9dd759fc83f2b4e8a"
+    },
+    "storage": {
+      "active_patchcore_budget_bytes": 8589934592,
+      "checks": "before/after cells and validation/compaction; every 60 seconds during work",
+      "compaction": "only validated-completed PatchCore embedding chunks; retain full inventory and durable deletion receipt",
+      "dataset_archive_bytes_existing": 1929840640,
+      "dataset_extracted_bytes_existing_audit": 1920559633,
+      "development_copy_bytes": 1525917294,
+      "free_bytes_at_freeze": 161476280320,
+      "interruption_extra_budget_bytes": 21474836480,
+      "largest_embedding_payload_bytes": 5127536640,
+      "minimum_free_bytes": 21474836480,
+      "required_additional_budget_bytes": 79020687360,
+      "retained_efficientad_budget_bytes": 8757706752,
+      "retained_patchcore_budget_bytes": 18723373056
+    },
+    "triage_fingerprint": "94442ab3121bccd392e3805b6134710cc6e8c95e8f17b8eccda288f8b1bd672d"
+  },
+  "fingerprint": "31a5b53d91bf7f609b5dfa3a97b87c4c6617a767d9096fa845f774a5f9bfefc3"
+}

@@ -1,0 +1,26 @@
+{
+  "inference_or_training_performed": false,
+  "reused_phase4c_evidence": {
+    "efficientad-restarted": {
+      "canonical_model_sha256": "4aacd280c85c64764262e6c7d5475d44f2097727aa3a84f2bb37e2dd65e58472",
+      "manifest_sha256": "876e6c27f65075f1e10a7ec7d6f864cc8fc95c058430d532b5bff5861c9ac761",
+      "status": "validated"
+    },
+    "efficientad-uninterrupted": {
+      "canonical_model_sha256": "4aacd280c85c64764262e6c7d5475d44f2097727aa3a84f2bb37e2dd65e58472",
+      "manifest_sha256": "cdf256156074b6bb82251e45a46fde157c6059795e9ca78278c584b9e22d9825",
+      "status": "validated"
+    },
+    "patchcore-restarted": {
+      "canonical_model_sha256": "f683126c739787191489b63f7744746db29b6ff61cd7f9650cbcf06107218f14",
+      "manifest_sha256": "fc11970260f02d985a9597b14b2e719ad05eb59ac44c088d7f71343f72020411",
+      "status": "validated"
+    },
+    "patchcore-uninterrupted": {
+      "canonical_model_sha256": "f683126c739787191489b63f7744746db29b6ff61cd7f9650cbcf06107218f14",
+      "manifest_sha256": "c6885bd4b3ff115296765603c4326346ca2b57397b9caadf2d4499950bb99622",
+      "status": "validated"
+    }
+  },
+  "test_performance_evaluated": false
+}

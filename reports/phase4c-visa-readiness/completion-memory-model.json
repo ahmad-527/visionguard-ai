@@ -1,0 +1,41 @@
+{
+  "anomalib_version": "2.6.0",
+  "calculated": {
+    "category": "pcb3",
+    "dtype": "float32",
+    "embedding_bytes": 5127536640,
+    "embedding_shape": [
+      834560,
+      1536
+    ],
+    "fit_count": 815,
+    "preallocated_core_working_bytes": 7370833920,
+    "projection_bytes": 1121648640,
+    "projection_shape": [
+      834560,
+      336
+    ],
+    "reference_stack_lower_bound_bytes": 10255073280
+  },
+  "installed_sources": {
+    "anomalib/models/components/dimensionality_reduction/random_projection.py": {
+      "sha256": "65a2794fa72348ef41f4623cdf7d74c0ecf614fdec807114c4e07a6c424673a3",
+      "wheel_RECORD_verified": true
+    },
+    "anomalib/models/components/sampling/k_center_greedy.py": {
+      "sha256": "04a74842ed53c60493fc311653e01c3147601e3ff1be1de505b8881b2eb4b556",
+      "wheel_RECORD_verified": true
+    },
+    "anomalib/models/image/patchcore/torch_model.py": {
+      "sha256": "a5e5bc1ed22ed86db477000092e8e628b0c02a99cdd6ec6789c0ab8b924aaba9",
+      "wheel_RECORD_verified": true
+    }
+  },
+  "test_performance_evaluated": false,
+  "unknown_before_acceptance": [
+    "allocator fragmentation",
+    "CUDA library workspace",
+    "full-fit peak allocated and reserved",
+    "host peak and total wall time"
+  ]
+}

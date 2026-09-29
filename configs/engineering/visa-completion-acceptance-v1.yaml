@@ -1,0 +1,37 @@
+schema_version: 1
+engineering:
+  id: visa-pretest-completion-acceptance-v1
+  scientific_settings_change: forbidden
+  test_access: forbidden
+  equivalence:
+    criterion: exact_bitwise_no_posthoc_tolerance
+    category: candle
+    seed: 42
+    fit: first_8_lexical_frozen_fitting_normals
+    calibration: all_frozen_category_calibration_normals
+    compare: [ordered_embeddings, coreset_indices, memory_bank, canonical_model_state, calibration_scores, restored_float32_maps, thresholds]
+    paths: [native_reference, preallocated_uninterrupted, preallocated_process_restart]
+    intentional_process_exit_after_completed_images: 4
+    intentional_exit_code: 75
+  memory_safe_path:
+    extraction: unchanged_anomalib_forward_one_image_at_a_time
+    durable_embeddings: immutable_exact_float32_cpu_chunks_with_rng_and_hashes
+    reconstruction: one_preallocated_cuda_tensor_filled_in_original_row_order
+    coreset: unchanged_installed_KCenterGreedy_sample_coreset
+    projection: unchanged_installed_SparseRandomProjection
+    dtype: float32
+    device_for_coreset: cuda
+    arithmetic_reordering: forbidden
+  largest_acceptance:
+    prerequisite: all_three_equivalence_paths_exact
+    category_selection: largest_frozen_fit_count_then_lexical_tie_break
+    seed: 42
+    fit_only: true
+    calibration: false
+    retries_after_cuda_or_hardware_failure: 0
+  execution:
+    gpu_jobs: 1
+    disk_free_minimum_gib: 20
+    full_efficientad_training: not_authorized
+    full_matrix: not_authorized
+    final_test_gate: permanently_closed

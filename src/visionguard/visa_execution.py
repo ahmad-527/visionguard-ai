@@ -16,6 +16,7 @@ from pathlib import Path
 from visionguard.triage import ALLOWED_SEEDS
 from visionguard.visa import CATEGORIES, safe_asset
 from visionguard.visa_acquire import VisaIntegrityError, atomic_json, sha256_file
+from visionguard.visa_guard import reject_test_request
 from visionguard.visa_protocol import load_visa_protocol, verify_audit
 
 
@@ -271,18 +272,22 @@ class ExecutionState:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--protocol", required=True, type=Path)
+    parser.add_argument("--repository", type=Path, default=Path.cwd())
+    parser.add_argument(
+        "--model", choices=("patchcore", "efficientad"), default="patchcore"
+    )
     parser.add_argument("--protocol-fingerprint", required=True)
     parser.add_argument("--dataset-audit", required=True, type=Path)
     parser.add_argument("--dataset-audit-sha", required=True)
     parser.add_argument("--confirm-independent-test-evaluation", action="store_true")
     args = parser.parse_args(argv)
     if args.confirm_independent_test_evaluation:
-        reject_final_test(
+        reject_test_request(
+            args.repository,
+            args.model,
             confirmed=True,
             supplied_fingerprint=args.protocol_fingerprint,
-            expected_fingerprint=args.protocol_fingerprint,
-            supplied_audit_sha256=args.dataset_audit_sha,
-            expected_audit_sha256=args.dataset_audit_sha,
+            supplied_audit=args.dataset_audit_sha,
         )
     protocol = load_visa_protocol(
         args.protocol, expected_fingerprint=args.protocol_fingerprint

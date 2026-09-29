@@ -1,0 +1,22 @@
+schema_version: 1
+engineering:
+  id: visa-development-dispatcher-acceptance-v1
+  category: candle
+  seed: 42
+  criterion: exact_canonical_model_and_calibration_scores_maps_thresholds
+  patchcore:
+    fit: first_8_lexical_frozen_normals
+    calibration: all_90_frozen_normals
+    baseline: uninterrupted
+    restarted_process_sequence: [embedding_4, before_coreset, after_fit, after_calibration, complete]
+  efficientad:
+    fit: first_4_lexical_frozen_normals
+    calibration: first_19_lexical_frozen_normals
+    steps: 2
+    scientific_scheduler_steps: 70000
+    baseline: uninterrupted
+    restarted_process_sequence: [step_1, after_normalization, complete]
+  models_run_sequentially: true
+  test_access: forbidden
+  tolerance: none
+  failure: stop_preserve_attempts

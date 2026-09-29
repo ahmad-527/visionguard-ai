@@ -43,6 +43,7 @@ visionguard-visa-audit = "visionguard.visa_audit:main"
 visionguard-visa-plan = "visionguard.visa_execution:main"
 visionguard-visa-smoke = "visionguard.visa_smoke:main"
 visionguard-visa-protocol = "visionguard.visa_protocol:main"
+visionguard-visa-develop = "visionguard.visa_dispatcher:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/visionguard"]

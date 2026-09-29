@@ -8,7 +8,15 @@ import pytest
 
 @pytest.mark.parametrize(
     "module",
-    ["visa_acquire", "visa_audit", "visa_execution", "visa_protocol", "visa_smoke"],
+    [
+        "visa_acquire",
+        "visa_audit",
+        "visa_execution",
+        "visa_protocol",
+        "visa_smoke",
+        "visa_dispatcher",
+        "visa_development_worker",
+    ],
 )
 def test_help_never_loads_models_or_data(module):
     result = subprocess.run(
@@ -29,6 +37,7 @@ def test_lightweight_import_has_no_model_dependency():
             "-c",
             "import sys; import visionguard.visa_smoke; "
             "import visionguard.visa_development; import visionguard.visa_execution; "
+            "import visionguard.visa_dispatcher; "
             "assert 'torch' not in sys.modules; assert 'anomalib' not in sys.modules",
         ],
         capture_output=True,

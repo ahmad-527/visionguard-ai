@@ -1,8 +1,8 @@
 # Phase 4C — VisA independent-evaluation readiness
 
-Status: **protocols frozen for review; integrity audit and normal-only smoke
-passed; confirmatory execution NOT authorized. Operational readiness remains
-conditional on PatchCore memory capacity and the historical-access declaration.**
+Status: **pre-test engineering completion submitted for review; normal-only
+memory/equivalence/restart acceptance passed. Confirmatory execution NOT
+authorized. Historical-access attestation remains PENDING.**
 
 No VisA final-test predictions, AUROC, F1, AU-PRO, triage metrics, example panels,
 or qualitative anomaly inspection were produced. Test assets were decoded only
@@ -22,6 +22,13 @@ for the explicitly authorized integrity audit. No full 70,000-step training,
 - The successful smoke recorded that exact commit and a clean worktree.
   All scientific settings remain as predeclared. Engineering failures remain
   documented below; they did not trigger scientific tuning.
+- The initial conditional-readiness commit was
+  `505631bc55048247cc55b77b3b66455ebe50dea5`. Completion work adds commits on top;
+  it does not rewrite any of these three scientific chronology anchors.
+
+**THIS PR MUST NOT BE SQUASH-MERGED.** Following human review, use a regular
+merge commit so the distinct pre-data freeze remains in main history. This
+completion pass neither merges the PR nor opens Phase 4D.
 
 **MVTec AD 2 `test_public` remains exposed development evidence.** Phase 4A
 motivates this hypothesis but validates neither hybrid nor router. Replaying that
@@ -208,8 +215,10 @@ optimization steps, without changing the scientific 70,000-step scheduler.
   bytes. These are tiny plumbing observations, not throughput or performance claims.
 - The optional 1,000-step probe was not run. Existing 24-cell resource history
   already informs capacity; two steps are not a reliable steady-state estimate.
-- No CUDA instability occurred. Only one GPU workload ran. Checkpoint restoration
-  was exercised; crash/power-loss durability and full-category memory were not.
+- No CUDA instability occurred. Only one GPU workload ran. This original smoke
+  did not establish cross-process or full-category feasibility; the later
+  completion acceptance below addresses those gaps. Power-loss durability is
+  still not experimentally established.
 
 ## Test seal and infrastructure limits
 
@@ -231,10 +240,15 @@ fields, artifact/checkpoint hashes, validated skip-completed, and separate faile
 versus interrupted status. Source/model/protocol/audit/membership/environment
 must agree for resume. Old attempts are not overwritten. A stale lock requires
 inspection. The EfficientAD smoke reuses the proven Phase 3B optimizer/scheduler/
-RNG checkpoint code without changing the old runner. A production full-matrix
-dispatcher and PatchCore cross-process resume integration still need review and
-engineering completion before authorization; generic state tests alone do not
-certify those paths. No claim of full execution readiness is made.
+RNG checkpoint code without changing the old runner. The completion pass adds a
+development-only dispatcher and genuine cross-process acceptance, described
+below. It is not a final-test evaluator or a production-readiness claim.
+
+Final-test diagnostics now load expected identities independently from the
+canonical repository freeze, reproduce protocol/source/audit/membership hashes,
+and compare supplied values against those anchors. No caller-supplied value is
+used as its own expectation. Arbitrary fingerprints, arbitrary audit hashes,
+and even correct identities all fail closed. No opening path exists.
 
 ## All-category capacity: measured versus extrapolated
 
@@ -258,28 +272,204 @@ Reserve **at least 100 GiB additional free storage** as an operational planning
 budget, not a scientific threshold: maps/checkpoints plus temporary embeddings,
 metric scratch, interrupted attempts, and headroom. Inputs/archive and normal
 copies are retained separately. A second full map copy can exceed this budget;
-review retention before execution. CPU metric time, host peak RAM, new storage
-compression and end-to-end runtime remain unknown. Training and CPU evaluation
+review retention before execution. CPU metric time, full-workflow host peak RAM,
+new storage compression and end-to-end runtime remain unknown. Training and CPU evaluation
 should run sequentially until measured peak resource safety is established.
 
-**Current 8 GiB GPU blocker:** the largest fitting category has 815 images.
+**Original memory blocker (before completion acceptance):** the largest fitting
+category has 815 images.
 At 1,024 patches × 1,536 float32 features, stored embeddings alone require
 5,127,536,640 bytes. Anomalib stacks the live list before clearing it, so list
 plus stacked tensor needs at least 10,255,073,280 bytes (~9.55 GiB), excluding
 weights, activations and coreset working state. This exceeds available VRAM.
-No full fit was attempted. Smaller categories/ratios/resize or fewer EfficientAD
-steps are NOT authorized remedies. Human review must choose sufficiently large
-hardware or a separately reviewed memory-safe implementation retaining scientific
-semantics and validating numerical/resume behavior before test access.
+The original smoke did not attempt a full fit. The completion pass below removes
+the redundant full copy and measures a successful fit. Smaller categories,
+ratios, resize, altered feature dtype or fewer scientific EfficientAD steps
+remain prohibited remedies. Larger hardware remains an option if other runtime
+conditions cannot sustain this implementation safely.
+
+## Completion pass: measured engineering gates
+
+The reproducible [completion summary](../reports/phase4c-visa-readiness/completion-summary.json)
+binds ignored raw reports, process exits, immutable attempts, implementation
+commits, environment, source hashes and exact comparison digests. It is generated
+by `scripts/phase4c_completion_evidence.py`, without loading models or test data.
+Original protocols, audit, allocation and triage fingerprints are unchanged.
+Engineering source identities are additional bindings, not replacements for the
+pre-data scientific freeze.
+
+| Former blocker | Status | Evidence and remaining limit |
+|---|---|---|
+| A: largest-category PatchCore memory | RESOLVED for measured fit | pcb3, all 815 frozen fit normals, seed 42, coreset completed; limited headroom, not every runtime/hardware combination |
+| B: cross-process PatchCore resume | RESOLVED | hard termination after four committed chunks, new process, exact embeddings/indices/bank/model/calibration outputs |
+| C: normal-only dispatcher/integration | RESOLVED within development contract | canonical 36-cell plans per model; single-cell execution/resume; real staged restarts passed for both models; full matrix not run |
+| D: future authorization identity design | RESOLVED | independently verified canonical expectations; all Phase 4C requests still denied |
+| E: historical access | UNRESOLVED | template/plumbing implemented; **PENDING HUMAN ATTESTATION**, never inferred from audit success |
+
+### Exact installed source and residency model
+
+[Memory model](../reports/phase4c-visa-readiness/completion-memory-model.json)
+records the installed Anomalib 2.6.0 PatchCore, KCenterGreedy and random-projection
+source hashes, checked against wheel RECORD. Source inspection establishes:
+
+1. Each 256×256 input produces layer2 `[1,512,32,32]` and layer3
+   `[1,1024,16,16]` features. Unchanged average pooling, layer3 upsampling and
+   concatenation yield **1,024 × 1,536 float32 CUDA values per image**, in native
+   flatten/permute order. Native forward appends each embedding to a list.
+2. Native subsampling `vstack`s that list before clearing it: both full copies
+   coexist. This alone exceeds 8 GiB for pcb3, before any coreset work.
+3. The unchanged sampler creates a dense-stored sparse random projection on CPU
+   then copies it to CUDA (336 × 1,536 float32; 2,064,384 bytes). Projected features
+   have shape `[834560,336]`. Each distance update materializes a projected-size
+   subtraction plus distance/minimum vectors. Random starting point and every
+   greedy update are unchanged. The final selected bank is `[8345,1536]`.
+4. No separate nearest-neighbor index is fitted: native scoring uses the bank
+   and its distance computation. Scoring workspace remains relevant for later
+   calibration/inference; a fit-only test is not an end-to-end inference claim.
+
+The replacement changes **storage only**: immediately persist each exact CPU
+embedding chunk and RNG state, release its CUDA list reference, then allocate
+one contiguous full CUDA tensor and copy verified chunks into original row
+positions. Invoke unchanged `KCenterGreedy.sample_coreset`; do not change dtype,
+projection, order, algorithm, ratio, seed, weights, features or arithmetic.
+After bank selection the full tensor/projection/sampler can be freed. During
+extraction, only the current activation/embedding and a bounded host chunk need
+remain; reconstruction never creates a second full stacked tensor.
+
+| Classification | Quantity | Bytes / observation |
+|---|---|---:|
+| CALCULATED | Full ordered embedding | 5,127,536,640 |
+| CALCULATED | Native list + stacked lower bound | 10,255,073,280 |
+| CALCULATED | Projected matrix or broadcast subtraction, each | 1,121,648,640 |
+| CALCULATED | New embedding + two projected-size tensors, before other state | 7,370,833,920 |
+| MEASURED | Largest-fit peak CUDA allocated | 7,519,790,080 |
+| MEASURED | Peak CUDA allocator reserved | 8,646,557,696 |
+| MEASURED | Worker peak host working set, including imports | 2,804,207,616 |
+| MEASURED | Attempt file bytes before report publication | 5,320,840,756 |
+| MEASURED | Worker body wall time | 1,293.38 s |
+| MEASURED | Extraction / reconstruction-and-coreset time | 93.67 / 1,190.24 s |
+| CALCULATED from measured bank shape | Final bank payload | 51,271,680 |
+| UNKNOWN | Physical VRAM residency peak, system-wide RAM peak, driver paging, filesystem peak | Not measured |
+
+CUDA reserved exceeds the card's physical 8 GiB; it is an allocator observation,
+**not a measured physical-residency peak**. Do not replace it with allocated
+memory, infer zero paging, claim comfortable headroom, or extrapolate a Linux
+8 GiB guarantee. The actual Windows/RTX 3070 Ti Laptop run completed without a
+CUDA/OOM error. Driver 561.17 was observed; runtime/package versions are bound in
+the receipt. Keep one GPU workload active and a larger-GPU option available.
+Timing excludes imports/provenance preflight and is not a model-speed benchmark.
+The largest run was fit-only: no calibration or test scoring was done for pcb3.
+
+### Equivalence and preserved negative evidence
+
+The exact/no-tolerance criterion was committed before acceptance in
+`configs/engineering/visa-completion-acceptance-v1.yaml`. Candle, seed 42,
+first eight lexical frozen fitting normals and all 90 calibration normals were
+identical across native reference, preallocated uninterrupted and restarted
+paths. Ordered embedding bytes, shape/dtype, every selected coreset index, bank
+bytes, canonical whole-model state, all calibration image scores, restored
+float32 map hashes and both thresholds matched **exactly**. Canonical calibration
+JSON hashes also agree. No post-result tolerance was introduced. Serialized
+checkpoints include attempt/provenance metadata and need not share container
+hashes; canonical tensor/model identity is the scientific comparison.
+
+The first largest attempt stopped with a Windows `PermissionError` replacing
+the embedding journal after 735 committed chunks; one additional serialized
+chunk had no completion record and was not treated as complete. The failed
+attempt (4,669,107,860 bytes), logs and raw receipt remain ignored and hash-bound
+in the published failure record. This was not a CUDA failure. A bounded retry
+of identical atomic metadata publication was added; persistent errors still
+fail. Because source identity changed, the old chunks were **not** reused under
+new metadata. Fresh reference/equivalence/restart runs passed, then the full
+815-normal fit passed at `3e8fd557245a63613af663e7d05a25968642751c`.
+
+Exactness is established on these declared development fixtures/environment,
+not every category/device. No scientific threshold from these engineering
+models may be reused for the eventual full scientific models.
+
+### Durable restart and dispatcher operations
+
+`visionguard-visa-develop` exposes `--plan`, `--status`,
+`--run-cell CATEGORY SEED`, and `--resume-cell CATEGORY SEED`. Every manifest
+contains all 12 categories in canonical order, then seeds 42, 123, 2026. Each
+invocation runs one cell, not an automatic 36/72-cell benchmark. There is no test
+root, test loader, metric evaluation or best-seed path. Full normal-only fitting
+requires an explicit confirmation flag; **it was not executed as a matrix here**.
+
+Append-only chunks bind protocol/audit/membership, exact code/environment,
+weights, category/seed, sample ID/index, attempt, tensor metadata, payload and
+canonical tensor hashes, and RNG state. Restart validates every completed chunk,
+rejects missing/reordered/corrupt/mismatched state, resumes at the next image,
+and reconstructs the original tensor. Incomplete chunks never advance the
+journal. If interrupted during coreset, retain completed embeddings and restart
+the unchanged coreset from their saved RNG; do not claim mid-coreset progress
+is checkpointed. Post-fit stages reuse validated saved models/artifacts.
+
+The dispatcher holds a repository-wide GPU lease and uses atomic state,
+immutable numbered attempts, stage receipts, worker PID/start records, validated
+skip-completed, a 20 GiB free-disk preflight, failure/interruption distinction
+and hardware-failure resume refusal. CUDA environment preflight is a separate
+short-lived process so the orchestration parent retains no second GPU context.
+No stale lock is removed automatically: confirm process ownership/termination
+and obtain human-approved recovery. Sudden host power loss is not proven safe
+by intentional process exits; `fsync`/atomic publication are engineering
+primitives, not a storage-device durability guarantee.
+
+At `52455a2a8fdde1912082c38b6e91fdf5d15eac4b` the dispatcher acceptance used new worker processes for PatchCore
+stops after chunk 4, before coreset, after fit and after calibration (five
+attempts), versus one uninterrupted attempt. EfficientAD stopped after step 1
+and after fit-normal normalization (three attempts), versus one uninterrupted
+two-step attempt. Both models' final canonical states and complete calibration
+scores/maps/thresholds were exact. EfficientAD reuses the Phase 3B optimizer,
+scheduler, RNG and train/ImageNette stream restoration; its scheduler remains
+70,000-step scientific configuration, but only **two** smoke steps ran. No long-
+run thermal/reliability conclusion follows.
+
+Read-only planning examples (no fitting):
+
+```text
+visionguard-visa-develop --model patchcore --output outputs/visa-development --plan
+visionguard-visa-develop --model efficientad --output outputs/visa-development --status
+python scripts/phase4c_completion_evidence.py --repository .
+```
+
+The acceptance drivers and frozen engineering YAMLs document exact normal-only
+invocations. Large chunks/checkpoints/maps/logs stay ignored under `outputs/`;
+compact committed receipts bind their identities. Preserve failed attempts.
+
+### Membership artifact cost/benefit review
+
+The existing inventory remains byte-identical: **3,877,119 bytes, 112,575 lines**,
+8,659 permitted normal records. Full inventory adds substantial review/diff
+volume, but no new diff in this pass. Fit/calibration IDs and roles are exactly
+reconstructible from the bound official CSV plus frozen SHA-ranked allocation.
+Per-image encoded/decoded hashes and dimensions are not derivable from CSV
+alone. They allow exact copied-development-root validation without reopening
+sealed assets. Retaining the ~3.7 MiB inventory has a concrete provenance value;
+no representation/hash binding was changed merely to shrink the PR.
+
+The [human declaration template](attestations/visa-test-access-history.md)
+separates repository evidence, contributor knowledge, integrity and independence.
+It explicitly asks about pre-freeze images, masks, labels, predictions, metrics
+and qualitative examples. Its status remains **PENDING HUMAN ATTESTATION**.
 
 ## Reproduction, QA, and stop conditions
+
+Completion-pass checks: **490 passed, one Windows symlink-privilege skip**;
+Ruff format/lint, `pip check`, editable install, clean imports/CLI help and
+plan/status, protocol reproduction and evidence/source provenance checks passed.
+Secret-pattern/absolute-local-path scans found no matches across 134 tracked or
+pending files; none exceeded 5 MiB. Whitespace review passed. GitHub CI is tracked
+separately on PR #18 for the pushed head, not inferred from these local results.
+Real GPU acceptance receipts are separate from synthetic/unit CI tests; CI does
+not download VisA or silently repeat any fitting job.
 
 Install the lightweight project with `python -m pip install -e ".[analysis,dev]"`.
 Imports, protocol checks, synthetic tests and CLI help require no dataset or GPU.
 CI builds clean Linux environments on Python 3.11, 3.12 and 3.13. Scientific ML
 execution retains the parent Python 3.11/3.12 and pinned ML dependency contract.
 
-Local final checks: 446 tests passed; one existing Windows symlink-privilege test
+Original smoke-pass checks: 446 tests passed; one existing Windows symlink-privilege test
 skipped. Ruff format/lint, `pip check`, editable installation, installed CLI help,
 protocol reproduction, and Git whitespace checks passed. Repository-wide secret
 pattern and absolute-local-path scans had no matches; no tracked/pending file
@@ -314,7 +504,7 @@ state, not arbitrary replacement files. Never hand-edit evidence to make it pass
 Stop for source/license identity conflicts, unexpected overlap, bad masks,
 inadequate calibration, unreservable independence, required test-driven choices,
 hardware failure, altered triage, or any proposed scientific scope change.
-Outstanding human gates: historical access declaration; a feasible all-category
-PatchCore execution platform/implementation; complete dispatcher/resume review;
+Outstanding human gates: historical access declaration; review of measured
+memory headroom and exact-equivalence/dispatcher evidence;
 reviewed artifact retention and operational risk preferences; explicit Phase 4D
 authorization. See the [unauthorized draft plan](planning/phase-4d-visa-confirmatory-execution-plan.md).

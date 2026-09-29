@@ -1,0 +1,532 @@
+{
+  "accepted_equivalence": {
+    "checks": {
+      "resumed": {
+        "calibration_scores_maps_thresholds": true,
+        "canonical_model": true,
+        "coreset_indices": true,
+        "dtype": true,
+        "embedding_shape": true,
+        "memory_bank_sha256": true,
+        "memory_bank_shape": true,
+        "ordered_embeddings_sha256": true
+      },
+      "safe": {
+        "calibration_scores_maps_thresholds": true,
+        "canonical_model": true,
+        "coreset_indices": true,
+        "dtype": true,
+        "embedding_shape": true,
+        "memory_bank_sha256": true,
+        "memory_bank_shape": true,
+        "ordered_embeddings_sha256": true
+      }
+    },
+    "criterion": "exact_bitwise_no_tolerance",
+    "exact_results": {
+      "calibration_json_sha256": "7c18155f83dec493cd8e40cef0cd99014759c79f705d2a4805482c9d154125d4",
+      "canonical_model_sha256": "f683126c739787191489b63f7744746db29b6ff61cd7f9650cbcf06107218f14",
+      "coreset_indices_sha256": "9eab1b120a4c0a1ba40effee1be00f31eb61e22936522ec3b3f987c95820cd39",
+      "dtype": "torch.float32",
+      "embedding_shape": [
+        8192,
+        1536
+      ],
+      "image_threshold": 53.7371711730957,
+      "memory_bank_sha256": "a8da6a04fbde61fe61f9ed68b37aa59b6a832ebaaef0580915ec8c466651a1c3",
+      "memory_bank_shape": [
+        81,
+        1536
+      ],
+      "ordered_embeddings_sha256": "ed4ca110f531da30717574ce9b5fc9df623ca63686819f5c200e6dc513549575",
+      "pixel_threshold": 51.86742401123047,
+      "thresholds_are_engineering_only": true
+    },
+    "fixture": {
+      "calibration_count": 90,
+      "category": "candle",
+      "fit_count": 8,
+      "seed": 42
+    },
+    "implementation_identity": {
+      "audit_sha256": "06e227bb5d2cd26f38010b2c304c62f14f383a81c64f5b2e4c48f1019128f58f",
+      "environment": {
+        "cuda": "12.6",
+        "gpu": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+        "packages": {
+          "Pillow": "12.3.0",
+          "anomalib": "2.6.0",
+          "numpy": "2.4.6",
+          "safetensors": "0.8.0",
+          "scikit-learn": "1.9.0",
+          "scipy": "1.17.1",
+          "timm": "1.0.28",
+          "torch": "2.9.1+cu126",
+          "torchvision": "0.24.1+cu126"
+        },
+        "platform": "Windows",
+        "python": "3.11.6"
+      },
+      "environment_fingerprint": "3ab822fdd104157d833b0e7e4201588b359aa5b17b6ded4a918b59de4b83c6bc",
+      "final_test_lock": "closed",
+      "implementation_commit": "3e8fd557245a63613af663e7d05a25968642751c",
+      "membership_sha256": "10e7a6c898fb18fbd1b93a115a5a94f3e2ebcecb7a1796d99d8c1e6f3567ce0b",
+      "model": "patchcore",
+      "protocol_fingerprint": "3ffcdc37cf3117d319da3e970383c6d0bdb52e2cd42dca87ad3161c5a9bc3191",
+      "source_fingerprint": "cac1b85cfe5442a6e9839e2f50981740e2c01a3588fef8896d836f7cb7931d67",
+      "source_hashes": {
+        "configs/engineering/visa-completion-acceptance-v1.yaml": "7af3fbd699b8b163fea80b9ad211d9111f2db63df88c9e8b2df90cb794f43477",
+        "scripts/phase4c_patchcore_acceptance.py": "f4387a12dfb9ee07f014227a0d828cf5b13a3125f584bcd982133ca5ab75d55d",
+        "src/visionguard/efficientad_benchmark.py": "0f2fc1201d895fa91c2c22af1d0e5cf9ae893f0567db91b95718bbfda03a96bd",
+        "src/visionguard/embedding_journal.py": "d5516b6ff65b551ed70c20975e90312a786b11a40e05b11e76d999f0fbd7ac23",
+        "src/visionguard/visa_development.py": "ac1417863babca7cf9faecfcdf6bcf823d793fd68aa95c051f38cea88cf0ee44",
+        "src/visionguard/visa_engineering.py": "98e59957083fb9855c31fc392cc2c562f77f56b2ae447e9d2d700abd4708cc34",
+        "src/visionguard/visa_execution.py": "f7599a5478a5f496f332ff2ce09ac02dfad5d9702165c7f1b884c69fbbccd12c",
+        "src/visionguard/visa_guard.py": "3c5c7376973b265363d3a882474429cdab6b0a149484c714f72f01358e5a1920",
+        "src/visionguard/visa_patchcore.py": "0b894e00a8d16320966b949749584d8f2bdba67389217d3aa970e9dd30ea9ec4",
+        "src/visionguard/visa_patchcore_acceptance.py": "607f6ba3f40ef74b74b5c58b15f44d05df22ad3a6a4883e8e71322b60f0d5022"
+      }
+    },
+    "interrupted_journal_sha256": "8d7e9d6d3ed687a6ab2d564689976ef32b2ff3897cb8540ff31bc321419e6454",
+    "processes": {
+      "interrupted": {
+        "attempt": "interrupted",
+        "expected_returncode": 75,
+        "intentional_termination": true,
+        "log_sha256": "0c8a1bf3f4f8b67d7e57cc0c48c8786186f8f1f5386a6812d21a12b5ca3cd239",
+        "pid": 30844,
+        "returncode": 75,
+        "test_performance_evaluated": false
+      },
+      "reference": {
+        "attempt": "reference",
+        "expected_returncode": 0,
+        "intentional_termination": false,
+        "log_sha256": "8ba2ccfe3cbf366c70f0cd0db63b0a8454aef6ba04a5586f115f16939a10fd51",
+        "pid": 19764,
+        "returncode": 0,
+        "test_performance_evaluated": false
+      },
+      "resumed": {
+        "attempt": "resumed",
+        "expected_returncode": 0,
+        "intentional_termination": false,
+        "log_sha256": "c09d52e5caab75650cdcdb8b278de630d978c050b2dfadc342eac84abc4125a2",
+        "pid": 30540,
+        "returncode": 0,
+        "test_performance_evaluated": false
+      },
+      "safe": {
+        "attempt": "safe",
+        "expected_returncode": 0,
+        "intentional_termination": false,
+        "log_sha256": "6d8e284c722e83e792f3a12bffeda13fc1834df6417f606dcbad156ea55028ce",
+        "pid": 24840,
+        "returncode": 0,
+        "test_performance_evaluated": false
+      }
+    },
+    "raw_equivalence_sha256": "9082b9fbb9c71895eb7001d6f9da83dc50d88fa05c9c27712cf8b55fddd4880f",
+    "report_sha256": {
+      "reference": "b3e165a04cbc137d7c96da3f5b807d8c426d934d7940ce45cf0e4a0856543e21",
+      "resumed": "90b2c9af8ce1879b8f0f89b4efd269860a358f9539088737f5d875f318f110c7",
+      "safe": "c08537f8864bc0ab5fb60f71dcf9e2d832bac19100bf5c1154e0fdffdd78f67c"
+    },
+    "status": "exact",
+    "test_performance_evaluated": false
+  },
+  "dispatcher": {
+    "driver_sha256": "eac4c2f59c8d15f26ca6a9c85f38384b54bdbcb90e1da4378c0b0f958968d095",
+    "final_test_lock": "closed",
+    "models": {
+      "efficientad": {
+        "calibration_json_sha256": "f366ff3bd748fe96be2e6ff0ab278ef4a71a7d616c589020939a647c42c620be",
+        "canonical_final_model_sha256": "4aacd280c85c64764262e6c7d5475d44f2097727aa3a84f2bb37e2dd65e58472",
+        "canonical_model_and_calibration_exact": true,
+        "identity": {
+          "audit_sha256": "06e227bb5d2cd26f38010b2c304c62f14f383a81c64f5b2e4c48f1019128f58f",
+          "category": "candle",
+          "environment": {
+            "cuda": "12.6",
+            "gpu": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+            "packages": {
+              "Pillow": "12.3.0",
+              "anomalib": "2.6.0",
+              "numpy": "2.4.6",
+              "safetensors": "0.8.0",
+              "scikit-learn": "1.9.0",
+              "scipy": "1.17.1",
+              "timm": "1.0.28",
+              "torch": "2.9.1+cu126",
+              "torchvision": "0.24.1+cu126"
+            },
+            "platform": "Windows",
+            "python": "3.11.6"
+          },
+          "environment_fingerprint": "3ab822fdd104157d833b0e7e4201588b359aa5b17b6ded4a918b59de4b83c6bc",
+          "final_test_lock": "closed",
+          "imagenette_sha256": "6cbfac238434d89fe99e651496f0812ebc7a10fa62bd42d6874042bf01de4efd",
+          "implementation_commit": "52455a2a8fdde1912082c38b6e91fdf5d15eac4b",
+          "membership_sha256": "10e7a6c898fb18fbd1b93a115a5a94f3e2ebcecb7a1796d99d8c1e6f3567ce0b",
+          "model": "efficientad",
+          "protocol_fingerprint": "78b27feeee044f560287a1ce45000800452344190e7b68003eefb3e2e853f1f9",
+          "scope": {
+            "calibration_limit": 19,
+            "fit_limit": 4,
+            "purpose": "ENGINEERING_ONLY",
+            "steps": 2
+          },
+          "seed": 42,
+          "source_fingerprint": "478d30d8553d4675af0e493e6a0978b8867f2282f4d28b087b7a0f572e233d6a",
+          "source_hashes": {
+            "configs/engineering/visa-completion-acceptance-v1.yaml": "7af3fbd699b8b163fea80b9ad211d9111f2db63df88c9e8b2df90cb794f43477",
+            "configs/engineering/visa-dispatcher-acceptance-v1.yaml": "16ad7606dc77e68e1bd61068d7fe69d0e5e89f9884a69757ad6056bf87b831d8",
+            "src/visionguard/efficientad_benchmark.py": "0f2fc1201d895fa91c2c22af1d0e5cf9ae893f0567db91b95718bbfda03a96bd",
+            "src/visionguard/embedding_journal.py": "d5516b6ff65b551ed70c20975e90312a786b11a40e05b11e76d999f0fbd7ac23",
+            "src/visionguard/visa_development.py": "ac1417863babca7cf9faecfcdf6bcf823d793fd68aa95c051f38cea88cf0ee44",
+            "src/visionguard/visa_development_worker.py": "c1bf1aa469d26b3c406109a137e4d5105b6a7047add637df5e094e1258c15ec5",
+            "src/visionguard/visa_dispatcher.py": "d1d53d137fe1bad65910555e3355394064c5cc8dbaa23ae560dfc8829f63ffac",
+            "src/visionguard/visa_engineering.py": "98e59957083fb9855c31fc392cc2c562f77f56b2ae447e9d2d700abd4708cc34",
+            "src/visionguard/visa_execution.py": "f7599a5478a5f496f332ff2ce09ac02dfad5d9702165c7f1b884c69fbbccd12c",
+            "src/visionguard/visa_guard.py": "3c5c7376973b265363d3a882474429cdab6b0a149484c714f72f01358e5a1920",
+            "src/visionguard/visa_patchcore.py": "0b894e00a8d16320966b949749584d8f2bdba67389217d3aa970e9dd30ea9ec4"
+          },
+          "teacher_sha256": "a16ded54719674435576aee641152616a640dfc6dc2b83115dab6e226610ae7d"
+        },
+        "restarted": {
+          "attempt_count": 3,
+          "attempt_statuses": [
+            "interrupted",
+            "interrupted",
+            "development_complete"
+          ],
+          "directory": "efficientad-restarted/efficientad/runs/candle/seed-42/attempt-3",
+          "manifest_sha256": "876e6c27f65075f1e10a7ec7d6f864cc8fc95c058430d532b5bff5861c9ac761",
+          "receipt_sha256": "faaf04eac92ef026c7f31b20b7f13780f1d8236ab0e61dbc72c756ccd4a47a5f"
+        },
+        "uninterrupted": {
+          "attempt_count": 1,
+          "attempt_statuses": [
+            "development_complete"
+          ],
+          "directory": "efficientad-uninterrupted/efficientad/runs/candle/seed-42/attempt-1",
+          "manifest_sha256": "cdf256156074b6bb82251e45a46fde157c6059795e9ca78278c584b9e22d9825",
+          "receipt_sha256": "c294759570e801e9e761aa6d2a3749e0759bc603bf63778a5a3e63bd7acc334c"
+        }
+      },
+      "patchcore": {
+        "calibration_json_sha256": "7c18155f83dec493cd8e40cef0cd99014759c79f705d2a4805482c9d154125d4",
+        "canonical_final_model_sha256": "f683126c739787191489b63f7744746db29b6ff61cd7f9650cbcf06107218f14",
+        "canonical_model_and_calibration_exact": true,
+        "identity": {
+          "audit_sha256": "06e227bb5d2cd26f38010b2c304c62f14f383a81c64f5b2e4c48f1019128f58f",
+          "category": "candle",
+          "environment": {
+            "cuda": "12.6",
+            "gpu": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+            "packages": {
+              "Pillow": "12.3.0",
+              "anomalib": "2.6.0",
+              "numpy": "2.4.6",
+              "safetensors": "0.8.0",
+              "scikit-learn": "1.9.0",
+              "scipy": "1.17.1",
+              "timm": "1.0.28",
+              "torch": "2.9.1+cu126",
+              "torchvision": "0.24.1+cu126"
+            },
+            "platform": "Windows",
+            "python": "3.11.6"
+          },
+          "environment_fingerprint": "3ab822fdd104157d833b0e7e4201588b359aa5b17b6ded4a918b59de4b83c6bc",
+          "final_test_lock": "closed",
+          "implementation_commit": "52455a2a8fdde1912082c38b6e91fdf5d15eac4b",
+          "membership_sha256": "10e7a6c898fb18fbd1b93a115a5a94f3e2ebcecb7a1796d99d8c1e6f3567ce0b",
+          "model": "patchcore",
+          "protocol_fingerprint": "3ffcdc37cf3117d319da3e970383c6d0bdb52e2cd42dca87ad3161c5a9bc3191",
+          "scope": {
+            "calibration_limit": null,
+            "fit_limit": 8,
+            "purpose": "ENGINEERING_ONLY",
+            "steps": 2
+          },
+          "seed": 42,
+          "source_fingerprint": "478d30d8553d4675af0e493e6a0978b8867f2282f4d28b087b7a0f572e233d6a",
+          "source_hashes": {
+            "configs/engineering/visa-completion-acceptance-v1.yaml": "7af3fbd699b8b163fea80b9ad211d9111f2db63df88c9e8b2df90cb794f43477",
+            "configs/engineering/visa-dispatcher-acceptance-v1.yaml": "16ad7606dc77e68e1bd61068d7fe69d0e5e89f9884a69757ad6056bf87b831d8",
+            "src/visionguard/efficientad_benchmark.py": "0f2fc1201d895fa91c2c22af1d0e5cf9ae893f0567db91b95718bbfda03a96bd",
+            "src/visionguard/embedding_journal.py": "d5516b6ff65b551ed70c20975e90312a786b11a40e05b11e76d999f0fbd7ac23",
+            "src/visionguard/visa_development.py": "ac1417863babca7cf9faecfcdf6bcf823d793fd68aa95c051f38cea88cf0ee44",
+            "src/visionguard/visa_development_worker.py": "c1bf1aa469d26b3c406109a137e4d5105b6a7047add637df5e094e1258c15ec5",
+            "src/visionguard/visa_dispatcher.py": "d1d53d137fe1bad65910555e3355394064c5cc8dbaa23ae560dfc8829f63ffac",
+            "src/visionguard/visa_engineering.py": "98e59957083fb9855c31fc392cc2c562f77f56b2ae447e9d2d700abd4708cc34",
+            "src/visionguard/visa_execution.py": "f7599a5478a5f496f332ff2ce09ac02dfad5d9702165c7f1b884c69fbbccd12c",
+            "src/visionguard/visa_guard.py": "3c5c7376973b265363d3a882474429cdab6b0a149484c714f72f01358e5a1920",
+            "src/visionguard/visa_patchcore.py": "0b894e00a8d16320966b949749584d8f2bdba67389217d3aa970e9dd30ea9ec4"
+          },
+          "weight_sha256": "03b71d65fb2c73bb0de079a1781009f27a782ec481d2f64ab3bde9b1cdec3000"
+        },
+        "restarted": {
+          "attempt_count": 5,
+          "attempt_statuses": [
+            "interrupted",
+            "interrupted",
+            "interrupted",
+            "interrupted",
+            "development_complete"
+          ],
+          "directory": "patchcore-restarted/patchcore/runs/candle/seed-42/attempt-5",
+          "manifest_sha256": "fc11970260f02d985a9597b14b2e719ad05eb59ac44c088d7f71343f72020411",
+          "receipt_sha256": "d75a09dd9f743c215705b430ccd0f6eeab66607de0de6cf3eb761cb00dc82f59"
+        },
+        "uninterrupted": {
+          "attempt_count": 1,
+          "attempt_statuses": [
+            "development_complete"
+          ],
+          "directory": "patchcore-uninterrupted/patchcore/runs/candle/seed-42/attempt-1",
+          "manifest_sha256": "c6885bd4b3ff115296765603c4326346ca2b57397b9caadf2d4499950bb99622",
+          "receipt_sha256": "9b452a6b02ee5ca1ea497c67388a49bbe7508abe37cc40569a5635a289c83b22"
+        }
+      }
+    },
+    "raw_receipt_sha256": "89ab7c92494414742c10cc59c07c4b0b9bc878084374461795d492566b35a218",
+    "status": "exact",
+    "test_performance_evaluated": false
+  },
+  "final_test_lock": "closed",
+  "generator_sha256": "7ae655f1def06efa8d52bdce0837ec4d94977b9223a6b3a7ba10c80e95978e02",
+  "human_attestation": "PENDING HUMAN ATTESTATION",
+  "initial_equivalence": {
+    "checks": {
+      "resumed": {
+        "calibration_scores_maps_thresholds": true,
+        "canonical_model": true,
+        "coreset_indices": true,
+        "dtype": true,
+        "embedding_shape": true,
+        "memory_bank_sha256": true,
+        "memory_bank_shape": true,
+        "ordered_embeddings_sha256": true
+      },
+      "safe": {
+        "calibration_scores_maps_thresholds": true,
+        "canonical_model": true,
+        "coreset_indices": true,
+        "dtype": true,
+        "embedding_shape": true,
+        "memory_bank_sha256": true,
+        "memory_bank_shape": true,
+        "ordered_embeddings_sha256": true
+      }
+    },
+    "criterion": "exact_bitwise_no_tolerance",
+    "exact_results": {
+      "calibration_json_sha256": "7c18155f83dec493cd8e40cef0cd99014759c79f705d2a4805482c9d154125d4",
+      "canonical_model_sha256": "f683126c739787191489b63f7744746db29b6ff61cd7f9650cbcf06107218f14",
+      "coreset_indices_sha256": "9eab1b120a4c0a1ba40effee1be00f31eb61e22936522ec3b3f987c95820cd39",
+      "dtype": "torch.float32",
+      "embedding_shape": [
+        8192,
+        1536
+      ],
+      "image_threshold": 53.7371711730957,
+      "memory_bank_sha256": "a8da6a04fbde61fe61f9ed68b37aa59b6a832ebaaef0580915ec8c466651a1c3",
+      "memory_bank_shape": [
+        81,
+        1536
+      ],
+      "ordered_embeddings_sha256": "ed4ca110f531da30717574ce9b5fc9df623ca63686819f5c200e6dc513549575",
+      "pixel_threshold": 51.86742401123047,
+      "thresholds_are_engineering_only": true
+    },
+    "fixture": {
+      "calibration_count": 90,
+      "category": "candle",
+      "fit_count": 8,
+      "seed": 42
+    },
+    "implementation_identity": {
+      "audit_sha256": "06e227bb5d2cd26f38010b2c304c62f14f383a81c64f5b2e4c48f1019128f58f",
+      "environment": {
+        "cuda": "12.6",
+        "gpu": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+        "packages": {
+          "Pillow": "12.3.0",
+          "anomalib": "2.6.0",
+          "numpy": "2.4.6",
+          "safetensors": "0.8.0",
+          "scikit-learn": "1.9.0",
+          "scipy": "1.17.1",
+          "timm": "1.0.28",
+          "torch": "2.9.1+cu126",
+          "torchvision": "0.24.1+cu126"
+        },
+        "platform": "Windows",
+        "python": "3.11.6"
+      },
+      "environment_fingerprint": "3ab822fdd104157d833b0e7e4201588b359aa5b17b6ded4a918b59de4b83c6bc",
+      "final_test_lock": "closed",
+      "implementation_commit": "fb4faf39e2049a69f0873b05e53486247b6222f0",
+      "membership_sha256": "10e7a6c898fb18fbd1b93a115a5a94f3e2ebcecb7a1796d99d8c1e6f3567ce0b",
+      "model": "patchcore",
+      "protocol_fingerprint": "3ffcdc37cf3117d319da3e970383c6d0bdb52e2cd42dca87ad3161c5a9bc3191",
+      "source_fingerprint": "ef2e063130de3e7e87728e2b7ce2de1fe997b47821dcaf90bdc56e671f4c8627",
+      "source_hashes": {
+        "configs/engineering/visa-completion-acceptance-v1.yaml": "7af3fbd699b8b163fea80b9ad211d9111f2db63df88c9e8b2df90cb794f43477",
+        "scripts/phase4c_patchcore_acceptance.py": "f4387a12dfb9ee07f014227a0d828cf5b13a3125f584bcd982133ca5ab75d55d",
+        "src/visionguard/efficientad_benchmark.py": "0f2fc1201d895fa91c2c22af1d0e5cf9ae893f0567db91b95718bbfda03a96bd",
+        "src/visionguard/embedding_journal.py": "b93175d83b0f2d7d1a82b1f9f167a1b497c1563b8a01fd5af4567943636c9c5d",
+        "src/visionguard/visa_development.py": "ac1417863babca7cf9faecfcdf6bcf823d793fd68aa95c051f38cea88cf0ee44",
+        "src/visionguard/visa_engineering.py": "98e59957083fb9855c31fc392cc2c562f77f56b2ae447e9d2d700abd4708cc34",
+        "src/visionguard/visa_execution.py": "f7599a5478a5f496f332ff2ce09ac02dfad5d9702165c7f1b884c69fbbccd12c",
+        "src/visionguard/visa_guard.py": "3c5c7376973b265363d3a882474429cdab6b0a149484c714f72f01358e5a1920",
+        "src/visionguard/visa_patchcore.py": "0b894e00a8d16320966b949749584d8f2bdba67389217d3aa970e9dd30ea9ec4",
+        "src/visionguard/visa_patchcore_acceptance.py": "607f6ba3f40ef74b74b5c58b15f44d05df22ad3a6a4883e8e71322b60f0d5022"
+      }
+    },
+    "interrupted_journal_sha256": "5076177e0c56ae7d92a5a85346ec2c771443cf171211ef1c913618ec70e1501a",
+    "processes": {
+      "interrupted": {
+        "attempt": "interrupted",
+        "expected_returncode": 75,
+        "intentional_termination": true,
+        "log_sha256": "0c8a1bf3f4f8b67d7e57cc0c48c8786186f8f1f5386a6812d21a12b5ca3cd239",
+        "pid": 20268,
+        "returncode": 75,
+        "test_performance_evaluated": false
+      },
+      "reference": {
+        "attempt": "reference",
+        "expected_returncode": 0,
+        "intentional_termination": false,
+        "log_sha256": "61fdf302612f4a4a5fd3c95392cf315937111e2fd3a25f1f83ba6d787594a31c",
+        "pid": 3516,
+        "returncode": 0,
+        "test_performance_evaluated": false
+      },
+      "resumed": {
+        "attempt": "resumed",
+        "expected_returncode": 0,
+        "intentional_termination": false,
+        "log_sha256": "01b825cc5041eed752a9cada90d6edc3f90debf8d1f6386ad4369fa0dfc5ed63",
+        "pid": 31136,
+        "returncode": 0,
+        "test_performance_evaluated": false
+      },
+      "safe": {
+        "attempt": "safe",
+        "expected_returncode": 0,
+        "intentional_termination": false,
+        "log_sha256": "eb16df9d2a38aa2c3cc5ce38d23bcb5512e7fefc0215d8a8b3a2f20cbe865c46",
+        "pid": 31880,
+        "returncode": 0,
+        "test_performance_evaluated": false
+      }
+    },
+    "raw_equivalence_sha256": "34614cdff2a327ed47ba195526075e975d84eb42b11716c31eee1b9d81da5b63",
+    "report_sha256": {
+      "reference": "d7e3f15c6c3f8f3a3c552ca62d6f137b78477fb53ba846e6dfd0a21ecf95ace2",
+      "resumed": "0108befe9122ce4ff0ef82c593844784e58ba44de9f4fb0abdf9b8a692ac194d",
+      "safe": "daa6df2c534f090c4e4d10f360bd43b69b287f3545613bf5d351d00ef5a62d02"
+    },
+    "status": "exact",
+    "test_performance_evaluated": false
+  },
+  "largest_fit": {
+    "attempt_disk_bytes": 5320840756,
+    "canonical_model_sha256": "e2ed2cf567fe8d34032a8aff3ba1aadd535e65ced63f811b0ec665ce4569030a",
+    "category": "pcb3",
+    "coreset_indices_sha256": "9c4343959c2da36b686afd3ea6e6cade1b89e6d3b12338f8468955951d8018e8",
+    "cuda_peak_allocated_bytes": 7519790080,
+    "cuda_peak_reserved_bytes": 8646557696,
+    "final_checkpoint_sha256": "46a3202d104405caab307a812b36fdc4661e5ebdbe8462210bf2fb67290ef9e3",
+    "final_test_lock": "closed",
+    "fit": {
+      "coreset_and_reconstruction_seconds": 1190.243853,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 5127536640,
+      "embedding_shape": [
+        834560,
+        1536
+      ],
+      "extraction_seconds_this_process": 93.67057349999959,
+      "memory_bank_sha256": "daac62e1f899db06f9d0e15f7242e87b5dc271e3e2d3fd20a4042ff8fe59c276",
+      "memory_bank_shape": [
+        8345,
+        1536
+      ],
+      "ordered_embeddings_sha256": "cf81f409956474f7ff5ea8b1c9240a5570fc0b6bb973626d49616615b3634555"
+    },
+    "fit_count": 815,
+    "fit_only": true,
+    "host_peak_working_set_bytes": 2804207616,
+    "implementation_commit": "3e8fd557245a63613af663e7d05a25968642751c",
+    "memory_bank_bytes": 51271680,
+    "pid": 29644,
+    "process": {
+      "attempt": "largest",
+      "expected_returncode": 0,
+      "intentional_termination": false,
+      "log_sha256": "0af1c6ceef2a0bd7f2cfa272fdb1b0c291a042dfb5a33d5c91395454abcb5908",
+      "pid": 34300,
+      "returncode": 0,
+      "test_performance_evaluated": false
+    },
+    "raw_report_sha256": "3c641046895acb8cc0af7c188aa6022705918c6d3b48b3723420bc00913cc294",
+    "resource_caveats": [
+      "CUDA allocator reserved is not measured physical resident VRAM",
+      "Host measurement is worker peak working set, not system-wide RAM",
+      "Disk is attempt file bytes before report, not filesystem peak",
+      "Wall time is worker body, excluding imports and provenance preflight"
+    ],
+    "resume_parent": null,
+    "seed": 42,
+    "source_fingerprint": "cac1b85cfe5442a6e9839e2f50981740e2c01a3588fef8896d836f7cb7931d67",
+    "status": "passed",
+    "test_performance_evaluated": false,
+    "wall_seconds": 1293.3801832999961
+  },
+  "membership_review": {
+    "bytes": 3877119,
+    "conclusion": "Retain exact normal image hashes/dimensions; split allocation alone cannot supply these",
+    "lines": 112575,
+    "representation_changed": false,
+    "sha256": "10e7a6c898fb18fbd1b93a115a5a94f3e2ebcecb7a1796d99d8c1e6f3567ce0b"
+  },
+  "phase4d_started": false,
+  "preserved_failure": {
+    "attempt_disk_bytes": 4669107860,
+    "committed_embedding_chunks": 735,
+    "cuda_peak_allocated_bytes": 136077824,
+    "cuda_peak_reserved_bytes": 138412032,
+    "diagnosis": "Windows journal replace PermissionError; no CUDA failure",
+    "failure_type": "PermissionError",
+    "final_test_lock": "closed",
+    "fit_only": true,
+    "host_peak_working_set_bytes": 1625939968,
+    "implementation_commit": "fb4faf39e2049a69f0873b05e53486247b6222f0",
+    "pid": 15832,
+    "process": {
+      "attempt": "largest",
+      "expected_returncode": 0,
+      "intentional_termination": false,
+      "log_sha256": "d00d922fcaacb32ba497c1cd65583f71281b689192c71ba38a473e152fd09beb",
+      "pid": 26936,
+      "returncode": 1,
+      "test_performance_evaluated": false
+    },
+    "raw_report_sha256": "02f379903840267f345c1d554bad6ef6a661c2e96df353921e43b8ff99e0cace",
+    "remedy": "bounded identical-metadata publication retry; fresh equivalence and fit",
+    "resume_parent": null,
+    "status": "failed",
+    "test_performance_evaluated": false,
+    "total_chunk_files": 736,
+    "wall_seconds": 95.53776890000154
+  },
+  "purpose": "NORMAL_ONLY_PRETEST_ENGINEERING_NOT_PERFORMANCE",
+  "schema_version": 1,
+  "test_performance_evaluated": false
+}

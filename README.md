@@ -3,7 +3,7 @@
 Production-grade deep learning platform for industrial visual anomaly detection, defect localization, benchmarking, and real-time quality inspection.
 
 > **Project status:** Phase 4C — VisA protocols frozen for review; integrity audit
-> and tiny normal-only engineering smoke passed. No VisA test performance or
+> and normal-only memory/restart engineering acceptance passed. No VisA test performance or
 > hybrid evaluation has been performed. Final-test lock CLOSED; full execution
 > still requires hardware/readiness review and separate authorization.
 
@@ -85,8 +85,9 @@ production readiness is claimed.
 The [Phase 4C readiness record](docs/phase-4c-visa-independent-evaluation-readiness.md)
 binds the official VisA release, audit, normal-only membership and new model
 protocols. The [Phase 4D draft](docs/planning/phase-4d-visa-confirmatory-execution-plan.md)
-is **not authorized for execution**. PatchCore memory capacity, prior test-access
-history and full dispatcher/resume readiness remain human-review gates.
+is **not authorized for execution**. Largest-category PatchCore fitting and exact
+restart checks passed; prior test-access attestation remains pending. Engineering
+evidence, resource headroom and any future execution require human review.
 
 ## Development setup
 

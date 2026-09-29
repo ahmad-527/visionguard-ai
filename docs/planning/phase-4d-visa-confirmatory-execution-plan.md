@@ -9,20 +9,24 @@ refuses final-test execution even with matching confirmation flags.
 ### 1. Human decision gates before scheduling
 
 1. Review/merge Phase 4C separately; preserve its pre-data freeze chronology.
+   **DO NOT SQUASH-MERGE**: a regular merge must retain the distinct pre-data
+   freeze commit `c019f5515ee7692b42cda5bcc0595a4d3f00ec1e` in main history.
 2. A named custodian must attest to prior VisA test access by contributors,
    including any use of images/labels/predictions/results for scientific choices.
    If credible reservation is impossible, STOP: do not rename exposed evidence
    independent and do not silently substitute a split.
-3. Resolve PatchCore memory feasibility for **all 12** categories. The current
-   8 GiB GPU cannot hold the largest embedding list plus stacked tensor
-   (~9.55 GiB before other state). Options for review are larger hardware or a
-   memory-safe implementation with equivalence checks on development normals.
-   Offloading/chunking is NOT assumed equivalent without verification. No
-   autonomous category reduction, smaller resize/coreset, or rescue tuning.
-4. Review the remaining dispatcher/cross-process PatchCore resume integration.
-   Phase 4C supplies validated adapters, smoke paths and durable state primitives,
-   not a production full-matrix evaluator. Implement and review these gaps using
-   synthetic/development-only tests **before any test exposure**. If source
+3. Review the resolved fit-memory engineering gate: preallocated exact chunks
+   passed native-reference equivalence and the largest category (pcb3, 815
+   fitting normals, seed 42) completed on the RTX 3070 Ti Laptop. Peak allocated
+   CUDA was 7,519,790,080 bytes; allocator reserved was 8,646,557,696 bytes. The
+   latter is not measured physical VRAM residency. Headroom, paging and other
+   platform behavior are not established; larger hardware remains an option.
+   No category reduction, smaller resize/coreset or rescue tuning is allowed.
+4. Review the resolved development dispatcher/cross-process acceptance in the
+   [completion record](../phase-4c-visa-independent-evaluation-readiness.md#completion-pass-measured-engineering-gates).
+   Exact PatchCore and EfficientAD short staged restarts passed; no full matrix
+   or final-test evaluator was run. A separate evaluator still requires review
+   **before any test exposure**. If source
    hashes change, record a new reviewed freeze before test; do not simply ignore
    the mismatch. Scientific changes require a new protocol version/rationale.
 5. Approve a written time/storage/retention budget and stable power/cooling plan.
@@ -34,7 +38,10 @@ refuses final-test execution even with matching confirmation flags.
    and remains prohibited. Define a decision-maker's risk/review-workload
    preferences before interpreting operational benefit, not after results.
 
-No full execution should be scheduled while any of gates 2–4 remains unresolved.
+Engineering evidence is available for gates 3–4, not automatic human approval.
+Gate 2 remains **PENDING HUMAN ATTESTATION**; use the
+[declaration template](../attestations/visa-test-access-history.md). No full
+execution should be scheduled before these reviews and explicit authorization.
 
 ### 2. Fixed scientific inputs
 
@@ -64,16 +71,19 @@ normalization and thresholds before opening test. Do not reuse the tiny smoke.
 
 ### 3. Engineering acceptance before scientific execution
 
-- Build a dispatcher around `DevelopmentDataset` and `ExecutionState`, with
-  model-specific checkpoint payloads validated against immutable origins.
-- PatchCore restart acceptance must reconstruct frozen feature weights, restore
-  embeddings/order/RNG at a saved index, resume coreset fitting, and compare
-  final tensors/outputs on development normals with an uninterrupted tiny run.
-  The Phase 4C in-process round-trip alone is insufficient for this claim.
-- EfficientAD acceptance must preserve optimizer/scheduler/RNG, shuffled training
-  and ImageNette stream position, normalization and calibration stage state.
-  The two-step Phase 4C reconstruction test exercises this path but does not
-  establish long-run thermal or power-loss reliability.
+- The normal-only `visionguard-visa-develop` dispatcher now wraps
+  `DevelopmentDataset` and `ExecutionState`, binds immutable attempt origins and
+  supports plan/status/run-cell/resume-cell. Its full 36-cell-per-model schedule
+  is declared, not executed. It contains no final-test path.
+- PatchCore cross-process acceptance is RESOLVED on the declared small fixture:
+  frozen feature weights, exact embedding order/RNG, original coreset indices,
+  final bank/model and all calibration-normal scores/maps/thresholds agree.
+  Interrupted coreset work restarts from durable embeddings; partial greedy
+  iterations themselves are not checkpointed. Largest fit acceptance also passed.
+- EfficientAD dispatcher integration is RESOLVED on two-step normal-only smoke:
+  optimizer/scheduler/RNG, training/ImageNette streams, fit normalization and
+  calibration survived new processes with exact final model/calibration results.
+  This does not establish full 70,000-step thermal or power-loss reliability.
 - Validate stage progression, final-step checkpoint selection, artifact schema,
   same-seed pairing, deterministic lexical image order, nonfinite handling and
   original-coordinate map restoration. Never infer a missing field or threshold.
@@ -109,6 +119,10 @@ A separate reviewed evaluator must require explicit independent-test confirmatio
 exact protocol fingerprint and dataset-audit hash, plus an auditable human
 authorization record. Existing Phase 4C flags do not unlock it. A custodian should
 use OS account/filesystem isolation so training cannot read sealed test data.
+Expected identities must be loaded independently from repository-verified frozen
+configuration, never assigned from supplied values. Phase 4C now tests arbitrary
+self-asserted fingerprints/audits and correct identities: all remain CLOSED.
+The human attestation template cannot authorize execution by itself.
 
 First validate that all 72 final development cells and thresholds exist, their
 hashes/provenance agree, and the metric/artifact implementations are frozen. Only
@@ -158,12 +172,18 @@ with a median-based 125 hours; this is extrapolation, not measured VisA speed.
 PatchCore prior whole-cell timing varies widely and new fit memory invalidates
 straight-line prediction. Combined 4–16 continuous days is only a historical
 sensitivity envelope, excluding pauses and new evaluation overhead; it must not
-be advertised as a promise. Host RAM and CPU evaluation time remain unmeasured.
+be advertised as a promise. Largest-fit worker host peak was 2,804,207,616 bytes;
+this is not a full-workflow/system-wide peak. CPU evaluation time remains unmeasured.
 
 Uncompressed test-map payload for both models/all seeds is ~54.4 GiB. Add at
 least ~2.5 GiB EfficientAD resumable checkpoints, ~1.4 GiB PatchCore coresets,
 pretrained assets, temporary embeddings, duplicate final/attempt checkpoints,
 metric scratch and retained failures. Approve retention before removing anything.
+Largest-fit temporary/durable attempt files measured 5,320,840,756 bytes before
+the report; the failed Windows journal-publication attempt retains another
+4,669,107,860 bytes. These are measured engineering file totals, not a replacement
+for full-matrix storage budgeting. Membership evidence remains unchanged after
+read-only review (~3.7 MiB; exact image hashes/dimensions aid normal-only checks).
 If cost is unacceptable, STOP for a separately reviewed scope decision. This
 plan neither drops categories nor reduces steps to fit an overnight window.
 

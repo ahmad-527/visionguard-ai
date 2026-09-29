@@ -2,10 +2,9 @@
 
 Production-grade deep learning platform for industrial visual anomaly detection, defect localization, benchmarking, and real-time quality inspection.
 
-> **Project status:** Phase 4A — a reproducible, model-free comparative failure
-> analysis of the frozen PatchCore and EfficientAD public evidence is documented
-> for pull-request review. No private evaluation, new training, threshold
-> tuning, or formal inference-speed benchmark has been performed.
+> **Project status:** Phase 4B — dual-model triage protocol frozen for review;
+> no hybrid performance evaluation has been performed. The protocol preserves
+> PASS / REVIEW / REJECT and requires future independent evidence.
 
 ## Mission
 
@@ -73,8 +72,14 @@ evaluation or establish a final model winner.
 Phase 4A compares the two frozen evidence sets without training, inference, or
 threshold changes. See the
 [comparative failure analysis, deterministic examples, and model-selection boundaries](docs/phase-4a-comparative-failure-analysis.md).
-Its public-split assessment remains subject to human review and does not
-authorize private evaluation or Phase 4B.
+Its reviewed public-split assessment motivates further study but does not
+validate a hybrid or router.
+
+The [Phase 4B triage protocol](docs/phase-4b-hybrid-triage-protocol.md) freezes
+agreement-based automatic decisions and REVIEW on disagreement. MVTec AD 2
+`test_public` has already been inspected: any future replay is **retrospective
+development analysis**, not independent validation. No hybrid improvement or
+production readiness is claimed; Phase 4C requires separate human review.
 
 ## Development setup
 

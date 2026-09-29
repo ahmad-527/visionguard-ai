@@ -86,8 +86,11 @@ The [Phase 4C readiness record](docs/phase-4c-visa-independent-evaluation-readin
 binds the official VisA release, audit, normal-only membership and new model
 protocols. The [Phase 4D draft](docs/planning/phase-4d-visa-confirmatory-execution-plan.md)
 is **not authorized for execution**. Largest-category PatchCore fitting and exact
-restart checks passed; prior test-access attestation remains pending. Engineering
-evidence, resource headroom and any future execution require human review.
+restart checks passed. Human access-history declaration: **UNKNOWN**;
+independent reservation of VisA test evidence: **NOT ESTABLISHED**. Any future
+authorized evaluation must disclose this limitation unless credibly resolved
+before execution; it is not currently independent confirmatory evidence.
+Engineering evidence remains valid; future execution requires human review.
 
 ## Development setup
 

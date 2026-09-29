@@ -1,20 +1,43 @@
 # DRAFT — NOT AUTHORIZED FOR EXECUTION
 
-## Phase 4D proposal: VisA confirmatory execution
+## Phase 4D proposal: conditional VisA evaluation paths
 
 This document is a review agenda, not permission to train a full matrix or open
 the test seal. Phase 4C did not begin Phase 4D. The current code deliberately
 refuses final-test execution even with matching confirmation flags.
 
+Human access-history declaration: **UNKNOWN**. Independent reservation of VisA
+test evidence: **NOT ESTABLISHED**. Repository chronology and dataset integrity
+are verified, but cannot resolve historical exposure. All engineering readiness
+evidence remains valid. No VisA test performance has been evaluated.
+
+### Conditional paths — neither authorized
+
+- **PATH A:** If credible historical independence is later established **before
+  test execution**, VisA may potentially serve as independent confirmatory
+  evidence, subject to separate human review and explicit authorization.
+- **PATH B:** If historical independence remains UNKNOWN, a future separately
+  authorized run must be labeled **held-out VisA evaluation with historical
+  access independence unverified**. It may inform external robustness analysis,
+  but must not be presented as pristine independent confirmatory evidence,
+  untouched independent evidence, or proof of generalization from an
+  independently reserved test set. Keep this limitation visible in every report.
+
+The declaration does not change any frozen scientific protocol or fingerprint,
+fit/calibration membership, threshold contract, seed, model setting or audit.
+Neither path is executed or authorized by this documentation or PR review status.
+
 ### 1. Human decision gates before scheduling
 
 1. Review/merge Phase 4C separately; preserve its pre-data freeze chronology.
-   **DO NOT SQUASH-MERGE**: a regular merge must retain the distinct pre-data
+   **DO NOT SQUASH-MERGE OR REBASE-MERGE**: a regular merge commit must retain
+   the distinct pre-data
    freeze commit `c019f5515ee7692b42cda5bcc0595a4d3f00ec1e` in main history.
-2. A named custodian must attest to prior VisA test access by contributors,
-   including any use of images/labels/predictions/results for scientific choices.
-   If credible reservation is impossible, STOP: do not rename exposed evidence
-   independent and do not silently substitute a split.
+2. Review the user's UNKNOWN declaration and document which conditional path
+   is justified. A custodian must establish credible reservation before a Path A
+   claim; otherwise only Path B's explicitly limited interpretation is available
+   for separate authorization. Do not convert UNKNOWN to NO, infer independence
+   from integrity/chronology, or silently substitute a split.
 3. Review the resolved fit-memory engineering gate: preallocated exact chunks
    passed native-reference equivalence and the largest category (pcb3, 815
    fitting normals, seed 42) completed on the RTX 3070 Ti Laptop. Peak allocated
@@ -39,8 +62,9 @@ refuses final-test execution even with matching confirmation flags.
    preferences before interpreting operational benefit, not after results.
 
 Engineering evidence is available for gates 3–4, not automatic human approval.
-Gate 2 remains **PENDING HUMAN ATTESTATION**; use the
-[declaration template](../attestations/visa-test-access-history.md). No full
+Gate 2 now has a human response, **UNKNOWN**; independent reservation remains
+**NOT ESTABLISHED**. See the
+[declaration record](../attestations/visa-test-access-history.md). No full
 execution should be scheduled before these reviews and explicit authorization.
 
 ### 2. Fixed scientific inputs
@@ -115,14 +139,16 @@ active time separately; do not turn pauses into model speed claims.
 
 ### 5. Sealed evaluation authorization and once-only access
 
-A separate reviewed evaluator must require explicit independent-test confirmation,
-exact protocol fingerprint and dataset-audit hash, plus an auditable human
-authorization record. Existing Phase 4C flags do not unlock it. A custodian should
+A separate reviewed evaluator must require an auditable human authorization
+record identifying Path A or Path B and its permitted claims, plus independently
+verified exact protocol fingerprint and dataset-audit hash. Path B must not
+assert historical independence or use a confirmation flag as evidence of it.
+Existing Phase 4C flags do not unlock either path. A custodian should
 use OS account/filesystem isolation so training cannot read sealed test data.
 Expected identities must be loaded independently from repository-verified frozen
 configuration, never assigned from supplied values. Phase 4C now tests arbitrary
 self-asserted fingerprints/audits and correct identities: all remain CLOSED.
-The human attestation template cannot authorize execution by itself.
+The human declaration cannot authorize execution by itself.
 
 First validate that all 72 final development cells and thresholds exist, their
 hashes/provenance agree, and the metric/artifact implementations are frozen. Only
@@ -130,7 +156,8 @@ then permit the evaluator to load the official test assets. No preliminary
 category pilot or test feedback for tuning. Evaluate the frozen final model once
 per cell on the exact official test set. If interrupted, resume durable test
 artifact writing without changing settings and record any recomputation; do not
-count partial matrices as confirmatory completion.
+count partial matrices as completed evaluation. Even a complete matrix does not
+establish historical independence under Path B.
 
 Keep per-image portable IDs/order, original shape, image score, threshold and
 strict model decision; preserve float16 continuous TIFF and strict binary PNG
@@ -141,6 +168,12 @@ rescue. Full test manifests remain ignored if licensing/privacy rules require;
 publish sufficient compact hash-bound evidence for audit.
 
 ### 6. Prespecified reporting and claims
+
+Every report must state the authorized path, human declaration and reservation
+status prominently. While history remains UNKNOWN, use Path B's limited label;
+do not describe VisA as independent confirmatory evidence. A Path A claim needs
+documented credible independence established before execution, not inferred
+after favorable results. These restrictions apply regardless of metric values.
 
 Report all category/seed cells and both model policies on identical samples:
 image AUROC and AU-PRO@0.05 are ranking metrics; confusion counts, sensitivity,
@@ -189,7 +222,8 @@ plan neither drops categories nor reduces steps to fit an overnight window.
 
 ### 8. Required handoff before opening test
 
-Provide the human reviewer with: access-history attestation; all scientific
+Provide the human reviewer with: access-history declaration and any later evidence
+resolving it; the justified Path A/Path B label and limitations; all scientific
 fingerprints; all development checkpoint/threshold hashes; full matrix status;
 hardware/memory proof; budget/retention decision; dispatcher/resume tests; clean
 CI; failed-attempt history; and the exact proposed evaluation command and

@@ -1,8 +1,9 @@
 # Phase 4C — VisA independent-evaluation readiness
 
 Status: **pre-test engineering completion submitted for review; normal-only
-memory/equivalence/restart acceptance passed. Confirmatory execution NOT
-authorized. Historical-access attestation remains PENDING.**
+memory/equivalence/restart acceptance passed. Phase 4D NOT AUTHORIZED.
+Human access-history declaration: UNKNOWN. Independent reservation of VisA test
+evidence: NOT ESTABLISHED.**
 
 No VisA final-test predictions, AUROC, F1, AU-PRO, triage metrics, example panels,
 or qualitative anomaly inspection were produced. Test assets were decoded only
@@ -26,17 +27,30 @@ for the explicitly authorized integrity audit. No full 70,000-step training,
   `505631bc55048247cc55b77b3b66455ebe50dea5`. Completion work adds commits on top;
   it does not rewrite any of these three scientific chronology anchors.
 
-**THIS PR MUST NOT BE SQUASH-MERGED.** Following human review, use a regular
+**THIS PR MUST NOT BE SQUASH-MERGED OR REBASE-MERGED.** Following human review,
+use a regular
 merge commit so the distinct pre-data freeze remains in main history. This
 completion pass neither merges the PR nor opens Phase 4D.
 
 **MVTec AD 2 `test_public` remains exposed development evidence.** Phase 4A
 motivates this hypothesis but validates neither hybrid nor router. Replaying that
 split could only be retrospective development analysis, not independent evidence.
-VisA independence is also a claim requiring an access-history declaration: no
-such human declaration has yet been received in this phase. The audit does not
-prove that no contributor previously inspected VisA outcomes. Do not label a
-future run confirmatory until a custodian resolves this gate.
+The user has now supplied the [access-history declaration](attestations/visa-test-access-history.md):
+**UNKNOWN**. They cannot establish with sufficient confidence whether any
+contributor influencing VisionGuard inspected or used the six specified VisA
+test evidence types before the pre-data freeze. UNKNOWN is not NO. Repository
+chronology and dataset integrity are verified; independent reservation is
+**NOT ESTABLISHED**. Neither Git history, absent committed results, archive
+hashes, integrity checks, zero overlap nor lack of known metrics establishes it.
+
+VisA MUST NOT currently be described as an independent confirmatory benchmark,
+untouched independent evidence, or proof of generalization from an independently
+reserved test set. Unless uncertainty is credibly resolved before test execution,
+any future authorized run must be labeled **held-out VisA evaluation with
+historical access independence unverified**, with that limitation visible in
+every report. Such a run may be useful for external robustness evaluation but
+does not establish pristine independent confirmation. The draft Phase 4D plan
+separates the two conditional paths; neither is authorized or executed.
 
 ## Authoritative acquisition and licensing
 
@@ -304,7 +318,7 @@ pre-data scientific freeze.
 | B: cross-process PatchCore resume | RESOLVED | hard termination after four committed chunks, new process, exact embeddings/indices/bank/model/calibration outputs |
 | C: normal-only dispatcher/integration | RESOLVED within development contract | canonical 36-cell plans per model; single-cell execution/resume; real staged restarts passed for both models; full matrix not run |
 | D: future authorization identity design | RESOLVED | independently verified canonical expectations; all Phase 4C requests still denied |
-| E: historical access | UNRESOLVED | template/plumbing implemented; **PENDING HUMAN ATTESTATION**, never inferred from audit success |
+| E: historical independence | UNRESOLVED | human declaration received: **UNKNOWN**; independent reservation **NOT ESTABLISHED**, never inferred from audit success |
 
 ### Exact installed source and residency model
 
@@ -448,10 +462,14 @@ alone. They allow exact copied-development-root validation without reopening
 sealed assets. Retaining the ~3.7 MiB inventory has a concrete provenance value;
 no representation/hash binding was changed merely to shrink the PR.
 
-The [human declaration template](attestations/visa-test-access-history.md)
+The [human declaration record](attestations/visa-test-access-history.md)
 separates repository evidence, contributor knowledge, integrity and independence.
-It explicitly asks about pre-freeze images, masks, labels, predictions, metrics
-and qualitative examples. Its status remains **PENDING HUMAN ATTESTATION**.
+The user answered **UNKNOWN** for pre-freeze images, masks, labels, predictions,
+metrics and qualitative examples. Independent reservation is **NOT ESTABLISHED**.
+All engineering readiness evidence remains valid. Historical machine receipts
+retain their pending-attestation snapshot; the later declaration is governance
+metadata and does not alter or regenerate scientific evidence, protocols,
+fingerprints, membership, thresholds, seeds, model settings or the audit.
 
 ## Reproduction, QA, and stop conditions
 
@@ -502,9 +520,11 @@ change or provenance cannot be validated. The documented hashes bind this exact
 state, not arbitrary replacement files. Never hand-edit evidence to make it pass.
 
 Stop for source/license identity conflicts, unexpected overlap, bad masks,
-inadequate calibration, unreservable independence, required test-driven choices,
+inadequate calibration, unsupported independent-evidence claims, required
+test-driven choices,
 hardware failure, altered triage, or any proposed scientific scope change.
-Outstanding human gates: historical access declaration; review of measured
+Outstanding human gates: review of the UNKNOWN historical-access limitation and
+selection of an appropriately limited future evaluation path; review of measured
 memory headroom and exact-equivalence/dispatcher evidence;
 reviewed artifact retention and operational risk preferences; explicit Phase 4D
 authorization. See the [unauthorized draft plan](planning/phase-4d-visa-confirmatory-execution-plan.md).

@@ -1,0 +1,147 @@
+schema_version: 1
+protocol:
+  id: visionguard-dual-model-triage-v1
+  version: 1
+  status: frozen_for_review_no_performance_evaluation
+  phase: 4B_protocol_design_only
+  evidence:
+    phase4a_reviewed_merge: bc71bb3290e61417a7c461f369d2d520fb3ce217
+    dataset_audit_sha256: 8c0f71f0a7dc81436b7bd3affed0ba7f97ea3844213d487c2d9886befa055a92
+    patchcore:
+      protocol_id: patchcore-mvtecad2-v1
+      protocol_fingerprint: 03f545ea23b1bd00206cb919aece6972502712aa9f981e8a3f11dbd1be1f0c2b
+      implementation_sha: 8848e8defb1f734a319168fd597b4252b606fff7
+      manifest_sha256: 762c693616cbb02d9e215264c589497ef97cc07b29c1bf2ba2e661d6e7d2e171
+    efficientad:
+      protocol_id: efficientad-mvtecad2-v1
+      protocol_fingerprint: e9d6a66e7a52f2993e984ec20278c4ca4c710198cc466df15f947adff763f69f
+      implementation_sha: 9e477389530743f8a7cf4caa8c48214e5c63ec28
+      manifest_sha256: e2ac8e3f050271458b9d1aa04afb3543f7792b38906a2e3e73c872cce8e8841a
+    phase4a_summary_sha256: 236c69e5233df5593eb09afde254d4c0bb55e9957d9a9d80b08a973b5d2b8445
+  inputs:
+    required: [patchcore_score, patchcore_threshold, efficientad_score, efficientad_threshold]
+    scalar_types: [builtin_int, builtin_float]
+    finite_only: true
+    boolean_string_array_missing_coercion: forbidden
+    negative_finite_values: permitted
+    score_scale: each_models_own_frozen_scale
+    threshold_source: each_models_own_frozen_validation_normal_image_threshold
+    threshold_changes: forbidden
+    cross_model_normalization: forbidden
+    weighted_averaging: forbidden
+    learned_meta_model: forbidden
+    public_label_calibration: forbidden
+    category_specific_threshold_override: forbidden
+    category_specific_routing: forbidden
+    manual_override: forbidden
+  decision:
+    anomalous_comparison: score_strictly_greater_than_own_threshold
+    equality: normal
+    truth_table:
+      - {patchcore_anomalous: false, efficientad_anomalous: false, outcome: PASS}
+      - {patchcore_anomalous: true, efficientad_anomalous: true, outcome: REJECT}
+      - {patchcore_anomalous: false, efficientad_anomalous: true, outcome: REVIEW}
+      - {patchcore_anomalous: true, efficientad_anomalous: false, outcome: REVIEW}
+    preserve_model_binary_decisions: true
+    review_to_binary_conversion: forbidden
+    rationale: operational_uncertainty_handling_not_metric_optimization
+  localization:
+    fusion: forbidden
+    preserve_for: [REJECT, REVIEW]
+    preserve: [patchcore_continuous_map, patchcore_frozen_thresholded_map, efficientad_continuous_map, efficientad_frozen_thresholded_map]
+    prohibited: [union, intersection, weighted_heatmap, average_heatmap, category_map_selection, morphology, threshold_adjustment]
+    future_ui: side_by_side_explanations
+  pairing:
+    seeds: [42, 123, 2026]
+    same_seed_required: true
+    best_seed_selection: forbidden
+    require_equal: [dataset_identity, split, sample_id, category, seed]
+    require_verified: [protocol_identity, score_threshold_scale, artifact_hashes, frozen_threshold_provenance]
+    missing_duplicate_or_mismatched_samples: stop
+    report_all_seeds: true
+  metrics:
+    notation: N_all_A_anomalous_G_normal_P_pass_V_review_R_reject_suffix_denotes_true_class
+    rates:
+      review_rate: V/N
+      automatic_decision_coverage: (P+R)/N
+      selective_accuracy: (P_G+R_A)/(P+R)
+      anomaly_pass_through_rate: P_A/A
+      normal_reject_rate: R_G/G
+      anomaly_review_capture: V_A/A
+      normal_review_rate: V_G/G
+      reject_precision: R_A/R
+      pass_negative_predictive_value: P_G/P
+    decision_counts: [PASS, REVIEW, REJECT]
+    disagreement_directions: [patchcore_anomalous_efficientad_normal, patchcore_normal_efficientad_anomalous]
+    class_counts: [normal, anomalous]
+    preserve_numerator_denominator: true
+    zero_denominator: null_with_zero_denominator_reason_never_zero_imputation
+    binary_f1_for_triage: not_defined
+    reporting:
+      cells: every_category_and_seed_and_true_class
+      per_seed_micro: pool_category_counts_then_compute_rates
+      per_seed_macro: unweighted_mean_of_all_category_rates
+      across_seeds: arithmetic_mean_and_sample_standard_deviation_of_seed_rates
+      incomplete_macro: null_with_missing_category_or_seed_list
+      seed_pooling_as_independent_samples: forbidden
+      individual_comparators: both_models_same_samples_seed_and_frozen_thresholds
+      human_review_outcome: unmeasured_no_assumed_perfect_reviewer
+      operational_prevalence: unknown_precision_and_npv_are_dataset_dependent
+  interpretation:
+    tradeoffs: [anomaly_pass_through, normal_rejection, review_workload, automatic_coverage, selective_accuracy]
+    weighted_score: forbidden_without_real_operational_cost_model
+    numeric_acceptance_target: none_without_external_requirement
+    deployment_requires: explicit_operational_cost_and_risk_preference
+    single_metric_winner_claim: forbidden
+    lower_pass_through_alone: structural_subset_property_not_validation
+  evaluation:
+    phase4b: no_training_inference_replay_or_performance_evaluation
+    mvtec_test_public:
+      independent: false
+      reason: fully_inspected_in_phases_2c_3b_4a_before_rule_design
+      future_replay_requires: separate_human_authorization
+      mandatory_label: retrospective development analysis
+      permitted_claims: [implementation_verification, descriptive_development_metrics, development_review_workload]
+      prohibited_claims: [independent_validation, generalization, model_selection, production_performance]
+      tuning_weighting_thresholding_category_routing_from_public_results: forbidden
+    visa:
+      suitability: conditionally_feasible_not_yet_audited_or_reserved
+      source_repository: amazon-science/spot-diff
+      source_commit: 2a692ab575001cbde74d402d897a7286086c6199
+      split: split_csv/1cls.csv
+      dataset_release: VisA_20220922.tar
+      data_license: CC-BY-4.0
+      model_data: official_training_normals_only
+      calibration: disjoint_normal_holdout_reserved_before_any_fitting
+      normalization: fit_only_on_permitted_development_normals_before_threshold_freeze
+      test: untouched_until_single_confirmatory_evaluation_of_all_frozen_seed_pairs
+      triage_rule: unchanged_v1
+      model_adaptation: new_visa_protocols_and_thresholds_never_relabel_mvtec_artifacts
+      prerequisites:
+        - verify_license_release_split_checksums_and_train_normal_membership
+        - establish_access_history_and_sequester_test_assets_labels_and_results
+        - audit_duplicates_and_overlap_without_exposing_test_outcomes_to_developers
+        - review_and_freeze_holdout_fraction_algorithm_ids_and_minimum_sample_count
+        - freeze_training_preprocessing_weights_normalization_threshold_methods_and_dependencies
+        - reserve_disjoint_normalization_fit_and_threshold_calibration_sets_or_disclaim_exchangeable_coverage
+        - freeze_test_manifest_metrics_and_all_category_seed_settings_before_test_access
+        - hash_models_thresholds_and_prediction_manifest_before_label_join
+        - explicit_human_authorization_in_later_phase
+      insufficient_independence_or_samples: stop_no_test_borrowing_or_alternate_split_selection
+    mvtec_private:
+      authorization: separate_explicit_future_human_authorization
+      private_label_visibility: forbidden
+      prerequisite: official_mechanism_supports_three_way_counts_and_required_class_conditioned_metrics
+      current_documented_interface: anomaly_maps_and_segmentation_thresholds
+      triage_metric_support: unverified_do_not_assume
+      binary_or_map_encoding_of_review: forbidden
+    phase4c_authorized: false
+  fail_closed:
+    invalid_numeric_input: raise_no_decision
+    missing_evidence: raise_no_decision
+    seed_or_sample_mismatch: raise_no_decision
+    protocol_or_anchor_mismatch: stop
+    independent_data_unreservable: stop
+    public_label_tuning_or_category_rescue: stop
+    private_access_required: stop
+    claim_exceeds_evidence: stop

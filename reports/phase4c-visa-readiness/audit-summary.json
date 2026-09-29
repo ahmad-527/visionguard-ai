@@ -1,0 +1,151 @@
+{
+  "acquisition_sha256": "dd2becf0484ec8c4b2d908e06f4af28d8e58b6ec4c7649bc0b627343929cf233",
+  "allocation_counts": {
+    "candle": {
+      "calibration": 90,
+      "fit": 810
+    },
+    "capsules": {
+      "calibration": 54,
+      "fit": 488
+    },
+    "cashew": {
+      "calibration": 45,
+      "fit": 405
+    },
+    "chewinggum": {
+      "calibration": 45,
+      "fit": 408
+    },
+    "fryum": {
+      "calibration": 45,
+      "fit": 405
+    },
+    "macaroni1": {
+      "calibration": 90,
+      "fit": 810
+    },
+    "macaroni2": {
+      "calibration": 90,
+      "fit": 810
+    },
+    "pcb1": {
+      "calibration": 90,
+      "fit": 814
+    },
+    "pcb2": {
+      "calibration": 90,
+      "fit": 811
+    },
+    "pcb3": {
+      "calibration": 90,
+      "fit": 815
+    },
+    "pcb4": {
+      "calibration": 90,
+      "fit": 814
+    },
+    "pipe_fryum": {
+      "calibration": 45,
+      "fit": 405
+    }
+  },
+  "archive_sha256": "2eb8690c803ab37de0324772964100169ec8ba1fa3f7e94291c9ca673f40f362",
+  "category_count": 12,
+  "category_counts": {
+    "candle": {
+      "test_anomaly": 100,
+      "test_normal": 100,
+      "train_normal": 900
+    },
+    "capsules": {
+      "test_anomaly": 100,
+      "test_normal": 60,
+      "train_normal": 542
+    },
+    "cashew": {
+      "test_anomaly": 100,
+      "test_normal": 50,
+      "train_normal": 450
+    },
+    "chewinggum": {
+      "test_anomaly": 100,
+      "test_normal": 50,
+      "train_normal": 453
+    },
+    "fryum": {
+      "test_anomaly": 100,
+      "test_normal": 50,
+      "train_normal": 450
+    },
+    "macaroni1": {
+      "test_anomaly": 100,
+      "test_normal": 100,
+      "train_normal": 900
+    },
+    "macaroni2": {
+      "test_anomaly": 100,
+      "test_normal": 100,
+      "train_normal": 900
+    },
+    "pcb1": {
+      "test_anomaly": 100,
+      "test_normal": 100,
+      "train_normal": 904
+    },
+    "pcb2": {
+      "test_anomaly": 100,
+      "test_normal": 100,
+      "train_normal": 901
+    },
+    "pcb3": {
+      "test_anomaly": 100,
+      "test_normal": 101,
+      "train_normal": 905
+    },
+    "pcb4": {
+      "test_anomaly": 100,
+      "test_normal": 101,
+      "train_normal": 904
+    },
+    "pipe_fryum": {
+      "test_anomaly": 100,
+      "test_normal": 50,
+      "train_normal": 450
+    }
+  },
+  "decoded_image_count": 10821,
+  "decoded_mask_count": 1200,
+  "duplicates": {
+    "decoded": {
+      "fit_calibration_overlap_groups": 0,
+      "train_test_overlap_group_sha256": [],
+      "train_test_overlap_groups": 0,
+      "within_test_groups": 0,
+      "within_train_groups": 0
+    },
+    "file": {
+      "fit_calibration_overlap_groups": 0,
+      "train_test_overlap_group_sha256": [],
+      "train_test_overlap_groups": 0,
+      "within_test_groups": 0,
+      "within_train_groups": 0
+    },
+    "mask_decoded": {
+      "affected_samples": 0,
+      "duplicate_groups": 0
+    },
+    "mask_file": {
+      "affected_samples": 0,
+      "duplicate_groups": 0
+    }
+  },
+  "final_test_lock": "closed",
+  "inventory_sha256": "4c16ebb13a1546399a28dc1f41aebeb5dfb062ab0c7c9108cc5bfb541c94ccb2",
+  "issues": [],
+  "official_split_sha256": "a48557e6033318cb90556f706196bc9d247a776a23ea51aecee5a80dd0332995",
+  "sample_count": 10821,
+  "schema_version": 1,
+  "status": "passed",
+  "test_performance_evaluated": false
+}

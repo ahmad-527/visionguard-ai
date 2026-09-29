@@ -1,0 +1,13 @@
+{
+  "audit_sha256": "06e227bb5d2cd26f38010b2c304c62f14f383a81c64f5b2e4c48f1019128f58f",
+  "final_test_lock": "closed",
+  "membership_sha256": "10e7a6c898fb18fbd1b93a115a5a94f3e2ebcecb7a1796d99d8c1e6f3567ce0b",
+  "phase4b_merge": "c5bc3f8269a2b507c57a6663360c2846f90922da",
+  "phase4d_authorized": false,
+  "predata_commit": "c019f5515ee7692b42cda5bcc0595a4d3f00ec1e",
+  "protocol_fingerprints": {
+    "efficientad": "78b27feeee044f560287a1ce45000800452344190e7b68003eefb3e2e853f1f9",
+    "patchcore": "3ffcdc37cf3117d319da3e970383c6d0bdb52e2cd42dca87ad3161c5a9bc3191"
+  },
+  "schema_version": 1
+}

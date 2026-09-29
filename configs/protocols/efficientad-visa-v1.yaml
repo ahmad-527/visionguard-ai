@@ -1,0 +1,315 @@
+schema_version: 1
+protocol:
+  id: efficientad-visa-v1
+  status: frozen_for_review
+  predata_design_fingerprint: c73c680bbcc3bff2da688d49f36b3bc34df2a3a74aa5f83c3efc21b471ffb891
+  parent_protocol_fingerprint: e9d6a66e7a52f2993e984ec20278c4ca4c710198cc466df15f947adff763f69f
+  scientific:
+    model:
+      implementation: anomalib
+      implementation_version: 2.6.0
+      implementation_revision: 3759687e76395c4d6d239552d3bf6d72e003da78
+      algorithm: efficient_ad
+      variant: pdn_small
+      rejected_variant: pdn_medium
+      teacher_out_channels: 384
+      padding: false
+      pad_maps: true
+      teacher_pretrained: true
+      teacher_weight_filename: pretrained_teacher_small.pth
+      teacher_weight_sha256: a16ded54719674435576aee641152616a640dfc6dc2b83115dab6e226610ae7d
+      teacher_weight_archive_sha256: c09aeaa2b33f244b3261a5efdaeae8f8284a949470a4c5a526c61275fe62684a
+      teacher_weight_source: https://github.com/open-edge-platform/anomalib/releases/download/efficientad_pretrained_weights/efficientad_pretrained_weights.zip
+      teacher_weight_license: Apache-2.0
+      anomaly_map_combination: equal_mean_student_teacher_and_student_autoencoder
+    preprocessing:
+      decoder: pillow_via_torchvision_default_loader
+      color_mode: RGB
+      resize:
+      - 256
+      - 256
+      resize_interpolation: bilinear
+      resize_antialias: true
+      aspect_ratio: distort_to_exact_size
+      center_crop: null
+      tensor_layout: CHW
+      tensor_dtype: float32
+      tensor_range:
+      - 0.0
+      - 1.0
+      model_internal_normalization_mean:
+      - 0.485
+      - 0.456
+      - 0.406
+      model_internal_normalization_std:
+      - 0.229
+      - 0.224
+      - 0.225
+      train_augmentation:
+        autoencoder_student_branch: one_of_brightness_contrast_saturation_uniform_0.8_1.2
+        penalty_stream_random_grayscale_probability: 0.3
+      inference_augmentation: none
+      anomaly_map_internal_interpolation: bilinear
+      anomaly_map_internal_align_corners: false
+      anomaly_map_restoration_interpolation: bilinear
+      anomaly_map_restoration_align_corners: false
+      anomaly_map_output_coordinates: original_image_height_width
+    training:
+      optimizer: adam
+      learning_rate: 0.0001
+      weight_decay: 1.0e-05
+      scheduler: step_lr
+      scheduler_step_fraction: 0.95
+      scheduler_gamma: 0.1
+      max_steps: 70000
+      max_epochs: -1
+      batch_size: 1
+      accumulate_grad_batches: 1
+      gradient_clipping: none
+      precision: float32
+      mixed_precision: false
+      checkpoint_selection: final_step
+      early_stopping: false
+      teacher_behavior: frozen_pretrained_channel_standardized
+      student_initialization: pytorch_default_under_seed
+      autoencoder_initialization: pytorch_default_under_seed
+      hard_feature_quantile: 0.999
+      loss_combination: sum_student_teacher_autoencoder_student_autoencoder
+      device: cuda
+      num_workers: 0
+      shuffle_train: true
+    auxiliary_data:
+      required: true
+      role: student_penalty_loss
+      dataset: imagenette2
+      publisher: fastai
+      source: https://s3.amazonaws.com/fast-ai-imageclas/imagenette2.tgz
+      archive_filename: imagenette2.tgz
+      archive_sha256: 6cbfac238434d89fe99e651496f0812ebc7a10fa62bd42d6874042bf01de4efd
+      content_origin: ImageNet_subset
+      use_restriction: noncommercial_research
+      redistribution: prohibited_by_visionguard
+      batch_size: 1
+      shuffle: true
+      resize:
+      - 512
+      - 512
+      center_crop:
+      - 256
+      - 256
+      random_grayscale_probability: 0.3
+    internal_map_normalization:
+      required: true
+      source_split: fit
+      normal_only: true
+      student_teacher_lower_quantile: 0.9
+      student_teacher_upper_quantile: 0.995
+      student_autoencoder_lower_quantile: 0.9
+      student_autoencoder_upper_quantile: 0.995
+      scale: 0.1
+    calibration:
+      normal_only: true
+      split: calibration
+      comparison: score_strictly_greater_than_threshold
+      image:
+        method: highest_order_statistic
+        calibration_unit: normalized_image_anomaly_score
+        minimum_samples: 19
+      pixel:
+        method: highest_order_statistic
+        calibration_unit: per_image_maximum_normalized_restored_map_score
+        minimum_samples: 19
+    metrics:
+      official_ranking:
+        name: au_pro
+        fpr_limit: 0.05
+        ground_truth_connectivity: 8
+        representation: original_coordinate_float16_tiff
+        category_aggregation: unweighted_arithmetic_mean
+      official_thresholded:
+        names:
+        - pixel_f1
+        - image_f1
+        threshold_source: calibration_normal_only
+        category_aggregation: unweighted_arithmetic_mean
+      visionguard_supplemental:
+      - image_auroc
+    reproducibility:
+      seeds:
+      - 42
+      - 123
+      - 2026
+      report_every_seed: true
+      deterministic_algorithms: true
+      cudnn_benchmark: false
+      cublas_workspace_config: :4096:8
+      seed_python: true
+      seed_numpy: true
+      seed_torch: true
+      seed_cuda: true
+      seed_dataloader: true
+    artifacts:
+      schema_version: 3
+      checkpoint_identity: canonical_tensor_sha256
+      anomaly_map_identity: sha256
+      predictions_order: lexical_portable_sample_id
+    dependencies:
+      python:
+      - 3.11
+      - 3.12
+      anomalib: 2.6.0
+      lightning: 2.6.5
+      torch: 2.9.1
+      torchvision: 0.24.1
+      cuda_runtime: '12.6'
+  implementation_source_sha256:
+    src/visionguard/visa.py: a34d0628dedbcfd091c4e3e9c502897440a1d5b5a77afcbaf63ce87df1085378
+    src/visionguard/visa_development.py: ac1417863babca7cf9faecfcdf6bcf823d793fd68aa95c051f38cea88cf0ee44
+    src/visionguard/visa_smoke.py: 1fad20f0e71763232f330c3bdcb0cefb31fa1ee76f336ce9dd759fc83f2b4e8a
+    src/visionguard/efficientad_benchmark.py: 0f2fc1201d895fa91c2c22af1d0e5cf9ae893f0567db91b95718bbfda03a96bd
+    src/visionguard/calibration.py: 43464a87a162d17eeb4bbc9af83e25db8c12469f7fcf7ae1522860b3da2c5519
+    src/visionguard/preprocessing.py: ea865d1721718913fa7f583e8aa03e3f21053f7710ad0da09d0f0d4de58e1a27
+    src/visionguard/metrics.py: c8da85f2e3cc9dfabff0b0e6cb2f85dab358c7e0151306c0a1c4f9077ea51a87
+    src/visionguard/benchmark_metrics.py: c128c64378fe14a507a2df7b2b08ae021d44d16290ec647070a34749a8258347
+    src/visionguard/triage.py: 855a4f37c0c6bac15fc89612596ba3951d0c9bb02bce78efa8163cd4ef5b18d9
+    src/visionguard/triage_metrics.py: 916cb95c7db1bcc7bca8674c193f65cce8dcaa929f274b4f48a27b3a02c2fea1
+  dataset:
+    release: VisA_20220922.tar
+    archive_sha256: 2eb8690c803ab37de0324772964100169ec8ba1fa3f7e94291c9ca673f40f362
+    official_split_sha256: a48557e6033318cb90556f706196bc9d247a776a23ea51aecee5a80dd0332995
+    categories:
+    - candle
+    - capsules
+    - cashew
+    - chewinggum
+    - fryum
+    - macaroni1
+    - macaroni2
+    - pcb1
+    - pcb2
+    - pcb3
+    - pcb4
+    - pipe_fryum
+    source:
+      commit: 2a692ab575001cbde74d402d897a7286086c6199
+      files:
+        LICENSE-DATASET:
+          git_blob_sha1: 4ea99c213c5c0c005ae4e80df8e52169d06896ec
+          sha256: 9e5f1b3c610b9c2da5c313bf81d577a7d1acec686bdb0384edefa6df0f90cd94
+          size_bytes: 18656
+          url: https://raw.githubusercontent.com/amazon-science/spot-diff/2a692ab575001cbde74d402d897a7286086c6199/LICENSE-DATASET
+        README.md:
+          git_blob_sha1: ac656d6626ae75a96d57311b811fb43f58a60400
+          sha256: 803d1a86c80fcdebc63dfabd041f78336c433ca635b735668aadb24bfc124917
+          size_bytes: 5470
+          url: https://raw.githubusercontent.com/amazon-science/spot-diff/2a692ab575001cbde74d402d897a7286086c6199/README.md
+        split_csv/1cls.csv:
+          git_blob_sha1: b92269792db47fe3f7de6a67e29c7bb04acee0f2
+          sha256: a48557e6033318cb90556f706196bc9d247a776a23ea51aecee5a80dd0332995
+          size_bytes: 660329
+          url: https://raw.githubusercontent.com/amazon-science/spot-diff/2a692ab575001cbde74d402d897a7286086c6199/split_csv/1cls.csv
+        utils/id2class.py:
+          git_blob_sha1: 9b4f9fb28bfd84bab5af35ebf412497594375389
+          sha256: 4b862131cb8c080f864815fb16ab906165691618fd4734edf35131b759eb25e3
+          size_bytes: 2493
+          url: https://raw.githubusercontent.com/amazon-science/spot-diff/2a692ab575001cbde74d402d897a7286086c6199/utils/id2class.py
+        utils/prepare_data.py:
+          git_blob_sha1: 3627dcae7fc80eed767a6ad80da2acfb7e8c2f85
+          sha256: bb87854a2cb4713bb47970dec28ebd2e002b2e9e7c2e5b6ff91db700cac89e6f
+          size_bytes: 5174
+          url: https://raw.githubusercontent.com/amazon-science/spot-diff/2a692ab575001cbde74d402d897a7286086c6199/utils/prepare_data.py
+      git_tree_request_revision: 2a692ab575001cbde74d402d897a7286086c6199
+      repository: amazon-science/spot-diff
+    audit_sha256: 06e227bb5d2cd26f38010b2c304c62f14f383a81c64f5b2e4c48f1019128f58f
+    membership_sha256: 10e7a6c898fb18fbd1b93a115a5a94f3e2ebcecb7a1796d99d8c1e6f3567ce0b
+    allocation:
+      id: visa-normal-sha256-90-10-v1
+      population: official_train_normal_only
+      identity: exact_posix_relative_image_path_from_verified_official_csv
+      rank_key: sha256_utf8_salt_NUL_category_NUL_identity_then_identity_tiebreak
+      salt: visionguard-visa-development-v1
+      calibration_count: floor_train_count_divided_by_10
+      calibration_members: first_ranked_samples
+      fit_members: all_remaining_train_normals
+      minimum_calibration_count: 19
+      shared_across_models_and_seeds: true
+      duplicate_content_across_fit_and_calibration: stop
+      membership_freeze: portable_ids_and_content_hashes_after_integrity_gate
+    development_roles:
+    - fit
+    - calibration
+    sealed_test_role: sealed_test
+    test_sequestration: separate_root_no_training_label_or_mask_access
+  seeds:
+  - 42
+  - 123
+  - 2026
+  triage:
+    id: visionguard-dual-model-triage-v1
+    fingerprint: 94442ab3121bccd392e3805b6134710cc6e8c95e8f17b8eccda288f8b1bd672d
+    same_seed_only: true
+    metrics:
+      notation: N_all_A_anomalous_G_normal_P_pass_V_review_R_reject_suffix_denotes_true_class
+      rates:
+        review_rate: V/N
+        automatic_decision_coverage: (P+R)/N
+        selective_accuracy: (P_G+R_A)/(P+R)
+        anomaly_pass_through_rate: P_A/A
+        normal_reject_rate: R_G/G
+        anomaly_review_capture: V_A/A
+        normal_review_rate: V_G/G
+        reject_precision: R_A/R
+        pass_negative_predictive_value: P_G/P
+      decision_counts:
+      - PASS
+      - REVIEW
+      - REJECT
+      disagreement_directions:
+      - patchcore_anomalous_efficientad_normal
+      - patchcore_normal_efficientad_anomalous
+      class_counts:
+      - normal
+      - anomalous
+      preserve_numerator_denominator: true
+      zero_denominator: null_with_zero_denominator_reason_never_zero_imputation
+      binary_f1_for_triage: not_defined
+      reporting:
+        cells: every_category_and_seed_and_true_class
+        per_seed_micro: pool_category_counts_then_compute_rates
+        per_seed_macro: unweighted_mean_of_all_category_rates
+        across_seeds: arithmetic_mean_and_sample_standard_deviation_of_seed_rates
+        incomplete_macro: null_with_missing_category_or_seed_list
+        seed_pooling_as_independent_samples: forbidden
+        individual_comparators: both_models_same_samples_seed_and_frozen_thresholds
+        human_review_outcome: unmeasured_no_assumed_perfect_reviewer
+        operational_prevalence: unknown_precision_and_npv_are_dataset_dependent
+  model_metric_interpretation: prespecified_visionguard_metrics_not_official_visa_leaderboard_claim
+  before_test_changes:
+    inherit_scientific_settings_from: efficientad-mvtecad2-v1
+    parent_fingerprint: e9d6a66e7a52f2993e984ec20278c4ca4c710198cc466df15f947adff763f69f
+    max_steps: 70000
+    changes: dataset_identity_and_normalization_source_role_only
+    normalization_source: fitting_normals_after_final_training_step
+    normalization_rationale: keep_threshold_calibration_normals_independent_of_all_model_and_normalization_fitting
+    normalization_algorithm: unchanged_parent_quantiles_and_scale
+  artifacts:
+    schema_version: 1
+    predictions: lexical_portable_sample_id
+    maps: original_coordinate_float16_tiff_and_frozen_binary_png_separate_models
+    image_score: finite_float_own_model_scale
+    thresholds: normal_calibration_only
+    checkpoint: file_and_canonical_tensor_sha256
+    attempts: immutable
+    provenance:
+    - implementation_commit
+    - source_hashes
+    - environment
+    - hardware
+    - protocol_fingerprint
+    - audit_sha256
+    - membership_sha256
+    - category
+    - seed
+  failure_policy: stop_on_identity_integrity_nonfinite_or_hardware_failure_preserve_attempt
+  final_test_authorization: closed_by_default_requires_separate_reviewed_execution_authorization
+  partial_matrix_complete_claim: forbidden

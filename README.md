@@ -2,9 +2,10 @@
 
 Production-grade deep learning platform for industrial visual anomaly detection, defect localization, benchmarking, and real-time quality inspection.
 
-> **Project status:** Phase 4B — dual-model triage protocol frozen for review;
-> no hybrid performance evaluation has been performed. The protocol preserves
-> PASS / REVIEW / REJECT and requires future independent evidence.
+> **Project status:** Phase 4C — VisA protocols frozen for review; integrity audit
+> and normal-only memory/restart engineering acceptance passed. No VisA test performance or
+> hybrid evaluation has been performed. Final-test lock CLOSED; full execution
+> still requires hardware/readiness review and separate authorization.
 
 ## Mission
 
@@ -79,7 +80,17 @@ The [Phase 4B triage protocol](docs/phase-4b-hybrid-triage-protocol.md) freezes
 agreement-based automatic decisions and REVIEW on disagreement. MVTec AD 2
 `test_public` has already been inspected: any future replay is **retrospective
 development analysis**, not independent validation. No hybrid improvement or
-production readiness is claimed; Phase 4C requires separate human review.
+production readiness is claimed.
+
+The [Phase 4C readiness record](docs/phase-4c-visa-independent-evaluation-readiness.md)
+binds the official VisA release, audit, normal-only membership and new model
+protocols. The [Phase 4D draft](docs/planning/phase-4d-visa-confirmatory-execution-plan.md)
+is **not authorized for execution**. Largest-category PatchCore fitting and exact
+restart checks passed. Human access-history declaration: **UNKNOWN**;
+independent reservation of VisA test evidence: **NOT ESTABLISHED**. Any future
+authorized evaluation must disclose this limitation unless credibly resolved
+before execution; it is not currently independent confirmatory evidence.
+Engineering evidence remains valid; future execution requires human review.
 
 ## Development setup
 

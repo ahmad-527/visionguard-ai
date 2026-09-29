@@ -1,0 +1,57 @@
+{
+  "archive": {
+    "observed_sha256": "2eb8690c803ab37de0324772964100169ec8ba1fa3f7e94291c9ca673f40f362",
+    "release": "VisA_20220922.tar",
+    "secondary_expected_sha256": "2eb8690c803ab37de0324772964100169ec8ba1fa3f7e94291c9ca673f40f362",
+    "size_bytes": 1929840640,
+    "source": "https://amazon-visual-anomaly.s3.us-west-2.amazonaws.com/VisA_20220922.tar",
+    "status": "verified"
+  },
+  "audit_schema_version": 1,
+  "dataset": "VisA",
+  "extraction": {
+    "archive_sha256": "2eb8690c803ab37de0324772964100169ec8ba1fa3f7e94291c9ca673f40f362",
+    "extracted_bytes": 1920559633,
+    "file_count": 12037,
+    "status": "completed"
+  },
+  "license": "CC-BY-4.0",
+  "schema_version": 1,
+  "source": {
+    "commit": "2a692ab575001cbde74d402d897a7286086c6199",
+    "files": {
+      "LICENSE-DATASET": {
+        "git_blob_sha1": "4ea99c213c5c0c005ae4e80df8e52169d06896ec",
+        "sha256": "9e5f1b3c610b9c2da5c313bf81d577a7d1acec686bdb0384edefa6df0f90cd94",
+        "size_bytes": 18656,
+        "url": "https://raw.githubusercontent.com/amazon-science/spot-diff/2a692ab575001cbde74d402d897a7286086c6199/LICENSE-DATASET"
+      },
+      "README.md": {
+        "git_blob_sha1": "ac656d6626ae75a96d57311b811fb43f58a60400",
+        "sha256": "803d1a86c80fcdebc63dfabd041f78336c433ca635b735668aadb24bfc124917",
+        "size_bytes": 5470,
+        "url": "https://raw.githubusercontent.com/amazon-science/spot-diff/2a692ab575001cbde74d402d897a7286086c6199/README.md"
+      },
+      "split_csv/1cls.csv": {
+        "git_blob_sha1": "b92269792db47fe3f7de6a67e29c7bb04acee0f2",
+        "sha256": "a48557e6033318cb90556f706196bc9d247a776a23ea51aecee5a80dd0332995",
+        "size_bytes": 660329,
+        "url": "https://raw.githubusercontent.com/amazon-science/spot-diff/2a692ab575001cbde74d402d897a7286086c6199/split_csv/1cls.csv"
+      },
+      "utils/id2class.py": {
+        "git_blob_sha1": "9b4f9fb28bfd84bab5af35ebf412497594375389",
+        "sha256": "4b862131cb8c080f864815fb16ab906165691618fd4734edf35131b759eb25e3",
+        "size_bytes": 2493,
+        "url": "https://raw.githubusercontent.com/amazon-science/spot-diff/2a692ab575001cbde74d402d897a7286086c6199/utils/id2class.py"
+      },
+      "utils/prepare_data.py": {
+        "git_blob_sha1": "3627dcae7fc80eed767a6ad80da2acfb7e8c2f85",
+        "sha256": "bb87854a2cb4713bb47970dec28ebd2e002b2e9e7c2e5b6ff91db700cac89e6f",
+        "size_bytes": 5174,
+        "url": "https://raw.githubusercontent.com/amazon-science/spot-diff/2a692ab575001cbde74d402d897a7286086c6199/utils/prepare_data.py"
+      }
+    },
+    "git_tree_request_revision": "2a692ab575001cbde74d402d897a7286086c6199",
+    "repository": "amazon-science/spot-diff"
+  }
+}

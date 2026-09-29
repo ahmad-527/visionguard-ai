@@ -3,11 +3,28 @@
 from __future__ import annotations
 
 import json
+import time
 from copy import deepcopy
 from pathlib import Path
 
 from visionguard.visa import safe_asset
 from visionguard.visa_acquire import VisaIntegrityError, atomic_json, sha256_file
+
+
+def publish_journal(path: Path, document: dict) -> None:
+    """Bound Windows sharing races without treating an uncommitted chunk as done.
+
+    Readers/sync clients can briefly deny replace. Retry identical metadata only;
+    permanent permission failures still surface and retain the last valid journal.
+    """
+    for attempt in range(6):
+        try:
+            atomic_json(path, document)
+            return
+        except PermissionError:
+            if attempt == 5:
+                raise
+            time.sleep(0.1 * 2**attempt)
 
 
 class EmbeddingJournal:
@@ -48,14 +65,14 @@ class EmbeddingJournal:
             "attempt": self.relative,
             "parent": resume,
         }
-        atomic_json(self.directory / "embedding-origin.json", origin)
+        publish_journal(self.directory / "embedding-origin.json", origin)
         document = {
             **origin,
             "origin_sha256": sha256_file(self.directory / "embedding-origin.json"),
             "chunks": [] if prior is None else prior["chunks"],
             "next_index": 0 if prior is None else prior["next_index"],
         }
-        atomic_json(self.path, document)
+        publish_journal(self.path, document)
         return document
 
     def validate(self, document: dict | None = None) -> dict:
@@ -113,7 +130,7 @@ class EmbeddingJournal:
             }
         )
         document["next_index"] = index + 1
-        atomic_json(self.path, document)
+        publish_journal(self.path, document)
         return document
 
     def receipt(self) -> dict:

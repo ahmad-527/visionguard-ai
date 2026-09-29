@@ -89,3 +89,40 @@ def test_journal_and_origin_tampering(journal):
     with pytest.raises(VisaIntegrityError, match="hash"):
         second.create(receipt)
     assert sha256_file(journal.path) != receipt["sha256"]
+
+
+def test_transient_replace_retry_is_bounded_and_identical(tmp_path, monkeypatch):
+    import visionguard.embedding_journal as module
+
+    calls = []
+
+    def write(path, value):
+        calls.append((path, value.copy()))
+        if len(calls) < 3:
+            raise PermissionError("synthetic Windows sharing race")
+        atomic_json(path, value)
+
+    monkeypatch.setattr(module, "atomic_json", write)
+    monkeypatch.setattr(module.time, "sleep", lambda _: None)
+    target = tmp_path / "journal.json"
+    module.publish_journal(target, {"synthetic": True})
+    assert len(calls) == 3
+    assert all(item == calls[0] for item in calls)
+
+
+def test_permanent_replace_failure_does_not_claim_completion(tmp_path, monkeypatch):
+    import visionguard.embedding_journal as module
+
+    count = []
+
+    def denied(*_):
+        count.append(1)
+        raise PermissionError("synthetic persistent denial")
+
+    monkeypatch.setattr(module, "atomic_json", denied)
+    monkeypatch.setattr(module.time, "sleep", lambda _: None)
+    target = tmp_path / "journal.json"
+    with pytest.raises(PermissionError):
+        module.publish_journal(target, {"synthetic": True})
+    assert len(count) == 6
+    assert not target.exists()

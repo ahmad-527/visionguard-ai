@@ -38,6 +38,11 @@ visionguard-repeatability-compare = "visionguard.repeatability:main"
 visionguard-efficientad-smoke = "visionguard.efficientad_smoke:main"
 visionguard-efficientad-benchmark = "visionguard.efficientad_benchmark:main"
 visionguard-comparative-analysis = "visionguard.comparative_analysis:main"
+visionguard-visa-acquire = "visionguard.visa_acquire:main"
+visionguard-visa-audit = "visionguard.visa_audit:main"
+visionguard-visa-plan = "visionguard.visa_execution:main"
+visionguard-visa-smoke = "visionguard.visa_smoke:main"
+visionguard-visa-protocol = "visionguard.visa_protocol:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/visionguard"]

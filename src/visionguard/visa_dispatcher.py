@@ -4,9 +4,11 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shutil
 import subprocess
 import sys
+from datetime import UTC, datetime
 from pathlib import Path
 
 from visionguard.embedding_journal import EmbeddingJournal, publish_journal
@@ -363,6 +365,16 @@ def main(argv=None):
                 ],
                 stdout=log,
                 stderr=subprocess.STDOUT,
+            )
+            atomic_json(
+                directory / "worker-process.json",
+                {
+                    "parent_pid": os.getpid(),
+                    "worker_pid": worker.pid,
+                    "started_at": datetime.now(UTC).isoformat(),
+                    "request_sha256": sha256_file(directory / "request.json"),
+                    "purpose": identity["scope"]["purpose"],
+                },
             )
             try:
                 code = worker.wait()

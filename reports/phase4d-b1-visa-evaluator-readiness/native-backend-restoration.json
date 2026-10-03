@@ -1,0 +1,19 @@
+{
+  "evidence_class": "CPU_development_checkpoint_restoration_not_inference",
+  "category": "candle",
+  "seed": 42,
+  "patchcore_canonical_state_sha256": "db1eaeff9786d65ed013981363787ce742dec073f9b5bee9208ce20416e7f575",
+  "efficientad_canonical_state_sha256": "6de858deebce5527dcac130e674b0cb3e0e41dc95f9385e317566082a2c46e8b",
+  "canonical_state_match": "bitwise_exact_before_and_after_strict_native_loading",
+  "training": false,
+  "requires_grad": false,
+  "model_inference_performed": false,
+  "test_asset_access": false,
+  "native_source_sha256": {
+    "anomalib/models/components/base/dynamic_buffer.py": "ef214c097f6e674cbb2eb4e842d2937053ede7fd39cb3d05928065b74a99eb11",
+    "anomalib/models/components/feature_extractors/timm.py": "36b617fa1404cb34ef47e8544bb2d6363b77d708b54bb35d52f472e85aa93524",
+    "anomalib/models/image/efficient_ad/torch_model.py": "8f80c2db5e546e5209f105c757d8c88c70c48e86bcf1d036b797fff88be3bd08",
+    "anomalib/models/image/patchcore/anomaly_map.py": "ca1d8bebad615dec0b1fdbd2651f7a8ba3200b175082bceb271e2ff2148fd45a",
+    "anomalib/models/image/patchcore/torch_model.py": "a5e5bc1ed22ed86db477000092e8e628b0c02a99cdd6ec6789c0ab8b924aaba9"
+  }
+}

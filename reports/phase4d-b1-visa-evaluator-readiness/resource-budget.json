@@ -1,0 +1,20 @@
+{
+  "assumed_maximum_height": 1536,
+  "assumed_maximum_width": 1536,
+  "counts_source": "previously_committed_aggregate_audit_only",
+  "dimensions_measured": false,
+  "estimated_retained_bytes": 92739993600,
+  "evidence_class": "calculated_capacity_scenario_not_inference_measurement",
+  "file_and_manifest_allowance_bytes": 925630464,
+  "future_capacity_gate_satisfied_now": false,
+  "future_preflight": "separate_B2_authorization_required_actual_dimensions_and_disk_budget_checked_before_scoring",
+  "gpu_workloads_at_once": 1,
+  "latency_measured": false,
+  "map_payload_bytes": 91814363136,
+  "model_image_calls": 12972,
+  "observed_local_free_bytes": 116582596608,
+  "required_free_bytes": 158913789952,
+  "run_budget_bytes": 137438953472,
+  "safety_floor_bytes": 21474836480,
+  "sample_count": 2162
+}

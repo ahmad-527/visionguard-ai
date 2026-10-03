@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "protocol_id": "visionguard-heldout-visa-evaluator-v1",
+  "phase": "4D-B1_ENGINEERING_ONLY",
+  "development_merge": "ab6f47402e11ae55c835ba7323c681e995ef4082",
+  "development_implementation": "cca5e47ec8c3f68adfa6c90e17a17770b48049d0",
+  "development_execution_fingerprint": "31a5b53d91bf7f609b5dfa3a97b87c4c6617a767d9096fa845f774a5f9bfefc3",
+  "development_freeze_sha256": "d75712cad7fcfa9309c12882d869db65627e7c325723c48459ef8e1da90be061",
+  "dataset_audit_sha256": "06e227bb5d2cd26f38010b2c304c62f14f383a81c64f5b2e4c48f1019128f58f",
+  "membership_sha256": "10e7a6c898fb18fbd1b93a115a5a94f3e2ebcecb7a1796d99d8c1e6f3567ce0b",
+  "model_protocol_fingerprints": {
+    "patchcore": "3ffcdc37cf3117d319da3e970383c6d0bdb52e2cd42dca87ad3161c5a9bc3191",
+    "efficientad": "78b27feeee044f560287a1ce45000800452344190e7b68003eefb3e2e853f1f9"
+  },
+  "triage_fingerprint": "94442ab3121bccd392e3805b6134710cc6e8c95e8f17b8eccda288f8b1bd672d",
+  "categories": ["candle", "capsules", "cashew", "chewinggum", "fryum", "macaroni1", "macaroni2", "pcb1", "pcb2", "pcb3", "pcb4", "pipe_fryum"],
+  "seeds": [42, 123, 2026],
+  "matrix": "exactly72models_and36_same_category_same_seed_pairs_no_missing_substitution",
+  "execution": {
+    "order": "category_then_seed_then_model_patchcore_efficientad_one_gpu_workload",
+    "batch_size": 1,
+    "membership_order": "future_authorized_official_split_category_test_relative_POSIX_image_path_lexicographic_same_order_all_seeds_models_no_selection",
+    "model_settings": "immutable_frozen_development_final_checkpoint_only",
+    "inference": "eval_no_grad_no_optimizer_no_calibration_no_asset_download_no_rng_restore_from_training",
+    "preprocessing": "exact_parent_model_RGB_resize256_bilinear_antialias_and_own_normalization",
+    "restoration": "original_coordinates_bilinear_align_corners_false",
+    "image_score": "native_pred_score_own_scale_no_rescaling",
+    "maps": "float32_restored_strict_pixel_threshold_before_float16_continuous_export",
+    "finite_policy": "reject_nonfinite_scores_maps_thresholds_and_float16_overflow",
+    "labels_masks": "binary_mask_original_dimensions_normal_empty_anomaly_nonempty_no_resizing_truth"
+  },
+  "metrics": {
+    "ranking": ["image_auroc", "au_pro_0.05"],
+    "ranking_details": "AUROC_MannWhitney_tie_half_credit_AUPRO_8connected_region_equal_weights_exact_float16_ties_trapezoid_interpolated_FPR0.05_normalized",
+    "threshold_dependent": ["TP", "FP", "TN", "FN", "sensitivity", "specificity", "precision", "image_f1", "pixel_f1", "pixel_precision", "pixel_sensitivity", "pixel_specificity"],
+    "pixel_auroc": "supplemental_diagnostic_not_primary",
+    "image_score_distributions": "own_scale_by_true_class_count_min_max_mean_population_std_linear_index_nminus1_quartiles_no_cross_model_pooling",
+    "thresholds": "strict_score_gt_own_frozen_normal_calibration_threshold_equality_normal",
+    "undefined": "null_value_explicit_reason_and_denominator_no_zero_fill_no_silent_group_omission"
+  },
+  "triage": {
+    "normal_normal": "PASS",
+    "anomalous_anomalous": "REJECT",
+    "normal_anomalous": "REVIEW",
+    "anomalous_normal": "REVIEW",
+    "review": "first_class_never_binary_or_discarded",
+    "rates": ["review_rate", "automatic_decision_coverage", "selective_accuracy", "anomaly_pass_through_rate", "normal_reject_rate", "anomaly_review_capture", "normal_review_rate", "reject_precision", "pass_negative_predictive_value"],
+    "counts": "PASS_REVIEW_REJECT_by_class_and_both_disagreement_directions",
+    "localization": "both_model_maps_preserved_no_union_intersection_average_fusion_morphology"
+  },
+  "aggregation": {
+    "primary": "category_unweighted_macro_within_seed_then3seed_mean_sample_std_ddof1",
+    "paired_comparison": "PatchCore_minus_EfficientAD_same_category_seed_membership_metric_before_macro",
+    "secondary": "within_seed_pooled_confusion_and_triage_counts_explicitly_micro",
+    "ranking_pooling": "forbidden_across_categories_models_and_seeds",
+    "undefined_macro": "any_undefined_cell_makes_macro_undefined_report_defined_count",
+    "seeds": "report_all_three_no_best_seed_no_treating_repeated_images_as_independent_observations",
+    "statistical_claims": "descriptive_only_no_pvalues_CIs_significance_or_independence_claim_from3seeds"
+  },
+  "future_output_schema": {
+    "machine_schema": "configs/schemas/visa-evaluator-report-v1.json; B1 synthetic evidence class; any future real-evidence extension requires separately reviewed B2 gate/labeling",
+    "sample_rows": "ordered_ID_category_seed_label_shape_native_scores_own_binary_flags_three_way_outcome_artifact_hashes",
+    "cell": "sample_count_membership_hash_both_model_hashes_thresholds_image_pixel_metrics_and_triage_counts_rates",
+    "aggregate": "all36paired_cells_per_seed_macro_micro_counts_paired_deltas_3seed_descriptive_stats",
+    "manifest": "evaluator_fp_code_environment_hardware_development_freeze_authorization_receipt_input_membership_artifact_hashes_stage_attempts_access_history",
+    "completion": "all72models_exact_membership_no_errors_hash_verified_atomic_manifest_no_partial_claim"
+  },
+  "failure_policy": "stop_and_preserve_immutable_attempt_partial_not_complete_no_skip_substitute_retry_hardware_or_mutate_models",
+  "repeatability": "recompute_reducers_from_saved_rows_maps_twice_canonical_JSON_identity_no_new_test_inference_no_posthoc_tolerance",
+  "retention": {
+    "maps": "lossless_float16_TIFF_and_binary_PNG_per_model_per_seed_all_images_local_ignored",
+    "scope": "one_cell_at_a_time_stream_metrics_no_full_resolution_matrix_in_RAM",
+    "compact": "JSON_counts_metrics_model_protocol_membership_artifact_hashes_and_manifest_in_Git_no_images_models_maps_or_secrets",
+    "capacity": "predeclared_from_committed_counts_and_dimension_assumptions_no_test_enumeration; actual_B2_preflight_separate_authorization; stop_before_writes_if_budget_insufficient",
+    "safety_floor_bytes": 21474836480,
+    "maximum_retained_run_budget_bytes": 137438953472,
+    "compression": "budget_uncompressed_no_assumed_compression_or_midrun_deletion"
+  },
+  "gate": {
+    "B1": "permanently_closed_even_matching_identities_or_supplied_human_text",
+    "expected_identity": "canonical_repository_freeze_loaded_independently_not_supplied_as_expected",
+    "no_test_io": "no_test_root_loader_or_dataset_enumeration_hash_decode_inference_metrics_in_B1",
+    "B2": "separate_human_review_and_explicit_authorization_required_no_auto_transition"
+  },
+  "historical_access": "UNKNOWN",
+  "independent_reservation": "NOT ESTABLISHED",
+  "report_title": "Held-out VisA evaluation with historical access independence unverified",
+  "prohibited_claims": ["independent_confirmatory_validation", "production_ready", "proven_generalization", "hybrid_better_from_one_metric"],
+  "negative_history": "retain_two_failed_one_interrupted_Phase4D-A_attempts_migrations_unknown_operational_causes"
+}

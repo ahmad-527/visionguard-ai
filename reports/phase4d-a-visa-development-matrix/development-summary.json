@@ -1,0 +1,30 @@
+{
+  "active_recorded_seconds": 312231.4606580007,
+  "active_time_caveat": "model-specific recorded fit/training timers, not end-to-end active time or speed comparison",
+  "counts": {
+    "completed_total": 72,
+    "efficientad": {
+      "active": 0,
+      "completed": 36,
+      "failed": 0,
+      "interrupted": 0,
+      "pending": 0
+    },
+    "expected_total": 72,
+    "patchcore": {
+      "active": 0,
+      "completed": 36,
+      "failed": 0,
+      "interrupted": 0,
+      "pending": 0
+    }
+  },
+  "elapsed_wall_seconds": 337645.039824,
+  "failed_attempts": 2,
+  "final_test_lock": "closed",
+  "freeze_sha256": "d75712cad7fcfa9309c12882d869db65627e7c325723c48459ef8e1da90be061",
+  "interrupted_attempts": 1,
+  "retained_output_bytes": 21941903734,
+  "status": "72_development_cells_validated",
+  "test_performance_evaluated": false
+}

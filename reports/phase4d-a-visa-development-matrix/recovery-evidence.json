@@ -1,0 +1,1181 @@
+{
+  "evidence_kind": "sanitized_metadata_derivative_not_raw_receipt_bytes",
+  "execution_fingerprint": "31a5b53d91bf7f609b5dfa3a97b87c4c6617a767d9096fa845f774a5f9bfefc3",
+  "final_test_lock": "closed",
+  "human_reviewed_recoveries": [
+    {
+      "affected_cell": "efficientad:cashew:42",
+      "attempt1_checkpoint_not_used": true,
+      "attempt1_preserved": true,
+      "attempt2_preserved": true,
+      "authorization_text_sha256": "20147a0a5c771a90c06cb454b3df490dafd3ef55c3015948f13a83716002c090",
+      "cashew_validation_sha256": "f675d9e5a579845cb9a5d40f9b3d6111bde10c0c15a4ddd4f5206d2fba2312f2",
+      "checkpoint_sha256": "80ffe603fd2d22291968760b64832f907bd8a85eb23eeb04cc51b962628f215c",
+      "destination_active_runtime_inventory_sha256": "dbb714f307a99e7861e1d3ea84706b2e887088d90b37a6f472df7a50498d00ab",
+      "destination_location": "local NTFS runtime",
+      "destination_validation_sha256": "7f0bc22326c0a5774d1c246a2cc2557365a85f14c48b1f9601e3f6d9dcc2929f",
+      "execution_fingerprint": "31a5b53d91bf7f609b5dfa3a97b87c4c6617a767d9096fa845f774a5f9bfefc3",
+      "failed_attempts": [
+        1,
+        2
+      ],
+      "final_test_lock": "closed",
+      "git_head": "cca5e47ec8c3f68adfa6c90e17a17770b48049d0",
+      "human_reviewed_recovery": true,
+      "migration_receipt_sha256": "84e1f9baf45fc973e3cb1f401b6f69c91e2472002c198eaec9c36963993a1c7a",
+      "original_stop": {
+        "at": "2026-09-30T09:30:45.991297+00:00",
+        "cell": "efficientad:cashew:42",
+        "reason": "Dispatcher failed; STOP before next cell",
+        "type": "VisaIntegrityError"
+      },
+      "pre_repair_manifest_sha256": "a817d6f83de6258a6a91f6c999341bbeefc658ddf5c734c354a5621e200353ab",
+      "publication34000_sha256": "f2687450f681cbb0414403383c0d7dea14fd03b34cfc369053a1216e2b7b0df9",
+      "publication35000_sha256": "5f77fce70071451d0c5882f2d95595bce48cb99411f92582bac28c16c939c273",
+      "recorded_at": "2026-09-30T13:45:54.168181+00:00",
+      "resume_parent": {
+        "path": "runs/cashew/seed-42/attempt-2/worker-state.json",
+        "sha256": "0cbfe9689dbcf2c3bcae98d54d7032f984c3a08c46ec3893a3b07daabe40c143",
+        "size_bytes": 3195
+      },
+      "resume_step": 33000,
+      "source_active_runtime_inventory_sha256": "dbb714f307a99e7861e1d3ea84706b2e887088d90b37a6f472df7a50498d00ab",
+      "source_changed": false,
+      "source_location": "original OneDrive checkout",
+      "strategy": "non_onedrive_migration_resume_published_attempt2_step33000",
+      "successful_attempt": 3,
+      "test_performance_evaluated": false,
+      "timestamp": "2026-09-30T15:05:36.388939+00:00",
+      "two_winerror5_failures": [
+        "attempt1 metadata replace",
+        "attempt2 checkpoint payload replace"
+      ]
+    },
+    {
+      "affected_cell": "efficientad:pcb1:42",
+      "at": "2026-10-01T23:54:34.765284+00:00",
+      "authorization": "no continue again now and keep running",
+      "cause": "UNKNOWN",
+      "checkpoint_sha256": "ea7b5d4a0028b3df5bb938d32e328efaacd87676e979faa5a6b18900b1382d23",
+      "checkpoint_validation_sha256": "78887ffb8275e76e7b25e26670738e80806847855fcb1fcb46a8696645ff91e3",
+      "execution_fingerprint": "31a5b53d91bf7f609b5dfa3a97b87c4c6617a767d9096fa845f774a5f9bfefc3",
+      "final_test_lock": "closed",
+      "forensic_receipt_sha256": "35cc5dfe43b7abb90d0f8d4b4d94aaff45ae460d1c0a839e0bb8ac8995e3ae73",
+      "git_head": "cca5e47ec8c3f68adfa6c90e17a17770b48049d0",
+      "hardware": {
+        "at": "2026-10-01T23:54:33.870665+00:00",
+        "boot": "2026-09-28T22:41:11.5000000Z",
+        "gpu_csv": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 561.17, 8192, 1032, 40, 6",
+        "whea_events_since_start": 0
+      },
+      "interrupted_attempt": 1,
+      "observed_exit_code": null,
+      "processes": [
+        {
+          "CommandLine": "/silentConfig",
+          "CreationDate": "/Date(1790724421886)/",
+          "ExecutablePath": "${SYSTEM_PROGRAMS}\\Microsoft OneDrive\\26.168.0830.0006\\OneDrive.Sync.Service.exe",
+          "ParentProcessId": 35876,
+          "ProcessId": 35152
+        },
+        {
+          "CommandLine": "\"${RUNTIME}\\.venv\\Scripts\\python.exe\" ${OPERATOR_HELPERS}/phase4d_a_pcb1_recovery_validate.py --repair",
+          "CreationDate": "/Date(1790898869174)/",
+          "ExecutablePath": "${RUNTIME}\\.venv\\Scripts\\python.exe",
+          "ParentProcessId": 54148,
+          "ProcessId": 55920
+        },
+        {
+          "CommandLine": "\"${SYSTEM_PROGRAMS}\\Python311\\python.exe\" ${OPERATOR_HELPERS}/phase4d_a_pcb1_recovery_validate.py --repair",
+          "CreationDate": "/Date(1790898869203)/",
+          "ExecutablePath": "${SYSTEM_PROGRAMS}\\Python311\\python.exe",
+          "ParentProcessId": 55920,
+          "ProcessId": 56648
+        }
+      ],
+      "resume_parent": {
+        "path": "runs/pcb1/seed-42/attempt-1/worker-state.json",
+        "sha256": "adff276f3dfbcf9c3cfe1b02cb16a95d5a0f0264f06898c7ab0edb9818732675",
+        "size_bytes": 3191
+      },
+      "resume_step": 39000,
+      "retired_reviewed_stale_locks": [
+        {
+          "path": "outputs/phase4d-a-visa-development-matrix/.writer.lock",
+          "sha256": "a72c2a8c39ab41015e0dc858d5d161697bacd9f39be27d04c05bdd4b9ec36e3b"
+        },
+        {
+          "path": "outputs/visa-development-gpu-lease/.writer.lock",
+          "sha256": "eb4875a941de3bbdbc52b489645c705d0b76bf19de2e621c5b6b3d18d28b2b93"
+        },
+        {
+          "path": "outputs/phase4d-a-migration/continuation/.writer.lock",
+          "sha256": "a8cab5bada7c19bde731a1a6a63cd637ac0df1624193d79ee8b52353298239c9"
+        }
+      ],
+      "source_changed": false,
+      "test_performance_evaluated": false
+    }
+  ],
+  "implementation_commit": "cca5e47ec8c3f68adfa6c90e17a17770b48049d0",
+  "original_stop": {
+    "at": "2026-09-30T09:30:45.991297+00:00",
+    "cell": "efficientad:cashew:42",
+    "reason": "Dispatcher failed; STOP before next cell",
+    "type": "VisaIntegrityError"
+  },
+  "path_alias_policy": "Runtime, forensic-original, migration-record, helper and system-program roots replaced with placeholders; raw SHA bindings preserved; original local files unchanged.",
+  "phase4d_b_started": false,
+  "receipts": {
+    "cashew_34000": {
+      "document": {
+        "checkpoint_sha256": "2b92c7168a006d6ad08bc5f71047dac7ff0f62d56fc629ccf26b45213e6aee6a",
+        "final_test_lock": "closed",
+        "observed_at": "2026-09-30T13:49:01.614980+00:00",
+        "published_metadata": {
+          "entry": {
+            "latest_valid_checkpoint": {
+              "path": "runs/cashew/seed-42/attempt-3/training-checkpoint.pt",
+              "recorded_at": "2026-09-30T13:48:55.287776+00:00",
+              "sha256": "2b92c7168a006d6ad08bc5f71047dac7ff0f62d56fc629ccf26b45213e6aee6a",
+              "step": 34000
+            },
+            "status": "training"
+          },
+          "identity": {
+            "audit_sha256": "06e227bb5d2cd26f38010b2c304c62f14f383a81c64f5b2e4c48f1019128f58f",
+            "category": "cashew",
+            "environment": {
+              "cuda": "12.6",
+              "gpu": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+              "packages": {
+                "Pillow": "12.3.0",
+                "anomalib": "2.6.0",
+                "numpy": "2.4.6",
+                "safetensors": "0.8.0",
+                "scikit-learn": "1.9.0",
+                "scipy": "1.17.1",
+                "timm": "1.0.28",
+                "torch": "2.9.1+cu126",
+                "torchvision": "0.24.1+cu126"
+              },
+              "platform": "Windows",
+              "python": "3.11.6"
+            },
+            "environment_fingerprint": "3ab822fdd104157d833b0e7e4201588b359aa5b17b6ded4a918b59de4b83c6bc",
+            "final_test_lock": "closed",
+            "imagenette_sha256": "6cbfac238434d89fe99e651496f0812ebc7a10fa62bd42d6874042bf01de4efd",
+            "implementation_commit": "cca5e47ec8c3f68adfa6c90e17a17770b48049d0",
+            "membership_sha256": "10e7a6c898fb18fbd1b93a115a5a94f3e2ebcecb7a1796d99d8c1e6f3567ce0b",
+            "model": "efficientad",
+            "protocol_fingerprint": "78b27feeee044f560287a1ce45000800452344190e7b68003eefb3e2e853f1f9",
+            "scope": {
+              "calibration_limit": null,
+              "fit_limit": null,
+              "purpose": "NORMAL_ONLY_FULL_DEVELOPMENT",
+              "steps": 70000
+            },
+            "seed": 42,
+            "source_fingerprint": "478d30d8553d4675af0e493e6a0978b8867f2282f4d28b087b7a0f572e233d6a",
+            "source_hashes": {
+              "configs/engineering/visa-completion-acceptance-v1.yaml": "7af3fbd699b8b163fea80b9ad211d9111f2db63df88c9e8b2df90cb794f43477",
+              "configs/engineering/visa-dispatcher-acceptance-v1.yaml": "16ad7606dc77e68e1bd61068d7fe69d0e5e89f9884a69757ad6056bf87b831d8",
+              "src/visionguard/efficientad_benchmark.py": "0f2fc1201d895fa91c2c22af1d0e5cf9ae893f0567db91b95718bbfda03a96bd",
+              "src/visionguard/embedding_journal.py": "d5516b6ff65b551ed70c20975e90312a786b11a40e05b11e76d999f0fbd7ac23",
+              "src/visionguard/visa_development.py": "ac1417863babca7cf9faecfcdf6bcf823d793fd68aa95c051f38cea88cf0ee44",
+              "src/visionguard/visa_development_worker.py": "c1bf1aa469d26b3c406109a137e4d5105b6a7047add637df5e094e1258c15ec5",
+              "src/visionguard/visa_dispatcher.py": "d1d53d137fe1bad65910555e3355394064c5cc8dbaa23ae560dfc8829f63ffac",
+              "src/visionguard/visa_engineering.py": "98e59957083fb9855c31fc392cc2c562f77f56b2ae447e9d2d700abd4708cc34",
+              "src/visionguard/visa_execution.py": "f7599a5478a5f496f332ff2ce09ac02dfad5d9702165c7f1b884c69fbbccd12c",
+              "src/visionguard/visa_guard.py": "3c5c7376973b265363d3a882474429cdab6b0a149484c714f72f01358e5a1920",
+              "src/visionguard/visa_patchcore.py": "0b894e00a8d16320966b949749584d8f2bdba67389217d3aa970e9dd30ea9ec4"
+            },
+            "teacher_sha256": "a16ded54719674435576aee641152616a640dfc6dc2b83115dab6e226610ae7d"
+          },
+          "updated_at": "2026-09-30T13:48:55.287776+00:00"
+        },
+        "snapshot_sha256": "2b92c7168a006d6ad08bc5f71047dac7ff0f62d56fc629ccf26b45213e6aee6a",
+        "source_changed": false,
+        "step": 34000,
+        "validated": true
+      },
+      "raw_sha256": "f2687450f681cbb0414403383c0d7dea14fd03b34cfc369053a1216e2b7b0df9"
+    },
+    "cashew_35000": {
+      "document": {
+        "checkpoint_sha256": "5ef08a49ba920df7fc69e341e4cc7e8a4eca5938f87b28415f7ae78700b109cd",
+        "final_test_lock": "closed",
+        "observed_at": "2026-09-30T13:51:11.133888+00:00",
+        "published_metadata": {
+          "entry": {
+            "latest_valid_checkpoint": {
+              "path": "runs/cashew/seed-42/attempt-3/training-checkpoint.pt",
+              "recorded_at": "2026-09-30T13:51:10.467049+00:00",
+              "sha256": "5ef08a49ba920df7fc69e341e4cc7e8a4eca5938f87b28415f7ae78700b109cd",
+              "step": 35000
+            },
+            "status": "training"
+          },
+          "identity": {
+            "audit_sha256": "06e227bb5d2cd26f38010b2c304c62f14f383a81c64f5b2e4c48f1019128f58f",
+            "category": "cashew",
+            "environment": {
+              "cuda": "12.6",
+              "gpu": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+              "packages": {
+                "Pillow": "12.3.0",
+                "anomalib": "2.6.0",
+                "numpy": "2.4.6",
+                "safetensors": "0.8.0",
+                "scikit-learn": "1.9.0",
+                "scipy": "1.17.1",
+                "timm": "1.0.28",
+                "torch": "2.9.1+cu126",
+                "torchvision": "0.24.1+cu126"
+              },
+              "platform": "Windows",
+              "python": "3.11.6"
+            },
+            "environment_fingerprint": "3ab822fdd104157d833b0e7e4201588b359aa5b17b6ded4a918b59de4b83c6bc",
+            "final_test_lock": "closed",
+            "imagenette_sha256": "6cbfac238434d89fe99e651496f0812ebc7a10fa62bd42d6874042bf01de4efd",
+            "implementation_commit": "cca5e47ec8c3f68adfa6c90e17a17770b48049d0",
+            "membership_sha256": "10e7a6c898fb18fbd1b93a115a5a94f3e2ebcecb7a1796d99d8c1e6f3567ce0b",
+            "model": "efficientad",
+            "protocol_fingerprint": "78b27feeee044f560287a1ce45000800452344190e7b68003eefb3e2e853f1f9",
+            "scope": {
+              "calibration_limit": null,
+              "fit_limit": null,
+              "purpose": "NORMAL_ONLY_FULL_DEVELOPMENT",
+              "steps": 70000
+            },
+            "seed": 42,
+            "source_fingerprint": "478d30d8553d4675af0e493e6a0978b8867f2282f4d28b087b7a0f572e233d6a",
+            "source_hashes": {
+              "configs/engineering/visa-completion-acceptance-v1.yaml": "7af3fbd699b8b163fea80b9ad211d9111f2db63df88c9e8b2df90cb794f43477",
+              "configs/engineering/visa-dispatcher-acceptance-v1.yaml": "16ad7606dc77e68e1bd61068d7fe69d0e5e89f9884a69757ad6056bf87b831d8",
+              "src/visionguard/efficientad_benchmark.py": "0f2fc1201d895fa91c2c22af1d0e5cf9ae893f0567db91b95718bbfda03a96bd",
+              "src/visionguard/embedding_journal.py": "d5516b6ff65b551ed70c20975e90312a786b11a40e05b11e76d999f0fbd7ac23",
+              "src/visionguard/visa_development.py": "ac1417863babca7cf9faecfcdf6bcf823d793fd68aa95c051f38cea88cf0ee44",
+              "src/visionguard/visa_development_worker.py": "c1bf1aa469d26b3c406109a137e4d5105b6a7047add637df5e094e1258c15ec5",
+              "src/visionguard/visa_dispatcher.py": "d1d53d137fe1bad65910555e3355394064c5cc8dbaa23ae560dfc8829f63ffac",
+              "src/visionguard/visa_engineering.py": "98e59957083fb9855c31fc392cc2c562f77f56b2ae447e9d2d700abd4708cc34",
+              "src/visionguard/visa_execution.py": "f7599a5478a5f496f332ff2ce09ac02dfad5d9702165c7f1b884c69fbbccd12c",
+              "src/visionguard/visa_guard.py": "3c5c7376973b265363d3a882474429cdab6b0a149484c714f72f01358e5a1920",
+              "src/visionguard/visa_patchcore.py": "0b894e00a8d16320966b949749584d8f2bdba67389217d3aa970e9dd30ea9ec4"
+            },
+            "teacher_sha256": "a16ded54719674435576aee641152616a640dfc6dc2b83115dab6e226610ae7d"
+          },
+          "updated_at": "2026-09-30T13:51:10.467049+00:00"
+        },
+        "snapshot_sha256": "5ef08a49ba920df7fc69e341e4cc7e8a4eca5938f87b28415f7ae78700b109cd",
+        "source_changed": false,
+        "step": 35000,
+        "validated": true
+      },
+      "raw_sha256": "5f77fce70071451d0c5882f2d95595bce48cb99411f92582bac28c16c939c273"
+    },
+    "cashew_authorization": {
+      "document": {
+        "attempt1_checkpoint_not_used": true,
+        "attempt1_preserved": true,
+        "attempt2_preserved": true,
+        "authorization_text_sha256": "20147a0a5c771a90c06cb454b3df490dafd3ef55c3015948f13a83716002c090",
+        "checkpoint_sha256": "80ffe603fd2d22291968760b64832f907bd8a85eb23eeb04cc51b962628f215c",
+        "destination_active_runtime_inventory_sha256": "dbb714f307a99e7861e1d3ea84706b2e887088d90b37a6f472df7a50498d00ab",
+        "destination_location": "local NTFS runtime",
+        "destination_validation_sha256": "7f0bc22326c0a5774d1c246a2cc2557365a85f14c48b1f9601e3f6d9dcc2929f",
+        "execution_fingerprint": "31a5b53d91bf7f609b5dfa3a97b87c4c6617a767d9096fa845f774a5f9bfefc3",
+        "final_test_lock": "closed",
+        "git_head": "cca5e47ec8c3f68adfa6c90e17a17770b48049d0",
+        "human_reviewed_recovery": true,
+        "migration_receipt_sha256": "84e1f9baf45fc973e3cb1f401b6f69c91e2472002c198eaec9c36963993a1c7a",
+        "recorded_at": "2026-09-30T13:45:54.168181+00:00",
+        "resume_parent": {
+          "path": "runs/cashew/seed-42/attempt-2/worker-state.json",
+          "sha256": "0cbfe9689dbcf2c3bcae98d54d7032f984c3a08c46ec3893a3b07daabe40c143",
+          "size_bytes": 3195
+        },
+        "resume_step": 33000,
+        "source_active_runtime_inventory_sha256": "dbb714f307a99e7861e1d3ea84706b2e887088d90b37a6f472df7a50498d00ab",
+        "source_changed": false,
+        "source_location": "original OneDrive checkout",
+        "strategy": "non_onedrive_migration_resume_published_attempt2_step33000",
+        "test_performance_evaluated": false
+      },
+      "raw_sha256": "acee1fb447fffcac63df4814365131ebb56e99e811d0ac85451eb514c3714440"
+    },
+    "cashew_matrix_repair": {
+      "document": {
+        "affected_cell": "efficientad:cashew:42",
+        "attempt1_checkpoint_not_used": true,
+        "attempt1_preserved": true,
+        "attempt2_preserved": true,
+        "authorization_text_sha256": "20147a0a5c771a90c06cb454b3df490dafd3ef55c3015948f13a83716002c090",
+        "cashew_validation_sha256": "f675d9e5a579845cb9a5d40f9b3d6111bde10c0c15a4ddd4f5206d2fba2312f2",
+        "cells_manually_marked_complete": false,
+        "checkpoint_sha256": "80ffe603fd2d22291968760b64832f907bd8a85eb23eeb04cc51b962628f215c",
+        "destination_active_runtime_inventory_sha256": "dbb714f307a99e7861e1d3ea84706b2e887088d90b37a6f472df7a50498d00ab",
+        "destination_location": "local NTFS runtime",
+        "destination_validation_sha256": "7f0bc22326c0a5774d1c246a2cc2557365a85f14c48b1f9601e3f6d9dcc2929f",
+        "execution_fingerprint": "31a5b53d91bf7f609b5dfa3a97b87c4c6617a767d9096fa845f774a5f9bfefc3",
+        "failed_attempts": [
+          1,
+          2
+        ],
+        "final_test_lock": "closed",
+        "git_head": "cca5e47ec8c3f68adfa6c90e17a17770b48049d0",
+        "human_reviewed_recovery": true,
+        "migration_receipt_sha256": "84e1f9baf45fc973e3cb1f401b6f69c91e2472002c198eaec9c36963993a1c7a",
+        "original_stop": {
+          "at": "2026-09-30T09:30:45.991297+00:00",
+          "cell": "efficientad:cashew:42",
+          "reason": "Dispatcher failed; STOP before next cell",
+          "type": "VisaIntegrityError"
+        },
+        "post_repair_manifest_sha256": "c8417d04bfab32eb133b069fec1360db33b4da3d6e02c06ab12076fdd57a22ff",
+        "pre_repair_manifest_sha256": "a817d6f83de6258a6a91f6c999341bbeefc658ddf5c734c354a5621e200353ab",
+        "publication34000_sha256": "f2687450f681cbb0414403383c0d7dea14fd03b34cfc369053a1216e2b7b0df9",
+        "publication35000_sha256": "5f77fce70071451d0c5882f2d95595bce48cb99411f92582bac28c16c939c273",
+        "recorded_at": "2026-09-30T13:45:54.168181+00:00",
+        "resume_parent": {
+          "path": "runs/cashew/seed-42/attempt-2/worker-state.json",
+          "sha256": "0cbfe9689dbcf2c3bcae98d54d7032f984c3a08c46ec3893a3b07daabe40c143",
+          "size_bytes": 3195
+        },
+        "resume_step": 33000,
+        "source_active_runtime_inventory_sha256": "dbb714f307a99e7861e1d3ea84706b2e887088d90b37a6f472df7a50498d00ab",
+        "source_changed": false,
+        "source_location": "original OneDrive checkout",
+        "strategy": "non_onedrive_migration_resume_published_attempt2_step33000",
+        "successful_attempt": 3,
+        "test_performance_evaluated": false,
+        "timestamp": "2026-09-30T15:05:36.388939+00:00",
+        "two_winerror5_failures": [
+          "attempt1 metadata replace",
+          "attempt2 checkpoint payload replace"
+        ]
+      },
+      "raw_sha256": "df19c3996662b4cc21ce9c1cc5306a7694c952f8b5e3974fb1764b8034da2267"
+    },
+    "cashew_resume_parent": {
+      "document": {
+        "observed_at": "2026-09-30T13:46:03.539379+00:00",
+        "request_sha256": "065958672ef56e2d56fd3df2ee0aae09e18b195c7269d9289163c9600cdea94d",
+        "resume_parent": {
+          "path": "runs/cashew/seed-42/attempt-2/worker-state.json",
+          "sha256": "0cbfe9689dbcf2c3bcae98d54d7032f984c3a08c46ec3893a3b07daabe40c143",
+          "size_bytes": 3195
+        },
+        "validated_parent_step": 33000
+      },
+      "raw_sha256": "5e93c04891259b460054da5f6c20bc4b36f7b15a93b6c58f31b9538a6d0fca0d"
+    },
+    "cashew_reverification": {
+      "document": {
+        "attempt_3_final_step": 70000,
+        "cashew_validation_sha256": "f675d9e5a579845cb9a5d40f9b3d6111bde10c0c15a4ddd4f5206d2fba2312f2",
+        "completed_count": 43,
+        "early_publications_validated": [
+          34000,
+          35000
+        ],
+        "execution_fingerprint": "31a5b53d91bf7f609b5dfa3a97b87c4c6617a767d9096fa845f774a5f9bfefc3",
+        "failed_attempts_unchanged": true,
+        "final_test_lock": "closed",
+        "git_head": "cca5e47ec8c3f68adfa6c90e17a17770b48049d0",
+        "original_stop_preserved": true,
+        "post_repair_manifest_sha256": "c8417d04bfab32eb133b069fec1360db33b4da3d6e02c06ab12076fdd57a22ff",
+        "post_repair_reconstruction_verified": true,
+        "pre_repair_manifest_sha256": "a817d6f83de6258a6a91f6c999341bbeefc658ddf5c734c354a5621e200353ab",
+        "prior_validated": 42,
+        "source_changed": false,
+        "status": "recovery_verified_supervisor_running",
+        "test_performance_evaluated": false,
+        "verified_at": "2026-09-30T15:58:26.425722+00:00"
+      },
+      "raw_sha256": "2676fc26f2232e3b39fd372da6aa63856c5803cb23d5fbe9583011505b0d2a81"
+    },
+    "destination_validation": {
+      "document": {
+        "efficientad_validated": 6,
+        "execution_fingerprint": "31a5b53d91bf7f609b5dfa3a97b87c4c6617a767d9096fa845f774a5f9bfefc3",
+        "final_test_lock": "closed",
+        "git_head": "cca5e47ec8c3f68adfa6c90e17a17770b48049d0",
+        "patchcore_validated": 36,
+        "prior_cells": {
+          "efficientad:candle:123": {
+            "path": "outputs/phase4d-a-migration/revalidation/efficientad-candle-123.json",
+            "sha256": "7717af7947e57d80a0fd9d45360ba27adba0bbeab272677bd9d2a699efc71f2a"
+          },
+          "efficientad:candle:2026": {
+            "path": "outputs/phase4d-a-migration/revalidation/efficientad-candle-2026.json",
+            "sha256": "3b62e5063fcd8735be3afd8ec6402dc35e3a53e96be354d7cd52937c424716d3"
+          },
+          "efficientad:candle:42": {
+            "path": "outputs/phase4d-a-migration/revalidation/efficientad-candle-42.json",
+            "sha256": "ec064fe1cf557fb7390324565cbff85bd7c2e3b935d5da93ea17a009c9ac69b2"
+          },
+          "efficientad:capsules:123": {
+            "path": "outputs/phase4d-a-migration/revalidation/efficientad-capsules-123.json",
+            "sha256": "ef33076590b265aadcd57041756e0a305f0a4373579050fe9b42c590e1d6a9e6"
+          },
+          "efficientad:capsules:2026": {
+            "path": "outputs/phase4d-a-migration/revalidation/efficientad-capsules-2026.json",
+            "sha256": "8ff00bda2ef099acb4efb4b175ff7e971442c3697be9bf1ecaa4e9cd8eebd414"
+          },
+          "efficientad:capsules:42": {
+            "path": "outputs/phase4d-a-migration/revalidation/efficientad-capsules-42.json",
+            "sha256": "7ae4acf50a94f51462d2a088cc624f2afeab3282aaa3f404bc17b9faf4d3dd8b"
+          },
+          "patchcore:candle:123": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-candle-123.json",
+            "sha256": "459dc3cf7e9f3e4ee9609f1ea6e6f44918f9d3335d8fd7316e49113876475844"
+          },
+          "patchcore:candle:2026": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-candle-2026.json",
+            "sha256": "374bc695f7fe64e20517f4e9fc2d4f4a12e8d669d4eb8209e0c74dca9e85ba26"
+          },
+          "patchcore:candle:42": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-candle-42.json",
+            "sha256": "cdbde7bbeb83b62e014df6c13bbd35158cbbe3a6fcd509481e18acb4b62dc2c0"
+          },
+          "patchcore:capsules:123": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-capsules-123.json",
+            "sha256": "536c48d56ea90c645f8aed27710308e74d1c52951352ae10ca3c6f43e7bb5b4c"
+          },
+          "patchcore:capsules:2026": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-capsules-2026.json",
+            "sha256": "ba12aac7ee834d47a743089180a81377ab78c49ba55951b7bb13781f1dc1e83b"
+          },
+          "patchcore:capsules:42": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-capsules-42.json",
+            "sha256": "0cb637760e632c76bf2c473e81bf267c5937004e69a7c6bf731097b2119d79b0"
+          },
+          "patchcore:cashew:123": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-cashew-123.json",
+            "sha256": "a08f8694e5117dd72499eff4abefbf33383df849ea2d6453cdb1bbc4f73b28c3"
+          },
+          "patchcore:cashew:2026": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-cashew-2026.json",
+            "sha256": "7cbc43f15b6071d9829d83d13d28e56b9b25c95007f0c4daafc1b7d2d56b70b8"
+          },
+          "patchcore:cashew:42": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-cashew-42.json",
+            "sha256": "d5d861d26b0e34297b669832a4d6178ea6f22657befcf27bc10e2df44fb2ea1f"
+          },
+          "patchcore:chewinggum:123": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-chewinggum-123.json",
+            "sha256": "bf96f814adbce3289ebb924c9de0606cc6cbc8288cccd6ec9c13231f503c72c2"
+          },
+          "patchcore:chewinggum:2026": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-chewinggum-2026.json",
+            "sha256": "069759d3590fc54a93369d86a4e7c55c39aedfdc48f0d5c1183d4022828410cb"
+          },
+          "patchcore:chewinggum:42": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-chewinggum-42.json",
+            "sha256": "1533bb8734e15d01778dbb610590a009f37f869d38194809e3e96b2cfc5d01d2"
+          },
+          "patchcore:fryum:123": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-fryum-123.json",
+            "sha256": "9636103326cebe93ecf78d2a1995aaa91a06af1c33c11f83b9a317b822214ddc"
+          },
+          "patchcore:fryum:2026": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-fryum-2026.json",
+            "sha256": "d35b9c6105840cb198b1a71ca1cacfe406bfccff403f870a8ee17fd77ec755ae"
+          },
+          "patchcore:fryum:42": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-fryum-42.json",
+            "sha256": "1ae5989d6cf5f51f4747829eea414ee68547f9be22d03171a1d4913942da67f8"
+          },
+          "patchcore:macaroni1:123": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-macaroni1-123.json",
+            "sha256": "9294f656fcca936b8e670aee77460f795d396a9fe6280055e46954b167e4fa94"
+          },
+          "patchcore:macaroni1:2026": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-macaroni1-2026.json",
+            "sha256": "4e731157c6d419f828c32d19165e45500b23988c51860b49f41d5a313d8fd5d8"
+          },
+          "patchcore:macaroni1:42": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-macaroni1-42.json",
+            "sha256": "d71d12630924df3f4e624ce832a0d27935d0625e593fd046e14304f81c314c8d"
+          },
+          "patchcore:macaroni2:123": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-macaroni2-123.json",
+            "sha256": "3b42bb1e4d0630a9a9c9679728d2a66b1aa3cbff2b580966ffe22934b2a757bc"
+          },
+          "patchcore:macaroni2:2026": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-macaroni2-2026.json",
+            "sha256": "c7da877499e3437132f4209ab7d243b451c737fdf6b89152ef3eb93e5482e023"
+          },
+          "patchcore:macaroni2:42": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-macaroni2-42.json",
+            "sha256": "c4cdf61d891f0bca8713ecc8f00eec76a1304fabf1178ec92d304a89f0b1eb86"
+          },
+          "patchcore:pcb1:123": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-pcb1-123.json",
+            "sha256": "193fe6d4a1dae69d615f20637d2749ef1e881ff168c514da8a7ea857749ef6f9"
+          },
+          "patchcore:pcb1:2026": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-pcb1-2026.json",
+            "sha256": "1ec2976bc37207fc42bd0721cdf181b6150ffce683973ff1f1f6f9e33a245aca"
+          },
+          "patchcore:pcb1:42": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-pcb1-42.json",
+            "sha256": "0b1efdbe01d13bf041bf7a7f87af7e639f04f9472847d9e2996ff121b32587ab"
+          },
+          "patchcore:pcb2:123": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-pcb2-123.json",
+            "sha256": "d58fc9ca26065ca2b3ff90877e84480e7276ab5749c6c744113772232541018c"
+          },
+          "patchcore:pcb2:2026": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-pcb2-2026.json",
+            "sha256": "2057be12224045d65de64b2de26c1e703d40adce21650c4278b899d309629bd6"
+          },
+          "patchcore:pcb2:42": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-pcb2-42.json",
+            "sha256": "fc2db5d83075edfefb5876814e3fab9a45f2bbbd24e7e7be18f1af6b29193131"
+          },
+          "patchcore:pcb3:123": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-pcb3-123.json",
+            "sha256": "e803ab237904987b0e7e995036ab8c1fcf317e7bef065f3e4b83c96d7ccf9421"
+          },
+          "patchcore:pcb3:2026": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-pcb3-2026.json",
+            "sha256": "399524589f3747704eac3d0ebe32dd4546648f65848eeb8043ce65222c4513a9"
+          },
+          "patchcore:pcb3:42": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-pcb3-42.json",
+            "sha256": "3a4c781472af561d83f74941d941033d189d0d3f51bf9f6f719738d95afe14b3"
+          },
+          "patchcore:pcb4:123": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-pcb4-123.json",
+            "sha256": "acf75b9e20848afd9ba74c24a916b0f90f8b6f08b2f2efbc24e44c44f411f6db"
+          },
+          "patchcore:pcb4:2026": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-pcb4-2026.json",
+            "sha256": "5ee0787519923634197abacbff02835fd9964447f06061877bb2992d5670692e"
+          },
+          "patchcore:pcb4:42": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-pcb4-42.json",
+            "sha256": "38612690bf30610d979a9ac99c906f6f8086e287b701da2a9cd823ccc545ce0f"
+          },
+          "patchcore:pipe_fryum:123": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-pipe_fryum-123.json",
+            "sha256": "dbcbbee71bbefa8560627da6a2e523a908a516d720aa4a57f6a7640ee059075d"
+          },
+          "patchcore:pipe_fryum:2026": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-pipe_fryum-2026.json",
+            "sha256": "035bece2864571b2700907309eb30aba199a7559a73572d51edba1382fddb506"
+          },
+          "patchcore:pipe_fryum:42": {
+            "path": "outputs/phase4d-a-migration/revalidation/patchcore-pipe_fryum-42.json",
+            "sha256": "1c8332e1bc727f69e9723b0bc472aee38b15408cf60d302385574f3e9e824e09"
+          }
+        },
+        "published_checkpoint_sha256": "80ffe603fd2d22291968760b64832f907bd8a85eb23eeb04cc51b962628f215c",
+        "published_resume_step": 33000,
+        "resume_receipt": {
+          "path": "runs/cashew/seed-42/attempt-2/worker-state.json",
+          "sha256": "0cbfe9689dbcf2c3bcae98d54d7032f984c3a08c46ec3893a3b07daabe40c143",
+          "size_bytes": 3195
+        },
+        "source_changed": false,
+        "step33000_validation": {
+          "deserializable": true,
+          "exact_identity": true,
+          "finite_tensors": true,
+          "optimizer_scheduler_restored_exact": true,
+          "progress_cadence": true,
+          "rng_restored_exact": true,
+          "stable_sha256": true,
+          "streams_reconstructed_exact": true
+        },
+        "test_performance_evaluated": false,
+        "training_performed": false,
+        "validated_at": "2026-09-30T13:43:29.032207+00:00",
+        "validated_prior_count": 42
+      },
+      "raw_sha256": "7f0bc22326c0a5774d1c246a2cc2557365a85f14c48b1f9601e3f6d9dcc2929f"
+    },
+    "final_operator": {
+      "document": {
+        "counts": {
+          "completed_total": 72,
+          "efficientad": {
+            "active": 0,
+            "completed": 36,
+            "failed": 0,
+            "interrupted": 0,
+            "pending": 0
+          },
+          "expected_total": 72,
+          "patchcore": {
+            "active": 0,
+            "completed": 36,
+            "failed": 0,
+            "interrupted": 0,
+            "pending": 0
+          }
+        },
+        "early_checkpoint_steps": [
+          40000,
+          41000
+        ],
+        "execution_fingerprint": "31a5b53d91bf7f609b5dfa3a97b87c4c6617a767d9096fa845f774a5f9bfefc3",
+        "final_test_lock": "closed",
+        "finished_at": "2026-10-03T09:09:10.926210+00:00",
+        "git_head": "cca5e47ec8c3f68adfa6c90e17a17770b48049d0",
+        "heartbeat_at": "2026-10-03T09:08:50.912319+00:00",
+        "matrix_status": "completed",
+        "operator_parent_pid": 40984,
+        "operator_pid": 56728,
+        "repair_receipt_sha256": "134cef32c0b8dcb9ec6aa3a388685e698d9d45f8f6e507239d5af266963a89c0",
+        "resume_parent_verified": true,
+        "source_changed": false,
+        "stage": "supervisor_exited",
+        "started_at": "2026-10-01T23:56:24.846944+00:00",
+        "supervisor_launch_pid": 42720,
+        "supervisor_launched_at": "2026-10-01T23:56:26.753731+00:00",
+        "test_performance_evaluated": false
+      },
+      "raw_sha256": "a9454e7d0b9afc191488ff7106f1fba46b8fdfe9eb7f5505bc5a04cfbe47557f"
+    },
+    "migration": {
+      "document": {
+        "active_runtime_equal": true,
+        "config_path_changes": [
+          {
+            "after_sha256": "f0e8ce4cd611df5eed3ef0bf44d085d886c3d0ec7720617fead393a1b8576872",
+            "before_sha256": "d8018584e120ddca0a719d162d33e0450d1cc8b726ae1c08bd4dd593f890eb04",
+            "path": "outputs/phase4d-a-preflight/local-settings.json",
+            "reason": "absolute launch paths only"
+          },
+          {
+            "after_sha256": "16c2cadace06b0ddab03d306f83e4e1810e305edca85588bbfe87b4cda31a48a",
+            "before_sha256": "fbd37e8561a50f42c730ca86dce1e3df0525ee99dca8644a35172fdeb1387e53",
+            "path": ".venv/Lib/site-packages/_editable_impl_visionguard_ai.pth",
+            "reason": "editable package import path only"
+          }
+        ],
+        "destination": "${RUNTIME}",
+        "destination_active_inventory_sha256": "dbb714f307a99e7861e1d3ea84706b2e887088d90b37a6f472df7a50498d00ab",
+        "execution_fingerprint": "31a5b53d91bf7f609b5dfa3a97b87c4c6617a767d9096fa845f774a5f9bfefc3",
+        "filesystem": "NTFS",
+        "final_test_lock": "closed",
+        "free_bytes_after_copy": 124579647488,
+        "git_head": "cca5e47ec8c3f68adfa6c90e17a17770b48049d0",
+        "original_active_runtime_unchanged": true,
+        "recorded_at": "2026-09-30T13:36:14.497976+00:00",
+        "selected_copy_verified": true,
+        "source_active_inventory_sha256": "dbb714f307a99e7861e1d3ea84706b2e887088d90b37a6f472df7a50498d00ab",
+        "source_code_changed": false,
+        "test_performance_evaluated": false
+      },
+      "raw_sha256": "84e1f9baf45fc973e3cb1f401b6f69c91e2472002c198eaec9c36963993a1c7a"
+    },
+    "pcb1_40000": {
+      "document": {
+        "at": "2026-10-02T00:08:39.357119+00:00",
+        "checkpoint_sha256": "a3e490aa975ebe864b0bf2ec14e65b5c633d7181b1ad8860ce2b53bb6cd4e90d",
+        "final_test_lock": "closed",
+        "published_metadata": {
+          "entry": {
+            "latest_valid_checkpoint": {
+              "path": "runs/pcb1/seed-42/attempt-2/training-checkpoint.pt",
+              "recorded_at": "2026-10-02T00:08:33.858018+00:00",
+              "sha256": "a3e490aa975ebe864b0bf2ec14e65b5c633d7181b1ad8860ce2b53bb6cd4e90d",
+              "step": 40000
+            },
+            "status": "training"
+          },
+          "identity": {
+            "audit_sha256": "06e227bb5d2cd26f38010b2c304c62f14f383a81c64f5b2e4c48f1019128f58f",
+            "category": "pcb1",
+            "environment": {
+              "cuda": "12.6",
+              "gpu": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+              "packages": {
+                "Pillow": "12.3.0",
+                "anomalib": "2.6.0",
+                "numpy": "2.4.6",
+                "safetensors": "0.8.0",
+                "scikit-learn": "1.9.0",
+                "scipy": "1.17.1",
+                "timm": "1.0.28",
+                "torch": "2.9.1+cu126",
+                "torchvision": "0.24.1+cu126"
+              },
+              "platform": "Windows",
+              "python": "3.11.6"
+            },
+            "environment_fingerprint": "3ab822fdd104157d833b0e7e4201588b359aa5b17b6ded4a918b59de4b83c6bc",
+            "final_test_lock": "closed",
+            "imagenette_sha256": "6cbfac238434d89fe99e651496f0812ebc7a10fa62bd42d6874042bf01de4efd",
+            "implementation_commit": "cca5e47ec8c3f68adfa6c90e17a17770b48049d0",
+            "membership_sha256": "10e7a6c898fb18fbd1b93a115a5a94f3e2ebcecb7a1796d99d8c1e6f3567ce0b",
+            "model": "efficientad",
+            "protocol_fingerprint": "78b27feeee044f560287a1ce45000800452344190e7b68003eefb3e2e853f1f9",
+            "scope": {
+              "calibration_limit": null,
+              "fit_limit": null,
+              "purpose": "NORMAL_ONLY_FULL_DEVELOPMENT",
+              "steps": 70000
+            },
+            "seed": 42,
+            "source_fingerprint": "478d30d8553d4675af0e493e6a0978b8867f2282f4d28b087b7a0f572e233d6a",
+            "source_hashes": {
+              "configs/engineering/visa-completion-acceptance-v1.yaml": "7af3fbd699b8b163fea80b9ad211d9111f2db63df88c9e8b2df90cb794f43477",
+              "configs/engineering/visa-dispatcher-acceptance-v1.yaml": "16ad7606dc77e68e1bd61068d7fe69d0e5e89f9884a69757ad6056bf87b831d8",
+              "src/visionguard/efficientad_benchmark.py": "0f2fc1201d895fa91c2c22af1d0e5cf9ae893f0567db91b95718bbfda03a96bd",
+              "src/visionguard/embedding_journal.py": "d5516b6ff65b551ed70c20975e90312a786b11a40e05b11e76d999f0fbd7ac23",
+              "src/visionguard/visa_development.py": "ac1417863babca7cf9faecfcdf6bcf823d793fd68aa95c051f38cea88cf0ee44",
+              "src/visionguard/visa_development_worker.py": "c1bf1aa469d26b3c406109a137e4d5105b6a7047add637df5e094e1258c15ec5",
+              "src/visionguard/visa_dispatcher.py": "d1d53d137fe1bad65910555e3355394064c5cc8dbaa23ae560dfc8829f63ffac",
+              "src/visionguard/visa_engineering.py": "98e59957083fb9855c31fc392cc2c562f77f56b2ae447e9d2d700abd4708cc34",
+              "src/visionguard/visa_execution.py": "f7599a5478a5f496f332ff2ce09ac02dfad5d9702165c7f1b884c69fbbccd12c",
+              "src/visionguard/visa_guard.py": "3c5c7376973b265363d3a882474429cdab6b0a149484c714f72f01358e5a1920",
+              "src/visionguard/visa_patchcore.py": "0b894e00a8d16320966b949749584d8f2bdba67389217d3aa970e9dd30ea9ec4"
+            },
+            "teacher_sha256": "a16ded54719674435576aee641152616a640dfc6dc2b83115dab6e226610ae7d"
+          },
+          "updated_at": "2026-10-02T00:08:33.858018+00:00"
+        },
+        "snapshot_sha256": "a3e490aa975ebe864b0bf2ec14e65b5c633d7181b1ad8860ce2b53bb6cd4e90d",
+        "source_changed": false,
+        "step": 40000,
+        "validated": true
+      },
+      "raw_sha256": "76653dddda60850bf19779a9ec175a76335d4768edf2c3fb73cab8a6272017ac"
+    },
+    "pcb1_41000": {
+      "document": {
+        "at": "2026-10-02T00:10:35.716006+00:00",
+        "checkpoint_sha256": "639ea47a54dc14d3466c53086c6b684d250841f607cd7edbc48cb64aef8a8699",
+        "final_test_lock": "closed",
+        "published_metadata": {
+          "entry": {
+            "latest_valid_checkpoint": {
+              "path": "runs/pcb1/seed-42/attempt-2/training-checkpoint.pt",
+              "recorded_at": "2026-10-02T00:10:34.886954+00:00",
+              "sha256": "639ea47a54dc14d3466c53086c6b684d250841f607cd7edbc48cb64aef8a8699",
+              "step": 41000
+            },
+            "status": "training"
+          },
+          "identity": {
+            "audit_sha256": "06e227bb5d2cd26f38010b2c304c62f14f383a81c64f5b2e4c48f1019128f58f",
+            "category": "pcb1",
+            "environment": {
+              "cuda": "12.6",
+              "gpu": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+              "packages": {
+                "Pillow": "12.3.0",
+                "anomalib": "2.6.0",
+                "numpy": "2.4.6",
+                "safetensors": "0.8.0",
+                "scikit-learn": "1.9.0",
+                "scipy": "1.17.1",
+                "timm": "1.0.28",
+                "torch": "2.9.1+cu126",
+                "torchvision": "0.24.1+cu126"
+              },
+              "platform": "Windows",
+              "python": "3.11.6"
+            },
+            "environment_fingerprint": "3ab822fdd104157d833b0e7e4201588b359aa5b17b6ded4a918b59de4b83c6bc",
+            "final_test_lock": "closed",
+            "imagenette_sha256": "6cbfac238434d89fe99e651496f0812ebc7a10fa62bd42d6874042bf01de4efd",
+            "implementation_commit": "cca5e47ec8c3f68adfa6c90e17a17770b48049d0",
+            "membership_sha256": "10e7a6c898fb18fbd1b93a115a5a94f3e2ebcecb7a1796d99d8c1e6f3567ce0b",
+            "model": "efficientad",
+            "protocol_fingerprint": "78b27feeee044f560287a1ce45000800452344190e7b68003eefb3e2e853f1f9",
+            "scope": {
+              "calibration_limit": null,
+              "fit_limit": null,
+              "purpose": "NORMAL_ONLY_FULL_DEVELOPMENT",
+              "steps": 70000
+            },
+            "seed": 42,
+            "source_fingerprint": "478d30d8553d4675af0e493e6a0978b8867f2282f4d28b087b7a0f572e233d6a",
+            "source_hashes": {
+              "configs/engineering/visa-completion-acceptance-v1.yaml": "7af3fbd699b8b163fea80b9ad211d9111f2db63df88c9e8b2df90cb794f43477",
+              "configs/engineering/visa-dispatcher-acceptance-v1.yaml": "16ad7606dc77e68e1bd61068d7fe69d0e5e89f9884a69757ad6056bf87b831d8",
+              "src/visionguard/efficientad_benchmark.py": "0f2fc1201d895fa91c2c22af1d0e5cf9ae893f0567db91b95718bbfda03a96bd",
+              "src/visionguard/embedding_journal.py": "d5516b6ff65b551ed70c20975e90312a786b11a40e05b11e76d999f0fbd7ac23",
+              "src/visionguard/visa_development.py": "ac1417863babca7cf9faecfcdf6bcf823d793fd68aa95c051f38cea88cf0ee44",
+              "src/visionguard/visa_development_worker.py": "c1bf1aa469d26b3c406109a137e4d5105b6a7047add637df5e094e1258c15ec5",
+              "src/visionguard/visa_dispatcher.py": "d1d53d137fe1bad65910555e3355394064c5cc8dbaa23ae560dfc8829f63ffac",
+              "src/visionguard/visa_engineering.py": "98e59957083fb9855c31fc392cc2c562f77f56b2ae447e9d2d700abd4708cc34",
+              "src/visionguard/visa_execution.py": "f7599a5478a5f496f332ff2ce09ac02dfad5d9702165c7f1b884c69fbbccd12c",
+              "src/visionguard/visa_guard.py": "3c5c7376973b265363d3a882474429cdab6b0a149484c714f72f01358e5a1920",
+              "src/visionguard/visa_patchcore.py": "0b894e00a8d16320966b949749584d8f2bdba67389217d3aa970e9dd30ea9ec4"
+            },
+            "teacher_sha256": "a16ded54719674435576aee641152616a640dfc6dc2b83115dab6e226610ae7d"
+          },
+          "updated_at": "2026-10-02T00:10:34.886954+00:00"
+        },
+        "snapshot_sha256": "639ea47a54dc14d3466c53086c6b684d250841f607cd7edbc48cb64aef8a8699",
+        "source_changed": false,
+        "step": 41000,
+        "validated": true
+      },
+      "raw_sha256": "ebd5c9b6b9dcac6d3aa8199e662546fb0d0c739813283c2878e1ac2bc3de9542"
+    },
+    "pcb1_checkpoint_validation": {
+      "document": {
+        "at": "2026-10-01T23:54:01.214614+00:00",
+        "checkpoint_sha256": "ea7b5d4a0028b3df5bb938d32e328efaacd87676e979faa5a6b18900b1382d23",
+        "exact_identity": true,
+        "execution_fingerprint": "31a5b53d91bf7f609b5dfa3a97b87c4c6617a767d9096fa845f774a5f9bfefc3",
+        "final_test_lock": "closed",
+        "finite": true,
+        "git_head": "cca5e47ec8c3f68adfa6c90e17a17770b48049d0",
+        "model_optimizer_scheduler_exact": true,
+        "progress_cadence_valid": true,
+        "rng_exact": true,
+        "source_changed": false,
+        "stable_sha256": true,
+        "step": 39000,
+        "streams_exact": true,
+        "test_performance_evaluated": false,
+        "training_performed": false
+      },
+      "raw_sha256": "78887ffb8275e76e7b25e26670738e80806847855fcb1fcb46a8696645ff91e3"
+    },
+    "pcb1_completion": {
+      "document": {
+        "at": "2026-10-02T02:01:52.189803+00:00",
+        "attempt": 2,
+        "calibration_count": 90,
+        "cause_of_original_termination": "UNKNOWN",
+        "cell": "efficientad:pcb1:42",
+        "cells_manually_completed": false,
+        "counts": {
+          "completed_total": 58,
+          "efficientad": {
+            "active": 0,
+            "completed": 22,
+            "failed": 0,
+            "interrupted": 0,
+            "pending": 14
+          },
+          "expected_total": 72,
+          "patchcore": {
+            "active": 0,
+            "completed": 36,
+            "failed": 0,
+            "interrupted": 0,
+            "pending": 0
+          }
+        },
+        "early_publications": {
+          "40000": {
+            "checkpoint_sha256": "a3e490aa975ebe864b0bf2ec14e65b5c633d7181b1ad8860ce2b53bb6cd4e90d",
+            "receipt_sha256": "76653dddda60850bf19779a9ec175a76335d4768edf2c3fb73cab8a6272017ac"
+          },
+          "41000": {
+            "checkpoint_sha256": "639ea47a54dc14d3466c53086c6b684d250841f607cd7edbc48cb64aef8a8699",
+            "receipt_sha256": "ebd5c9b6b9dcac6d3aa8199e662546fb0d0c739813283c2878e1ac2bc3de9542"
+          }
+        },
+        "execution_fingerprint": "31a5b53d91bf7f609b5dfa3a97b87c4c6617a767d9096fa845f774a5f9bfefc3",
+        "failed_attempts_preserved": true,
+        "final_model_sha256": "c246a28688968700e4f07032904895a675cacc2066aa032192eafcc3eea28a28",
+        "final_optimization_step": 70000,
+        "final_test_lock": "closed",
+        "fit_count": 814,
+        "forensic_snapshots_verified": true,
+        "git_head": "cca5e47ec8c3f68adfa6c90e17a17770b48049d0",
+        "interrupted_attempt_preserved": true,
+        "matrix_post_repair_sha256": "a117ba3c7a32b45675617fd9d2884717a14abf42e0fc1c20a2036b90c8a3c786",
+        "matrix_pre_repair_sha256": "5faf76f612d39792d542d322194f22f765037ae230e4aea3baa5f849a786e380",
+        "native_validation_sha256": "862f666eaca41a693abc56ad33e0f504be03b4334d9e692ab73acb1b774b09d9",
+        "normalization_source": "fit",
+        "original_exit_code": null,
+        "phase4d_b_started": false,
+        "repair_bytes_reconstructed_exact": true,
+        "resume_parent": {
+          "path": "runs/pcb1/seed-42/attempt-1/worker-state.json",
+          "sha256": "adff276f3dfbcf9c3cfe1b02cb16a95d5a0f0264f06898c7ab0edb9818732675",
+          "size_bytes": 3191
+        },
+        "resume_step": 39000,
+        "source_changed": false,
+        "test_performance_evaluated": false
+      },
+      "raw_sha256": "4232cdee1ed51b8abed52c320e7b4e339b22265a7773f49d112661298cc8f6a2"
+    },
+    "pcb1_forensics": {
+      "document": {
+        "at": "2026-10-01T23:53:49.276272+00:00",
+        "cause": "UNKNOWN",
+        "execution_fingerprint": "31a5b53d91bf7f609b5dfa3a97b87c4c6617a767d9096fa845f774a5f9bfefc3",
+        "files": [
+          {
+            "path": "outputs/phase4d-a-visa-development-matrix/matrix-manifest.json",
+            "sha256": "5faf76f612d39792d542d322194f22f765037ae230e4aea3baa5f849a786e380",
+            "size_bytes": 60959
+          },
+          {
+            "path": "outputs/phase4d-a-visa-development-matrix/efficientad/manifest.json",
+            "sha256": "e7cbda834016ade192457e9a8bd1020eb45029cd6253159514c2d24ed999bd6b",
+            "size_bytes": 76074
+          },
+          {
+            "path": "outputs/phase4d-a-visa-development-matrix/efficientad/runs/pcb1/seed-42/attempt-1/origin.json",
+            "sha256": "b97f6be58623d71135279864b821bfe92e360d3a9925bb3ed7f77416974bca11",
+            "size_bytes": 2782
+          },
+          {
+            "path": "outputs/phase4d-a-visa-development-matrix/efficientad/runs/pcb1/seed-42/attempt-1/request.json",
+            "sha256": "0612b45d0c56fc781a8ec5c4ba41598af3bd379cdabb9419a0d02334d1e3a36b",
+            "size_bytes": 3595
+          },
+          {
+            "path": "outputs/phase4d-a-visa-development-matrix/efficientad/runs/pcb1/seed-42/attempt-1/training-checkpoint.pt",
+            "sha256": "ea7b5d4a0028b3df5bb938d32e328efaacd87676e979faa5a6b18900b1382d23",
+            "size_bytes": 75255443
+          },
+          {
+            "path": "outputs/phase4d-a-visa-development-matrix/efficientad/runs/pcb1/seed-42/attempt-1/training-state.json",
+            "sha256": "90f4542bb6ce473032920066e9a268ec07db15ce781382b0aa9eeb28a123af69",
+            "size_bytes": 3196
+          },
+          {
+            "path": "outputs/phase4d-a-visa-development-matrix/efficientad/runs/pcb1/seed-42/attempt-1/worker-process.json",
+            "sha256": "c25b3d391b406f6d630567794de597b9de44fdf74d41ea97b613a9648dd950c2",
+            "size_bytes": 234
+          },
+          {
+            "path": "outputs/phase4d-a-visa-development-matrix/efficientad/runs/pcb1/seed-42/attempt-1/worker-state.json",
+            "sha256": "f4e58a9f11b585f77013cb0d690866fb27fc5958e47f557c7c796e96b1fd2bc2",
+            "size_bytes": 2972
+          },
+          {
+            "path": "outputs/phase4d-a-visa-development-matrix/efficientad/runs/pcb1/seed-42/attempt-1/worker.log",
+            "sha256": "d7de12e06be31f65bf4eeed45dddab2778aa7c066478fc11e7976bd12dad22ad",
+            "size_bytes": 1109
+          },
+          {
+            "path": "outputs/phase4d-a-migration/continuation/operator-status.json",
+            "sha256": "9bd9d365aa79d1c5623db9a28c9f7b90d3907237af231247e72d770924844f4c",
+            "size_bytes": 630
+          },
+          {
+            "path": "outputs/phase4d-a-migration/continuation/operator-telemetry.jsonl",
+            "sha256": "9a8d267839584dbd0057e41ffdf298d2aff2bf0d052ed2289879e75bc8fc221f",
+            "size_bytes": 431518
+          },
+          {
+            "path": "outputs/phase4d-a-visa-development-matrix/telemetry.jsonl",
+            "sha256": "28f4259aede06d9517e5365a9afb4bcf31cb0eef92ff3f13640f29839d8a35de",
+            "size_bytes": 817944
+          },
+          {
+            "path": "outputs/phase4d-a-visa-development-matrix/.writer.lock",
+            "sha256": "a72c2a8c39ab41015e0dc858d5d161697bacd9f39be27d04c05bdd4b9ec36e3b",
+            "size_bytes": 32
+          },
+          {
+            "path": "outputs/visa-development-gpu-lease/.writer.lock",
+            "sha256": "eb4875a941de3bbdbc52b489645c705d0b76bf19de2e621c5b6b3d18d28b2b93",
+            "size_bytes": 32
+          },
+          {
+            "path": "outputs/phase4d-a-migration/continuation/.writer.lock",
+            "sha256": "a8cab5bada7c19bde731a1a6a63cd637ac0df1624193d79ee8b52353298239c9",
+            "size_bytes": 32
+          },
+          {
+            "path": "outputs/phase4d-a-visa-development-matrix/supervisor-logs/efficientad-pcb1-42-1.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "size_bytes": 0
+          }
+        ],
+        "final_test_lock": "closed",
+        "git_head": "cca5e47ec8c3f68adfa6c90e17a17770b48049d0",
+        "hardware": {
+          "at": "2026-10-01T23:53:48.264642+00:00",
+          "boot": "2026-09-28T22:41:11.5000000Z",
+          "gpu_csv": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 561.17, 8192, 1043, 41, 6",
+          "whea_events_since_start": 0
+        },
+        "observed_exit_code": null,
+        "processes": [
+          {
+            "CommandLine": "/silentConfig",
+            "CreationDate": "/Date(1790724421886)/",
+            "ExecutablePath": "${SYSTEM_PROGRAMS}\\Microsoft OneDrive\\26.168.0830.0006\\OneDrive.Sync.Service.exe",
+            "ParentProcessId": 35876,
+            "ProcessId": 35152
+          },
+          {
+            "CommandLine": "\"${RUNTIME}\\.venv\\Scripts\\python.exe\" ${OPERATOR_HELPERS}/phase4d_a_pcb1_recovery_validate.py",
+            "CreationDate": "/Date(1790898824084)/",
+            "ExecutablePath": "${RUNTIME}\\.venv\\Scripts\\python.exe",
+            "ParentProcessId": 19448,
+            "ProcessId": 56824
+          },
+          {
+            "CommandLine": "\"${SYSTEM_PROGRAMS}\\Python311\\python.exe\" ${OPERATOR_HELPERS}/phase4d_a_pcb1_recovery_validate.py",
+            "CreationDate": "/Date(1790898824101)/",
+            "ExecutablePath": "${SYSTEM_PROGRAMS}\\Python311\\python.exe",
+            "ParentProcessId": 56824,
+            "ProcessId": 18052
+          }
+        ],
+        "source_changed": false,
+        "test_performance_evaluated": false
+      },
+      "raw_sha256": "35cc5dfe43b7abb90d0f8d4b4d94aaff45ae460d1c0a839e0bb8ac8995e3ae73"
+    },
+    "pcb1_resume_parent": {
+      "document": {
+        "at": "2026-10-02T00:06:06.441172+00:00",
+        "checkpoint_sha256": "ea7b5d4a0028b3df5bb938d32e328efaacd87676e979faa5a6b18900b1382d23",
+        "request_sha256": "1e5c9734ca5af446f106272df12f7ec4a42e4f82e2e8bd7fff43f83ec3cadaac",
+        "resume_parent": {
+          "path": "runs/pcb1/seed-42/attempt-1/worker-state.json",
+          "sha256": "adff276f3dfbcf9c3cfe1b02cb16a95d5a0f0264f06898c7ab0edb9818732675",
+          "size_bytes": 3191
+        },
+        "validated_resume_step": 39000
+      },
+      "raw_sha256": "8376618dc58bff80fa9000286087c19546406ec295a4da4cfc6cf5cc41b0c54f"
+    },
+    "pcb1_state_repair": {
+      "document": {
+        "affected_cell": "efficientad:pcb1:42",
+        "at": "2026-10-01T23:54:34.765284+00:00",
+        "attempt_after": {
+          "artifacts": {},
+          "attempt": 1,
+          "checkpoint": {
+            "path": "runs/pcb1/seed-42/attempt-1/worker-state.json",
+            "sha256": "adff276f3dfbcf9c3cfe1b02cb16a95d5a0f0264f06898c7ab0edb9818732675",
+            "size_bytes": 3191
+          },
+          "directory": "runs/pcb1/seed-42/attempt-1",
+          "history": [
+            {
+              "at": "2026-10-01T22:15:30.995677+00:00",
+              "stage": "created"
+            },
+            {
+              "at": "2026-10-01T22:15:31.011365+00:00",
+              "reason": null,
+              "stage": "fit",
+              "status": "active"
+            },
+            {
+              "at": "2026-10-01T23:54:34.754848+00:00",
+              "reason": "human_authorized_recovery_after_unclassified_process_termination_exit_code_unknown",
+              "stage": "fit",
+              "status": "interrupted"
+            }
+          ],
+          "stage": "fit",
+          "status": "interrupted"
+        },
+        "attempt_before": {
+          "artifacts": {},
+          "attempt": 1,
+          "checkpoint": null,
+          "directory": "runs/pcb1/seed-42/attempt-1",
+          "history": [
+            {
+              "at": "2026-10-01T22:15:30.995677+00:00",
+              "stage": "created"
+            },
+            {
+              "at": "2026-10-01T22:15:31.011365+00:00",
+              "reason": null,
+              "stage": "fit",
+              "status": "active"
+            }
+          ],
+          "stage": "fit",
+          "status": "active"
+        },
+        "authorization": "no continue again now and keep running",
+        "cause": "UNKNOWN",
+        "cells_manually_completed": false,
+        "checkpoint_payload_modified": false,
+        "checkpoint_sha256": "ea7b5d4a0028b3df5bb938d32e328efaacd87676e979faa5a6b18900b1382d23",
+        "checkpoint_validation_sha256": "78887ffb8275e76e7b25e26670738e80806847855fcb1fcb46a8696645ff91e3",
+        "execution_fingerprint": "31a5b53d91bf7f609b5dfa3a97b87c4c6617a767d9096fa845f774a5f9bfefc3",
+        "final_test_lock": "closed",
+        "forensic_receipt_sha256": "35cc5dfe43b7abb90d0f8d4b4d94aaff45ae460d1c0a839e0bb8ac8995e3ae73",
+        "git_head": "cca5e47ec8c3f68adfa6c90e17a17770b48049d0",
+        "hardware": {
+          "at": "2026-10-01T23:54:33.870665+00:00",
+          "boot": "2026-09-28T22:41:11.5000000Z",
+          "gpu_csv": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 561.17, 8192, 1032, 40, 6",
+          "whea_events_since_start": 0
+        },
+        "interrupted_attempt": 1,
+        "matrix_post_sha256": "a117ba3c7a32b45675617fd9d2884717a14abf42e0fc1c20a2036b90c8a3c786",
+        "matrix_pre_sha256": "5faf76f612d39792d542d322194f22f765037ae230e4aea3baa5f849a786e380",
+        "observed_exit_code": null,
+        "processes": [
+          {
+            "CommandLine": "/silentConfig",
+            "CreationDate": "/Date(1790724421886)/",
+            "ExecutablePath": "${SYSTEM_PROGRAMS}\\Microsoft OneDrive\\26.168.0830.0006\\OneDrive.Sync.Service.exe",
+            "ParentProcessId": 35876,
+            "ProcessId": 35152
+          },
+          {
+            "CommandLine": "\"${RUNTIME}\\.venv\\Scripts\\python.exe\" ${OPERATOR_HELPERS}/phase4d_a_pcb1_recovery_validate.py --repair",
+            "CreationDate": "/Date(1790898869174)/",
+            "ExecutablePath": "${RUNTIME}\\.venv\\Scripts\\python.exe",
+            "ParentProcessId": 54148,
+            "ProcessId": 55920
+          },
+          {
+            "CommandLine": "\"${SYSTEM_PROGRAMS}\\Python311\\python.exe\" ${OPERATOR_HELPERS}/phase4d_a_pcb1_recovery_validate.py --repair",
+            "CreationDate": "/Date(1790898869203)/",
+            "ExecutablePath": "${SYSTEM_PROGRAMS}\\Python311\\python.exe",
+            "ParentProcessId": 55920,
+            "ProcessId": 56648
+          }
+        ],
+        "resume_parent": {
+          "path": "runs/pcb1/seed-42/attempt-1/worker-state.json",
+          "sha256": "adff276f3dfbcf9c3cfe1b02cb16a95d5a0f0264f06898c7ab0edb9818732675",
+          "size_bytes": 3191
+        },
+        "resume_step": 39000,
+        "retired_reviewed_stale_locks": [
+          {
+            "path": "outputs/phase4d-a-visa-development-matrix/.writer.lock",
+            "sha256": "a72c2a8c39ab41015e0dc858d5d161697bacd9f39be27d04c05bdd4b9ec36e3b"
+          },
+          {
+            "path": "outputs/visa-development-gpu-lease/.writer.lock",
+            "sha256": "eb4875a941de3bbdbc52b489645c705d0b76bf19de2e621c5b6b3d18d28b2b93"
+          },
+          {
+            "path": "outputs/phase4d-a-migration/continuation/.writer.lock",
+            "sha256": "a8cab5bada7c19bde731a1a6a63cd637ac0df1624193d79ee8b52353298239c9"
+          }
+        ],
+        "source_changed": false,
+        "test_performance_evaluated": false
+      },
+      "raw_sha256": "134cef32c0b8dcb9ec6aa3a388685e698d9d45f8f6e507239d5af266963a89c0"
+    }
+  },
+  "source_changed": false,
+  "test_performance_evaluated": false,
+  "unclassified_process_terminations": [
+    {
+      "at": "2026-10-01T23:54:34.773285+00:00",
+      "cause": "UNKNOWN",
+      "cell": "efficientad:pcb1:42",
+      "last_guard_at": "2026-10-01T23:42:10+00:00",
+      "observed_exit_code": null
+    }
+  ]
+}

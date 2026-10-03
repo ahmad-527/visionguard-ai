@@ -1,0 +1,689 @@
+{
+  "execution_fingerprint": "31a5b53d91bf7f609b5dfa3a97b87c4c6617a767d9096fa845f774a5f9bfefc3",
+  "final_test_lock": "closed",
+  "limitations": [
+    "Sampled nvidia-smi values are not true peaks.",
+    "Per-cell Torch CUDA allocated/reserved peaks and host RAM peaks were not recorded by frozen workers.",
+    "Native model-specific timers exclude normalization/calibration and can include OS sleep; not a speed comparison."
+  ],
+  "per_cell_patchcore_recorded_fields": {
+    "efficientad:candle:123": {},
+    "efficientad:candle:2026": {},
+    "efficientad:candle:42": {},
+    "efficientad:capsules:123": {},
+    "efficientad:capsules:2026": {},
+    "efficientad:capsules:42": {},
+    "efficientad:cashew:123": {},
+    "efficientad:cashew:2026": {},
+    "efficientad:cashew:42": {},
+    "efficientad:chewinggum:123": {},
+    "efficientad:chewinggum:2026": {},
+    "efficientad:chewinggum:42": {},
+    "efficientad:fryum:123": {},
+    "efficientad:fryum:2026": {},
+    "efficientad:fryum:42": {},
+    "efficientad:macaroni1:123": {},
+    "efficientad:macaroni1:2026": {},
+    "efficientad:macaroni1:42": {},
+    "efficientad:macaroni2:123": {},
+    "efficientad:macaroni2:2026": {},
+    "efficientad:macaroni2:42": {},
+    "efficientad:pcb1:123": {},
+    "efficientad:pcb1:2026": {},
+    "efficientad:pcb1:42": {},
+    "efficientad:pcb2:123": {},
+    "efficientad:pcb2:2026": {},
+    "efficientad:pcb2:42": {},
+    "efficientad:pcb3:123": {},
+    "efficientad:pcb3:2026": {},
+    "efficientad:pcb3:42": {},
+    "efficientad:pcb4:123": {},
+    "efficientad:pcb4:2026": {},
+    "efficientad:pcb4:42": {},
+    "efficientad:pipe_fryum:123": {},
+    "efficientad:pipe_fryum:2026": {},
+    "efficientad:pipe_fryum:42": {},
+    "patchcore:candle:123": {
+      "coreset_and_reconstruction_seconds": 854.4045976999987,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 5096079360,
+      "embedding_shape": [
+        829440,
+        1536
+      ],
+      "extraction_seconds_this_process": 94.20915710000554,
+      "memory_bank_sha256": "90fe35849b9cb704838f4e85e999dab95d142f1c2a3150df99de559367d5747f",
+      "memory_bank_shape": [
+        8294,
+        1536
+      ],
+      "ordered_embeddings_sha256": "19fc99bcde584031151c3c82184ec43e6c06a24bf2232c90eb5cd109c8dd9c30"
+    },
+    "patchcore:candle:2026": {
+      "coreset_and_reconstruction_seconds": 891.0066413000022,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 5096079360,
+      "embedding_shape": [
+        829440,
+        1536
+      ],
+      "extraction_seconds_this_process": 96.62371920000442,
+      "memory_bank_sha256": "5fcfd08a206d6b0518bd24d6d032d37c4eff345a74f314d46f7638783a542f9b",
+      "memory_bank_shape": [
+        8294,
+        1536
+      ],
+      "ordered_embeddings_sha256": "19fc99bcde584031151c3c82184ec43e6c06a24bf2232c90eb5cd109c8dd9c30"
+    },
+    "patchcore:candle:42": {
+      "coreset_and_reconstruction_seconds": 1238.3063425999935,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 5096079360,
+      "embedding_shape": [
+        829440,
+        1536
+      ],
+      "extraction_seconds_this_process": 94.18486990000383,
+      "memory_bank_sha256": "dc46fe977bfce51365bc81f7401cf0ebde2770748c5de7a33cc20a1f5d29418d",
+      "memory_bank_shape": [
+        8294,
+        1536
+      ],
+      "ordered_embeddings_sha256": "19fc99bcde584031151c3c82184ec43e6c06a24bf2232c90eb5cd109c8dd9c30"
+    },
+    "patchcore:capsules:123": {
+      "coreset_and_reconstruction_seconds": 38.896088199995575,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 3070230528,
+      "embedding_shape": [
+        499712,
+        1536
+      ],
+      "extraction_seconds_this_process": 53.99490090000472,
+      "memory_bank_sha256": "14f3c36ec7e90d43a6b3f70e5428e9d114ad378a9fa52f628611bfeeff5c71d0",
+      "memory_bank_shape": [
+        4997,
+        1536
+      ],
+      "ordered_embeddings_sha256": "b61db61a74013ed6b4456b9817509f290ee5aa24e666c0d3452f915427fa8d2d"
+    },
+    "patchcore:capsules:2026": {
+      "coreset_and_reconstruction_seconds": 38.73583189999772,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 3070230528,
+      "embedding_shape": [
+        499712,
+        1536
+      ],
+      "extraction_seconds_this_process": 55.52234360000148,
+      "memory_bank_sha256": "073cd6a953e79a8280d3b374db81d163f9f49f8173fc22eea4229a7a0fc861d2",
+      "memory_bank_shape": [
+        4997,
+        1536
+      ],
+      "ordered_embeddings_sha256": "b61db61a74013ed6b4456b9817509f290ee5aa24e666c0d3452f915427fa8d2d"
+    },
+    "patchcore:capsules:42": {
+      "coreset_and_reconstruction_seconds": 38.561746599996695,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 3070230528,
+      "embedding_shape": [
+        499712,
+        1536
+      ],
+      "extraction_seconds_this_process": 57.490909200001624,
+      "memory_bank_sha256": "5b545fd68825659805d443e0241087226d0e5247e754b1e4ac026dff942187c6",
+      "memory_bank_shape": [
+        4997,
+        1536
+      ],
+      "ordered_embeddings_sha256": "b61db61a74013ed6b4456b9817509f290ee5aa24e666c0d3452f915427fa8d2d"
+    },
+    "patchcore:cashew:123": {
+      "coreset_and_reconstruction_seconds": 28.477582899999106,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 2548039680,
+      "embedding_shape": [
+        414720,
+        1536
+      ],
+      "extraction_seconds_this_process": 43.97994260000269,
+      "memory_bank_sha256": "423daf923fcb5051b7945b829d12d077453a92c58d6e893439aede115cb4e9ea",
+      "memory_bank_shape": [
+        4147,
+        1536
+      ],
+      "ordered_embeddings_sha256": "461103c6176d70476ef38fed783496546b02b56d6d790aad3b12b0f1a190a8a8"
+    },
+    "patchcore:cashew:2026": {
+      "coreset_and_reconstruction_seconds": 28.31294359999447,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 2548039680,
+      "embedding_shape": [
+        414720,
+        1536
+      ],
+      "extraction_seconds_this_process": 44.94377980000718,
+      "memory_bank_sha256": "3b5d60a961895ff2c2c3c836bab0b2039d364f4bdcab5769d771400536190a8f",
+      "memory_bank_shape": [
+        4147,
+        1536
+      ],
+      "ordered_embeddings_sha256": "461103c6176d70476ef38fed783496546b02b56d6d790aad3b12b0f1a190a8a8"
+    },
+    "patchcore:cashew:42": {
+      "coreset_and_reconstruction_seconds": 28.44378730000608,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 2548039680,
+      "embedding_shape": [
+        414720,
+        1536
+      ],
+      "extraction_seconds_this_process": 44.94381450000219,
+      "memory_bank_sha256": "43eedb37398def180745ef45f0763d17a36614a4ba8f995caa76bdd91d2afa7c",
+      "memory_bank_shape": [
+        4147,
+        1536
+      ],
+      "ordered_embeddings_sha256": "461103c6176d70476ef38fed783496546b02b56d6d790aad3b12b0f1a190a8a8"
+    },
+    "patchcore:chewinggum:123": {
+      "coreset_and_reconstruction_seconds": 28.55182220000279,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 2566914048,
+      "embedding_shape": [
+        417792,
+        1536
+      ],
+      "extraction_seconds_this_process": 47.58484199999657,
+      "memory_bank_sha256": "1a164cef27d152fe5f34c1211d965dc39dbbbe7ac726237edfaa9b71a2078d9e",
+      "memory_bank_shape": [
+        4177,
+        1536
+      ],
+      "ordered_embeddings_sha256": "833a23f4714058806209933ad2a71059d0e4df30b4677cef7a98c56b830a95ce"
+    },
+    "patchcore:chewinggum:2026": {
+      "coreset_and_reconstruction_seconds": 28.303639599995222,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 2566914048,
+      "embedding_shape": [
+        417792,
+        1536
+      ],
+      "extraction_seconds_this_process": 46.57542629999807,
+      "memory_bank_sha256": "7d5acf184872e3155152b38022d156a3256bf501903e373d602a007e0d156faf",
+      "memory_bank_shape": [
+        4177,
+        1536
+      ],
+      "ordered_embeddings_sha256": "833a23f4714058806209933ad2a71059d0e4df30b4677cef7a98c56b830a95ce"
+    },
+    "patchcore:chewinggum:42": {
+      "coreset_and_reconstruction_seconds": 28.835447999997996,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 2566914048,
+      "embedding_shape": [
+        417792,
+        1536
+      ],
+      "extraction_seconds_this_process": 45.996819400003005,
+      "memory_bank_sha256": "37a87ef09458f390552f8992e855479d1251e85a5f8a7f56ce81dece5fbb0171",
+      "memory_bank_shape": [
+        4177,
+        1536
+      ],
+      "ordered_embeddings_sha256": "833a23f4714058806209933ad2a71059d0e4df30b4677cef7a98c56b830a95ce"
+    },
+    "patchcore:fryum:123": {
+      "coreset_and_reconstruction_seconds": 28.71421000000555,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 2548039680,
+      "embedding_shape": [
+        414720,
+        1536
+      ],
+      "extraction_seconds_this_process": 47.240605400002096,
+      "memory_bank_sha256": "5fe302caada076aad5fa3a0ddfc56a73d01048daec371760e4ccdc89aca262cf",
+      "memory_bank_shape": [
+        4147,
+        1536
+      ],
+      "ordered_embeddings_sha256": "b8009e83ce69d66c6cb63f183e821f6bfb73f6a89b69b5599d8b6de80e4ea851"
+    },
+    "patchcore:fryum:2026": {
+      "coreset_and_reconstruction_seconds": 28.59650330000295,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 2548039680,
+      "embedding_shape": [
+        414720,
+        1536
+      ],
+      "extraction_seconds_this_process": 47.898699600002146,
+      "memory_bank_sha256": "2f5a8f315218e1f593e70f6d406b31a475c91dc03f05570d5c516e79b64c728d",
+      "memory_bank_shape": [
+        4147,
+        1536
+      ],
+      "ordered_embeddings_sha256": "b8009e83ce69d66c6cb63f183e821f6bfb73f6a89b69b5599d8b6de80e4ea851"
+    },
+    "patchcore:fryum:42": {
+      "coreset_and_reconstruction_seconds": 28.320111499997438,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 2548039680,
+      "embedding_shape": [
+        414720,
+        1536
+      ],
+      "extraction_seconds_this_process": 46.780324200000905,
+      "memory_bank_sha256": "1b862e4443470c300a153e6bcc1542bc4bc4e9a7139010409714f94b1223dad9",
+      "memory_bank_shape": [
+        4147,
+        1536
+      ],
+      "ordered_embeddings_sha256": "b8009e83ce69d66c6cb63f183e821f6bfb73f6a89b69b5599d8b6de80e4ea851"
+    },
+    "patchcore:macaroni1:123": {
+      "coreset_and_reconstruction_seconds": 1219.0748112,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 5096079360,
+      "embedding_shape": [
+        829440,
+        1536
+      ],
+      "extraction_seconds_this_process": 102.05175100000633,
+      "memory_bank_sha256": "5d624a2409981db02af2c38f8a4ff40a732db9a3e11292fb79d885768b294a32",
+      "memory_bank_shape": [
+        8294,
+        1536
+      ],
+      "ordered_embeddings_sha256": "00f041ba2e71c56d8d2a243ac29ee09e8d44bc20dca41c74a4371ba9caed9bb1"
+    },
+    "patchcore:macaroni1:2026": {
+      "coreset_and_reconstruction_seconds": 1007.3167300999994,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 5096079360,
+      "embedding_shape": [
+        829440,
+        1536
+      ],
+      "extraction_seconds_this_process": 96.85289069999999,
+      "memory_bank_sha256": "b6c695bc470010990ee718af7e573dca40f0082d92977a8a73d8f500d70342e3",
+      "memory_bank_shape": [
+        8294,
+        1536
+      ],
+      "ordered_embeddings_sha256": "00f041ba2e71c56d8d2a243ac29ee09e8d44bc20dca41c74a4371ba9caed9bb1"
+    },
+    "patchcore:macaroni1:42": {
+      "coreset_and_reconstruction_seconds": 1013.8715168000053,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 5096079360,
+      "embedding_shape": [
+        829440,
+        1536
+      ],
+      "extraction_seconds_this_process": 102.95004139999946,
+      "memory_bank_sha256": "45545cc93466b1d8778db1c67d83facc2e31eef6ac5ca4c8e4e088e09f832f21",
+      "memory_bank_shape": [
+        8294,
+        1536
+      ],
+      "ordered_embeddings_sha256": "00f041ba2e71c56d8d2a243ac29ee09e8d44bc20dca41c74a4371ba9caed9bb1"
+    },
+    "patchcore:macaroni2:123": {
+      "coreset_and_reconstruction_seconds": 961.0157461999988,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 5096079360,
+      "embedding_shape": [
+        829440,
+        1536
+      ],
+      "extraction_seconds_this_process": 92.52467320000142,
+      "memory_bank_sha256": "511f019571ec3900a6b4d396ea737cd86e6fc3a07b83e81d76b9190f5d62b936",
+      "memory_bank_shape": [
+        8294,
+        1536
+      ],
+      "ordered_embeddings_sha256": "8f9d46af6ff228d604e33443bf0b2ca4e13e2c626dcef2f7c39e6caa76dfb674"
+    },
+    "patchcore:macaroni2:2026": {
+      "coreset_and_reconstruction_seconds": 937.2915972999981,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 5096079360,
+      "embedding_shape": [
+        829440,
+        1536
+      ],
+      "extraction_seconds_this_process": 94.01605869999912,
+      "memory_bank_sha256": "c445f3835e2f21a0e53835b2b9a01b00c02520f8f858ba73290eabfee96254a9",
+      "memory_bank_shape": [
+        8294,
+        1536
+      ],
+      "ordered_embeddings_sha256": "8f9d46af6ff228d604e33443bf0b2ca4e13e2c626dcef2f7c39e6caa76dfb674"
+    },
+    "patchcore:macaroni2:42": {
+      "coreset_and_reconstruction_seconds": 960.8055769000057,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 5096079360,
+      "embedding_shape": [
+        829440,
+        1536
+      ],
+      "extraction_seconds_this_process": 94.49074290000135,
+      "memory_bank_sha256": "77d45a5b7c6e9078c5203c8205713f118e095b94b7fbd6139865f34404d0f840",
+      "memory_bank_shape": [
+        8294,
+        1536
+      ],
+      "ordered_embeddings_sha256": "8f9d46af6ff228d604e33443bf0b2ca4e13e2c626dcef2f7c39e6caa76dfb674"
+    },
+    "patchcore:pcb1:123": {
+      "coreset_and_reconstruction_seconds": 1025.0504970999973,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 5121245184,
+      "embedding_shape": [
+        833536,
+        1536
+      ],
+      "extraction_seconds_this_process": 96.49169619999884,
+      "memory_bank_sha256": "80434d153b1a7f4585e13f3d68fe453d7b74f5e77ab5f44dcf7e463e43bef51b",
+      "memory_bank_shape": [
+        8335,
+        1536
+      ],
+      "ordered_embeddings_sha256": "79ff34ba030bdf14fcad16909d3a46583ba513eb3480d694daa3c891b9c26997"
+    },
+    "patchcore:pcb1:2026": {
+      "coreset_and_reconstruction_seconds": 1032.2567211999994,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 5121245184,
+      "embedding_shape": [
+        833536,
+        1536
+      ],
+      "extraction_seconds_this_process": 98.22931360000075,
+      "memory_bank_sha256": "19666aa123c1da321f950d89246aa1baff6dc0fa9888b8b93c1add72964191bc",
+      "memory_bank_shape": [
+        8335,
+        1536
+      ],
+      "ordered_embeddings_sha256": "79ff34ba030bdf14fcad16909d3a46583ba513eb3480d694daa3c891b9c26997"
+    },
+    "patchcore:pcb1:42": {
+      "coreset_and_reconstruction_seconds": 1066.9413385000007,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 5121245184,
+      "embedding_shape": [
+        833536,
+        1536
+      ],
+      "extraction_seconds_this_process": 96.94661889999406,
+      "memory_bank_sha256": "9fe9b59a2eee4b19dca27d4b832bf18f8586b5bd241ae27f6ac976edcd133fae",
+      "memory_bank_shape": [
+        8335,
+        1536
+      ],
+      "ordered_embeddings_sha256": "79ff34ba030bdf14fcad16909d3a46583ba513eb3480d694daa3c891b9c26997"
+    },
+    "patchcore:pcb2:123": {
+      "coreset_and_reconstruction_seconds": 988.2856819000008,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 5102370816,
+      "embedding_shape": [
+        830464,
+        1536
+      ],
+      "extraction_seconds_this_process": 101.45471050000197,
+      "memory_bank_sha256": "c2f774758188c00316786dab322d5cfbf53b7d5652f77d29cef3fc2a9b824933",
+      "memory_bank_shape": [
+        8304,
+        1536
+      ],
+      "ordered_embeddings_sha256": "ad700df4dc001cc2431e467d2434a8c0d452bba0b087a0ffcdb3a8dbbadd09a3"
+    },
+    "patchcore:pcb2:2026": {
+      "coreset_and_reconstruction_seconds": 987.0670957000038,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 5102370816,
+      "embedding_shape": [
+        830464,
+        1536
+      ],
+      "extraction_seconds_this_process": 99.99720610000077,
+      "memory_bank_sha256": "9e3c3047217843efcd8f57d54d9d80b75c51cc6708ae55e2dadbc226755b0a21",
+      "memory_bank_shape": [
+        8304,
+        1536
+      ],
+      "ordered_embeddings_sha256": "ad700df4dc001cc2431e467d2434a8c0d452bba0b087a0ffcdb3a8dbbadd09a3"
+    },
+    "patchcore:pcb2:42": {
+      "coreset_and_reconstruction_seconds": 956.8085371999987,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 5102370816,
+      "embedding_shape": [
+        830464,
+        1536
+      ],
+      "extraction_seconds_this_process": 100.54876819999481,
+      "memory_bank_sha256": "58191df790e69b71f615a7d131645c586249b3fc1986b24e1e891849cfedfd99",
+      "memory_bank_shape": [
+        8304,
+        1536
+      ],
+      "ordered_embeddings_sha256": "ad700df4dc001cc2431e467d2434a8c0d452bba0b087a0ffcdb3a8dbbadd09a3"
+    },
+    "patchcore:pcb3:123": {
+      "coreset_and_reconstruction_seconds": 973.9507439000008,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 5127536640,
+      "embedding_shape": [
+        834560,
+        1536
+      ],
+      "extraction_seconds_this_process": 101.91575510000985,
+      "memory_bank_sha256": "d4304541201775b84b90d6eb79fed7884608548cd65cd0e57f3de4fdedece31a",
+      "memory_bank_shape": [
+        8345,
+        1536
+      ],
+      "ordered_embeddings_sha256": "cf81f409956474f7ff5ea8b1c9240a5570fc0b6bb973626d49616615b3634555"
+    },
+    "patchcore:pcb3:2026": {
+      "coreset_and_reconstruction_seconds": 981.9289483999892,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 5127536640,
+      "embedding_shape": [
+        834560,
+        1536
+      ],
+      "extraction_seconds_this_process": 100.07286630000453,
+      "memory_bank_sha256": "5c134e4a774f55253e6f8a949215789f11df10855e381d6d6df27e6dd4f53862",
+      "memory_bank_shape": [
+        8345,
+        1536
+      ],
+      "ordered_embeddings_sha256": "cf81f409956474f7ff5ea8b1c9240a5570fc0b6bb973626d49616615b3634555"
+    },
+    "patchcore:pcb3:42": {
+      "coreset_and_reconstruction_seconds": 1045.4367390999978,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 5127536640,
+      "embedding_shape": [
+        834560,
+        1536
+      ],
+      "extraction_seconds_this_process": 100.32162189999508,
+      "memory_bank_sha256": "daac62e1f899db06f9d0e15f7242e87b5dc271e3e2d3fd20a4042ff8fe59c276",
+      "memory_bank_shape": [
+        8345,
+        1536
+      ],
+      "ordered_embeddings_sha256": "cf81f409956474f7ff5ea8b1c9240a5570fc0b6bb973626d49616615b3634555"
+    },
+    "patchcore:pcb4:123": {
+      "coreset_and_reconstruction_seconds": 971.958169599995,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 5121245184,
+      "embedding_shape": [
+        833536,
+        1536
+      ],
+      "extraction_seconds_this_process": 102.1243770000001,
+      "memory_bank_sha256": "11cc325de8f2ed47b87f28c0c3cbe61e35dcd7da5fa02e031de59f655328cf81",
+      "memory_bank_shape": [
+        8335,
+        1536
+      ],
+      "ordered_embeddings_sha256": "34cec8d7e25a499d63312d5bf4bf6a98c07fd726832a1a10e3ba82b69532ed27"
+    },
+    "patchcore:pcb4:2026": {
+      "coreset_and_reconstruction_seconds": 931.5932138000062,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 5121245184,
+      "embedding_shape": [
+        833536,
+        1536
+      ],
+      "extraction_seconds_this_process": 103.0570391999936,
+      "memory_bank_sha256": "01ed9e63b7e6978eea4c13171fc1985ed5e46f17eb8ca3426e71683139e3e77b",
+      "memory_bank_shape": [
+        8335,
+        1536
+      ],
+      "ordered_embeddings_sha256": "34cec8d7e25a499d63312d5bf4bf6a98c07fd726832a1a10e3ba82b69532ed27"
+    },
+    "patchcore:pcb4:42": {
+      "coreset_and_reconstruction_seconds": 997.7185088999977,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 5121245184,
+      "embedding_shape": [
+        833536,
+        1536
+      ],
+      "extraction_seconds_this_process": 100.40261309999914,
+      "memory_bank_sha256": "1a0e04cc6b255168e7dac5f857d2c05ace6d64cf426173735ca5acd314df8844",
+      "memory_bank_shape": [
+        8335,
+        1536
+      ],
+      "ordered_embeddings_sha256": "34cec8d7e25a499d63312d5bf4bf6a98c07fd726832a1a10e3ba82b69532ed27"
+    },
+    "patchcore:pipe_fryum:123": {
+      "coreset_and_reconstruction_seconds": 28.292285599993193,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 2548039680,
+      "embedding_shape": [
+        414720,
+        1536
+      ],
+      "extraction_seconds_this_process": 43.28023589999066,
+      "memory_bank_sha256": "19f34136cc180080ff4b1172c0cfad75a6c77e98a5d2481d7884b7a9bd4d23b8",
+      "memory_bank_shape": [
+        4147,
+        1536
+      ],
+      "ordered_embeddings_sha256": "da538de44c0d46dcc26cb8bdccaee19d8f85f6ffeba00f751fb4ceee7dac2c68"
+    },
+    "patchcore:pipe_fryum:2026": {
+      "coreset_and_reconstruction_seconds": 28.409669799992116,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 2548039680,
+      "embedding_shape": [
+        414720,
+        1536
+      ],
+      "extraction_seconds_this_process": 43.40582390000054,
+      "memory_bank_sha256": "0b9a32300c41bb247fad0d4416aa2a05bc04f08b6d841c415dac0162d7cebaeb",
+      "memory_bank_shape": [
+        4147,
+        1536
+      ],
+      "ordered_embeddings_sha256": "da538de44c0d46dcc26cb8bdccaee19d8f85f6ffeba00f751fb4ceee7dac2c68"
+    },
+    "patchcore:pipe_fryum:42": {
+      "coreset_and_reconstruction_seconds": 28.909031500006677,
+      "coreset_completed": true,
+      "dtype": "torch.float32",
+      "embedding_bytes": 2548039680,
+      "embedding_shape": [
+        414720,
+        1536
+      ],
+      "extraction_seconds_this_process": 46.82238990000042,
+      "memory_bank_sha256": "39a61b1cbf2d27d49f33cb7bc11acd7360121c2887b817254ad633f446c99c40",
+      "memory_bank_shape": [
+        4147,
+        1536
+      ],
+      "ordered_embeddings_sha256": "da538de44c0d46dcc26cb8bdccaee19d8f85f6ffeba00f751fb4ceee7dac2c68"
+    }
+  },
+  "sampled_telemetry": [
+    {
+      "maximum_sampled_gpu_mib": 7882,
+      "maximum_sampled_temperature_c": 78,
+      "maximum_whea_events_since_start": 0,
+      "minimum_free_bytes": 110722736128,
+      "path": "outputs/phase4d-a-visa-development-matrix/telemetry.jsonl",
+      "samples": 5028,
+      "sha256": "2efaa86c24958561b375b1fa3cd575fa70d92455b79f30da6a91ac48d7ce5dc9"
+    },
+    {
+      "maximum_sampled_gpu_mib": 1958,
+      "maximum_sampled_temperature_c": 78,
+      "maximum_whea_events_since_start": 0,
+      "minimum_free_bytes": 113411751936,
+      "path": "outputs/phase4d-a-migration/continuation/operator-telemetry.jsonl",
+      "samples": 1944,
+      "sha256": "9a8d267839584dbd0057e41ffdf298d2aff2bf0d052ed2289879e75bc8fc221f"
+    },
+    {
+      "maximum_sampled_gpu_mib": 3698,
+      "maximum_sampled_temperature_c": 69,
+      "maximum_whea_events_since_start": 0,
+      "minimum_free_bytes": 110726946816,
+      "path": "outputs/phase4d-a-recovery/pcb1-42-process-loss-20261002/continuation/operator-telemetry.jsonl",
+      "samples": 1913,
+      "sha256": "ca68ee40ad15c842c8926b5c0d7392366e45d7a0896c6dd165f1cc96395240a1"
+    }
+  ],
+  "test_performance_evaluated": false
+}

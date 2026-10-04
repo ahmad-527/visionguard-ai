@@ -316,3 +316,25 @@ The exact implementation commit, activation fingerprint, full local checks,
 fresh artifact verification and CI status are recorded in the adjacent compact
 freeze/acceptance evidence and final PR handoff. **No merge or actual evaluation
 is performed by this task. All real gates remain CLOSED.**
+
+## Frozen review handoff
+
+Implementation commit: `810d5f26016a7369edaf363bf3162f9068a03915`.
+Activation protocol: `visionguard-visa-controlled-activation-v1`.
+Activation fingerprint:
+`960811034e904c6f86a8e127ef0b149a67fb2ec5715e96333e813d461d4d431f`.
+
+`reports/phase4d-b2-controlled-activation/implementation-freeze.json` binds the
+source/configuration/environment/model matrix and SHA-bound compact acceptance
+evidence. `acceptance-evidence.json` records 710 passed / 2 skipped full local
+tests, successful 36-pair artificial execution, 72 verified restart stages with
+zero new calls, four successful native equivalence calls, and all preserved
+negative findings. Ruff format/lint, pip check, CLI/import, prior-freeze and
+focused secret/personal-path/large-file/whitespace checks passed.
+
+Future registry `reviewed_head` must be the **final reviewed PR head**, including
+this freeze/evidence handoff, not merely the earlier implementation commit.
+`reviewed_merge` must be its later actual regular merge on main. Neither identity
+is guessed or supplied as an executable permission in this branch. CI is checked
+on the published final PR head and recorded separately; hosted CPU/artificial
+jobs do not replace the local Windows/CUDA measurements.

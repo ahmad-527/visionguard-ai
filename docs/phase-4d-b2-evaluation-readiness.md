@@ -35,6 +35,11 @@ protocol, metric definitions, backend and permanently closed gate were not
 changed. An unrelated new workflow provides B2-specific CI without changing
 the B1-bound existing workflow.
 
+Frozen readiness fingerprint:
+`1b44805040f211fdf75bd54561bae1b61f0fe2912d25ff734c355ff1202ba6cc`.
+Implementation commit: `a03e4d9df859d1078bb7c399f8218183f1dc8631`.
+The later freeze/evidence commit does not change that implementation.
+
 The authoritative workspace/output volume is the migrated external NTFS drive.
 Its 67-receipt migration index was independently SHA/size verified against
 `80b786e5eaef37e4a56c33f7fc43c65dd8713830f0f848a5e1c6e7c31fbedac7`.

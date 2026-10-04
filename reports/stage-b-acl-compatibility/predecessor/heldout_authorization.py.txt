@@ -13,21 +13,18 @@ import json
 import os
 import re
 import shutil
-import stat
 import subprocess
 import sys
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 
-from visionguard.authorization_amendment import PREDECESSOR_HEAD, PREDECESSOR_MERGE
 from visionguard.heldout_contract import context, verify_freeze
 from visionguard.heldout_paths import checked
 from visionguard.visa_acquire import sha256_file
 from visionguard.visa_b2_storage import json_once
 from visionguard.visa_evaluator import require
 from visionguard.visa_evaluator_storage import canonical_bytes
-from visionguard.windows_trust_acl import collect_chain, validate_chain
 
 _ISSUED = {}
 
@@ -45,53 +42,57 @@ class Permission:
 
 
 def _protected_registry() -> tuple[dict, str]:
-    """Fixed Get-Acl metadata collector, then fail-closed actual-object screening.
-
-    The collector rejects: Run evaluator without administrative write authority.
-    No caller override, installer, private-key interface or missing-file fallback.
-    """
     require(
         sys.platform == "win32", "Real execution requires reviewed Windows environment"
     )
     # Fixed machine-wide location; no caller/environment-variable trust override.
-    validate_chain(collect_chain())
-    target = checked(Path(r"C:\ProgramData\VisionGuardAI\authorization\trust.json"))
-    state = target.stat()
-    require(
-        stat.S_ISREG(state.st_mode) and state.st_nlink == 1,
-        "Non-regular/multi-link trust registry",
+    script = r"""
+$target='C:\ProgramData\VisionGuardAI\authorization\trust.json'
+$ErrorActionPreference='Stop'
+$id=[Security.Principal.WindowsIdentity]::GetCurrent()
+$principal=New-Object Security.Principal.WindowsPrincipal($id)
+if($principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)){
+    throw 'Run evaluator without administrative write authority'
+}
+$protected=@('S-1-5-18','S-1-5-32-544')
+foreach($ancestor in @('C:\','C:\ProgramData')){
+  $item=Get-Item -LiteralPath $ancestor
+  if($item.Attributes -band [IO.FileAttributes]::ReparsePoint){
+    throw 'Linked trust ancestor'
+  }
+  foreach($rule in (Get-Acl -LiteralPath $ancestor).Access){
+    $sid=$rule.IdentityReference.Translate([Security.Principal.SecurityIdentifier])
+    $danger=([int]$rule.FileSystemRights -band 0xD0040) -ne 0
+    if($rule.AccessControlType -eq 'Allow' -and $danger `
+        -and $sid.Value -notin $protected){throw 'Replaceable trust ancestor'}
+  }
+}
+$paths=@('C:\ProgramData\VisionGuardAI','C:\ProgramData\VisionGuardAI\authorization',$target)
+foreach($p in $paths){
+  $item=Get-Item -LiteralPath $p -ErrorAction Stop
+  if($item.Attributes -band [IO.FileAttributes]::ReparsePoint){
+    throw 'Linked trust path'
+  }
+  $acl=Get-Acl -LiteralPath $p -ErrorAction Stop
+  $account=[Security.Principal.NTAccount]$acl.Owner
+  $owner=$account.Translate([Security.Principal.SecurityIdentifier]).Value
+  if($owner -notin $protected){throw 'Untrusted registry owner'}
+  foreach($rule in $acl.Access){
+    $sid=$rule.IdentityReference.Translate([Security.Principal.SecurityIdentifier]).Value
+    $write=([int]$rule.FileSystemRights -band 0xD0156) -ne 0
+    if($rule.AccessControlType -eq 'Allow' -and $write -and $sid -notin $protected){
+      throw 'Registry writable by ordinary principal'
+    }
+  }
+}
+[IO.File]::ReadAllText($target)
+"""
+    raw = subprocess.check_output(
+        ["powershell", "-NoProfile", "-NonInteractive", "-Command", script],
+        text=True,
+        stderr=subprocess.PIPE,
     )
-    document = json.loads(target.read_bytes())
-    require(
-        type(document) is dict
-        and set(document)
-        == {
-            "reviewed_merge",
-            "reviewed_head",
-            "activation_fingerprint",
-            "source_root",
-            "public_key",
-        },
-        "Malformed public trust registry",
-    )
-    for field, length in (
-        ("reviewed_merge", 40),
-        ("reviewed_head", 40),
-        ("activation_fingerprint", 64),
-    ):
-        require(
-            type(document[field]) is str
-            and re.fullmatch(f"[0-9a-f]{{{length}}}", document[field]) is not None,
-            "Malformed registry identity",
-        )
-    require(
-        type(document["source_root"]) is str
-        and bool(document["source_root"])
-        and type(document["public_key"]) is dict
-        and set(document["public_key"]) == {"modulus", "exponent"}
-        and all(type(v) is str and bool(v) for v in document["public_key"].values()),
-        "Malformed public trust fields",
-    )
+    document = json.loads(raw)
     return document, hashlib.sha256(canonical_bytes(document)).hexdigest()
 
 
@@ -153,10 +154,6 @@ def _review_state(repository: Path, registry: dict) -> None:
     require(not git("status", "--porcelain"), "Execution requires clean checkout")
     expected = registry["reviewed_merge"]
     require(
-        expected != PREDECESSOR_MERGE and registry["reviewed_head"] != PREDECESSOR_HEAD,
-        "Successor requires a new reviewed regular merge/head",
-    )
-    require(
         git("rev-parse", "HEAD") == expected == git("rev-parse", "origin/main"),
         "Review merge/checkout mismatch",
     )
@@ -169,12 +166,6 @@ def _review_state(repository: Path, registry: dict) -> None:
         registry["reviewed_head"]
         != context(repository)["activation"]["base_regular_merge"],
         "Activation PR itself not merged",
-    )
-    git(
-        "merge-base",
-        "--is-ancestor",
-        PREDECESSOR_MERGE,
-        expected,
     )
     git(
         "merge-base",

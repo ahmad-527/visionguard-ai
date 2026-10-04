@@ -1,0 +1,195 @@
+"""Exact historical/successor identity tests with isolated manufactured copies."""
+
+import copy
+import json
+from pathlib import Path
+from types import SimpleNamespace
+
+import pytest
+
+from visionguard import authorization_amendment as amendment
+from visionguard import heldout_authorization as gate
+from visionguard import heldout_contract as contract
+from visionguard.visa_protocol import canonical_fingerprint
+
+REPOSITORY = Path(__file__).resolve().parents[1]
+
+
+@pytest.fixture
+def isolated(tmp_path, monkeypatch):
+    old = json.loads((REPOSITORY / amendment.PREDECESSOR).read_text())
+    paths = (
+        set(old["document"]["source_sha256"])
+        | set(old["document"]["evidence_sha256"])
+        | set(amendment.ADDITIONAL)
+        | set(amendment.ARCHIVES.values())
+        | {amendment.PREDECESSOR}
+    )
+    for relative in paths:
+        target = tmp_path / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes((REPOSITORY / relative).read_bytes())
+    ctx = {
+        "activation": copy.deepcopy(old["document"]["contract"]),
+        "specs": {
+            k: SimpleNamespace(**v) for k, v in old["document"]["models"].items()
+        },
+        "published": {
+            "execution_contract": {"environment": old["document"]["environment"]}
+        },
+    }
+    monkeypatch.setattr(contract, "context", lambda *a: ctx)
+    return tmp_path, old, ctx
+
+
+def test_successor_exact_science_and_historical_identity(isolated):
+    root, old, _ = isolated
+    assert amendment.verify_predecessor(root) == old
+    new = contract.build_freeze(root)
+    assert new == contract.build_freeze(root)
+    assert new["document"]["schema_version"] == 2
+    assert new["fingerprint"] != old["fingerprint"]
+    for field in ["contract", "models", "environment"]:
+        assert new["document"][field] == old["document"][field]
+    assert len(new["document"]["models"]) == 72
+    freeze = root / amendment.FREEZE
+    freeze.parent.mkdir(parents=True, exist_ok=True)
+    freeze.write_text(json.dumps(new))
+    assert contract.verify_freeze(root) == new
+    # Historical fingerprint cannot be self-asserted as the current identity.
+    changed = new | {"fingerprint": old["fingerprint"]}
+    freeze.write_text(json.dumps(changed))
+    with pytest.raises(ValueError, match="Successor"):
+        contract.verify_freeze(root)
+
+
+@pytest.mark.parametrize(
+    "relative", [*amendment.ARCHIVES.values(), "src/visionguard/heldout_metrics.py"]
+)
+def test_historical_source_drift_rejected(isolated, relative):
+    root, _, _ = isolated
+    with (root / relative).open("ab") as handle:
+        handle.write(b"\n# manufactured drift\n")
+    with pytest.raises(ValueError, match="Historical source"):
+        amendment.build_freeze(root)
+
+
+def test_original_freeze_evidence_drift_rejected(isolated):
+    root, _, _ = isolated
+    original = root / amendment.PREDECESSOR
+    old = json.loads(original.read_text())
+    old["document"]["schema_version"] = 999
+    original.write_text(json.dumps(old))
+    with pytest.raises(ValueError, match="Predecessor"):
+        amendment.build_freeze(root)
+
+
+@pytest.mark.parametrize(
+    "relative",
+    [
+        "src/visionguard/windows_trust_acl.py",
+        "src/visionguard/heldout_authorization.py",
+        amendment.PROTOCOL,
+    ],
+)
+def test_security_semantic_changes_alter_successor_fingerprint(isolated, relative):
+    root, _, _ = isolated
+    before = amendment.build_freeze(root)
+    target = root / relative
+    if relative.endswith(".json"):
+        value = json.loads(target.read_text())
+        value["acl_policy"] = "manufactured unsafe rule"
+        target.write_text(json.dumps(value))
+    else:
+        with target.open("ab") as handle:
+            handle.write(b"\n# manufactured changed security implementation\n")
+    assert amendment.build_freeze(root)["fingerprint"] != before["fingerprint"]
+
+
+@pytest.mark.parametrize("field", ["threshold", "environment", "contract"])
+def test_frozen_science_cannot_change(isolated, field):
+    root, _, ctx = isolated
+    if field == "threshold":
+        spec = next(iter(ctx["specs"].values()))
+        spec.image_threshold += 1
+    elif field == "environment":
+        ctx["published"]["execution_contract"]["environment"] = {"manufactured": True}
+    else:
+        ctx["activation"] = {"scope": "wrong"}
+    with pytest.raises(ValueError, match="drift"):
+        amendment.build_freeze(root)
+
+
+def test_fingerprint_order_stable():
+    assert canonical_fingerprint({"b": 2, "a": 1}) == canonical_fingerprint(
+        {"a": 1, "b": 2}
+    )
+
+
+def test_missing_successor_never_falls_back_to_predecessor(isolated):
+    root, _, _ = isolated
+    with pytest.raises(FileNotFoundError):
+        contract.verify_freeze(root)
+
+
+@pytest.mark.parametrize(
+    "case",
+    [
+        "valid",
+        "predecessor-merge",
+        "predecessor-head",
+        "dirty",
+        "one-parent",
+        "wrong-head",
+        "wrong-origin",
+        "not-descendant",
+    ],
+)
+def test_future_new_regular_merge_required(monkeypatch, tmp_path, case):
+    registry = {"reviewed_merge": "a" * 40, "reviewed_head": "b" * 40}
+    if case == "predecessor-merge":
+        registry["reviewed_merge"] = amendment.PREDECESSOR_MERGE
+    elif case == "predecessor-head":
+        registry["reviewed_head"] = "58062446d7a6d7bded8515e2d884de04981c843f"
+    commands = []
+
+    def git(command, **kwargs):
+        args = command[1:]
+        commands.append(args)
+        if args[0] == "status":
+            return " M manufactured" if case == "dirty" else ""
+        if args[0] == "rev-parse":
+            return (
+                "wrong"
+                if case == "wrong-origin" and args[1] == "origin/main"
+                else registry["reviewed_merge"]
+            )
+        if args[0] == "show":
+            return (
+                "c" * 40
+                if case == "one-parent"
+                else "c" * 40
+                + " "
+                + ("d" * 40 if case == "wrong-head" else registry["reviewed_head"])
+            )
+        if args[0] == "merge-base":
+            if case == "not-descendant":
+                raise gate.subprocess.CalledProcessError(1, command)
+            return ""
+        raise AssertionError(args)
+
+    monkeypatch.setattr(gate.subprocess, "check_output", git)
+    monkeypatch.setattr(
+        gate, "context", lambda *a: {"activation": {"base_regular_merge": "e" * 40}}
+    )
+    if case == "valid":
+        gate._review_state(tmp_path, registry)
+        assert [
+            "merge-base",
+            "--is-ancestor",
+            amendment.PREDECESSOR_MERGE,
+            registry["reviewed_merge"],
+        ] in commands
+    else:
+        with pytest.raises((ValueError, gate.subprocess.CalledProcessError)):
+            gate._review_state(tmp_path, registry)

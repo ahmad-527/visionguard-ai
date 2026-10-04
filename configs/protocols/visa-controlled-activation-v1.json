@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "protocol_id": "visionguard-visa-controlled-activation-v1",
+  "base_regular_merge": "3ab2b3bc9135aa1c1c63aef78fd2d88c1552f1f7",
+  "b1_fingerprint": "0578ca3bc7765657fe568e7db670088490639ef5f011315ab043391c8a8fcb49",
+  "b2_readiness_fingerprint": "1b44805040f211fdf75bd54561bae1b61f0fe2912d25ff734c355ff1202ba6cc",
+  "development_freeze_sha256": "d75712cad7fcfa9309c12882d869db65627e7c325723c48459ef8e1da90be061",
+  "scope": {"categories": 12, "seeds": [42, 123, 2026], "models": 72, "pairs": 36, "images": 2162, "model_image_calls": 12972},
+  "output_relative": "outputs/phase4d-b2-heldout-visa",
+  "output_volume": "D",
+  "canonical_repository": "D:/VisionGuardAI/repository",
+  "run_budget_bytes": 137438953472,
+  "safety_reserve_bytes": 21474836480,
+  "minimum_free_bytes": 158913789952,
+  "authorization": {
+    "trust": "human-administrator-provisioned ProgramData/VisionGuardAI/authorization registry; Administrators/SYSTEM ownership/write only; current user read only; no registration/signing command in evaluator",
+    "signature": "RSA PKCS1 v1.5 SHA256, exponent 65537, modulus >=3072 bits; verified by Windows .NET RSA; no signing private key in evaluator",
+    "approval": "explicit signed allow_real_test_access true; merge/head/fingerprints/model matrix/audit/scope/input/output/environment/id/expiry bound independently",
+    "merge": "registry-pinned reviewed regular merge equals clean actual HEAD and origin/main; second parent equals reviewed feature head; source freeze verifies",
+    "single_use": "exclusive claim after approval before any test-root operation; immutable claim hash required for same-run resume; no new-run reuse",
+    "during_this_assignment": "no trust registration, approval creation, claim or real admission permitted"
+  },
+  "admission": {
+    "after_permission_only": true,
+    "identity": "committed acquisition/inventory/split SHA from Phase4C audit; per-file encoded/decoded hash, original dimensions and membership verified",
+    "order": "canonical category then seed; image POSIX relative path lexicographic identical both models/all seeds",
+    "mask": "official pinned id2class label semantics then >0 binary foreground; no resizing ground truth",
+    "duplicates": "encoded and RGB-decoded duplicates and original train/test overlaps rejected; no aliases, traversal, reparse/cloud entries or unexpected asset membership"
+  },
+  "inference": "one model resident, batch1, unchanged B1 native restoration/transforms/restoration; separate real-ID frame and reducer; strict own-threshold > before float16 continuous export; no fusion/tuning",
+  "metrics": "B1 numerically and structurally equivalent image AUROC/AUPRO05/pixel AUROC diagnostic/threshold metrics/distributions/three-way triage; category macro within seed then descriptive three-seed mean/sample std; no significance",
+  "publication": "exclusive create fsync rehash, original-coordinate float16 TIFF/native binary PNG/truth PNG; origin and all files SHA-bound; complete candidate last plus independent validated receipt; two exact metric replays; all36 pairs/12972 calls before overall",
+  "restart": "same authorized run and claim only; independently revalidate complete model stages/cells before skip; classified interruption new immutable attempt with parent hash; no hardware/filesystem failure retry; stale/unclassified process/lock requires human review",
+  "monitoring": "actual capacity/connectivity before writes; CUDA allocator peaks separately from device point readings; process RAM, temperature points, timing, periodic heartbeat; independent watcher for owner disappearance/Windows hardware warnings; no settings changes",
+  "retention": "128GiB including failed attempts plus20GiB floor; preserve C originals and all72 artifacts; no discard to rescue results",
+  "human_access_history": "UNKNOWN",
+  "independent_reservation": "NOT ESTABLISHED",
+  "future_report_title": "Held-out VisA evaluation with historical access independence unverified."
+}

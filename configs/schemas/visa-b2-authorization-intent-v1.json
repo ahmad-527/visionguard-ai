@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "B2 draft authorization intent — never permission",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "reviewed_implementation_commit", "b2_fingerprint", "b1_fingerprint", "development_freeze_sha256", "dataset_audit_sha256", "scope", "output_relative", "output_destination", "contract_sha256", "models", "status", "authorization_id"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "reviewed_implementation_commit": {"type": "string", "pattern": "^[a-f0-9]{40}$"},
+    "b2_fingerprint": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "b1_fingerprint": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "development_freeze_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "dataset_audit_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "scope": {"type": "object"},
+    "output_relative": {"const": "outputs/phase4d-b2-heldout-visa"},
+    "output_destination": {"type": "string", "minLength": 1},
+    "contract_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "models": {"type": "object", "minProperties": 72, "maxProperties": 72},
+    "status": {"const": "DRAFT_NOT_AUTHORIZED"},
+    "authorization_id": {"type": "string", "pattern": "^[a-f0-9]{32}$"}
+  }
+}

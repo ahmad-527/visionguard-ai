@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "protocol_id": "visionguard-visa-b2-readiness-v1",
+  "stage": "READINESS_ONLY_NO_REAL_TEST_ACCESS",
+  "b1_regular_merge": "d335b91d10489b4c0811530bd4d69418f68fb2ff",
+  "b1_fingerprint": "0578ca3bc7765657fe568e7db670088490639ef5f011315ab043391c8a8fcb49",
+  "development_freeze_sha256": "d75712cad7fcfa9309c12882d869db65627e7c325723c48459ef8e1da90be061",
+  "development_execution_fingerprint": "31a5b53d91bf7f609b5dfa3a97b87c4c6617a767d9096fa845f774a5f9bfefc3",
+  "dataset_audit_sha256": "06e227bb5d2cd26f38010b2c304c62f14f383a81c64f5b2e4c48f1019128f58f",
+  "official_split_sha256": "a48557e6033318cb90556f706196bc9d247a776a23ea51aecee5a80dd0332995",
+  "real_execution_enabled": false,
+  "scope": {"categories": 12, "seeds": [42, 123, 2026], "models": 72, "pairs": 36, "images": 2162, "model_image_calls": 12972},
+  "output_relative": "outputs/phase4d-b2-heldout-visa",
+  "capacity": {"run_budget_bytes": 137438953472, "safety_reserve_bytes": 21474836480, "minimum_free_bytes": 158913789952, "future_output_volume": "D", "budget_includes_failed_attempts": true},
+  "admission": {
+    "readiness": "only_new_generated_trees_minted_in_process_no_caller_root",
+    "future": "human_authorization_before_any_test_root_path_operation",
+    "source": "official_archive_and_split_hash_bound_to_precommitted_audit_no_self_asserted_expected_hash",
+    "order": "category_then_seed_then_model; images_POSIX_relative_path_lexicographic",
+    "alignment": "exact_same_category_membership_labels_dimensions_all_three_seeds_and_both_models",
+    "images": "RGB_original_dimensions_no_truth_resizing",
+    "masks": "official_binary_0_255_to_0_1_original_dimensions_normal_empty_anomaly_nonempty",
+    "duplicates": "reject_repeated_rows_missing_files_extra_membership_aliases_reparse_paths; future_real_crosscategory_and_train_test_hash_duplicate_check_required",
+    "synthetic_templates": "crosscategory_RGB_template_reuse_is_deliberate_and_not_real_independence_evidence"
+  },
+  "runner": {
+    "concurrency": "one_gpu_workload_and_exclusive_output_writer",
+    "native": "unchanged_B1_strict_final_model_restoration_and_synthetic_frame_inference",
+    "science": "no_training_recalibration_new_thresholds_model_changes_rng_training_restore_or_selection",
+    "metrics": "unchanged_B1_streamed_reducers_and_36_pair_aggregation",
+    "binary": "native_float32_restored_map_strict_gt_own_threshold_before_float16_export",
+    "localization": "retain_separate_model_float16_TIFF_and_binary_PNG_no_fusion",
+    "reporting": "category_macro_within_seed_then_descriptive_three_seed_mean_sample_std; paired_PC_minus_EA; pooled_counts_secondary; undefined_explicit_no_significance",
+    "triage": "PASS_normal_normal; REJECT_anomalous_anomalous; REVIEW_disagreement_never_binary_or_dropped"
+  },
+  "publication": {
+    "files": "exclusive_create_fsync_rehash_no_replace_live_files_no_silent_retry",
+    "attempts": "immutable_origin_before_payload_completion_manifest_last_validated_receipt_required",
+    "resume": "independent_all_file_hash_and_metric_replay_before_skip; partial_attempt_not_complete_new_attempt_after_classified_interruption",
+    "unclean_exit": "stale_lock_or_unclassified_attempt_requires_independent_process_review_no_auto_cleanup",
+    "failure": "stop_preserve_hardware_filesystem_corruption_provenance_failure_no_auto_retry",
+    "overall": "publish_only_36_valid_pairs_exact72_models_and_all12972_calls_after_authorized_real_execution",
+    "repeatability": "two_canonical_reducer_replays_from_retained_maps_rows_no_new_inference_no_posthoc_tolerance"
+  },
+  "authorization": {
+    "readiness": "all_real_entrypoints_permanently_deny_before_test_root_operations_even_matching_ids_or_human_text",
+    "future_required": ["reviewed_implementation_commit", "b2_fingerprint", "b1_fingerprint", "development_freeze_sha256", "dataset_audit_sha256", "scope", "output_destination", "contract_sha256", "authorization_id", "explicit_human_approval_receipt"],
+    "trust": "expected_values_loaded_independently_from_repository; future_trusted_out_of_band_human_approval_ledger_not_caller_expected_values",
+    "lifecycle": "single_use_authorization_id_claim_exclusive_before_admission; consumed_receipt_immutable; resume_only_same_run_with_receipt_chain; never_reuse_for_new_run",
+    "matching_hash": "identity_not_permission; design_intent_validation_never_grants_execution",
+    "opening": "separate_human_review_and_execution_authorization_required_no_auto_transition; B1_gate_never_modified"
+  },
+  "native_smoke": {"inputs": "manufactured_RGB_only", "selection": "largest_frozen_PatchCore_fit_count_then_category_lexicographic_seed42_and_same_EfficientAD_pair_not_performance_selection", "one_model_at_once": true, "no_accuracy_claim": true},
+  "human_access_history": "UNKNOWN",
+  "independent_reservation": "NOT ESTABLISHED",
+  "future_report_title": "Held-out VisA evaluation with historical access independence unverified",
+  "history": "retain_72_complete_2_failed_1_interrupted_attempts_migrations_and_unknown_operational_causes"
+}

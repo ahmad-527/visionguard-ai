@@ -1,0 +1,15 @@
+{
+  "schema_version": 2,
+  "protocol_id": "visionguard-visa-authorization-amendment-v2",
+  "predecessor_merge": "91b5b45a82ccef042ad13535d2456ea7d6013885",
+  "predecessor_head": "58062446d7a6d7bded8515e2d884de04981c843f",
+  "predecessor_activation_fingerprint": "960811034e904c6f86a8e127ef0b149a67fb2ec5715e96333e813d461d4d431f",
+  "historical_source_policy": "exact archived bytes for authorization and contract; every other predecessor source/evidence remains current and byte-identical",
+  "acl_policy": "skip InheritOnly only on its current object; independently inspect all five actual objects; never skip effective IsInherited ACEs; reject dangerous ordinary Allow even with Deny; reject generic writes and unsupported states",
+  "metadata_policy": "fixed literal trust paths; Force hidden metadata only; reject missing/null/unsupported DACL, untrusted owner, aliases, reparse/offline/recall paths and multi-link registry",
+  "review_policy": "new reviewed regular merge descendant of predecessor required; predecessor merge/head/fingerprint cannot authorize successor",
+  "scientific_policy": "predecessor scientific contract, environment and 72 model/threshold specifications exact; B1/B2/audit/split/development/calibration unchanged",
+  "during_this_assignment": "engineering and synthetic ACL/artificial activation tests only; no dataset, registry installation, keys, real approval/claim, inference/evaluation or power/ACL changes",
+  "human_access_history": "UNKNOWN",
+  "independent_reservation": "NOT ESTABLISHED"
+}

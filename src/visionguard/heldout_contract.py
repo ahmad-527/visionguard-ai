@@ -5,11 +5,9 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from visionguard.visa_acquire import sha256_file
 from visionguard.visa_b2_contract import context as readiness_context
 from visionguard.visa_b2_contract import verify_freeze as verify_readiness
 from visionguard.visa_evaluator import require
-from visionguard.visa_protocol import canonical_fingerprint
 
 PROTOCOL = "configs/protocols/visa-controlled-activation-v1.json"
 FREEZE = "reports/phase4d-b2-controlled-activation/implementation-freeze.json"
@@ -37,35 +35,14 @@ def context(repository: Path) -> dict:
 
 
 def build_freeze(repository: Path) -> dict:
-    ctx = context(repository)
-    paths = [
-        p.relative_to(repository).as_posix()
-        for pattern in (
-            "src/visionguard/heldout_*.py",
-            "tests/test_heldout_*.py",
-            "scripts/heldout_activation_*.py",
-        )
-        for p in repository.glob(pattern)
-    ]
-    paths += [PROTOCOL, ".github/workflows/controlled-activation.yml"]
-    document = {
-        "schema_version": 1,
-        "contract": ctx["activation"],
-        "source_sha256": {p: sha256_file(repository / p) for p in sorted(paths)},
-        "environment": ctx["published"]["execution_contract"]["environment"],
-        "models": {k: vars(v) for k, v in ctx["specs"].items()},
-        "evidence_sha256": {
-            p.relative_to(repository).as_posix(): sha256_file(p)
-            for p in sorted(
-                (repository / "reports/phase4d-b2-controlled-activation").glob("*.json")
-            )
-            if p.name not in ("implementation-freeze.json", "ci-verification.json")
-        },
-    }
-    return {"document": document, "fingerprint": canonical_fingerprint(document)}
+    """Explicitly select schema-2 security successor, never relabel v1 code."""
+    from visionguard.authorization_amendment import build_freeze as successor
+
+    return successor(repository)
 
 
 def verify_freeze(repository: Path) -> dict:
-    saved = json.loads((repository / FREEZE).read_text())
-    require(saved == build_freeze(repository), "Activation/source fingerprint drift")
-    return saved
+    """Require the current successor AND immutable historical/scientific bindings."""
+    from visionguard.authorization_amendment import verify_freeze as successor
+
+    return successor(repository)

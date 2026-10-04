@@ -112,6 +112,32 @@ predicate passes. Native ancestor receipt SHA-256:
 `4d2cbb2a54066986b151ceb9615105825998ec0255a75cd685766c2f5cc611dc`.
 Raw ACL metadata remains in ignored local engineering outputs, not public Git.
 
+**Additional tooling-scratch deviation retained:** initial local focused/full
+pytest invocations omitted `--basetemp`, so pytest used its default Windows
+temporary fixture directory outside the explicitly repository-confined scratch
+scope. These were manufactured unit-test fixtures, not staged dataset assets.
+This omission is not represented as compliance with the location restriction.
+Default pytest retention can manage older pytest scratch directories; its exact
+historical effects were not reconstructed by inspecting external scratch.
+No retrospective external-scratch enumeration or manual cleanup was undertaken.
+A replacement full validation uses an explicitly named, verified-new ignored
+repository-local directory via `--basetemp`. The original invocation/results and
+this deviation remain recorded; the repeat does not erase them. Independent
+human review must include this additional operational finding.
+The bounded repeat passed **867 tests, 2 symlink-privilege skips and 1 key-generation
+deselection in 232.47 seconds**. Its exact scratch path was the ignored
+`outputs/engineering/stage-b-acl-amendment/pytest-bounded-20261004T1530` beneath
+the reviewed repository, verified absent before pytest could manage it.
+
+```powershell
+python -m pytest --basetemp outputs/engineering/stage-b-acl-amendment/pytest-bounded-20261004T1530 -k 'not platform_signature_with_ephemeral_synthetic_key' -q
+```
+
+Do not reuse an existing basetemp containing evidence: pytest manages that exact
+directory. Use a verified-new ignored repository-local scratch path for future
+checks. A legacy cached traceback filename appeared in one skip; independently
+printed module locations confirmed the current D: repository package was loaded.
+
 A separate full-chain **metadata-only** probe stopped at missing
 `C:\ProgramData\VisionGuardAI` with native Get-Item PathNotFound/return code 1.
 It did not read a registry. Thus **production registry NOT VALIDATED**; no trust
@@ -212,6 +238,13 @@ The Windows key-generating test
 is intentionally excluded locally; Ubuntu CI naturally skips that Windows-only
 test. All three supported Python versions run the unchanged general and
 controlled-activation workflows plus the new synthetic amendment workflow.
+
+At implementation commit `2ec36c1adff0f4ff3c76ebab297bb09b8a8eb3fb`, all **12 CI
+jobs** passed: general CI, B2 readiness, controlled activation and authorization
+amendment, each on Python **3.11, 3.12 and 3.13**. Run IDs respectively:
+`37213106567`, `37213106542`, `37213106547`, `37213106578`.
+The final documentation/evidence head is verified separately in the PR handoff;
+these implementation-head results are not substituted for final-head CI.
 
 ## Review boundary and remaining limitations
 

@@ -42,6 +42,18 @@
     "retained_matrix_bytes": 1836339
   },
   "local_checks": {
+    "initial_pytest_scratch": "default Windows pytest temporary fixtures outside repository; deviation retained",
+    "initial_full_invocation": "python -m pytest -k 'not platform_signature_with_ephemeral_synthetic_key' -q",
+    "external_pytest_retention_effects": "NOT RETROSPECTIVELY INSPECTED",
+    "bounded_repeat": {
+      "invocation": "python -m pytest --basetemp outputs/engineering/stage-b-acl-amendment/pytest-bounded-20261004T1530 -k 'not platform_signature_with_ephemeral_synthetic_key' -q",
+      "scratch_verified_new_before_run": true,
+      "passed": 867,
+      "skipped": 2,
+      "deselected": 1,
+      "seconds": 232.47,
+      "source_unchanged": true
+    },
     "targeted_tests_passed": 184,
     "full_tests_passed": 867,
     "full_tests_skipped": 2,
@@ -56,6 +68,18 @@
     "closed_plan_and_cli": "PASS",
     "git_whitespace": "PASS",
     "targeted_secret_personal_path_large_file_scan": "PASS"
+  },
+  "implementation_commit_ci": {
+    "commit": "2ec36c1adff0f4ff3c76ebab297bb09b8a8eb3fb",
+    "supported_python": ["3.11", "3.12", "3.13"],
+    "successful_jobs": 12,
+    "workflow_runs": {
+      "CI": 37213106567,
+      "B2 readiness": 37213106542,
+      "controlled activation": 37213106547,
+      "authorization amendment": 37213106578
+    },
+    "final_documentation_head_ci": "Verify independently in final PR handoff"
   },
   "preserved_incident": {
     "exact_invocation": "rg --files D:\\VisionGuardAI -g gh.exe -g '!heldout-visa-source/**' -g '!repository/outputs/**' -g '!repository/data/**'",

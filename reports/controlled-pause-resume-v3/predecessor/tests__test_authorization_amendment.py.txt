@@ -10,7 +10,6 @@ import pytest
 from visionguard import authorization_amendment as amendment
 from visionguard import heldout_authorization as gate
 from visionguard import heldout_contract as contract
-from visionguard import operational_successor as operational
 from visionguard.visa_protocol import canonical_fingerprint
 
 REPOSITORY = Path(__file__).resolve().parents[1]
@@ -29,9 +28,7 @@ def isolated(tmp_path, monkeypatch):
     for relative in paths:
         target = tmp_path / relative
         target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_bytes(
-            (REPOSITORY / operational.ARCHIVES.get(relative, relative)).read_bytes()
-        )
+        target.write_bytes((REPOSITORY / relative).read_bytes())
     ctx = {
         "activation": copy.deepcopy(old["document"]["contract"]),
         "specs": {
@@ -48,8 +45,8 @@ def isolated(tmp_path, monkeypatch):
 def test_successor_exact_science_and_historical_identity(isolated):
     root, old, _ = isolated
     assert amendment.verify_predecessor(root) == old
-    new = amendment.build_freeze(root)
-    assert new == amendment.build_freeze(root)
+    new = contract.build_freeze(root)
+    assert new == contract.build_freeze(root)
     assert new["document"]["schema_version"] == 2
     assert new["fingerprint"] != old["fingerprint"]
     for field in ["contract", "models", "environment"]:
@@ -58,12 +55,12 @@ def test_successor_exact_science_and_historical_identity(isolated):
     freeze = root / amendment.FREEZE
     freeze.parent.mkdir(parents=True, exist_ok=True)
     freeze.write_text(json.dumps(new))
-    assert amendment.verify_freeze(root) == new
+    assert contract.verify_freeze(root) == new
     # Historical fingerprint cannot be self-asserted as the current identity.
     changed = new | {"fingerprint": old["fingerprint"]}
     freeze.write_text(json.dumps(changed))
     with pytest.raises(ValueError, match="Successor"):
-        amendment.verify_freeze(root)
+        contract.verify_freeze(root)
 
 
 @pytest.mark.parametrize(
@@ -132,7 +129,7 @@ def test_fingerprint_order_stable():
 def test_missing_successor_never_falls_back_to_predecessor(isolated):
     root, _, _ = isolated
     with pytest.raises(FileNotFoundError):
-        amendment.verify_freeze(root)
+        contract.verify_freeze(root)
 
 
 @pytest.mark.parametrize(
@@ -151,9 +148,9 @@ def test_missing_successor_never_falls_back_to_predecessor(isolated):
 def test_future_new_regular_merge_required(monkeypatch, tmp_path, case):
     registry = {"reviewed_merge": "a" * 40, "reviewed_head": "b" * 40}
     if case == "predecessor-merge":
-        registry["reviewed_merge"] = operational.PREDECESSOR_MERGE
+        registry["reviewed_merge"] = amendment.PREDECESSOR_MERGE
     elif case == "predecessor-head":
-        registry["reviewed_head"] = operational.PREDECESSOR_HEAD
+        registry["reviewed_head"] = "58062446d7a6d7bded8515e2d884de04981c843f"
     commands = []
 
     def git(command, **kwargs):
@@ -190,7 +187,7 @@ def test_future_new_regular_merge_required(monkeypatch, tmp_path, case):
         assert [
             "merge-base",
             "--is-ancestor",
-            operational.PREDECESSOR_MERGE,
+            amendment.PREDECESSOR_MERGE,
             registry["reviewed_merge"],
         ] in commands
     else:

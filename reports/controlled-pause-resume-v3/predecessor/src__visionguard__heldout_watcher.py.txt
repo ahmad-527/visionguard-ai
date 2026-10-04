@@ -8,7 +8,6 @@ is detected by runner.poll(). A watcher cannot rescue a broken output volume.
 from __future__ import annotations
 
 import argparse
-import json
 import os
 import subprocess
 import sys
@@ -18,7 +17,6 @@ from uuid import uuid4
 
 from visionguard.heldout_resources import Budget, windows_warnings
 from visionguard.heldout_storage import json_once
-from visionguard.visa_acquire import sha256_file
 from visionguard.visa_evaluator import require
 
 
@@ -37,30 +35,11 @@ def process_identity(pid):
     return Path(f"/proc/{pid}/stat").read_text().rsplit(")", 1)[1].split()[19]
 
 
-def process_parent(pid):
-    """Exact PID lookup; Windows venv launcher and Python worker may differ."""
-    if os.name == "nt":
-        script = (
-            "(Get-CimInstance Win32_Process -Filter 'ProcessId = "
-            + str(int(pid))
-            + "' -ErrorAction Stop).ParentProcessId"
-        )
-        return int(
-            subprocess.check_output(
-                ["powershell", "-NoProfile", "-NonInteractive", "-Command", script],
-                text=True,
-                stderr=subprocess.PIPE,
-            ).strip()
-        )
-    return int(Path(f"/proc/{pid}/stat").read_text().rsplit(")", 1)[1].split()[1])
-
-
 class Watcher:
     def start(self, root, owner):
         self.root = root
         self.directory = root / f"watcher-{owner['nonce']}"
         self.directory.mkdir()
-        self.owner = owner
         identity = process_identity(owner["pid"])
         with (
             (self.directory / "stdout.log").open("xb") as out,
@@ -86,8 +65,6 @@ class Watcher:
                     identity,
                     "--started",
                     owner["started"],
-                    "--owner-nonce",
-                    owner["nonce"],
                 ],
                 stdout=out,
                 stderr=err,
@@ -100,18 +77,6 @@ class Watcher:
             self.check()
             time.sleep(0.1)
         require((self.directory / "ready.json").exists(), "Watcher readiness timeout")
-        ready = json.loads((self.directory / "ready.json").read_bytes())
-        require(
-            ready["owner_nonce"] == owner["nonce"]
-            and ready["owner_pid"] == owner["pid"]
-            and ready["owner_identity"] == identity
-            and ready["process_identity"] == process_identity(ready["pid"])
-            and (
-                ready["pid"] == self.child.pid
-                or process_parent(ready["pid"]) == self.child.pid
-            ),
-            "Watcher launcher/worker identity mismatch",
-        )
 
     def check(self):
         require(
@@ -122,35 +87,10 @@ class Watcher:
 
     def finish(self, safe):
         if not hasattr(self, "child"):
-            require(not safe, "Watcher never started: safe exit unproven")
             return
-        require(self.child.poll() is None, "Watcher exited before safe handshake")
-        finish = {"safe_owner_exit": safe, "owner_nonce": self.owner["nonce"]}
-        record = json_once(self.directory / "finish.json", finish)
-        exit_code = self.child.wait(timeout=10)
-        require(exit_code == 0, "Watcher safe shutdown failed")
-        stopped = json.loads((self.directory / "stopped.json").read_bytes())
-        ready = json.loads((self.directory / "ready.json").read_bytes())
-        require(
-            stopped["finish_sha256"] == record["sha256"]
-            and stopped["safe_owner_exit"] is safe
-            and stopped["owner_nonce"] == self.owner["nonce"]
-            and stopped["owner_pid"] == self.owner["pid"]
-            and stopped["owner_identity"] == process_identity(self.owner["pid"])
-            and stopped["pid"] == ready["pid"]
-            and stopped["process_identity"] == ready["process_identity"],
-            "Watcher shutdown acknowledgement mismatch",
-        )
-        from visionguard.heldout_pause import absent
-
-        require(
-            absent(stopped["pid"], stopped["process_identity"]),
-            "Watcher worker exit unconfirmed",
-        )
-        return {
-            "exit_code": exit_code,
-            "sha256": sha256_file(self.directory / "stopped.json"),
-        }
+        if self.child.poll() is None:
+            json_once(self.directory / "finish.json", {"safe_owner_exit": safe})
+            self.child.wait(timeout=10)
 
 
 def main():
@@ -160,7 +100,6 @@ def main():
     p.add_argument("--owner-pid", type=int, required=True)
     p.add_argument("--owner-identity", required=True)
     p.add_argument("--started", required=True)
-    p.add_argument("--owner-nonce", default=None)
     args = p.parse_args()
     budget = Budget(args.root)
     try:
@@ -170,13 +109,7 @@ def main():
         )
         json_once(
             args.directory / "ready.json",
-            {
-                "owner_pid": args.owner_pid,
-                "owner_identity": args.owner_identity,
-                "owner_nonce": args.owner_nonce,
-                "pid": os.getpid(),
-                "process_identity": process_identity(os.getpid()),
-            },
+            {"owner_pid": args.owner_pid, "owner_identity": args.owner_identity},
         )
         last = 0
         while not (args.directory / "finish.json").exists():
@@ -201,26 +134,6 @@ def main():
                 )
                 last = time.monotonic()
             time.sleep(1)
-        finish_path = args.directory / "finish.json"
-        finish = json.loads(finish_path.read_bytes())
-        require(
-            set(finish) == {"safe_owner_exit", "owner_nonce"}
-            and type(finish["safe_owner_exit"]) is bool
-            and finish["owner_nonce"] == args.owner_nonce
-            and process_identity(args.owner_pid) == args.owner_identity,
-            "Invalid watcher finish/owner identity",
-        )
-        json_once(
-            args.directory / "stopped.json",
-            {
-                **finish,
-                "finish_sha256": sha256_file(finish_path),
-                "owner_pid": args.owner_pid,
-                "owner_identity": args.owner_identity,
-                "pid": os.getpid(),
-                "process_identity": process_identity(os.getpid()),
-            },
-        )
     except BaseException as exc:
         json_once(
             args.root / "watcher-stop.json",

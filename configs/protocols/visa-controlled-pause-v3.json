@@ -1,0 +1,18 @@
+{
+  "protocol_id": "visa-controlled-pause-v3",
+  "predecessor_merge": "808319e29164d69a72d7de6286fc6b014bc546c3",
+  "predecessor_head": "63e2787989cfe84e3363bfcfd21f37941620560d",
+  "predecessor_fingerprint": "8b30e6b923c8bb49f457b50860a0adcc62d6bf1031405e28e60ab1c28ddd00b0",
+  "authorization_validity_seconds": 432000,
+  "validity_origin": "original signed not_before; exact 120 hours; no extension or renewal",
+  "request_binding": ["authorization_id", "claim_sha256", "invocation", "owner_sha256", "requester_process_identity", "requested_at"],
+  "pause_semantics": "cooperative checkpoints; no asynchronous native cancellation; preserve partial attempt; no additional inference after acknowledgement",
+  "safe_exit": ["GPU allocations zero after synchronization and cache release", "watcher handshake and observed exit zero", "owner-checked lock release", "immutable safe-exit receipt", "independent recorded-process absence confirmation"],
+  "resume": "same signed approval, original claim and origin; prior safe-exit and process clearance before admission; independent completed-stage validation; new numbered partial-stage attempt",
+  "failure_policy": "fail closed; no stale-lock removal; no process termination; blocked process inspection remains UNKNOWN",
+  "pause_cli_exit_code": 75,
+  "scientific_change": "none; 36 pairs, 72 model stages, 12972 logical calls; physical calls can increase after partial-stage restart",
+  "historical_access": "UNKNOWN",
+  "independent_reservation": "NOT ESTABLISHED",
+  "reporting_qualification": "Held-out VisA evaluation with historical access independence unverified."
+}

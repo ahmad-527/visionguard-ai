@@ -81,10 +81,26 @@ def test_code_changes_change_operational_fingerprint(tmp_path):
 
 
 def test_committed_contract_reproduces_and_binds_every_cell():
-    from visionguard.visa_matrix_contract import load_contract
+    import yaml
+
+    from visionguard.visa_matrix_contract import CONTRACT, load_contract
 
     repository = Path(__file__).resolve().parents[1]
-    document, fingerprint = load_contract(repository)
+    # Historical D-A source bytes remain immutable. Later-phase additions must
+    # NOT weaken its live execution guard or permit restarting that old matrix.
+    snapshot = yaml.safe_load((repository / CONTRACT).read_text())
+    document, fingerprint = snapshot["execution"], snapshot["fingerprint"]
+    for relative, digest in document["source_hashes"].items():
+        assert sha256_file(repository / relative) == digest
+    assert (
+        fingerprint
+        == "31a5b53d91bf7f609b5dfa3a97b87c4c6617a767d9096fa845f774a5f9bfefc3"
+    )
+    if source_hashes(repository) != document["source_hashes"]:
+        with pytest.raises(VisaIntegrityError, match="STOP MATRIX"):
+            load_contract(repository)
+    else:
+        assert load_contract(repository) == (document, fingerprint)
     assert document["order"] == order()
     assert document["checkpoint_policy"]["efficientad_interval_steps"] == 1000
     assert document["checkpoint_policy"]["efficientad_final_step"] == 70000

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:visionguard:visa-evaluator-report-v1",
+  "title": "Per-cell B1 synthetic output; future real-evidence extension requires B2 review",
+  "type": "object",
+  "required": ["schema_version", "evidence_class", "category", "seed", "sample_count", "membership_sha256", "models", "triage", "images"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": 1},
+    "evidence_class": {"const": "synthetic_engineering_only"},
+    "category": {"enum": ["candle", "capsules", "cashew", "chewinggum", "fryum", "macaroni1", "macaroni2", "pcb1", "pcb2", "pcb3", "pcb4", "pipe_fryum"]},
+    "seed": {"enum": [42, 123, 2026]},
+    "sample_count": {"type": "integer", "minimum": 1},
+    "membership_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "models": {"type": "object", "required": ["patchcore", "efficientad"], "additionalProperties": false,
+      "properties": {"patchcore": {"$ref": "#/$defs/model"}, "efficientad": {"$ref": "#/$defs/model"}}},
+    "triage": {"type": "object", "required": ["sample_count", "decision_counts", "class_decision_counts", "disagreement_counts", "class_disagreement_counts", "rates"]},
+    "images": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/image"}}
+  },
+  "$defs": {
+    "model": {"type": "object", "required": ["model_sha256", "image_threshold", "pixel_threshold", "image", "pixel", "image_score_distributions"], "additionalProperties": false,
+      "properties": {"model_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "image_threshold": {"type": "number"}, "pixel_threshold": {"type": "number"}, "image": {"type": "object", "required": ["confusion", "image_auroc", "image_f1", "sensitivity", "specificity", "precision"]}, "pixel": {"type": "object", "required": ["confusion", "au_pro_0.05", "pixel_f1", "pixel_precision", "pixel_sensitivity", "pixel_specificity", "pixel_auroc_diagnostic", "continuous_score_distributions"]}, "image_score_distributions": {"type": "object", "required": ["normal_images", "anomalous_images"]}}},
+    "image": {"type": "object", "required": ["sample_id", "label", "original_shape", "patchcore_score", "efficientad_score", "patchcore_anomalous", "efficientad_anomalous", "triage"], "additionalProperties": false,
+      "properties": {"sample_id": {"type": "string", "pattern": "^synthetic:"}, "label": {"enum": [0, 1]}, "original_shape": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "integer", "minimum": 1}}, "patchcore_score": {"type": "number"}, "efficientad_score": {"type": "number"}, "patchcore_anomalous": {"type": "boolean"}, "efficientad_anomalous": {"type": "boolean"}, "triage": {"enum": ["PASS", "REVIEW", "REJECT"]}}}
+  }
+}

@@ -42,6 +42,12 @@ jobs:
       - name: Check dependency consistency
         run: python -m pip check
 
+      - name: Verify closed B1 evaluator freeze and synthetic-only interfaces
+        run: |
+          python scripts/phase4d_b1_freeze.py
+          python -m visionguard.visa_evaluator_synthetic --repository . > /tmp/b1-synthetic.json
+          python -m visionguard.visa_evaluator_artifacts --help
+
       - name: Verify VisA freeze and lightweight command interfaces
         run: |
           visionguard-visa-protocol

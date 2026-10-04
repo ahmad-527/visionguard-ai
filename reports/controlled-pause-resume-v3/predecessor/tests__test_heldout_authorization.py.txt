@@ -51,7 +51,7 @@ def artificial_trust(tmp_path, monkeypatch):
         | {
             "authorization_id": "1" * 32,
             "not_before": (now - timedelta(minutes=1)).isoformat(),
-            "expires": (now - timedelta(minutes=1) + timedelta(hours=120)).isoformat(),
+            "expires": (now + timedelta(minutes=10)).isoformat(),
         },
         "signature": "TEST MOCK NOT REAL HUMAN APPROVAL",
     }

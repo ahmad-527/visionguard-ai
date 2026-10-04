@@ -4,7 +4,8 @@ import argparse
 import json
 from pathlib import Path
 
-from visionguard.operational_successor import historical
+from visionguard.authorization_amendment import FREEZE, build_freeze, verify_freeze
+from visionguard.visa_b2_storage import json_once
 
 
 def main():
@@ -13,14 +14,15 @@ def main():
     parser.add_argument("--create-successor", action="store_true")
     args = parser.parse_args()
     if args.create_successor:
-        parser.error("v2 is immutable historical evidence; creation forbidden")
-    _, saved = historical(args.repository)
+        path = args.repository / FREEZE
+        path.parent.mkdir(parents=True, exist_ok=True)
+        json_once(path, build_freeze(args.repository))
+    saved = verify_freeze(args.repository)
     print(
         json.dumps(
             {
                 "fingerprint": saved["fingerprint"],
                 "schema_version": 2,
-                "historical_only": True,
                 "predecessor": saved["document"]["predecessor_fingerprint"],
                 "evaluation_lock": "CLOSED absent new human authorization",
             }

@@ -11,7 +11,6 @@ from datetime import UTC, datetime
 from pathlib import Path
 from uuid import uuid4
 
-from visionguard import heldout_pause as pause
 from visionguard.heldout_admission import admit, admit_artificial, make_artificial
 from visionguard.heldout_authorization import authorize, check_permission
 from visionguard.heldout_backend import load_backend
@@ -95,8 +94,6 @@ def run_matrix(
     watcher=None,
     provenance_check=lambda: None,
     permission=None,
-    resume_invocation=None,
-    checkpoint_hook=None,
 ):
     """One model at a time. Complete stages independently verified before skip.
 
@@ -105,18 +102,6 @@ def run_matrix(
     """
     if real:
         check_permission(permission)
-        require(
-            checkpoint_hook is None,
-            "Synthetic checkpoint hook forbidden in real execution",
-        )
-        require(
-            resume_invocation is not None
-            or not output.exists()
-            or not list(output.glob("invocation-*")),
-            "Existing real run requires a verified safe resume invocation",
-        )
-    if resume_invocation is not None:
-        pause.verify_safe(output, resume_invocation, expected_origin=origin)
     require(inputs.artificial is (not real), "Execution/input evidence class mismatch")
     checked(output, missing=True)
     output.mkdir(parents=True, exist_ok=True)
@@ -129,8 +114,6 @@ def run_matrix(
         "nonce": uuid4().hex,
         "started": datetime.now(UTC).isoformat(),
         "origin": origin,
-        "process_identity": pause.process_identity(os.getpid()),
-        "artificial": not real,
     }
     lock_created = False
     safe_exit = False
@@ -139,19 +122,14 @@ def run_matrix(
     results = []
     calls = 0
     skipped_stages = 0
-    stop = None
-    safe_receipt = None
     try:
         json_once(lock, owner)
         lock_created = True
-        json_once(invocation / "owner.json", owner)
         if real:
             require(watcher is not None, "Independent owner watcher required")
             watcher.start(output, owner)
 
-        def check(label="before-image"):
-            if real:
-                check_permission(permission)
+        def check():
             if watcher:
                 watcher.check()
             row = monitor(output, budget, real)
@@ -162,12 +140,8 @@ def run_matrix(
                     budget.refresh()
                     json_once(invocation / f"telemetry-{uuid4().hex}.json", row)
                     check.last = now
-            if checkpoint_hook:
-                checkpoint_hook(output, owner["nonce"], label)
-            pause.checkpoint(invocation, owner, label)
 
         check.last = 0
-        check("before-first-stage")
         for category in CATEGORIES:
             for seed in ALLOWED_SEEDS:
                 pair_specs = tuple(
@@ -211,7 +185,7 @@ def run_matrix(
                         stage_path = parent / f"attempt-{len(paths) + 1}"
                         backend = None
                         started = time.perf_counter()
-                        check("before-stage")
+                        check()
                         try:
                             if real:
                                 import torch
@@ -221,7 +195,7 @@ def run_matrix(
                             digest = backend.state_digest() if real else None
                             receipt = publish_stage(
                                 stage_path,
-                                _checked_frames(inputs.frames(category), check),
+                                inputs.frames(category),
                                 spec,
                                 stage_origin,
                                 backend,
@@ -253,7 +227,6 @@ def run_matrix(
                             },
                         )
                     stages.append((stage_path, receipt["sha256"]))
-                    check("after-stage")
                 # Stage lineage differs by model, so paired reducer checks each
                 # independently then supplies common immutable source origin.
                 stage_origins = [
@@ -269,7 +242,6 @@ def run_matrix(
                     for (p, sha), o in zip(stages, stage_origins, strict=True)
                 ]
                 started = time.perf_counter()
-                check("before-pair")
                 if previous and (previous[-1] / "complete.json").exists():
                     require(
                         not (previous[-1] / "failure.json").exists(),
@@ -318,8 +290,6 @@ def run_matrix(
                         "receipt": receipt,
                     },
                 )
-                check("between-pairs")
-        check("before-summary")
         aggregate = aggregate_matrix(results)
         budget.refresh()
         require(len(results) == 36, "Incomplete matrix")
@@ -354,115 +324,18 @@ def run_matrix(
         return report
     except BaseException as exc:
         fail(invocation, exc)
-        safe_exit = isinstance(exc, pause.ControlledPause) or (
-            not real and isinstance(exc, InterruptedError)
-        )
-        if safe_exit:
-            # The publication stack can otherwise retain the native backend.
-            exc.__traceback__ = None
-            exc.__context__ = None
-            exc.__cause__ = None
-            stop = exc
-        else:
-            raise
+        safe_exit = isinstance(exc, InterruptedError)
+        raise
     finally:
-        try:
-            allocated = release_gpu(real) if safe_exit else None
-            watcher_receipt = watcher.finish(safe_exit) if watcher else None
-            if real and safe_exit:
-                require(
-                    watcher_receipt is not None and watcher_receipt["exit_code"] == 0,
-                    "Independent watcher exit unproven",
-                )
-            if lock_created and safe_exit:
-                require(
-                    json.loads(lock.read_text()) == owner, "Writer ownership changed"
-                )
-                lock.unlink()
-                if stop is not None:
-                    ack = invocation / "pause-acknowledged.json"
-                    acknowledged = (
-                        json.loads(ack.read_bytes()) if ack.exists() else None
-                    )
-                    safe_receipt = json_once(
-                        invocation / "safe-exit.json",
-                        {
-                            "status": "COOPERATIVE_STOP_CLEANUP_VERIFIED",
-                            "binding": pause.binding(
-                                owner, sha256_file(invocation / "owner.json")
-                            ),
-                            "origin": origin,
-                            "failure_sha256": sha256_file(invocation / "failure.json"),
-                            "request_sha256": acknowledged["request_sha256"]
-                            if acknowledged
-                            else None,
-                            "checkpoint": acknowledged["checkpoint"]
-                            if acknowledged
-                            else None,
-                            "ack_sha256": sha256_file(ack) if acknowledged else None,
-                            "gpu_allocated_bytes": allocated,
-                            "writer_lock_released": True,
-                            "watcher": watcher_receipt,
-                            "runner_process_exit": "REQUIRES INDEPENDENT CONFIRMATION",
-                        },
-                    )
-        except BaseException as cleanup_error:
-            try:
-                json_once(
-                    invocation / "cleanup-failure.json",
-                    {
-                        "exception_type": type(cleanup_error).__name__,
-                        "reason": str(cleanup_error),
-                        "safe_exit_unproven": True,
-                    },
-                )
-            except OSError as publication_error:
-                cleanup_error.add_note(
-                    f"Cleanup failure receipt also failed: {publication_error}"
-                )
-            raise
-        finally:
-            ACTIVE_BUDGET.reset(token)
-    if isinstance(stop, pause.ControlledPause):
-        return {
-            "status": "PAUSE_CLEANUP_VERIFIED_PROCESS_EXIT_PENDING",
-            "invocation": owner["nonce"],
-            "safe_exit_sha256": safe_receipt["sha256"],
-            "scientific_completion": False,
-        }
-    if stop is not None:
-        raise stop
+        if watcher:
+            watcher.finish(safe_exit)
+        if lock_created and safe_exit:
+            require(json.loads(lock.read_text()) == owner, "Writer ownership changed")
+            lock.unlink()
+        ACTIVE_BUDGET.reset(token)
 
 
-def _checked_frames(frames, check):
-    """Check before fetching another input, not just before predicting it."""
-    iterator = iter(frames)
-    while True:
-        check()
-        try:
-            frame = next(iterator)
-        except StopIteration:
-            return
-        yield frame
-
-
-def release_gpu(real):
-    """Operational cleanup only; process exit is independently confirmed later."""
-    gc.collect()
-    if not real:
-        return 0
-    import torch
-
-    torch.cuda.synchronize()
-    torch.cuda.empty_cache()
-    allocated = torch.cuda.memory_allocated()
-    require(allocated == 0, "Native GPU allocations remain: safe pause unproven")
-    return allocated
-
-
-def run_artificial(
-    parent, permit, *, interrupt=None, resume_invocation=None, checkpoint_hook=None
-):
+def run_artificial(parent, permit, *, interrupt=None):
     inputs = admit_artificial(permit)
     specs = {
         f"{s.model}:{c}:{seed}": s
@@ -471,41 +344,16 @@ def run_artificial(
         for s in fixture(c, seed)[3]
     }
     return run_matrix(
-        inputs,
-        parent,
-        specs,
-        inputs.origin,
-        ArtificialBackend,
-        interrupt=interrupt,
-        resume_invocation=resume_invocation,
-        checkpoint_hook=checkpoint_hook,
+        inputs, parent, specs, inputs.origin, ArtificialBackend, interrupt=interrupt
     )
 
 
 def evaluate_real(
-    repository: Path,
-    approval=None,
-    *,
-    resume_claim=None,
-    resume_invocation=None,
-    test_root=None,
+    repository: Path, approval=None, *, resume_claim=None, test_root=None
 ):
     """No caller dataset path. Denials do not touch even a hostile root sentinel."""
     permission = authorize(repository, approval, resume_claim=resume_claim)
     require(test_root is None, "Caller test-root override forbidden")
-    require(
-        (resume_claim is None) == (resume_invocation is None),
-        "Resume requires original claim AND safe invocation",
-    )
-    if resume_invocation is not None:
-        safe = pause.verify_safe(permission.run_root, resume_invocation)
-        require(
-            safe["origin"]["authorization_id"] == permission.authorization_id
-            and safe["origin"]["claim_sha256"] == permission.claim_sha256
-            and safe["origin"]["activation_fingerprint"]
-            == permission.expected["activation_fingerprint"],
-            "Resume authorization origin mismatch",
-        )
     ctx = context(repository)
     frozen = verify_freeze(repository)
     inputs = admit(repository, permission)
@@ -538,7 +386,6 @@ def evaluate_real(
         real=True,
         watcher=Watcher(),
         permission=permission,
-        resume_invocation=resume_invocation,
         provenance_check=lambda: (
             check_permission(permission),
             verify_freeze(repository),
@@ -554,7 +401,6 @@ def main():
     # Deliberately no execution shortcut; separate explicit signed document.
     parser.add_argument("--human-approval", type=Path)
     parser.add_argument("--resume-claim-sha256")
-    parser.add_argument("--resume-invocation")
     args = parser.parse_args()
     if args.plan:
         result = plan()
@@ -568,14 +414,9 @@ def main():
             json.loads(args.human_approval.read_text()) if args.human_approval else None
         )
         result = evaluate_real(
-            args.repository,
-            approval,
-            resume_claim=args.resume_claim_sha256,
-            resume_invocation=args.resume_invocation,
+            args.repository, approval, resume_claim=args.resume_claim_sha256
         )
     print(json.dumps(result, sort_keys=True, allow_nan=False))
-    if result.get("status") == "PAUSE_CLEANUP_VERIFIED_PROCESS_EXIT_PENDING":
-        raise SystemExit(75)
 
 
 if __name__ == "__main__":

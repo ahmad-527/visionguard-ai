@@ -35,14 +35,14 @@ def context(repository: Path) -> dict:
 
 
 def build_freeze(repository: Path) -> dict:
-    """Explicit schema-3 operational successor; v1/v2 stay historical evidence."""
-    from visionguard.operational_successor import build_freeze as successor
+    """Explicitly select schema-2 security successor, never relabel v1 code."""
+    from visionguard.authorization_amendment import build_freeze as successor
 
     return successor(repository)
 
 
 def verify_freeze(repository: Path) -> dict:
     """Require the current successor AND immutable historical/scientific bindings."""
-    from visionguard.operational_successor import verify_freeze as successor
+    from visionguard.authorization_amendment import verify_freeze as successor
 
     return successor(repository)

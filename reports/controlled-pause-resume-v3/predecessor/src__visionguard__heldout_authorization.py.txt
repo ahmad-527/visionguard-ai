@@ -17,12 +17,12 @@ import stat
 import subprocess
 import sys
 from dataclasses import dataclass
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, datetime
 from pathlib import Path
 
+from visionguard.authorization_amendment import PREDECESSOR_HEAD, PREDECESSOR_MERGE
 from visionguard.heldout_contract import context, verify_freeze
 from visionguard.heldout_paths import checked
-from visionguard.operational_successor import PREDECESSOR_HEAD, PREDECESSOR_MERGE
 from visionguard.visa_acquire import sha256_file
 from visionguard.visa_b2_storage import json_once
 from visionguard.visa_evaluator import require
@@ -200,7 +200,6 @@ def expected_approval(repository: Path, registry: dict) -> dict:
     require(output.drive.upper() == "D:", "Exact D output required")
     return {
         "schema_version": 1,
-        "authorization_validity_seconds": 432000,
         "allow_real_test_access": True,
         "reviewed_merge": registry["reviewed_merge"],
         "reviewed_head": registry["reviewed_head"],
@@ -252,10 +251,6 @@ def authorize(
         and expires.tzinfo is not None
         and start <= now < expires,
         "Expired/not-yet-valid approval",
-    )
-    require(
-        expires - start == timedelta(hours=120),
-        "Approval must have exactly 120 hours from original signed validity start",
     )
     require(
         _signature_valid(

@@ -292,3 +292,17 @@ execution. Native smoke is an explicit bounded engineering command requiring
 the exact native environment and ≥148 GiB, never a test-directory command.
 Local check results and per-version CI observations are reported separately in
 compact verification evidence and PR #24; neither substitutes for human approval.
+
+Local verification: 626 passed / one Windows symlink-privilege skip in the full
+clean-bytecode suite, followed by 46 passed in the final B2 targeted suite
+(including the additional boolean/int authorization-type regression). Ruff
+format/lint, pip check, scientific protocol reproduction, schema/CLI checks,
+default real-execution denial and public hygiene checks passed.
+
+Remote verification of frozen head
+`429d1c86ce4b164e4a9ba3016597466b644c0744`: all six jobs passed on Python
+3.11, 3.12 and 3.13 in [full CI](https://github.com/ahmad-527/visionguard-ai/actions/runs/37189865257)
+and [synthetic B2 readiness](https://github.com/ahmad-527/visionguard-ai/actions/runs/37189865288).
+The later documentation/CI-receipt commit changes no frozen implementation;
+its current-head check status is recorded in PR #24. Native Windows/GPU evidence
+is local, not a claim that hosted CI runs the GPU smoke.

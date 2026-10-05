@@ -184,10 +184,6 @@ def main():
                 process_identity(args.owner_pid) == args.owner_identity,
                 "Unexpected owner disappearance/identity change",
             )
-            # Drain bounded notifications each owner-check cycle, not only at
-            # the 60-second hardware/heartbeat interval. No whole-tree scan on
-            # Windows. A lost event stream still stops rather than guessing.
-            budget.before()
             if time.monotonic() - last >= 60:
                 budget.refresh()
                 budget.before()
@@ -201,7 +197,6 @@ def main():
                         "monotonic": time.monotonic(),
                         "events": events,
                         "owner_identity": args.owner_identity,
-                        "output_accounting": budget.summary(),
                     },
                 )
                 last = time.monotonic()
@@ -238,8 +233,6 @@ def main():
             },
         )
         raise
-    finally:
-        budget.close()
 
 
 if __name__ == "__main__":

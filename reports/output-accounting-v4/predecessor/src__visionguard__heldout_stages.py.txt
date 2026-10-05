@@ -18,11 +18,7 @@ from visionguard.heldout_metrics import (
     validate_sample,
 )
 from visionguard.heldout_paths import asset, checked
-from visionguard.heldout_resources import (
-    account_write,
-    before_write,
-    failure_publication,
-)
+from visionguard.heldout_resources import account_write, before_write
 from visionguard.heldout_storage import _png, json_once
 from visionguard.visa_acquire import sha256_file
 from visionguard.visa_evaluator import require
@@ -31,20 +27,19 @@ from visionguard.visa_evaluator_storage import canonical_bytes
 
 def fail(directory, exc, completed_calls=None):
     try:
-        with failure_publication(directory / "failure.json"):
-            json_once(
-                directory / "failure.json",
-                {
-                    "status": "interrupted"
-                    if isinstance(exc, InterruptedError)
-                    else "failed",
-                    "exception_type": type(exc).__name__,
-                    "reason": str(exc),
-                    "winerror": getattr(exc, "winerror", None),
-                    "completed_inference_calls": completed_calls,
-                },
-            )
-    except (OSError, ValueError) as secondary:
+        json_once(
+            directory / "failure.json",
+            {
+                "status": "interrupted"
+                if isinstance(exc, InterruptedError)
+                else "failed",
+                "exception_type": type(exc).__name__,
+                "reason": str(exc),
+                "winerror": getattr(exc, "winerror", None),
+                "completed_inference_calls": completed_calls,
+            },
+        )
+    except OSError as secondary:
         exc.add_note(f"Failure receipt publication failed: {secondary}")
 
 
@@ -81,14 +76,14 @@ def publish_stage(
                 "Native float32 map required",
             )
             target = directory / f"{i:06d}.tiff"
-            before_write(prediction.restored_map.size * 2 + 4096, target)
+            before_write(prediction.restored_map.size * 2 + 4096)
             with target.open("xb") as handle:
                 tifffile.imwrite(
                     handle, prediction.restored_map.astype(np.float16), compression=None
                 )
                 handle.flush()
                 os.fsync(handle.fileno())
-            account_write(target.stat().st_size, target)
+            account_write(target.stat().st_size)
             row = {
                 "sample_id": sample.sample_id,
                 "label": sample.label,

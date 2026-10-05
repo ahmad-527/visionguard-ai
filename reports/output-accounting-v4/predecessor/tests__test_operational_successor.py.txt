@@ -43,9 +43,6 @@ def test_fail_closed_drift(tmp_path, monkeypatch, kind):
     paths = set(saved["document"]["source_sha256"]) | set(
         first["document"]["evidence_sha256"]
     )
-    from visionguard.accounting_successor import ARCHIVES as v4_archives
-
-    paths.update(v4_archives.values())
     # Manufacturing a repository of text/config evidence, not model artifacts.
     for relative in paths:
         destination = tmp_path / relative

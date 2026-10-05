@@ -8,12 +8,10 @@ import os
 import shutil
 import subprocess
 import time
-from contextlib import contextmanager
 from contextvars import ContextVar
 from pathlib import Path
 
-from visionguard.heldout_accounting import Ledger
-from visionguard.heldout_paths import checked
+from visionguard.heldout_paths import checked, inventory
 from visionguard.visa_evaluator import require
 
 ACTIVE_BUDGET = ContextVar("heldout_budget", default=None)
@@ -39,10 +37,11 @@ class Budget:
 
     def __init__(self, root: Path, limit=128 * 2**30, reserve=20 * 2**30):
         self.root, self.limit, self.reserve = root, limit, reserve
-        self.ledger = Ledger(root) if root.exists() else None
-        self.used = self.ledger.used if self.ledger else 0
-        self.accounting_error = None
-        self.evidence_path = None
+        self.used = (
+            sum((root / p).stat().st_size for p in inventory(root))
+            if root.exists()
+            else 0
+        )
         parent = root
         while not parent.exists():
             require(parent.parent != parent, "Disconnected output drive")
@@ -50,7 +49,6 @@ class Budget:
         self.volume = volume_identity(parent)
 
     def before(self, additional=0):
-        self._update(poll=os.name == "nt")
         checked(self.root, missing=True)
         parent = self.root
         while not parent.exists():
@@ -72,92 +70,21 @@ class Budget:
             "Independent watcher requested STOP",
         )
 
-    def _update(self, *, full=False, poll=True):
-        if self.evidence_path is not None:
-            return  # Fresh full reconciliation already bound this failure write.
-        if self.accounting_error is not None:
-            raise self.accounting_error
-        if self.ledger is None and self.root.exists():
-            self.ledger = Ledger(self.root)
-        if self.ledger is not None:
-            if full or poll:
-                try:
-                    self.ledger.refresh(full=full)
-                except Exception as error:
-                    self.accounting_error = error
-                    raise
-            self.used = self.ledger.used
-
-    def refresh(self, *, full=False):
-        self._update(full=full)
+    def refresh(self):
+        self.used = sum((self.root / p).stat().st_size for p in inventory(self.root))
         self.before()
 
-    def record(self, path):
-        require(self.ledger is not None, "Output accounting not initialized")
-        self.ledger.record(path)
-        self.used = self.ledger.used
 
-    def close(self):
-        if self.ledger is not None:
-            self.ledger.close()
-
-    def summary(self):
-        return {
-            "retained_logical_bytes": self.used,
-            "mode": "windows_notifications"
-            if os.name == "nt"
-            else "portable_periodic_reconciliation",
-            "metadata_updates_since_baseline": self.ledger.total_changes.copy()
-            if self.ledger
-            else {},
-            "limit": "metadata accounting, not content authentication; counts can "
-            "include registered writes and coalesced notifications",
-        }
-
-
-def before_write(bytes_count, path):
+def before_write(bytes_count):
     budget = ACTIVE_BUDGET.get()
     if budget:
-        require(
-            budget.evidence_path is None or budget.evidence_path == path,
-            "Only bound failure evidence allowed after accounting failure",
-        )
         budget.before(bytes_count)
 
 
-def account_write(bytes_count, path):
+def account_write(bytes_count):
     budget = ACTIVE_BUDGET.get()
     if budget:
-        require(path.stat().st_size == bytes_count, "Written size changed")
-        budget.record(path)
-
-
-@contextmanager
-def failure_publication(path):
-    """Failed accounting permits only one bound failure receipt, never computation.
-
-    A fresh safe full reconciliation must pass, plus the normal per-write volume,
-    retained-byte limit and actual-free reserve guards. Lost notifications remain
-    fatal afterwards. If storage is unsafe/unavailable, preserve the exception
-    chain instead; do not bypass safeguards merely to create a receipt.
-    """
-    budget = ACTIVE_BUDGET.get()
-    if budget is None or budget.accounting_error is None:
-        yield
-        return
-    checked(path, missing=True)
-    require(
-        path.name == "failure.json" and path.is_relative_to(budget.root),
-        "Unbound failure evidence path",
-    )
-    budget.ledger.close()
-    budget.ledger.reconcile()
-    budget.used = budget.ledger.used
-    budget.evidence_path = path
-    try:
-        yield
-    finally:
-        budget.evidence_path = None
+        budget.used += bytes_count
 
 
 def observation() -> dict:
@@ -268,7 +195,6 @@ ConvertTo-Json -InputObject @($events|Select-Object Id,ProviderName,
 def monitor(root: Path, budget: Budget, real: bool):
     budget.before()
     row = observation() if real else {"pid": os.getpid(), "synthetic_cpu": True}
-    row["output_accounting"] = budget.summary()
     if real:
         require(row["gpu_point"] is not None, "Real GPU measurement unavailable")
     return row

@@ -43,13 +43,11 @@ ADDITIONAL = (
 
 def historical(repository: Path) -> tuple[dict, dict]:
     """No execution fallback and no regeneration of the old freezes."""
-    from visionguard.accounting_successor import ARCHIVES as v4_archives
-
     first = json.loads((repository / v2.PREDECESSOR).read_text())
     second = json.loads((repository / v2.FREEZE).read_text())
     for saved, fp, archives in (
-        (first, v2.PREDECESSOR_FINGERPRINT, v4_archives | ARCHIVES | v2.ARCHIVES),
-        (second, PREDECESSOR_FINGERPRINT, v4_archives | ARCHIVES),
+        (first, v2.PREDECESSOR_FINGERPRINT, ARCHIVES | v2.ARCHIVES),
+        (second, PREDECESSOR_FINGERPRINT, ARCHIVES),
     ):
         require(
             saved["fingerprint"] == fp == canonical_fingerprint(saved["document"]),
@@ -72,7 +70,6 @@ def historical(repository: Path) -> tuple[dict, dict]:
 
 
 def build_freeze(repository: Path) -> dict:
-    from visionguard.accounting_successor import ARCHIVES as v4_archives
     from visionguard.heldout_contract import context
 
     first, second = historical(repository)
@@ -102,9 +99,7 @@ def build_freeze(repository: Path) -> dict:
         "contract": ctx["activation"],
         "models": models,
         "environment": environment,
-        "source_sha256": {
-            p: sha256_file(repository / v4_archives.get(p, p)) for p in sorted(paths)
-        },
+        "source_sha256": {p: sha256_file(repository / p) for p in sorted(paths)},
     }
     return {"document": document, "fingerprint": canonical_fingerprint(document)}
 

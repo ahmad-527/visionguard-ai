@@ -6,6 +6,8 @@ from types import SimpleNamespace
 
 import pytest
 from PIL import Image
+
+pytest.importorskip("visionguard_inspection")
 from visionguard_inspection.native import NativeInspectionBackend
 
 from test_inspection_registry import fixture_entry

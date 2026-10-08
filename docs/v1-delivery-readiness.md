@@ -1,4 +1,24 @@
-# VisionGuard v1.0 delivery readiness — isolated preparation
+# VisionGuard v1.0 delivery readiness — isolated application candidate
+
+## Current application slice (supersedes preparation status below)
+
+The local HTTP/registry/browser slice is implemented in the separately packaged
+`apps/inspection` project. The root build recipe is restored byte-for-byte to
+the historical freeze: app dependencies/entrypoint must not modify it. See
+`v1-release-checklist.md` for current gate dispositions,
+`v1-application-installation.md` for installation/verified configurations,
+`v1-application-limitations.md` for truthful errors and
+`v1-model-registry.md` for native-use requirements.
+
+Manufactured generated-image API/browser acceptance and clean installation
+checks are recorded in the external application evidence packet, separately
+from manufactured CPU tensor plumbing. No real development model was loaded:
+exact artifact-use permission remains unestablished. The application matrix is
+declared but not hosted-executed. Source licensing and results publication remain
+human review gates; no v1.0 release, push, merge, activation or deployment occurs.
+
+The following baseline audit is retained as preparation context, not a claim
+that the currently implemented API/UI are still missing.
 
 Audited source baseline: `f2cabde46774f9c093900e69b35d07c667c47121`.
 Engineering adoption is draft PR #33, stacked on accounting successor PR #32.

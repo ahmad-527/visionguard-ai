@@ -1,0 +1,44 @@
+name: Application delivery (manufactured)
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  application:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install -e ".[analysis,dev]"
+      - run: python -m pip install -e "apps/inspection[test]"
+      - run: python -m ruff check .
+      - run: python -m ruff format --check .
+      - run: python -m pytest tests/test_inspection_contract.py tests/test_inspection_registry.py tests/test_inspection_service.py tests/test_heldout_cleanup.py tests/test_cleanup_successor.py tests/test_accounting_successor.py
+      - name: Provision test browser (no model/data)
+        if: runner.os == 'Windows'
+        run: python -m playwright install chromium
+      - name: Provision Linux test browser dependencies (ephemeral runner)
+        if: runner.os == 'Linux'
+        run: python -m playwright install --with-deps chromium
+      - name: Browser to API acceptance (manufactured only)
+        env:
+          VISIONGUARD_BROWSER_TESTS: "1"
+        run: python -m pytest tests/test_inspection_browser.py
+      - run: python -m build --outdir "${{ runner.temp }}/application-dist"
+      - run: python -m build apps/inspection --outdir "${{ runner.temp }}/application-dist"
+      - name: Clean wheel and sdist acceptance outside source
+        env:
+          VG_DIST: ${{ runner.temp }}/application-dist
+          VG_ENVS: ${{ runner.temp }}/application-install
+        run: python scripts/inspection_package_acceptance.py

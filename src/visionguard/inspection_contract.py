@@ -29,9 +29,11 @@ def _sha256(value: str) -> None:
 
 
 def _finite(value: float) -> None:
-    if type(value) not in (float, int) or (
-        type(value) is float and not math.isfinite(value)
-    ):
+    try:
+        valid = type(value) in (float, int) and math.isfinite(value)
+    except OverflowError:
+        valid = False
+    if not valid:
         raise InspectionError("Score and threshold must be finite numeric scalars")
 
 

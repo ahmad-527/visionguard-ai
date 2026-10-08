@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "visionguard-inspection"
+version = "0.1.0"
+description = "Local-first inspection application for VisionGuard AI"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["visionguard-ai==0.1.0", "fastapi>=0.115,<1", "uvicorn>=0.30,<1"]
+
+[project.optional-dependencies]
+test = ["httpx>=0.27,<1", "playwright>=1.49,<2", "build>=1.2,<2"]
+
+[project.scripts]
+visionguard-inspect = "visionguard_inspection.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/visionguard_inspection"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/visionguard_inspection", "README.md", "pyproject.toml"]

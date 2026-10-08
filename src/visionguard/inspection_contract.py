@@ -94,6 +94,10 @@ def prepare_image(payload: bytes) -> InspectionInput:
                 image.verify()
             with Image.open(io.BytesIO(payload)) as image:
                 image.load()  # Refuse truncated/corrupt payloads before inference.
+                # Reading PNG EXIF can load pixels: do this after the verify pass.
+                # Refuse browser auto-rotation/mirroring without altering model pixels.
+                if image.getexif().get(274, 1) != 1:
+                    raise InspectionError("Non-upright EXIF orientation is unsupported")
     except InspectionError:
         raise
     except (

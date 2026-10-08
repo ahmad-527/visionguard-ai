@@ -44,6 +44,29 @@ def test_generated_input_identity_and_dimensions(format):
     assert image == prepare_image(data)
 
 
+@pytest.mark.parametrize("format", ["PNG", "JPEG"])
+@pytest.mark.parametrize("orientation", [0, 2, 3, 4, 5, 6, 7, 8, 9])
+def test_exif_display_transform_refused_without_changing_model_pixels(
+    format, orientation
+):
+    buffer = BytesIO()
+    metadata = Image.Exif()
+    metadata[274] = orientation
+    Image.new("RGB", (3, 2), "red").save(buffer, format=format, exif=metadata)
+    with pytest.raises(InspectionError, match="EXIF orientation"):
+        prepare_image(buffer.getvalue())
+
+
+@pytest.mark.parametrize("format", ["PNG", "JPEG"])
+def test_upright_exif_keeps_original_coordinate_dimensions(format):
+    buffer = BytesIO()
+    metadata = Image.Exif()
+    metadata[274] = 1
+    Image.new("RGB", (3, 2), "red").save(buffer, format=format, exif=metadata)
+    image = prepare_image(buffer.getvalue())
+    assert (image.width, image.height) == (3, 2)
+
+
 @pytest.mark.parametrize("payload", [b"", b"not an image", bytearray(b"x")])
 def test_invalid_input_is_not_normal(payload):
     with pytest.raises(InspectionError):

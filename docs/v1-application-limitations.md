@@ -17,6 +17,11 @@ Peak working memory includes decode, tensors, immutable float-map rows and PNG
 encoding; a large permitted image can require substantial RAM. No production
 memory-isolation or throughput claim is made.
 
+Non-upright EXIF orientation is refused: browser auto-rotation/mirroring would
+otherwise misalign the original preview with raw-pixel model maps. No silent
+EXIF transformation changes approved model preprocessing. Use an upright image
+with absent/identity orientation; normalization of real inputs needs review.
+
 Default upload deadline is 15 seconds; inference response deadline is 30 seconds
 (bounded configuration caps are 60/300 seconds). The browser abandons its wait at
 60 seconds. One executor slot and a concurrency cap reject overlapping work.

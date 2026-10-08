@@ -171,3 +171,37 @@ def test_browser_actual_backend_failure_never_keeps_normal():
             expect(page.locator("#decision")).to_have_text("")
         finally:
             browser.close()
+
+
+def test_browser_refuses_auto_oriented_jpeg_without_a_decision():
+    metadata = Image.Exif()
+    metadata[274] = 6
+    encoded = io.BytesIO()
+    Image.new("RGB", (41, 23), "red").save(encoded, format="JPEG", exif=metadata)
+    with server(manufactured_registry()) as url, sync_playwright() as playwright:
+        browser = playwright.chromium.launch(
+            headless=True, channel=os.environ.get("VISIONGUARD_BROWSER_CHANNEL")
+        )
+        try:
+            page = browser.new_page()
+            page.goto(url)
+            expect(page.locator("#inspect")).to_be_enabled()
+            page.locator("#model").select_option("manufactured-demo")
+            upload(page, 0)
+            page.locator("#inspect").click()
+            expect(page.locator("#decision")).to_have_text("NORMAL")
+            page.locator("#image").set_input_files(
+                {
+                    "name": "oriented.jpg",
+                    "mimeType": "image/jpeg",
+                    "buffer": encoded.getvalue(),
+                }
+            )
+            page.locator("#inspect").click()
+            expect(page.locator("#status")).to_contain_text(
+                "Inspection failed. No decision."
+            )
+            expect(page.locator("#result")).to_be_hidden()
+            expect(page.locator("#decision")).to_have_text("")
+        finally:
+            browser.close()

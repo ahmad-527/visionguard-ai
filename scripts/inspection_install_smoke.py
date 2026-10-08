@@ -51,6 +51,16 @@ with TestClient(
         headers={"content-type": "image/png", "x-visionguard-client": "inspection-v1"},
     )
     assert failed.status_code == 422 and failed.json()["decision"] is None
+    oriented = io.BytesIO()
+    metadata = Image.Exif()
+    metadata[274] = 6
+    Image.new("RGB", (13, 9), "red").save(oriented, format="JPEG", exif=metadata)
+    refused = api.post(
+        "/api/v1/inspect/manufactured-demo",
+        content=oriented.getvalue(),
+        headers={"content-type": "image/jpeg", "x-visionguard-client": "inspection-v1"},
+    )
+    assert refused.status_code == 422 and refused.json()["decision"] is None
 print(
     json.dumps(
         {

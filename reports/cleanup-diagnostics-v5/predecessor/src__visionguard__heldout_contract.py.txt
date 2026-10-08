@@ -35,14 +35,14 @@ def context(repository: Path) -> dict:
 
 
 def build_freeze(repository: Path) -> dict:
-    """Explicit diagnostics v5 candidate; earlier freezes remain immutable."""
-    from visionguard.cleanup_successor import build_freeze as successor
+    """Explicit operational v4; all earlier freezes stay historical evidence."""
+    from visionguard.accounting_successor import build_freeze as successor
 
     return successor(repository)
 
 
 def verify_freeze(repository: Path) -> dict:
     """Require the current successor AND immutable historical/scientific bindings."""
-    from visionguard.cleanup_successor import verify_freeze as successor
+    from visionguard.accounting_successor import verify_freeze as successor
 
     return successor(repository)

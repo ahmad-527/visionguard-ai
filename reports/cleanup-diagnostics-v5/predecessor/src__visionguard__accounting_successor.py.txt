@@ -44,7 +44,6 @@ ADDITIONAL = (
 
 
 def build_freeze(repository: Path):
-    from visionguard.cleanup_successor import ARCHIVES as v5_archives
     from visionguard.heldout_contract import context
     from visionguard.operational_successor import FREEZE as old_path
     from visionguard.operational_successor import verify_freeze as old_verify
@@ -77,10 +76,7 @@ def build_freeze(repository: Path):
         "contract": ctx["activation"],
         "models": models,
         "environment": environment,
-        # Verify the exact v4 bytes as historical evidence, never execute archives.
-        "source_sha256": {
-            p: sha256_file(repository / v5_archives.get(p, p)) for p in sorted(paths)
-        },
+        "source_sha256": {p: sha256_file(repository / p) for p in sorted(paths)},
     }
     return {"document": document, "fingerprint": canonical_fingerprint(document)}
 

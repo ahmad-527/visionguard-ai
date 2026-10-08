@@ -1,0 +1,15 @@
+{
+  "protocol_id": "visa-cleanup-diagnostics-v5",
+  "predecessor_head": "d5aae83010e32524bb4787afdcc9ff32aeceb6ee",
+  "predecessor_fingerprint": "68e5e1bc3db4170e9dcebc6d7e844e8343e32ee16cce0032c6749e78c894c469",
+  "scope": "Operational scalar allocation diagnostics and truthful shutdown failure handling only; not a historical allocation leak fix",
+  "gpu_guard": "Unchanged zero current-device live allocated bytes; reserved cache reported separately; original exception propagates",
+  "failure_handling": "Attempt watcher finish with safe_owner_exit false after GPU cleanup failure; retain writer lock; preserve original exception even if watcher or receipt publication also fails",
+  "receipt": "Future cleanup-failure evidence binds UTC time, phase, owner identity and invocation, publication state, scalar allocation bytes, watcher outcome and lock-release outcome",
+  "predecessors": "Exact archived v4 source bytes and existing v3/v4/scientific freeze documents remain immutable; archives are verified, not executed",
+  "scientific_change": "None; model identity, preprocessing, thresholds, membership, calculations and scientific publication formats unchanged",
+  "evaluation_lock": "CLOSED",
+  "deployment": "DRAFT adoption candidate only; no activation or deployment; future use requires independent review and new fingerprint-bound human authorization",
+  "human_access_history": "UNKNOWN",
+  "independent_reservation": "NOT ESTABLISHED"
+}

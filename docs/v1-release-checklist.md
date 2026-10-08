@@ -8,10 +8,10 @@
 | Core/app wheel and sdist | Harness prepared; final results in external packet | Clean Windows 3.11 / Ubuntu WSL 3.12 installs outside source; site-packages/resource/CLI/API checks |
 | Native development inference | **Blocked** | Exact artifact-use permission/identities and authorized non-held-out fixture scope; see `v1-model-registry.md` |
 | Native tensor plumbing | Separate manufactured test evidence | CPU tensors, fake constructor; not trained model/real artifact acceptance |
-| Hosted application matrix | **Pending** | Prepared workflow: Windows/Ubuntu Python 3.11/3.12/3.13; application branch not pushed |
+| Hosted application matrix | **Final-commit verification required** | Windows/Ubuntu Python 3.11/3.12/3.13; dated external review packet records actual run/head/job results, not a declaration |
 | Results publication | **Pending review** | Prepared reconciliation; no scientific numbers/digests independently revalidated here |
 | Source license | **Human decision required** | MIT/Apache-2.0 options; no license silently selected |
-| Security/dependency/model license review | **Missing for release** | Local-only service is not authenticated/public deployment; dependency/version evidence is not a vulnerability audit |
+| Security/dependency/model license review | **Release qualification required** | Dated advisory/package/license inventory and limitations; local-only service is not authenticated/public deployment, and model-use/redistribution rights remain separate |
 | Distribution identity/version/support matrix | **Pending release review** | Untagged 0.1.0 core/app pair pinned by hashes; decide release version/support only after gates |
 | End-to-end native acceptance | **Missing** | Approved development state -> generated/non-held-out upload -> CPU -> original map -> browser; no tuning/rerun |
 | Release/activation/deployment/tag | **Not authorized** | Separate human authorization after review; do not treat green tests as permission |

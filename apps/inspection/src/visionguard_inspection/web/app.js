@@ -12,8 +12,13 @@ function reset() {
   originalURL = null;
   byId("original").removeAttribute("src");
 }
-byId("image").addEventListener("change", reset);
-byId("model").addEventListener("change", reset);
+function selectionChanged() {
+  reset();
+  status.textContent = active ? "Selection changed. Previous request may still run; its result will not be displayed." : "Selection changed. No current decision.";
+}
+byId("image").addEventListener("change", selectionChanged);
+byId("model").addEventListener("change", selectionChanged);
+byId("input-role").addEventListener("change", selectionChanged);
 async function initialize() {
   try {
     const [readyResponse, modelsResponse] = await Promise.all([fetch("/api/v1/ready"), fetch("/api/v1/models")]);
@@ -66,7 +71,16 @@ form.addEventListener("submit", async event => {
     byId("visualization").textContent = `Display only: min ${data.visualization.minimum}, max ${data.visualization.maximum}. ${data.visualization.constant_map ? "Constant map has no contrast." : "Independent of classification threshold."}`;
     result.hidden = false; status.textContent = "Inspection succeeded.";
   } catch (error) {
+    if (current !== generation) return;
     reset(); status.textContent = `Inspection failed. No decision. ${error.message}`;
-  } finally { clearTimeout(timer); active = false; byId("inspect").disabled = false; }
+  } finally {
+    clearTimeout(timer);
+    try {
+      const readiness = await fetch("/api/v1/ready");
+      const state = await readiness.json();
+      byId("inspect").disabled = !readiness.ok || !state.ready;
+    } catch (_) { byId("inspect").disabled = true; }
+    active = false;
+  }
 });
 initialize();

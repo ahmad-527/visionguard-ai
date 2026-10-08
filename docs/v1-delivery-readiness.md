@@ -14,15 +14,18 @@ Manufactured generated-image API/browser acceptance and clean installation
 checks are recorded in the external application evidence packet, separately
 from manufactured CPU tensor plumbing. No real development model was loaded:
 exact artifact-use permission remains unestablished. The application matrix is
-declared but not hosted-executed. Source licensing and results publication remain
-human review gates; no v1.0 release, push, merge, activation or deployment occurs.
+declared; the dated external robustness packet records actual hosted job/head
+results for the authorized draft application PR. Earlier checks are not substituted
+for final-commit CI. Source licensing and results publication remain human review
+gates; no v1.0 release, merge, activation or deployment occurs.
 
 The following baseline audit is retained as preparation context, not a claim
 that the currently implemented API/UI are still missing.
 
 Audited source baseline: `f2cabde46774f9c093900e69b35d07c667c47121`.
 Engineering adoption is draft PR #33, stacked on accounting successor PR #32.
-This local application branch is not pushed, activated or deployed. The original
+This baseline audit preceded the authorized draft application PR; current hosted
+evidence is in the dated external packet. No activation or deployment occurred. The original
 evaluation, STOP/lock, historical records and incident bundles are out of scope.
 
 ## Implemented, tested, missing

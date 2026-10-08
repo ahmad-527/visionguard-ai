@@ -59,6 +59,9 @@ its NORMAL/ANOMALOUS labels have **no industrial diagnostic meaning**.
 
 Without the demo flag or a pinned native registry, `/api/v1/ready` returns 503.
 Only `127.0.0.1` and `localhost` are CLI binding options; one worker is enforced.
+After a failed backend transition, no model can be reused and shutdown reports
+cleanup unverified. Do not interpret an HTTP 500/504 as a successful rollback or
+permission to restart any completed evaluation. Failed cleanup is not retried.
 Do not wrap this factory in a public/multi-worker server or reverse proxy without
 a separate security/resource/deployment review. Same-origin restrictions are
 browser protections, not local-user authentication.

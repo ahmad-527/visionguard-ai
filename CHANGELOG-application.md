@@ -15,5 +15,10 @@
   wheel/sdist acceptance harness and declared Windows/Ubuntu application CI.
 - Installation, limitations, proposed results reconciliation, source-license
   options and release gates. No held-out rerun, activation, merge, deployment or tag.
+- Atomic backend/model residency; close/initialization failure quarantine with
+  retained failed-close identity, no automatic retry and no clean-shutdown claim.
+- Bounded model-switch, repeated-request, upload deadline/disconnect, actual
+  concurrency, task cancellation and active-work shutdown tests; late browser
+  success/failure for changed selections ignored, readiness rechecked afterward.
 
 Held-out VisA evaluation with historical access independence unverified.

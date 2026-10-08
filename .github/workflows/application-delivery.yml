@@ -24,7 +24,7 @@ jobs:
       - run: python -m pip install -e "apps/inspection[test]"
       - run: python -m ruff check .
       - run: python -m ruff format --check .
-      - run: python -m pytest tests/test_inspection_contract.py tests/test_inspection_registry.py tests/test_inspection_service.py tests/test_heldout_cleanup.py tests/test_cleanup_successor.py tests/test_accounting_successor.py
+      - run: python -m pytest tests/test_inspection_contract.py tests/test_inspection_registry.py tests/test_inspection_service.py tests/test_inspection_lifecycle.py tests/test_heldout_cleanup.py tests/test_cleanup_successor.py tests/test_accounting_successor.py
       - name: Provision test browser (no model/data)
         if: runner.os == 'Windows'
         run: python -m playwright install chromium

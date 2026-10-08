@@ -28,16 +28,33 @@ Default upload deadline is 15 seconds; inference response deadline is 30 seconds
 A timed-out inference thread may still be running: the worker is quarantined,
 new requests are refused, and the busy slot remains until actual work finishes.
 No automatic restart, forceful cancellation, repair or quiet recovery exists.
-Application shutdown waits for active native work; a permanently hung call can
-prevent graceful exit. Process isolation is a future reviewed capability.
+Application shutdown drains active work off the event loop before closing its
+backend; a permanently hung call can prevent graceful exit. Process isolation
+is a future reviewed capability. Upload disconnects admit no inference. Cancelling
+an HTTP task after inference admission quarantines the worker without cancelling
+native execution; a TCP/browser disconnect is not proof the server task was cancelled.
+
+Model residency is one immutable backend/identity pair. Switching first unpublishes
+the old pair, then closes it, then constructs the replacement. Failed close or
+construction quarantines the worker: no stale identity, fallback model or automatic
+retry. Failed close retains its owner in `cleanup_pending_model_id`; initialization
+failure leaves resource cleanup unverified. A prior transition failure makes
+shutdown raise rather than claim clean cleanup; it is not retried during shutdown.
+Operator review is required; this service cannot prove a failed constructor freed
+all resources. Permission refusal before transition does not destroy a resident
+model but prevents inference and makes it ineligible for readiness.
 
 Decode/contract failure returns 422; unknown ID 404; unsupported body type 415;
-upload limit 413; upload timeout 408; busy 429; cross-origin/native input-role
+upload limit 413; upload timeout 408; upload disconnect 499; busy 429; cross-origin/native input-role
 refusal 403; inference exception 500; inference timeout 504; quarantined worker
 503. Error bodies have `status: failed`, `decision: null`; tracebacks remain in
-local structured logging. Browser failures clear previous decision and images.
+local structured logging. Failed backend transitions return 500 even when the
+original constructor/close exception is an InspectionError. Invalid model outputs
+return 422 and quarantine; input-validation failures alone do not quarantine.
+Browser failures clear previous decision and images; readiness is rechecked before
+re-enabling submission. Late success or failure for a changed selection is ignored.
 Host-level/middleware/network failures might not have the JSON error shape;
-the UI still clears the result. Changing selected file/model also clears it.
+the UI still clears the result. Changing selected file/model/input-role also clears it.
 
 NORMAL means only **this verified model score is not strictly above its existing
 threshold**, including equality. It is not proof of defect absence, a safety
@@ -49,7 +66,9 @@ have no contrast. CSS scales display only; canvas pixel dimensions remain exact.
 Loopback binding, host checks, same-origin POST/client headers and restrictive
 CSP reduce browser exposure. They do not authenticate local users or make public
 deployment safe. TLS, multi-user access control, retention/audit policy, malware
-hardening, dependency/security audit and production process isolation are missing.
+hardening and production process isolation are missing. A dated dependency/advisory
+inventory is review evidence, not a penetration test or a security certification;
+see `v1-security-and-rights-inventory.md` and the external advisory reports.
 
 Manufactured intensity tests verify integration only. Manufactured CPU tensor
 tests verify adapter plumbing/identity rejection, not trained native model

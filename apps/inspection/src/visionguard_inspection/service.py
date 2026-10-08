@@ -4,21 +4,25 @@ from __future__ import annotations
 
 import asyncio
 import base64
+import inspect
 import io
 import logging
 import threading
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import asynccontextmanager
+from dataclasses import dataclass
 from importlib.resources import files
 
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, JSONResponse, Response
 from PIL import Image
 from starlette.middleware.trustedhost import TrustedHostMiddleware
+from starlette.requests import ClientDisconnect
 
 from visionguard.inspection_contract import (
     MAX_IMAGE_BYTES,
     QUALIFICATION,
+    InferenceBackend,
     InspectionError,
     prepare_image,
     validate_output,
@@ -26,6 +30,14 @@ from visionguard.inspection_contract import (
 from visionguard_inspection.registry import Registry
 
 LOGGER = logging.getLogger(__name__)
+
+
+@dataclass(frozen=True)
+class Resident:
+    """A single published backend/identity pair, never independent mutable fields."""
+
+    model_id: str
+    backend: InferenceBackend
 
 
 class Engine:
@@ -36,19 +48,88 @@ class Engine:
         self.pool = ThreadPoolExecutor(max_workers=1, thread_name_prefix="inspection")
         self.slot = threading.Lock()
         self.quarantined = False
-        self.backend = None
-        self.model_id = None
+        self.resident: Resident | None = None
+        self.cleanup_pending: Resident | None = None
+        self.lifecycle_failure: str | None = None
+
+    @property
+    def backend(self):
+        resident = self.resident
+        return None if resident is None else resident.backend
+
+    @property
+    def model_id(self):
+        resident = self.resident
+        return None if resident is None else resident.model_id
+
+    def retire(self):
+        """Unpublish before close and retain failed cleanup without retrying."""
+        previous, self.resident = self.resident, None
+        if previous is None:
+            return
+        self.cleanup_pending = previous
+        try:
+            if hasattr(previous.backend, "close"):
+                closer = previous.backend.close
+                if inspect.iscoroutinefunction(closer):
+                    raise InspectionError("Backend close must be synchronous")
+                outcome = closer()
+                if inspect.isawaitable(outcome):
+                    if inspect.iscoroutine(outcome):
+                        # Discard the unexecuted coroutine, not backend cleanup.
+                        outcome.close()
+                    raise InspectionError(
+                        "Backend close did not complete synchronously"
+                    )
+        except BaseException:
+            self.quarantined = True
+            self.lifecycle_failure = "backend_close_failed"
+            LOGGER.exception("inspection_backend_close_failed")
+            raise
+        self.cleanup_pending = None
+
+    def shutdown(self):
+        """Drain work; prior transition failures cannot become clean shutdowns."""
+        self.pool.shutdown(wait=True, cancel_futures=True)
+        if self.lifecycle_failure is not None:
+            raise InspectionError(
+                "Prior backend transition failed; resource "
+                "cleanup unverified, not retried"
+            )
+        self.retire()
 
     def run(self, registration, data):
         image = prepare_image(data)
         registration.validate_use()
-        if self.model_id != registration.manifest.model_id:
-            if self.backend is not None and hasattr(self.backend, "close"):
-                self.backend.close()
-            self.backend = None
-            self.backend = registration.factory()
-            self.model_id = registration.manifest.model_id
-        output = self.backend.predict(image)
+        if self.quarantined:
+            raise InspectionError("Worker is quarantined; no inference admitted")
+        if (
+            self.resident is None
+            or self.resident.model_id != registration.manifest.model_id
+        ):
+            self.retire()
+            try:
+                replacement = registration.factory()
+                if not callable(getattr(replacement, "predict", None)):
+                    raise InspectionError("Factory did not return an inference backend")
+            except BaseException:
+                # A failed constructor may have allocated resources before raising.
+                # Do not invent rollback/cleanup or reuse the retired model identity.
+                self.quarantined = True
+                self.lifecycle_failure = "backend_initialization_failed"
+                LOGGER.exception("inspection_backend_initialization_failed")
+                raise
+            self.resident = Resident(registration.manifest.model_id, replacement)
+        try:
+            return self.infer(self.resident, registration, image)
+        except BaseException:
+            # This must also hold when the HTTP client/deadline stopped awaiting us.
+            self.quarantined = True
+            LOGGER.exception("inspection_backend_execution_failed")
+            raise
+
+    def infer(self, resident, registration, image):
+        output = resident.backend.predict(image)
         decision = validate_output(image, registration.manifest, output)
         # Original-coordinate PNG, one byte/pixel; no lossy map resizing in the UI.
         values = [v for row in output.anomaly_map for v in row]
@@ -112,13 +193,12 @@ def create_app(
 
     @asynccontextmanager
     async def lifespan(app):
-        yield
-        # Native calls cannot be safely killed by cancelling a thread.
-        engine.quarantined = True
-        engine.pool.shutdown(wait=True, cancel_futures=True)
-        if engine.backend is not None and hasattr(engine.backend, "close"):
-            engine.backend.close()
-        engine.backend = None
+        try:
+            yield
+        finally:
+            # Drain off the event loop: active responses/deadlines can still advance.
+            engine.quarantined = True
+            await asyncio.to_thread(engine.shutdown)
 
     app = FastAPI(
         title="VisionGuard local inspection",
@@ -168,6 +248,7 @@ def create_app(
                 LOGGER.warning(
                     "inspection_model_ineligible: %s", entry.manifest.model_id
                 )
+        resident = engine.resident
         available = bool(eligible) and not engine.quarantined
         return JSONResponse(
             {
@@ -175,9 +256,14 @@ def create_app(
                 "busy": engine.slot.locked(),
                 "worker_quarantined": engine.quarantined,
                 "eligible_model_ids": eligible,
-                "native_ready": engine.backend is not None
-                and engine.model_id in eligible
-                and registry.select(engine.model_id).mode == "native-development"
+                "resident_model_id": None if resident is None else resident.model_id,
+                "cleanup_pending_model_id": None
+                if engine.cleanup_pending is None
+                else engine.cleanup_pending.model_id,
+                "lifecycle_failure": engine.lifecycle_failure,
+                "native_ready": resident is not None
+                and resident.model_id in eligible
+                and registry.select(resident.model_id).mode == "native-development"
                 and available,
                 "qualification": QUALIFICATION,
             },
@@ -241,6 +327,18 @@ def create_app(
                 return error("upload_limit", "Encoded request exceeds the limit", 413)
             except TimeoutError:
                 return error("upload_timeout", "Upload timed out", 408)
+            except ClientDisconnect:
+                return error(
+                    "client_disconnected",
+                    "Upload disconnected; no inference admitted",
+                    499,
+                )
+            if engine.quarantined:
+                return error(
+                    "worker_quarantined",
+                    "Worker unavailable; no inference admitted",
+                    503,
+                )
             future = engine.pool.submit(engine.run, registration, data)
             future.add_done_callback(lambda _: engine.slot.release())
             submitted = True
@@ -274,6 +372,13 @@ def create_app(
                     504,
                 )
             except InspectionError:
+                if engine.lifecycle_failure is not None:
+                    return error(
+                        "backend_transition_failed",
+                        "Backend transition failed; worker quarantined, "
+                        "cleanup unverified",
+                        500,
+                    )
                 return error(
                     "invalid_input_or_output",
                     "Image or model result failed validation",
@@ -285,6 +390,13 @@ def create_app(
                 return error(
                     "inference_failed", "Inference failed; no decision produced", 500
                 )
+        except asyncio.CancelledError:
+            if submitted:
+                engine.quarantined = True
+                LOGGER.warning(
+                    "inspection_client_cancelled; execution was not cancelled"
+                )
+            raise
         finally:
             if not submitted:
                 engine.slot.release()

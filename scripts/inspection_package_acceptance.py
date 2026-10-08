@@ -24,6 +24,13 @@ for kind, suffix in (("wheel", ".whl"), ("sdist", ".gz")):
     python = environment / (
         "Scripts/python.exe" if sys.platform == "win32" else "bin/python"
     )
+    # Fresh venv bootstrap versions depend on the interpreter image. Pin reviewed
+    # advisory-clean tools here, never upgrade the frozen ML/evaluation environment.
+    subprocess.run(
+        [str(python), "-m", "pip", "install", "pip==26.2.1", "setuptools==84.0.0"],
+        cwd=environments,
+        check=True,
+    )
     subprocess.run(
         [
             str(python),

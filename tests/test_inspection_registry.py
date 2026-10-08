@@ -128,6 +128,55 @@ def test_existing_thresholds_unchanged_and_permission_rechecked(tmp_path):
         entry.validate_use()
 
 
+@pytest.mark.parametrize("changed", ["science", "calibration"])
+def test_changed_pinned_configuration_is_refused_before_checkpoint_use(
+    tmp_path, changed
+):
+    item = fixture_entry(tmp_path)
+    entry = approved_registration(tmp_path, item)
+    (tmp_path / item[changed]["path"]).write_bytes(b"{}")
+    with pytest.raises(InspectionError, match="identity/size mismatch"):
+        entry.validate_use()
+    assert not (tmp_path / "NEVER-OPEN.pt").exists()
+
+
+def test_permission_expires_after_registration_without_loading_any_artifact(
+    tmp_path, monkeypatch
+):
+    item = fixture_entry(tmp_path)
+    entry = approved_registration(tmp_path, item)
+
+    class Later(datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return datetime.now(UTC) + timedelta(hours=2)
+
+    monkeypatch.setattr("visionguard_inspection.native.datetime", Later)
+    with pytest.raises(InspectionError, match="expired"):
+        entry.validate_use()
+    assert not (tmp_path / "NEVER-OPEN.pt").exists()
+
+
+@pytest.mark.parametrize("present", [False, True])
+def test_missing_or_mismatched_checkpoint_rejected_before_deserialization(
+    tmp_path, monkeypatch, present
+):
+    item = fixture_entry(tmp_path)
+    entry = approved_registration(tmp_path, item)
+    monkeypatch.setattr(
+        "visionguard_inspection.native.version",
+        lambda package: {
+            "torch": "2.9.1",
+            "torchvision": "0.24.1",
+            "anomalib": "2.6.0",
+        }[package],
+    )
+    if present:
+        (tmp_path / "NEVER-OPEN.pt").write_bytes(b"manufactured non-checkpoint bytes")
+    with pytest.raises((InspectionError, FileNotFoundError)):
+        entry.factory()
+
+
 def test_missing_permission_before_any_other_asset(tmp_path):
     item = fixture_entry(tmp_path)
     (tmp_path / "permission.json").unlink()

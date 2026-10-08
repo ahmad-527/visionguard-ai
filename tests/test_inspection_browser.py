@@ -22,7 +22,11 @@ import uvicorn
 from playwright.sync_api import expect, sync_playwright
 
 pytest.importorskip("visionguard_inspection")
-from visionguard_inspection.registry import Registry, manufactured_registry
+from visionguard_inspection.registry import (
+    ManufacturedBackend,
+    Registry,
+    manufactured_registry,
+)
 from visionguard_inspection.service import create_app
 
 pytestmark = pytest.mark.skipif(
@@ -204,4 +208,52 @@ def test_browser_refuses_auto_oriented_jpeg_without_a_decision():
             expect(page.locator("#result")).to_be_hidden()
             expect(page.locator("#decision")).to_have_text("")
         finally:
+            browser.close()
+
+
+@pytest.mark.parametrize("late_failure", [False, True])
+def test_browser_changed_selection_ignores_late_result_and_updates_readiness(
+    late_failure,
+):
+    entered, release = threading.Event(), threading.Event()
+    entry = next(iter(manufactured_registry().entries.values()))
+
+    class Delayed(ManufacturedBackend):
+        def predict(self, data):
+            entered.set()
+            assert release.wait(3), "Bounded fixture release missing"
+            if late_failure:
+                raise RuntimeError("manufactured late backend failure")
+            return super().predict(data)
+
+    delayed = replace(entry, factory=lambda: Delayed(entry.manifest))
+    with server(Registry((delayed,))) as url, sync_playwright() as playwright:
+        browser = playwright.chromium.launch(
+            headless=True, channel=os.environ.get("VISIONGUARD_BROWSER_CHANNEL")
+        )
+        try:
+            page = browser.new_page()
+            page.goto(url)
+            expect(page.locator("#inspect")).to_be_enabled()
+            page.locator("#model").select_option("manufactured-demo")
+            upload(page, 0)
+            page.locator("#inspect").click()
+            assert entered.wait(2)
+            upload(page, 255, "changed.png")
+            expect(page.locator("#status")).to_contain_text("Selection changed")
+            release.set()
+            # Poll server readiness and UI rather than inventing a completion delay.
+            if late_failure:
+                expect(page.locator("#inspect")).to_be_disabled()
+                page.wait_for_function(
+                    "fetch('/api/v1/ready').then(r => r.json())"
+                    ".then(s => s.worker_quarantined)"
+                )
+            else:
+                expect(page.locator("#inspect")).to_be_enabled()
+            expect(page.locator("#result")).to_be_hidden()
+            expect(page.locator("#decision")).to_have_text("")
+            expect(page.locator("#status")).to_contain_text("Selection changed")
+        finally:
+            release.set()
             browser.close()

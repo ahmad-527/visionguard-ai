@@ -102,3 +102,17 @@ supply-chain attestation, commercial-rights clearance or native checkpoint smoke
 Permission JSON requires independently established operator authority, not a
 signature service. Loopback does not protect against malicious local processes.
 Public deployment is out of scope. Native acceptance/licensing remain human gates.
+
+## Separately observed CPU successor (9 October 2026)
+
+The historical scans above remain historical evidence, not overwritten results.
+The isolated application CPU successor uses Torch 2.13.0+cpu, Torchvision
+0.28.0+cpu, Anomalib 2.6.0, timm 1.0.28, lightning/pytorch-lightning 2.6.6 and
+multidict 6.9.1. Current maintainer/security-source verification and exact range
+discrepancies are recorded in `ml-cpu-runtime-successor.md`. Fresh unfiltered
+PyPI/OSV scans of this separate environment report no findings, with CPU-wheel
+and editable-source skips recorded and a supplementary base-version query.
+The independently verified PT2-loader advisory remains **UNRESOLVED**; a clear
+scanner is not security certification. No historical runtime is upgraded.
+The external public dependency inventory adds actual versions, available source
+URLs/hashes and declared licenses; missing digests/rights remain unverified.

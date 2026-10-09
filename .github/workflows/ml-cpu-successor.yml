@@ -1,0 +1,64 @@
+name: ML CPU successor (manufactured native)
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  native-cpu:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ["3.11", "3.12", "3.13"]
+    env:
+      HF_HUB_OFFLINE: "1"
+      OMP_NUM_THREADS: "2"
+      MKL_NUM_THREADS: "2"
+      VISIONGUARD_CPU_SUCCESSOR_TESTS: "1"
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install pip==26.2.1 setuptools==84.0.0
+      - name: CPU wheels from sole official CPU index (no mixed-index fallback)
+        run: python -m pip --isolated install --index-url https://download.pytorch.org/whl/cpu torch==2.13.0+cpu torchvision==0.28.0+cpu --report "${{ runner.temp }}/cpu-wheels.json"
+      - name: Separately pinned application runtime, never historical ML extra
+        run: python -m pip install -c requirements/ml-cpu-constraints.txt -r requirements/ml-cpu-successor.txt -e ".[analysis,dev]" -e "apps/inspection[test]" --report "${{ runner.temp }}/public-dependencies.json"
+      - run: python -m pip check
+      - run: python -m ruff check .
+      - run: python -m ruff format --check .
+      - name: Actual native random/generated states plus application and freeze-chain regression
+        run: python -m pytest tests/test_inspection_cpu_successor.py tests/test_inspection_runtime.py tests/test_inspection_native.py tests/test_inspection_registry.py tests/test_inspection_contract.py tests/test_inspection_service.py tests/test_inspection_lifecycle.py tests/test_heldout_cleanup.py tests/test_heldout_execution.py tests/test_heldout_pause.py tests/test_cleanup_successor.py tests/test_accounting_successor.py tests/test_operational_successor.py tests/test_heldout_accounting.py --basetemp="${{ runner.temp }}/generated-native-tests" --junitxml="${{ runner.temp }}/native-test-results.xml"
+      - run: python scripts/cleanup_successor_freeze.py
+      - run: python scripts/ml_cpu_inventory.py --output "${{ runner.temp }}/dependency-inventory.json" --pip-report "${{ runner.temp }}/cpu-wheels.json" --pip-report "${{ runner.temp }}/public-dependencies.json"
+      - name: Fresh unfiltered dependency scans (not PT2 security clearance)
+        run: python scripts/ml_cpu_audit.py --output "${{ runner.temp }}/cpu-audit"
+      - name: Build application wheels and sdists
+        run: |
+          python -m build --outdir "${{ runner.temp }}/application-dist"
+          python -m build apps/inspection --outdir "${{ runner.temp }}/application-dist"
+      - name: Installed CLI/API and packaged browser resources outside checkout
+        env:
+          VG_DIST: ${{ runner.temp }}/application-dist
+          VG_ENVS: ${{ runner.temp }}/application-install
+        run: python scripts/inspection_package_acceptance.py
+      - name: Retain public dependency and test evidence (no tensor/permission fixtures)
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ml-cpu-${{ matrix.os }}-py${{ matrix.python }}
+          path: |
+            ${{ runner.temp }}/cpu-wheels.json
+            ${{ runner.temp }}/public-dependencies.json
+            ${{ runner.temp }}/dependency-inventory.json
+            ${{ runner.temp }}/native-test-results.xml
+            ${{ runner.temp }}/cpu-audit/audit-*.json
+            ${{ runner.temp }}/cpu-audit/audit-*.log
+          if-no-files-found: warn

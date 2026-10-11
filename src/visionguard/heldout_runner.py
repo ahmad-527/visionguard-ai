@@ -83,6 +83,29 @@ def _resume_parent(paths):
     return sha256_file(paths[-1] / "failure.json")
 
 
+def _periodic_checks(invocation, budget, provenance_check, row, last):
+    """Interval starts after successful publication; expose operational costs only."""
+    started = time.monotonic()
+    if started - last < 60:
+        return last
+    provenance_check()
+    verified = time.monotonic()
+    budget.refresh()
+    accounted = time.monotonic()
+    json_once(
+        invocation / f"telemetry-{uuid4().hex}.json",
+        row
+        | {
+            "periodic_check": {
+                "provenance_seconds": verified - started,
+                "accounting_seconds": accounted - verified,
+                "interval_origin": "successful check completion",
+            }
+        },
+    )
+    return time.monotonic()
+
+
 def run_matrix(
     inputs,
     output,
@@ -156,12 +179,9 @@ def run_matrix(
                 watcher.check()
             row = monitor(output, budget, real)
             if real:
-                now = time.monotonic()
-                if now - check.last >= 60:
-                    provenance_check()
-                    budget.refresh()
-                    json_once(invocation / f"telemetry-{uuid4().hex}.json", row)
-                    check.last = now
+                check.last = _periodic_checks(
+                    invocation, budget, provenance_check, row, check.last
+                )
             if checkpoint_hook:
                 checkpoint_hook(output, owner["nonce"], label)
             pause.checkpoint(invocation, owner, label)
@@ -321,7 +341,7 @@ def run_matrix(
                 check("between-pairs")
         check("before-summary")
         aggregate = aggregate_matrix(results)
-        budget.refresh()
+        budget.refresh(full=True)
         require(len(results) == 36, "Incomplete matrix")
         expected_calls = sum(len(r) for r in inputs.rows.values()) * 6
         if real:
@@ -423,6 +443,7 @@ def run_matrix(
             raise
         finally:
             ACTIVE_BUDGET.reset(token)
+            budget.close()
     if isinstance(stop, pause.ControlledPause):
         return {
             "status": "PAUSE_CLEANUP_VERIFIED_PROCESS_EXIT_PENDING",

@@ -1,5 +1,19 @@
 # Server-managed registry and native-use gate
 
+## Application CPU successor addendum (not approval)
+
+The separately reviewed `application-cpu-20261009-v1` candidate supersedes the
+historical package-version check **only in its isolated application checkout**.
+Its permission must additionally bind `runtime_profile_id` and exact
+`runtime_versions` from `visionguard_inspection.runtime.MODEL_VERSIONS`.
+Historical evaluation or earlier application permission is not transferable.
+The full stack, advisory disposition and still-unverified artifact-use proposal
+are in [ML CPU runtime successor](ml-cpu-runtime-successor.md).
+No genuine application-use approval, trained loading or held-out access is
+created by that profile or its manufactured permission tests.
+
+## Existing registry boundary
+
 The browser chooses a bounded model ID, never a filesystem path, checkpoint,
 device, preprocessing or threshold. No default/best model, model-scale fusion,
 training, recalibration, download or final-test admission is provided.

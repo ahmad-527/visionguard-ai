@@ -8,6 +8,8 @@
 | Core/app wheel and sdist | Harness prepared; final results in external packet | Clean Windows 3.11 / Ubuntu WSL 3.12 installs outside source; site-packages/resource/CLI/API checks |
 | Native development inference | **Blocked** | Exact artifact-use permission/identities and authorized non-held-out fixture scope; see `v1-model-registry.md` |
 | Native tensor plumbing | Separate manufactured test evidence | CPU tensors, fake constructor; not trained model/real artifact acceptance |
+| Isolated CPU ML successor | Manufactured native compatibility candidate | Actual PatchCore/EfficientAD random-state constructors/loading/inference tested; exact-head matrix evidence in runtime packet; not trained acceptance or security clearance |
+| Residual ML security disposition | **Human review required** | Unresolved Torch PT2 loader advisory; restricted `weights_only` tensor-state path is not an upstream remediation; see `ml-cpu-runtime-successor.md` |
 | Hosted application matrix | **Final-commit verification required** | Windows/Ubuntu Python 3.11/3.12/3.13; dated external review packet records actual run/head/job results, not a declaration |
 | Results publication | **Pending review** | Prepared reconciliation; no scientific numbers/digests independently revalidated here |
 | Source license | **Human decision required** | MIT/Apache-2.0 options; no license silently selected |

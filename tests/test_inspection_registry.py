@@ -19,6 +19,15 @@ from visionguard_inspection.registry import (
     manufactured_registry,
     read_bound,
 )
+from visionguard_inspection.runtime import MODEL_VERSIONS, PROFILE_ID
+
+
+@pytest.fixture(autouse=True)
+def manufactured_runtime_metadata(monkeypatch):
+    """These are permission/registry unit fixtures, not native runtime acceptance."""
+    monkeypatch.setattr(
+        "visionguard_inspection.runtime.version", lambda name: MODEL_VERSIONS[name]
+    )
 
 
 def bound(root, name, document):
@@ -62,6 +71,8 @@ def fixture_entry(root, **approval_overrides):
         "calibration_sha256": item["calibration"]["sha256"],
         "device": "cpu",
         "input_scope": "generated-or-development-non-held-out",
+        "runtime_profile_id": PROFILE_ID,
+        "runtime_versions": dict(MODEL_VERSIONS),
         "human_attestation": "MANUFACTURED UNIT FIXTURE ONLY",
         "expires_at_utc": (datetime.now(UTC) + timedelta(hours=1)).isoformat(),
         **approval_overrides,
@@ -164,12 +175,8 @@ def test_missing_or_mismatched_checkpoint_rejected_before_deserialization(
     item = fixture_entry(tmp_path)
     entry = approved_registration(tmp_path, item)
     monkeypatch.setattr(
-        "visionguard_inspection.native.version",
-        lambda package: {
-            "torch": "2.9.1",
-            "torchvision": "0.24.1",
-            "anomalib": "2.6.0",
-        }[package],
+        "visionguard_inspection.runtime.version",
+        lambda package: MODEL_VERSIONS[package],
     )
     if present:
         (tmp_path / "NEVER-OPEN.pt").write_bytes(b"manufactured non-checkpoint bytes")

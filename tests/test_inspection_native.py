@@ -9,6 +9,7 @@ from PIL import Image
 
 pytest.importorskip("visionguard_inspection")
 from visionguard_inspection.native import NativeInspectionBackend
+from visionguard_inspection.runtime import MODEL_VERSIONS
 
 from test_inspection_registry import fixture_entry
 from visionguard.inspection_contract import (
@@ -88,11 +89,8 @@ def test_safe_loader_binds_manufactured_state_and_refuses_wrong_identity(
 
     save()
     monkeypatch.setattr(
-        inspection_native,
-        "version",
-        lambda name: {"torch": "2.9.1", "torchvision": "0.24.1", "anomalib": "2.6.0"}[
-            name
-        ],
+        "visionguard_inspection.runtime.version",
+        lambda name: MODEL_VERSIONS[name],
     )
     calls = []
 

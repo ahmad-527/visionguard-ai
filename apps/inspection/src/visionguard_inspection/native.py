@@ -9,7 +9,6 @@ from __future__ import annotations
 import io
 import json
 from datetime import UTC, datetime
-from importlib.metadata import version
 from pathlib import Path
 
 from PIL import Image
@@ -21,6 +20,7 @@ from visionguard.inspection_contract import (
     ModelOutput,
 )
 from visionguard_inspection.registry import Registration, read_bound
+from visionguard_inspection.runtime import MODEL_VERSIONS, PROFILE_ID, verify_runtime
 
 
 def approved_registration(root: Path, item: dict) -> Registration:
@@ -45,6 +45,8 @@ def approved_registration(root: Path, item: dict) -> Registration:
         "canonical_state_sha256": item["canonical_state_sha256"],
         "device": "cpu",
         "input_scope": "generated-or-development-non-held-out",
+        "runtime_profile_id": PROFILE_ID,
+        "runtime_versions": dict(MODEL_VERSIONS),
     }
     if any(approval.get(k) != v for k, v in required.items()):
         raise InspectionError("Application permission scope/binding mismatch")
@@ -74,6 +76,7 @@ def approved_registration(root: Path, item: dict) -> Registration:
 
     def validate_use():
         # Eligibility is rechecked before each request, not only the first load.
+        verify_runtime()
         current = json.loads(read_bound(root, item["application_permission"]))
         if current != approval or datetime.now(UTC) >= expiry:
             raise InspectionError("Application permission changed/expired")
@@ -84,15 +87,6 @@ def approved_registration(root: Path, item: dict) -> Registration:
 
     def factory():
         validate_use()
-        for package, expected in {
-            "torch": "2.9.1",
-            "torchvision": "0.24.1",
-            "anomalib": "2.6.0",
-        }.items():
-            if version(package).split("+")[0] != expected:
-                raise InspectionError(
-                    "Native package version differs from approved adapter"
-                )
         raw = read_bound(root, item["artifact"], limit=1024 * 1024 * 1024)
         import torch
 

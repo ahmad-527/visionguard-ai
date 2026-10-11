@@ -79,6 +79,11 @@ not wheel resources. A release/upgrade must match source and artifact hashes,
 not just 0.1.0 package metadata. Rollback uses a separate environment with prior
 reviewed packages; it must not edit original evaluation or incident evidence.
 
+The separate CPU successor has its own exact requirements/constraints and
+runtime-bound permission contract. Follow `ml-cpu-runtime-successor.md` for that
+candidate, **not** the historical root `ml` extra. Matching its package profile
+does not resolve the PT2 advisory or authorize any trained artifact loading.
+
 The current packet records actual Windows Python 3.11.6 and Ubuntu WSL Python
 3.12.3 acceptance. The declared future CI matrix is Windows/Ubuntu Python
 3.11/3.12/3.13, but **declaration is not hosted execution evidence**. See the

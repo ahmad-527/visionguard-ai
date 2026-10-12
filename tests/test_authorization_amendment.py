@@ -7,6 +7,7 @@ from types import SimpleNamespace
 
 import pytest
 
+from visionguard import accounting_successor as accounting
 from visionguard import authorization_amendment as amendment
 from visionguard import heldout_authorization as gate
 from visionguard import heldout_contract as contract
@@ -30,7 +31,10 @@ def isolated(tmp_path, monkeypatch):
         target = tmp_path / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(
-            (REPOSITORY / operational.ARCHIVES.get(relative, relative)).read_bytes()
+            (
+                REPOSITORY
+                / (accounting.ARCHIVES | operational.ARCHIVES).get(relative, relative)
+            ).read_bytes()
         )
     ctx = {
         "activation": copy.deepcopy(old["document"]["contract"]),

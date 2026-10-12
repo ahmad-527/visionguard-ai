@@ -49,3 +49,7 @@ artifacts/
 mlruns/
 wandb/
 audit-reports/
+
+# Preserved local synthetic shutdown-review attempts (logs remain reviewable)
+/reports/shutdown-failure-review/*/manufactured-temp/
+/reports/shutdown-failure-review/pytest-new-*/

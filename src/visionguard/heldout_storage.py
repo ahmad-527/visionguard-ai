@@ -33,13 +33,13 @@ from visionguard.visa_evaluator_storage import canonical_bytes
 
 def write_once(path: Path, content: bytes) -> dict:
     """O_EXCL + fsync + exact readback; a partial file is never overwritten."""
-    before_write(len(content))
+    before_write(len(content), path)
     with path.open("xb") as handle:
         handle.write(content)
         handle.flush()
         os.fsync(handle.fileno())
     digest = hashlib.sha256(content).hexdigest()
-    account_write(path.stat().st_size)
+    account_write(path.stat().st_size, path)
     require(sha256_file(path) == digest, "Publication rehash failed")
     return {"path": path.name, "bytes": len(content), "sha256": digest}
 
@@ -88,7 +88,7 @@ def publish_cell(
                 validate_prediction(sample, prediction, spec)
                 stem = f"{i:06d}-{spec.model}"
                 target = directory / f"{stem}.tiff"
-                before_write(prediction.restored_map.size * 2 + 4096)
+                before_write(prediction.restored_map.size * 2 + 4096, target)
                 with target.open("xb") as handle:
                     tifffile.imwrite(
                         handle,
@@ -102,7 +102,7 @@ def publish_cell(
                     if prediction.thresholded_map is None
                     else prediction.thresholded_map
                 )
-                account_write(target.stat().st_size)
+                account_write(target.stat().st_size, target)
                 row["predictions"][spec.model] = {
                     "score": prediction.score,
                     "continuous": {

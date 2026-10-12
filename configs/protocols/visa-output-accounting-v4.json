@@ -1,0 +1,19 @@
+{
+  "protocol_id": "visa-output-accounting-v4",
+  "predecessor_merge": "6e0bfb0c5cb3496efe760b42871e47a84995c778",
+  "predecessor_fingerprint": "0334a17b5b5c8f954e692c4caa47f93eaead0228acb6c45a082a75ca3fbc1c47",
+  "windows_accounting": "independent metadata ledgers; overlapped subtree notifications armed before baseline; exact final-size registration after each durable write; no normal whole-tree scans",
+  "notification_reader": "one blocking metadata-only reader per independent ledger; continuous re-arm across native/provenance work; 64 KiB native buffer and bounded coalesced backlog of at most 8192 names and 1 MiB estimated name/action payload; loss or overflow remains fatal",
+  "full_reconciliation": "startup/resume and before final publication; portable non-Windows fallback on periodic refresh",
+  "notification_failure": "overflow, malformed notification, inaccessible path, changed root, lost handle: fail closed with existing failure/STOP evidence; no recovery or silent fallback",
+  "failure_evidence": "after accounting failure, only a bound immutable failure.json may be published following fresh full reconciliation and unchanged path/volume/retention/free-space guards; normal writes stay forbidden; unsafe storage preserves exception chain instead",
+  "limits": "unchanged 128 GiB retained logical bytes, all attempts; 20 GiB actual free reserve; volume identity and safe ancestors checked before every write",
+  "periodic_checks": "provenance every 60 seconds after successful check completion, not start; hardware/owner watcher checks unchanged; watcher drains notifications each owner-check cycle",
+  "changes": "metadata additions, modifications, renames and deletions update accounting; accounting is not content authentication; original scientific hash validation remains mandatory",
+  "security": "no reparse/cloud paths, no file-content reads by ledger; changes under existing directories have individual notifications; notification loss fails closed",
+  "pause_resume": "unchanged cooperative checkpoints, partial-stage evidence and safe-exit handshake; fresh observer and full baseline on new process",
+  "deployment": "DRAFT review only; never applied to existing authorized v3 invocation; future use requires independently reviewed merge and fingerprint-bound human authorization",
+  "scientific_change": "none; calculations, model identities, thresholds, membership, provenance and scientific output schemas unchanged",
+  "human_access_history": "UNKNOWN",
+  "independent_reservation": "NOT ESTABLISHED"
+}

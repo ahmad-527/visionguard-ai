@@ -83,6 +83,29 @@ def _resume_parent(paths):
     return sha256_file(paths[-1] / "failure.json")
 
 
+def _periodic_checks(invocation, budget, provenance_check, row, last):
+    """Interval starts after successful publication; expose operational costs only."""
+    started = time.monotonic()
+    if started - last < 60:
+        return last
+    provenance_check()
+    verified = time.monotonic()
+    budget.refresh()
+    accounted = time.monotonic()
+    json_once(
+        invocation / f"telemetry-{uuid4().hex}.json",
+        row
+        | {
+            "periodic_check": {
+                "provenance_seconds": verified - started,
+                "accounting_seconds": accounted - verified,
+                "interval_origin": "successful check completion",
+            }
+        },
+    )
+    return time.monotonic()
+
+
 def run_matrix(
     inputs,
     output,
@@ -141,6 +164,7 @@ def run_matrix(
     skipped_stages = 0
     stop = None
     safe_receipt = None
+    completion_published = False
     try:
         json_once(lock, owner)
         lock_created = True
@@ -156,12 +180,9 @@ def run_matrix(
                 watcher.check()
             row = monitor(output, budget, real)
             if real:
-                now = time.monotonic()
-                if now - check.last >= 60:
-                    provenance_check()
-                    budget.refresh()
-                    json_once(invocation / f"telemetry-{uuid4().hex}.json", row)
-                    check.last = now
+                check.last = _periodic_checks(
+                    invocation, budget, provenance_check, row, check.last
+                )
             if checkpoint_hook:
                 checkpoint_hook(output, owner["nonce"], label)
             pause.checkpoint(invocation, owner, label)
@@ -321,7 +342,7 @@ def run_matrix(
                 check("between-pairs")
         check("before-summary")
         aggregate = aggregate_matrix(results)
-        budget.refresh()
+        budget.refresh(full=True)
         require(len(results) == 36, "Incomplete matrix")
         expected_calls = sum(len(r) for r in inputs.rows.values()) * 6
         if real:
@@ -350,6 +371,10 @@ def run_matrix(
                     "report_sha256": sha256_file(invocation / "complete.json"),
                 },
             )
+        completion_published = (
+            json.loads((output / "complete.json").read_bytes())["invocation"]
+            == invocation.name
+        )
         safe_exit = True
         return report
     except BaseException as exc:
@@ -366,8 +391,35 @@ def run_matrix(
         else:
             raise
     finally:
+        cleanup_phase = "gpu_release"
+        watcher_shutdown_attempted = False
+        watcher_shutdown_safe_owner_exit = None
+        watcher_receipt = None
+        watcher_shutdown_error = None
+        writer_lock_released = False
         try:
-            allocated = release_gpu(real) if safe_exit else None
+            try:
+                allocated = release_gpu(real) if safe_exit else None
+            except BaseException as gpu_error:
+                # Stop the observer truthfully even when GPU cleanup is unsafe.
+                # This never claims safe owner exit or authorizes lock release.
+                if watcher:
+                    watcher_shutdown_attempted = True
+                    watcher_shutdown_safe_owner_exit = False
+                    try:
+                        watcher_receipt = watcher.finish(False)
+                    except BaseException as secondary:
+                        watcher_shutdown_error = {
+                            "exception_type": type(secondary).__name__,
+                            "reason": str(secondary),
+                        }
+                        gpu_error.add_note(
+                            f"Unsafe watcher shutdown failed: {secondary}"
+                        )
+                raise
+            cleanup_phase = "watcher_shutdown"
+            watcher_shutdown_attempted = watcher is not None
+            watcher_shutdown_safe_owner_exit = safe_exit if watcher else None
             watcher_receipt = watcher.finish(safe_exit) if watcher else None
             if real and safe_exit:
                 require(
@@ -375,11 +427,14 @@ def run_matrix(
                     "Independent watcher exit unproven",
                 )
             if lock_created and safe_exit:
+                cleanup_phase = "writer_lock_release"
                 require(
                     json.loads(lock.read_text()) == owner, "Writer ownership changed"
                 )
                 lock.unlink()
+                writer_lock_released = True
                 if stop is not None:
+                    cleanup_phase = "safe_pause_receipt"
                     ack = invocation / "pause-acknowledged.json"
                     acknowledged = (
                         json.loads(ack.read_bytes()) if ack.exists() else None
@@ -413,16 +468,39 @@ def run_matrix(
                     {
                         "exception_type": type(cleanup_error).__name__,
                         "reason": str(cleanup_error),
+                        "recorded_at_utc": datetime.now(UTC).isoformat(),
                         "safe_exit_unproven": True,
+                        "cleanup_phase": cleanup_phase,
+                        "binding": pause.binding(
+                            owner, sha256_file(invocation / "owner.json")
+                        )
+                        if (invocation / "owner.json").exists()
+                        else None,
+                        "owner_pid": owner["pid"],
+                        "owner_identity": owner["process_identity"],
+                        "completion_pointer_for_this_invocation_published": (
+                            completion_published
+                        ),
+                        "gpu_cleanup": getattr(
+                            cleanup_error, "gpu_cleanup_diagnostics", None
+                        ),
+                        "writer_lock_released_by_cleanup": writer_lock_released,
+                        "watcher_shutdown": {
+                            "attempted": watcher_shutdown_attempted,
+                            "safe_owner_exit": watcher_shutdown_safe_owner_exit,
+                            "receipt": watcher_receipt,
+                            "secondary_error": watcher_shutdown_error,
+                        },
                     },
                 )
-            except OSError as publication_error:
+            except BaseException as publication_error:
                 cleanup_error.add_note(
                     f"Cleanup failure receipt also failed: {publication_error}"
                 )
             raise
         finally:
             ACTIVE_BUDGET.reset(token)
+            budget.close()
     if isinstance(stop, pause.ControlledPause):
         return {
             "status": "PAUSE_CLEANUP_VERIFIED_PROCESS_EXIT_PENDING",
@@ -448,16 +526,9 @@ def _checked_frames(frames, check):
 
 def release_gpu(real):
     """Operational cleanup only; process exit is independently confirmed later."""
-    gc.collect()
-    if not real:
-        return 0
-    import torch
+    from visionguard.heldout_cleanup import release_gpu as verify_release
 
-    torch.cuda.synchronize()
-    torch.cuda.empty_cache()
-    allocated = torch.cuda.memory_allocated()
-    require(allocated == 0, "Native GPU allocations remain: safe pause unproven")
-    return allocated
+    return verify_release(real)
 
 
 def run_artificial(

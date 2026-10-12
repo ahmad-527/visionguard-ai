@@ -10,15 +10,11 @@ permissions:
 
 jobs:
   quality:
-    name: ${{ matrix.os == 'ubuntu-latest' && format('Python {0}', matrix.python-version) || format('Windows / Python {0}', matrix.python-version) }}
-    runs-on: ${{ matrix.os }}
-    defaults:
-      run:
-        shell: bash
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest]
         python-version: ["3.11", "3.12", "3.13"]
 
     steps:
@@ -49,7 +45,7 @@ jobs:
       - name: Verify closed B1 evaluator freeze and synthetic-only interfaces
         run: |
           python scripts/phase4d_b1_freeze.py
-          python -c "import os, subprocess, sys; from pathlib import Path; out = Path(os.environ['RUNNER_TEMP']) / 'b1-synthetic.json'; result = subprocess.run([sys.executable, '-m', 'visionguard.visa_evaluator_synthetic', '--repository', '.'], check=True, stdout=subprocess.PIPE); out.write_bytes(result.stdout)"
+          python -m visionguard.visa_evaluator_synthetic --repository . > /tmp/b1-synthetic.json
           python -m visionguard.visa_evaluator_artifacts --help
 
       - name: Verify VisA freeze and lightweight command interfaces

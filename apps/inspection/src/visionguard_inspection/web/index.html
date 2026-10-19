@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VisionGuard · Local inspection</title><link rel="stylesheet" href="/assets/style.css"><script src="/assets/app.js" defer></script></head>
+<body><main>
+<header><p class="eyebrow">VISIONGUARD / LOCAL INSPECTION</p><h1>Inspect with evidence.</h1><p>No upload persistence. Model decisions are not a safety guarantee.</p></header>
+<p id="qualification">Held-out VisA evaluation with historical access independence unverified.</p>
+<form id="inspection-form"><label for="model">Server-approved model</label><select id="model" required><option value="">Choose a model explicitly</option></select>
+<label for="image">PNG or JPEG · up to 10 MiB</label><input id="image" type="file" accept="image/png,image/jpeg" required>
+<label><input id="input-role" type="checkbox"> This is generated or authorized development input, not held-out evaluation data (required for native inference).</label>
+<button id="inspect" type="submit" disabled>Inspect image</button></form>
+<p id="status" role="status" aria-live="polite">Checking service readiness…</p>
+<section id="result" hidden><h2 id="decision"></h2><p id="identity"></p><p id="score"></p><p id="mode"></p><p id="visualization"></p>
+<div class="views"><figure><figcaption>Original image</figcaption><img id="original" alt="Uploaded image"></figure><figure><figcaption>Original-coordinate heatmap (display-normalized)</figcaption><canvas id="heatmap" aria-label="Original-coordinate anomaly heatmap"></canvas></figure></div></section>
+</main></body></html>

@@ -1,0 +1,8 @@
+# Keep the historically frozen recipe/test bytes and all inherited lint rules.
+extend = "pyproject.toml"
+
+[lint.extend-per-file-ignores]
+# This WeakSet intentionally tracks allocation owners across fixture instances.
+# Ruff 0.17 added WeakSet to RUF012; modifying this frozen test breaks v5 bindings.
+"tests/test_heldout_cleanup.py" = ["RUF012"]
+

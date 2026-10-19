@@ -1,5 +1,11 @@
 # Local inspection installation — untagged review candidate
 
+Current integration: PR36 normal merge f13beb897e9223e07866f1f681c457cce6dcfec1.
+Use the separately reviewed private correction worktree only after its own
+adoption. The canonical development repository is visionguard-ai; FlawGlyph
+remains a separate unchanged source snapshot. See v1-release-checklist.md for
+the observed current CI failure and prepared private fix.
+
 Two distributions are intentional: `visionguard-ai` is the frozen core build
 recipe; `visionguard-inspection` packages the API/browser without rewriting that
 recipe. Both remain version 0.1.0; **this is not a v1.0 release**. Use the matching
@@ -84,9 +90,28 @@ runtime-bound permission contract. Follow `ml-cpu-runtime-successor.md` for that
 candidate, **not** the historical root `ml` extra. Matching its package profile
 does not resolve the PT2 advisory or authorize any trained artifact loading.
 
-The current packet records actual Windows Python 3.11.6 and Ubuntu WSL Python
-3.12.3 acceptance. The declared future CI matrix is Windows/Ubuntu Python
-3.11/3.12/3.13, but **declaration is not hosted execution evidence**. See the
-external validation JSON for exact versions, commands, skips and results.
+The exact PR36 candidate completed nine workflows/36 jobs on Windows/Ubuntu
+Python 3.11-3.13 before integration. The seven naturally triggered main workflows
+are separately recorded; ordinary lint failed on new Ruff 0.17.1 behaviour.
+The private compatibility fix is not yet public CI evidence. Windows Python
+3.11 has the completed, exact-scope one-shot trained PatchCore acceptance;
+the wider CPU platform/model matrix is manufactured evidence, not additional
+trained acceptance. Public/multi-worker service and GPU application support
+are outside this v1 operating scope.
+
+For durable fixture-test reporting without periodic native timed dumps, run:
+
+    python scripts/inspection_test_observer.py --output <new-external-observer-dir> tests/test_inspection_state_archive.py tests/test_inspection_observer.py
+
+Use an output directory that does not exist; the observer never replaces old
+evidence. It captures bounded Python code locations, not frame locals, and keeps
+fatal reporting. This command creates no trained authority.
+
+Native candidates now require an ordinary tensor-state ZIP; PT2/export,
+TorchScript, legacy pickle, compressed, duplicate or escaping records are
+refused before deserialization. This is stricter format admission, not a claim
+that upstream Torch export is patched. Follow v1-operational-security-status.md.
+Do not use the permanently consumed acceptance permission or registry as a
+startup example. No live trained startup is authorised by this documentation.
 
 > Held-out VisA evaluation with historical access independence unverified.

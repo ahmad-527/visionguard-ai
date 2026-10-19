@@ -88,6 +88,9 @@ def approved_registration(root: Path, item: dict) -> Registration:
     def factory():
         validate_use()
         raw = read_bound(root, item["artifact"], limit=1024 * 1024 * 1024)
+        from visionguard_inspection.state_archive import require_state_archive
+
+        require_state_archive(raw)
         import torch
 
         # No weights_only=False fallback, custom globals or arbitrary pickle execution.

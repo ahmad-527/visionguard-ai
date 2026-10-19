@@ -10,7 +10,7 @@
   heatmap; stale/failed results cleared; manufactured mode visibly qualified.
 - Native CPU adapter with hash-bound permission before artifact access, safe
   tensor loading, supported preprocessing and existing calibration verification.
-  Trained development-artifact acceptance remains blocked on exact use authority.
+  The exact bounded PatchCore CPU acceptance later completed; its permission is permanently consumed. New native startup remains separately authorised.
 - Generated browser/API fixtures, manufactured CPU tensor adapter tests, separate
   wheel/sdist acceptance harness and declared Windows/Ubuntu application CI.
 - Installation, limitations, proposed results reconciliation, source-license

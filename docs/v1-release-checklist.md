@@ -1,27 +1,29 @@
-# v1.0 release checklist — NOT release approval
+# v1 release checklist — engineering status, not release approval
 
-| Gate | Current disposition | Evidence / next requirement |
+This updates the original delivery criteria after PR36 integration. It adds no
+new product features or scientific acceptance gates. Dated private results are
+review evidence; original failures and frozen records remain unchanged.
+
+| Existing criterion | Current disposition | Remaining requirement |
 | --- | --- | --- |
-| Engineering adoption | Reviewed v5 remains a draft candidate; no activation | Parent PR #33 depends on accounting PR #32; no historical source/freeze modification |
-| HTTP/registry/UI slice | Implemented | `apps/inspection`, `inspection_contract.py`; external test/patch/hash packet |
-| Manufactured browser/API acceptance | Implemented tests and local verification | Real Edge -> ephemeral loopback FastAPI, generated PNGs and corrupt-input failure; no trained model |
-| Core/app wheel and sdist | Harness prepared; final results in external packet | Clean Windows 3.11 / Ubuntu WSL 3.12 installs outside source; site-packages/resource/CLI/API checks |
-| Native development inference | **Blocked** | Exact artifact-use permission/identities and authorized non-held-out fixture scope; see `v1-model-registry.md` |
-| Native tensor plumbing | Separate manufactured test evidence | CPU tensors, fake constructor; not trained model/real artifact acceptance |
-| Isolated CPU ML successor | Manufactured native compatibility candidate | Actual PatchCore/EfficientAD random-state constructors/loading/inference tested; exact-head matrix evidence in runtime packet; not trained acceptance or security clearance |
-| Residual ML security disposition | **Human review required** | Unresolved Torch PT2 loader advisory; restricted `weights_only` tensor-state path is not an upstream remediation; see `ml-cpu-runtime-successor.md` |
-| Hosted application matrix | **Final-commit verification required** | Windows/Ubuntu Python 3.11/3.12/3.13; dated external review packet records actual run/head/job results, not a declaration |
-| Results publication | **Pending review** | Prepared reconciliation; no scientific numbers/digests independently revalidated here |
-| Source license | **Human decision required** | MIT/Apache-2.0 options; no license silently selected |
-| Security/dependency/model license review | **Release qualification required** | Dated advisory/package/license inventory and limitations; local-only service is not authenticated/public deployment, and model-use/redistribution rights remain separate |
-| Distribution identity/version/support matrix | **Pending release review** | Untagged 0.1.0 core/app pair pinned by hashes; decide release version/support only after gates |
-| End-to-end native acceptance | **Missing** | Approved development state -> generated/non-held-out upload -> CPU -> original map -> browser; no tuning/rerun |
-| Release/activation/deployment/tag | **Not authorized** | Separate human authorization after review; do not treat green tests as permission |
+| Engineering adoption | PR36 normal-merged as f13beb897e9223e07866f1f681c457cce6dcfec1; reviewed tree 8531ffd0961c90534bb94ced085d2af477bc7dbd | New private corrections require their own public-action approval; no further push is authorised |
+| HTTP/registry/UI | Implemented: bounded PNG/JPEG upload, explicit immutable registry, readiness/non-decisions, original-coordinate heatmap, lifecycle quarantine | Supported scope is loopback, one worker, CPU; no public deployment or universal safety claim |
+| Manufactured API/browser acceptance | Prior exact-byte matrix reused; affected archive/lifecycle/observer checks recorded separately | Changed loader controls are new fixture evidence, not a transferred trained acceptance |
+| Core/application wheel and sdist | Existing matched-pair installation evidence reused; affected candidate packages checked privately | Final licensed release bytes must include applicable notices and exact new scope approval |
+| Native development inference | The completed one-shot PatchCore/candle/42 CPU workflow passed extraction, validation and three generated-image browser requests | Authority is permanently spent; no present permission to serve/load a trained registry |
+| CPU native compatibility | Reviewed six-version profile preserved; affected random/generated-state checks remain separate from trained evidence | No dependency or scientific pin is silently upgraded |
+| Release security | PT2/export route excluded by application design; private positive state-container admission adds a pre-loader rejection boundary | Upstream affected/patched versions remain unestablished; review the exact path-specific disposition before native release |
+| Hosted matrix | Reviewed PR36: nine successful workflows/36 jobs; natural main push: seven workflows, 15 successful jobs/six lint failures | Private Ruff 0.17 compatibility fix is prepared; main is not reported green |
+| Results/limitations documentation | Stale pre-run README status corrected without reading/recomputing scientific outputs | Any numerical publication needs its own approved provenance-bound summary; no new numerical result is required for a local UI demo |
+| Source licence | Adopted limited Apache-2.0 grant preserved for its exact published source scope | New/changed release contributions and extra canonical-repository paths are not automatically covered; review the exact additional-scope proposal |
+| Version and support | Untagged matching 0.1.0 pair; Windows/Ubuntu Python 3.11–3.13 manufactured matrix evidence | No v1.0 release/tag or GPU/public-service support is declared |
+| End-to-end native acceptance | Completed bounded trained workflow retained for its exact source/runtime/artifact and three generated images | It does not validate a changed loader end-to-end, other models/data, accuracy or historical prediction equivalence; any necessary future trained test must be separately bounded/authorised |
+| Historical operational incidents | Original observer AV, incomplete run and GPU cleanup failures preserved; fixture ownership diagnostics and safer observer prepared | Low-level historical causes remain unproven; no original STOP/lock reconciliation, recovery or GPU-safe-exit claim |
+| Release/activation/deployment/tag | Not authorised | Separate exact candidate/action decision after review |
 
-Final local test outcomes, failures/skips, source hashes and package digests are
-in the external application review packet. No numerical result in this checklist
-represents scientific evaluation. Frozen original STOP/lock, outputs and incident
-evidence remain untouched. This app does not reconcile an original lock, change
-monitoring policy or claim that the historical allocation leak was fixed.
+See [current delivery scope](v1-delivery-readiness.md),
+[installation](v1-application-installation.md) and
+[operational/security disposition](v1-operational-security-status.md).
+Mechanical checks do not execute a licence grant or authorise a release.
 
-> Held-out VisA evaluation with historical access independence unverified.
+Held-out VisA evaluation with historical access independence unverified.

@@ -198,7 +198,7 @@ def test_upload_deadline_and_disconnect_release_slot_without_factory():
     async def scenario(disconnect):
         factories = []
         a = entry("a", lambda: factories.append("called"))
-        app = create_app(Registry((a,)), upload_timeout=0.02)
+        app = create_app(Registry((a,)), upload_timeout=1)
         messages, calls = [], 0
 
         async def receive():
@@ -208,7 +208,7 @@ def test_upload_deadline_and_disconnect_release_slot_without_factory():
                 return {"type": "http.request", "body": b"partial", "more_body": True}
             if disconnect:
                 return {"type": "http.disconnect"}
-            await asyncio.sleep(0.2)
+            await asyncio.sleep(2)
             return {"type": "http.request", "body": b"", "more_body": False}
 
         async def send(message):

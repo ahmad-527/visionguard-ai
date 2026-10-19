@@ -1,5 +1,12 @@
 # Server-managed registry and native-use gate
 
+Current status: the previous bounded PatchCore CPU workflow completed once; its
+authority is permanently consumed. That pass is exact-scope technical evidence,
+not a current native registry permission. This candidate's new state-container
+gate and changed loader hashes are covered by untrained regressions only. See
+v1-operational-security-status.md before any separately authorised native use.
+
+
 ## Application CPU successor addendum (not approval)
 
 The separately reviewed `application-cpu-20261009-v1` candidate supersedes the

@@ -1,6 +1,7 @@
 """Container admission controls only; no trained bytes or exploit execution."""
 
 import io
+import struct
 import zipfile
 
 import pytest
@@ -80,10 +81,74 @@ def test_duplicate_members_are_refused():
         require_state_archive(raw)
 
 
-def test_factory_refuses_export_container_before_torch_loader(tmp_path, monkeypatch):
+def declared_sizes(raw, sizes):
+    """Change central-directory declarations only; never read member payloads."""
+    result = bytearray(raw)
+    offset = raw.index(b"PK\x01\x02")
+    for compressed, uncompressed in sizes:
+        assert result[offset : offset + 4] == b"PK\x01\x02"
+        struct.pack_into("<II", result, offset + 20, compressed, uncompressed)
+        name, extra, comment = struct.unpack_from("<HHH", result, offset + 28)
+        offset += 46 + name + extra + comment
+    return bytes(result)
+
+
+def admission_refusals():
+    raw = archive(state_records())
+    budget = len(raw)
+    return [
+        pytest.param(
+            archive([*state_records(), ("archive/models/model.json", b"{}")]),
+            "PT2/export",
+            id="export-container",
+        ),
+        pytest.param(
+            declared_sizes(raw, [(3 * 1024**3, 3 * 1024**3)]),
+            "archive byte budget",
+            id="small-zip-multi-gigabyte-claim",
+        ),
+        pytest.param(
+            declared_sizes(raw, [(4, 5)]),
+            "Inconsistent stored-member sizes",
+            id="stored-size-mismatch",
+        ),
+        pytest.param(
+            declared_sizes(raw, [(5, 4)]),
+            "Inconsistent stored-member sizes",
+            id="reverse-stored-size-mismatch",
+        ),
+        pytest.param(
+            declared_sizes(raw, [(budget // 2 + 1, budget // 2 + 1)] * 2),
+            "aggregate byte budget",
+            id="aggregate-declared-size-over-budget",
+        ),
+        pytest.param(
+            raw.replace(b"archive/", b"arch\x00ve/"),
+            "NUL in raw",
+            id="nul-root",
+        ),
+        pytest.param(
+            raw.replace(b"data.pkl", b"dat\x00.pkl"),
+            "NUL in raw",
+            id="nul-member",
+        ),
+    ]
+
+
+@pytest.mark.parametrize(("raw", "reason"), admission_refusals())
+def test_metadata_refusals_do_not_read_or_allocate_claimed_payload(raw, reason):
+    assert len(raw) < 1024
+    with pytest.raises(InspectionError, match=reason):
+        require_state_archive(raw)
+
+
+@pytest.mark.parametrize(("raw", "reason"), admission_refusals())
+def test_factory_refuses_before_torch_import_or_loader(
+    tmp_path, monkeypatch, raw, reason
+):
+    import builtins
     import hashlib
     import json
-    from types import SimpleNamespace
 
     from visionguard_inspection import native
     from visionguard_inspection.runtime import MODEL_VERSIONS
@@ -91,7 +156,6 @@ def test_factory_refuses_export_container_before_torch_loader(tmp_path, monkeypa
     from test_inspection_registry import fixture_entry
 
     item = fixture_entry(tmp_path)
-    raw = archive([*state_records(), ("archive/models/model.json", b"{}")])
     (tmp_path / item["artifact"]["path"]).write_bytes(raw)
     digest = hashlib.sha256(raw).hexdigest()
     item["artifact"]["sha256"] = digest
@@ -105,12 +169,16 @@ def test_factory_refuses_export_container_before_torch_loader(tmp_path, monkeypa
     monkeypatch.setattr(
         "visionguard_inspection.runtime.version", lambda name: MODEL_VERSIONS[name]
     )
+    original_import = builtins.__import__
     calls = []
-    monkeypatch.setitem(
-        __import__("sys").modules,
-        "torch",
-        SimpleNamespace(load=lambda *a, **kw: calls.append((a, kw))),
-    )
-    with pytest.raises(InspectionError, match="PT2/export"):
+
+    def refuse_torch_import(name, *args, **kwargs):
+        if name == "torch" or name.startswith("torch."):
+            calls.append(name)
+            raise AssertionError("Torch must not be imported for refused metadata")
+        return original_import(name, *args, **kwargs)
+
+    monkeypatch.setattr(builtins, "__import__", refuse_torch_import)
+    with pytest.raises(InspectionError, match=reason):
         native.approved_registration(tmp_path, item).factory()
     assert calls == []

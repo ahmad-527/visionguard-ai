@@ -2,6 +2,11 @@
 
 ## Unreleased — local inspection candidate (0.1.0 packages, not v1.0)
 
+- 26 October 2026: raw ZIP names reject NUL before path normalization or Torch
+  import. Stored compressed/uncompressed declarations must match; each member
+  and their aggregate must fit the captured archive byte length. Malformed
+  manufactured declarations are rejected without reading/deserializing payloads.
+
 - Separate `visionguard-inspection` package; preserved frozen core build recipe
   and all historical evaluator freezes.
 - Loopback FastAPI service, explicit server registry, bounded raw PNG/JPEG
@@ -14,7 +19,7 @@
 - Generated browser/API fixtures, manufactured CPU tensor adapter tests, separate
   wheel/sdist acceptance harness and declared Windows/Ubuntu application CI.
 - Installation, limitations, proposed results reconciliation, source-license
-  options and release gates. No held-out rerun, activation, merge, deployment or tag.
+  options and release gates. This changelog authorises no held-out rerun, activation, deployment or tag.
 - Atomic backend/model residency; close/initialization failure quarantine with
   retained failed-close identity, no automatic retry and no clean-shutdown claim.
 - Bounded model-switch, repeated-request, upload deadline/disconnect, actual

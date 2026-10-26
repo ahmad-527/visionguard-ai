@@ -4,8 +4,8 @@ Deep-learning research and local inspection tooling for industrial visual anomal
 
 > **Project status:** PR36 is integrated into the canonical VisionGuard
 > development repository. The loopback inference API, pinned registry and
-> inspection UI are implemented; private operational/security corrections remain
-> under review. This is an untagged 0.1.0 application, not a production release.
+> inspection UI are implemented. As of 26 October 2026, the narrow
+> operational/security corrections are authorised for a checked follow-up PR. This is an untagged 0.1.0 application, not a production release.
 > See [current v1 criteria](docs/v1-release-checklist.md) and
 > [startup/support scope](docs/v1-application-installation.md).
 >

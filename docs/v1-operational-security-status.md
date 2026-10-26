@@ -1,4 +1,8 @@
-# Operational and native-security disposition — private candidate
+# Operational and native-security disposition — restricted local CPU path
+
+Historical investigation recorded 19 October 2026; admission corrections and
+restricted disposition authorised 26 October 2026. This dated record does not
+claim that upstream advisory status was refreshed after the original review.
 
 This addresses the retained observer/GPU incidents and PT2 advisory within the
 existing local CPU application scope. No trained artifact or scientific output
@@ -52,10 +56,10 @@ repair the original GPU evaluation. That historical limitation remains explicit.
 ## PT2 reachability and current authoritative record
 
 The [GitHub Advisory Database entry](https://github.com/advisories/GHSA-33x2-ppm4-v46v)
-still lists unknown affected and patched versions. Its package-less unreviewed
+listed unknown affected and patched versions in the 19 October 2026 review. Its package-less unreviewed
 metadata cannot support Dependabot alerts. The
 [PyTorch fix proposal #176791](https://github.com/pytorch/pytorch/pull/176791)
-is closed without merge. It describes unsafe pickle fallback in export/PT2
+was closed without merge at that review. It describes unsafe pickle fallback in export/PT2
 deserialization. No patched Torch release was established by this review.
 The repository-scoped security-advisory URL returned 404; the global advisory
 and upstream proposal were accessible. The NVD response supplied no usable body.
@@ -72,8 +76,12 @@ benchmark unsafe loader is not imported/invoked by this application factory.
 The new metadata-only gate positively admits ordinary torch.save state ZIPs:
 one safe root, required data.pkl/version, known state metadata and numeric tensor
 records, at most 8192 entries, no encryption/compression, duplicates, traversal,
-raw backslashes, export records or TorchScript code/constants. It reads no pickle
-payload. Unsupported legacy state formats are refused without a fallback.
+raw backslashes, export records or TorchScript code/constants. Raw orig_filename
+values containing NUL are rejected before path normalization or Torch import.
+For ZIP_STORED records, compressed and uncompressed sizes must agree. Each
+declared size and the aggregate declared payload must not exceed len(raw), the
+actual captured archive byte budget; no claimed payload is read or allocated.
+It reads no pickle payload. Unsupported legacy state formats are refused without a fallback.
 Raw orig_filename is checked because Windows ZipInfo normalizes separators.
 Restricted loading, exact hash/permission, canonical identity and strict
 restoration remain mandatory. Both native architectures are checked with newly
@@ -82,9 +90,12 @@ generated states, not previously trained artifacts.
 This closes an application input-format ambiguity and prevents the supported
 factory from accepting export/JIT containers. It does not fix Torch export,
 prove all dependencies secure, authenticate a hostile local operator, or approve
-untrusted model uploads. The release security decision should explicitly accept
-only this supported local CPU path, or remain HOLD; it must not silently accept
-package-wide residual risk. No dependency version was changed on speculation.
+untrusted model uploads. On 26 October 2026 the owner accepted only the documented
+local, single-worker, CPU-only, independently pinned ordinary-state path with
+these corrected controls and retained restrictions. This is not upstream
+remediation, package-wide clearance, repaired historical crashes, GPU support,
+permission to load a trained artifact or release/deployment approval.
+No dependency version was changed on speculation.
 
 ## Acceptance and operating boundaries
 

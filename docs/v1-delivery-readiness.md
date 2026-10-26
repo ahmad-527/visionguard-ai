@@ -27,14 +27,17 @@ The original release criteria and their current dispositions are in
 is required to use the manufactured local demonstration. It deliberately has no
 industrial diagnostic meaning. An empty registry returns not ready.
 
-Private post-merge changes prepare a narrow current-Ruff compatibility config,
+The 19 October private post-merge candidate prepared a narrow Ruff compatibility config,
 an ordinary tensor-state ZIP admission gate before Torch deserialization, an
 opt-in durable Python-stack fixture-test observer and updated documentation.
-They are not published, released, deployed or trained-accepted by this document.
+As of 26 October, the owner authorised a narrow follow-up PR and conditional
+normal merge, including NUL and declared-size admission corrections. This
+document is not evidence that those public actions or checks have completed,
+and does not release, deploy or confer trained acceptance.
 Unchanged model/scientific code remains backed by its original evidence.
 Whole-candidate/source-hash acceptance does not transfer to changed files.
 
-Current main's natural push CI ran seven workflows: five succeeded, while the
+The 19 October PR36 merge's natural push CI ran seven workflows: five succeeded, while the
 six ordinary lint jobs failed on Ruff 0.17.1's new WeakSet RUF012 detection in a
 historically frozen test. The private config preserves all frozen bytes and
 inherits all lint rules, with one file/rule exception for that intentional shared
@@ -42,7 +45,7 @@ allocation-owner registry. It changes no runtime dependency or test assertion.
 The application/native workflows are pull-request/manual-triggered, so this push
 did not rerun them; the exact-byte PR36 evidence is retained rather than fabricated.
 
-The upstream PT2 advisory remains unresolved at the package-version level.
+The 19 October review did not establish a patched PT2 package-version range.
 Supported application input is image data, never a client-supplied model/path.
 The native factory accepts only an independently approved, pinned, ordinary
 tensor-state container and explicitly uses CPU weights_only=True; it has no
@@ -52,12 +55,16 @@ not package-wide security clearance. See
 
 The limited source grant applies to its exact adopted scope. It does not
 automatically cover new edits, all extra canonical-repository files, models or
-datasets. The private release proposal identifies the additional source scope
-and notice/metadata obligations without requesting a blanket ownership guarantee.
+datasets. On 26 October the owner adopted the additional limited grant for the
+reviewed canonical 16-path/release-copy 105-path scopes and specifically authorised
+corrections at their newly recorded hashes. Updated private receipts/manifests
+preserve third-party terms and the earlier authorship/contract limitations.
 
-The project is not declared fully complete: corrected source publication,
-licence scope, final native-security disposition and any release/version action
-still require the exact remaining review described in the consolidated result.
+The project is not declared fully complete. Follow-up integration/check outcomes
+must be read from their actual recorded candidate, and changed-loader trained
+validation remains preparation only. The owner accepted the restricted local
+CPU security disposition on 26 October, not package-wide security clearance.
+Any release/version/deployment action still requires separate authority.
 Do not repeat a trained test merely to replace a missing administrative decision.
 
 Held-out VisA evaluation with historical access independence unverified.

@@ -33,10 +33,14 @@ def require_state_archive(raw: bytes) -> None:
             if not 0 < len(entries) <= 8192:
                 raise InspectionError("Tensor-state archive member count is invalid")
             names = [item.orig_filename for item in entries]
+            if any("\x00" in name for name in names):
+                raise InspectionError("NUL in raw tensor-state archive name")
             if len(set(names)) != len(names):
                 raise InspectionError("Duplicate tensor-state archive members")
             root = names[0].split("/", 1)[0]
             suffixes = set()
+            byte_budget = len(raw)
+            declared_total = 0
             for item in entries:
                 name = item.orig_filename
                 path = PurePosixPath(name)
@@ -53,6 +57,13 @@ def require_state_archive(raw: bytes) -> None:
                     or item.compress_type != zipfile.ZIP_STORED
                 ):
                     raise InspectionError("Unsupported tensor-state archive member")
+                if item.compress_size != item.file_size:
+                    raise InspectionError("Inconsistent stored-member sizes")
+                if not 0 <= item.file_size <= byte_budget:
+                    raise InspectionError("Stored member exceeds archive byte budget")
+                declared_total += item.file_size
+                if declared_total > byte_budget:
+                    raise InspectionError("Stored members exceed aggregate byte budget")
                 relative = "/".join(path.parts[1:])
                 tensor_record = (
                     len(path.parts) == 3

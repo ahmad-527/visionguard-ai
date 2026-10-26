@@ -3,11 +3,23 @@
 import io
 import struct
 import zipfile
+from importlib.util import module_from_spec, spec_from_file_location
+from pathlib import Path
 
 import pytest
-from visionguard_inspection.state_archive import require_state_archive
 
 from visionguard.inspection_contract import InspectionError
+
+# Ordinary CI installs the core only. Exercise the exact source gate there too,
+# without installing the optional application or changing the suite import path.
+_APP_SOURCE = Path(__file__).resolve().parents[1] / "apps/inspection/src"
+_SPEC = spec_from_file_location(
+    "_inspection_state_archive_under_test",
+    _APP_SOURCE / "visionguard_inspection/state_archive.py",
+)
+_MODULE = module_from_spec(_SPEC)
+_SPEC.loader.exec_module(_MODULE)
+require_state_archive = _MODULE.require_state_archive
 
 
 def archive(records, compression=zipfile.ZIP_STORED):
@@ -150,6 +162,9 @@ def test_factory_refuses_before_torch_import_or_loader(
     import hashlib
     import json
 
+    # Scope package resolution to this factory integration case. Other optional
+    # application tests retain their configured collection/dependency behavior.
+    monkeypatch.syspath_prepend(str(_APP_SOURCE))
     from visionguard_inspection import native
     from visionguard_inspection.runtime import MODEL_VERSIONS
 

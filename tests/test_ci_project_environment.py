@@ -4,7 +4,7 @@ from collections import namedtuple
 from pathlib import Path
 
 import pytest
-from ci_project_environment import select_volume
+from scripts.ci_project_environment import select_volume
 
 Usage = namedtuple("Usage", "total used free")
 

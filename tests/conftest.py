@@ -67,7 +67,9 @@ def pytest_runtest_setup(item):
         usage = shutil.disk_usage(measured)
         item.user_properties.append(("actual_free_bytes_before_test", usage.free))
         item.user_properties.append(("production_reserve_bytes_unchanged", 20 * 2**30))
-        destination = os.environ.get("RUNNER_TEMP")
+        destination = os.environ.get("VISIONGUARD_PROJECT_TEMP") or os.environ.get(
+            "RUNNER_TEMP"
+        )
         if destination:
             event = {
                 "test": item.nodeid,

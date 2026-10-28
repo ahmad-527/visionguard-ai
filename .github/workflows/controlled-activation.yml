@@ -24,7 +24,7 @@ jobs:
       - run: python scripts/phase4d_b2_freeze.py
       - run: python scripts/heldout_activation_freeze.py
       - run: python -m pytest tests/test_heldout_metrics.py tests/test_heldout_admission.py tests/test_heldout_authorization.py tests/test_heldout_execution.py
-      - run: python -m visionguard.heldout_runner --artificial /tmp/heldout-artificial > /tmp/heldout-artificial-report.json
+      - run: python -m visionguard.heldout_runner --artificial "${{ env.VISIONGUARD_PROJECT_TEMP }}/heldout-artificial" > "${{ env.VISIONGUARD_PROJECT_TEMP }}/heldout-artificial-report.json"
       - name: Verify current CI/runtime successor and historical source anchors
         run: python scripts/ci_runtime_freeze.py
       - name: Retain actual capacity observations only

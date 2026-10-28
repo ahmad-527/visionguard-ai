@@ -23,7 +23,7 @@ jobs:
       - run: python scripts/phase4d_b1_freeze.py
       - run: python scripts/phase4d_b2_freeze.py
       - run: python -m visionguard.visa_b2_runner --plan
-      - run: python -m visionguard.visa_b2_runner --synthetic --output /tmp/b2-synthetic > /tmp/b2-report.json
+      - run: python -m visionguard.visa_b2_runner --synthetic --output "${{ env.VISIONGUARD_PROJECT_TEMP }}/b2-synthetic" > "${{ env.VISIONGUARD_PROJECT_TEMP }}/b2-report.json"
       - run: python -m pytest tests/test_visa_b2_readiness.py
       - name: Verify current CI/runtime successor and historical source anchors
         run: python scripts/ci_runtime_freeze.py

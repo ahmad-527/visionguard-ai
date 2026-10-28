@@ -30,7 +30,7 @@ jobs:
         run: python scripts/ci_project_environment.py --output "${{ runner.temp }}/project-python" --observations "${{ runner.temp }}/resource-observations.json"
 
       - name: Install project and development tools
-        run: python -m pip install --upgrade pip && python scripts/install_successor.py --profile ordinary --source "${{ env.VISIONGUARD_PROJECT_TEMP }}/ordinary-successor-source"
+        run: python scripts/install_successor.py --profile ordinary --source "${{ env.VISIONGUARD_PROJECT_TEMP }}/ordinary-successor-source"
 
       - name: Check formatting
         run: python -m ruff format --check .
@@ -47,7 +47,7 @@ jobs:
       - name: Verify closed B1 evaluator freeze and synthetic-only interfaces
         run: |
           python scripts/phase4d_b1_freeze.py
-          python -m visionguard.visa_evaluator_synthetic --repository . > /tmp/b1-synthetic.json
+          python -m visionguard.visa_evaluator_synthetic --repository . > "${{ env.VISIONGUARD_PROJECT_TEMP }}/b1-synthetic.json"
           python -m visionguard.visa_evaluator_artifacts --help
 
       - name: Verify VisA freeze and lightweight command interfaces

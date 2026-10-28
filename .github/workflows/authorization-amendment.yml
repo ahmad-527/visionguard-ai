@@ -22,7 +22,7 @@ jobs:
       - run: python scripts/install_successor.py --profile ordinary --source "${{ env.VISIONGUARD_PROJECT_TEMP }}/ordinary-successor-source"
       - run: python scripts/security_amendment_freeze.py
       - run: python -m pytest tests/test_windows_trust_acl.py tests/test_authorization_amendment.py tests/test_heldout_authorization.py
-      - run: python scripts/heldout_activation_acceptance.py --output /tmp/amended-artificial-acceptance
+      - run: python scripts/heldout_activation_acceptance.py --output "${{ env.VISIONGUARD_PROJECT_TEMP }}/amended-artificial-acceptance"
       - name: Verify current CI/runtime successor and historical source anchors
         run: python scripts/ci_runtime_freeze.py
       - name: Retain actual capacity observations only

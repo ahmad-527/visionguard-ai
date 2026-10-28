@@ -1,7 +1,7 @@
 """Resolve the v2 recipe in a clean project environment; never global pipx."""
 
 import argparse
-import os
+import json
 import subprocess
 import sys
 from pathlib import Path
@@ -36,10 +36,12 @@ def main():
         args.append(str(source / "apps/inspection") + "[test]")
     if a.profile == "native":
         args.extend(["-r", str(ROOT / "requirements/ml-cpu-successor-v2.txt")])
-    report = (
-        Path(os.environ.get("RUNNER_TEMP", str(a.source.parent)))
-        / f"project-dependencies-{a.profile}.json"
-    )
+    # The explicit source argument already binds the selected project workspace;
+    # do not infer receipt placement from GitHub's reserved RUNNER_* variables.
+    report = a.source.parent / f"project-dependencies-{a.profile}.json"
+    if report.exists():
+        raise RuntimeError("Dependency receipt must be new; preserve prior evidence")
+    print(json.dumps({"dependency_report_path": str(report.resolve())}), flush=True)
     args.extend(["--report", str(report)])
     subprocess.run(args, check=True)
     subprocess.run([sys.executable, "-m", "pip", "check"], check=True)

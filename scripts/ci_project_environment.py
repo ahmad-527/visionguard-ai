@@ -100,7 +100,7 @@ def main():
     )
     with Path(os.environ["GITHUB_ENV"]).open("a") as out:
         out.write("PIP_NO_CACHE_DIR=1\n")
-        for key in ["VISIONGUARD_PROJECT_TEMP", "RUNNER_TEMP", "TEMP", "TMP", "TMPDIR"]:
+        for key in ["VISIONGUARD_PROJECT_TEMP", "TEMP", "TMP", "TMPDIR"]:
             out.write(key + "=" + str(workspace) + "\n")
     with Path(os.environ["GITHUB_PATH"]).open("a") as out:
         out.write(str(python.parent.resolve()) + "\n")

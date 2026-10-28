@@ -1,3 +1,8 @@
+> 28 October 2026 successor: use application-cpu-20261028-v2 and the explicit
+> packaging/inspection-v2 recipe. The dated earlier 0.1.0/v1 observations below
+> remain historical evidence; they are not current installation instructions or
+> new CI/acceptance results. See [the successor](ci-runtime-successor-v6.md).
+
 # Local inspection installation — untagged review candidate
 
 Historical integration: PR36 normal merge f13beb897e9223e07866f1f681c457cce6dcfec1
@@ -13,6 +18,25 @@ recipe. Both remain version 0.1.0; **this is not a v1.0 release**. Use the match
 core and application files and SHA-256 manifest from this review packet, not an
 unrelated package from an index with the same version number. No weights, dataset,
 private application permission or incident bundle is shipped.
+
+## Current successor installation
+
+Create a fresh Python 3.11-3.13 project venv without system-site inheritance.
+Install pip 26.2.1, setuptools 84.2.1, hatchling 1.32.4 and build 1.6.1 there.
+Then use that venv's Python:
+
+    python scripts/install_successor.py --profile application --source <new-external-source-directory>
+    visionguard-inspect --manufactured-demo --port 8765
+
+For native fixtures, install the exact official CPU Torch/Torchvision wheels
+first, then choose --profile native. This does not permit trained artifact use.
+To build the matched pair with updated notices:
+
+    python scripts/successor_build.py --source <new-external-build-source> --dist <new-external-dist>
+
+The historical commands below document the earlier recipe and must not be used
+to force Pillow 13 into a <13 dependency declaration. The 0.2.0 metadata reflects
+the successor explicitly. No release/tag or package-index publication is implied.
 
 ## Development setup
 

@@ -12,7 +12,7 @@ from types import MappingProxyType
 
 from visionguard.inspection_contract import InspectionError
 
-PROFILE_ID = "application-cpu-20261009-v1"
+PROFILE_ID = "application-cpu-20261028-v2"
 MODEL_VERSIONS = MappingProxyType(
     {
         "torch": "2.13.0+cpu",
@@ -21,6 +21,10 @@ MODEL_VERSIONS = MappingProxyType(
         "timm": "1.0.28",
         "lightning": "2.6.6",
         "pytorch-lightning": "2.6.6",
+        "Pillow": "13.0.0",
+        "certifi": "2026.10.23",
+        "filelock": "4.2.4",
+        "setuptools": "84.2.1",
     }
 )
 

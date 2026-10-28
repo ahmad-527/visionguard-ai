@@ -32,7 +32,10 @@ def test_unissued_cannot_adopt_existing_directory(tmp_path):
 def test_admission_fail_closed(tmp_path, fault):
     permit = admission.make_artificial(tmp_path)
     root = admission._ARTIFICIAL[permit.nonce][1]
-    path = next((root / "sealed/candle/Data/Images/Normal").glob("*.png"))
+    admitted = admission.admit_artificial(permit)
+    selected = next(row for row in admitted.rows["candle"] if row.label == "normal")
+    assert selected.sample_id in admitted.origin["membership"]["candle"]
+    path = root / "sealed" / selected.image
     if fault == "extra":
         (root / "sealed/extra.txt").write_text("artificial")
     elif fault == "missing":

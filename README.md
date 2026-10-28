@@ -2,15 +2,16 @@
 
 Deep-learning research and local inspection tooling for industrial visual anomaly detection and defect localization.
 
-> **Project status:** PR36 is integrated into the canonical VisionGuard
-> development repository. The loopback inference API, pinned registry and
-> inspection UI are implemented. As of 26 October 2026, the narrow
-> operational/security corrections are authorised for a checked follow-up PR. This is an untagged 0.1.0 application, not a production release.
-> See [current v1 criteria](docs/v1-release-checklist.md) and
-> [startup/support scope](docs/v1-application-installation.md).
+> **Project status (28 October 2026):** PR37's CI/runtime repair uses the
+> explicit untagged 0.2.0 successor recipe and application-cpu-20261028-v2.
+> Actual integration/CI outcomes belong to their exact dated review records.
+> The historical 0.1.0 recipes, scientific pins and evidence are preserved.
+> This is not a production release or permission to load trained artifacts.
+> See [the current successor](docs/ci-runtime-successor-v6.md) and
+> [installation](docs/v1-application-installation.md).
 >
 > Held-out VisA evaluation with historical access independence unverified.
-> Completion publication did not establish clean historical GPU shutdown.
+> Historical GPU cleanup and native-crash root causes remain unproven.
 
 ## Mission
 

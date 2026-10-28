@@ -7,9 +7,11 @@ from pathlib import Path
 import pytest
 
 from visionguard import operational_successor as successor
+from visionguard.ci_runtime_successor import historical_repository
 from visionguard.visa_protocol import canonical_fingerprint
 
 REPOSITORY = Path(__file__).resolve().parents[1]
+HISTORICAL = historical_repository(REPOSITORY)
 
 
 def test_historical_source_archives_and_72_models_exact():
@@ -50,7 +52,7 @@ def test_fail_closed_drift(tmp_path, monkeypatch, kind):
     for relative in paths:
         destination = tmp_path / relative
         destination.parent.mkdir(parents=True, exist_ok=True)
-        destination.write_bytes((REPOSITORY / relative).read_bytes())
+        destination.write_bytes((HISTORICAL / relative).read_bytes())
     from visionguard import heldout_contract
 
     ctx = heldout_contract.context(REPOSITORY)

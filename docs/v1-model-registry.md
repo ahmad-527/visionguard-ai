@@ -1,3 +1,8 @@
+> 28 October 2026 successor: use application-cpu-20261028-v2 and the explicit
+> packaging/inspection-v2 recipe. The dated earlier 0.1.0/v1 observations below
+> remain historical evidence; they are not current installation instructions or
+> new CI/acceptance results. See [the successor](ci-runtime-successor-v6.md).
+
 # Server-managed registry and native-use gate
 
 Current status: the previous bounded PatchCore CPU workflow completed once; its

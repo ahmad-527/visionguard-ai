@@ -1,8 +1,13 @@
-# VisionGuard local inspection application — untagged candidate
+# VisionGuard local inspection application â€” untagged candidate
+
+The current untagged 0.2.0 pair uses application-cpu-20261028-v2 and the explicit
+packaging/inspection-v2 recipe. Install through scripts/install_successor.py in
+a clean venv; do not force Pillow 13 into the historical <13 recipe. The adopted
+limited grant covers eligible scoped contributions only, with third-party terms.
 
 Separate packaging leaves the historically frozen core build recipe unchanged.
 Install the matching reviewed `visionguard-ai` core distribution first, then this
-distribution. Do not substitute an unrelated 0.1.0 core wheel merely because its
+distribution. Do not substitute an unrelated core wheel merely because its
 version matches. Verify both distribution hashes from the review packet.
 
 `visionguard-inspect --manufactured-demo` starts a loopback-only generated-intensity

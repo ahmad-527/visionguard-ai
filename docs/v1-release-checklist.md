@@ -1,3 +1,8 @@
+> 28 October 2026 successor: use application-cpu-20261028-v2 and the explicit
+> packaging/inspection-v2 recipe. The dated earlier 0.1.0/v1 observations below
+> remain historical evidence; they are not current installation instructions or
+> new CI/acceptance results. See [the successor](ci-runtime-successor-v6.md).
+
 # v1 release checklist — engineering status, not release approval
 
 This updates the original delivery criteria after PR36 integration. It adds no

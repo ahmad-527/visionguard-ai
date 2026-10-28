@@ -8,6 +8,7 @@ import sys
 import weakref
 from datetime import UTC, datetime
 from types import SimpleNamespace
+from typing import ClassVar
 from uuid import uuid4
 
 import pytest
@@ -24,7 +25,7 @@ from visionguard.visa_evaluator_synthetic import fixture
 class ManufacturedAllocation:
     """Weakly observed Python ownership, not a measurement of native GPU use."""
 
-    live = weakref.WeakSet()
+    live: ClassVar[weakref.WeakSet["ManufacturedAllocation"]] = weakref.WeakSet()
 
     def __init__(self, size):
         self.size = size

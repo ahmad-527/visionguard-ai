@@ -37,6 +37,9 @@ ADDITIONAL = (
 
 def verify_predecessor(repository: Path) -> dict:
     """Historical v1 is evidence, never a current-execution fallback."""
+    from visionguard.ci_runtime_successor import historical_repository
+
+    repository = historical_repository(repository)
     saved = json.loads((repository / PREDECESSOR).read_text())
     require(
         saved["fingerprint"]
@@ -53,6 +56,9 @@ def verify_predecessor(repository: Path) -> dict:
 
 
 def build_freeze(repository: Path) -> dict:
+    from visionguard.ci_runtime_successor import historical_repository
+
+    repository = historical_repository(repository)
     from visionguard.heldout_contract import context
 
     old = verify_predecessor(repository)
@@ -89,6 +95,9 @@ def build_freeze(repository: Path) -> dict:
 
 
 def verify_freeze(repository: Path) -> dict:
+    from visionguard.ci_runtime_successor import historical_repository
+
+    repository = historical_repository(repository)
     saved = json.loads((repository / FREEZE).read_text())
     require(saved == build_freeze(repository), "Successor/source fingerprint drift")
     return saved

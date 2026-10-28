@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib
 import json
+from types import SimpleNamespace
 
 import pytest
 
@@ -10,9 +11,20 @@ from visionguard.experiment import ReproducibilityConfig
 from visionguard.reproducibility import configure_reproducibility
 
 
+@pytest.mark.parametrize("package_version", ["0.1.0", "0.2.0"])
 def test_environment_capture_distinguishes_configured_values(
     monkeypatch: pytest.MonkeyPatch,
+    package_version: str,
 ) -> None:
+    monkeypatch.setattr(
+        importlib.metadata,
+        "distributions",
+        lambda: [
+            SimpleNamespace(
+                metadata={"Name": "visionguard-ai"}, version=package_version
+            )
+        ],
+    )
     monkeypatch.setenv("HF_HUB_OFFLINE", "1")
     capture = capture_environment("cpu")
 
@@ -22,7 +34,7 @@ def test_environment_capture_distinguishes_configured_values(
         "hf_hub_offline": True,
     }
     assert capture["python"]["status"] == "detected"
-    assert capture["resolved_packages"]["visionguard-ai"] == "0.1.0"
+    assert capture["resolved_packages"]["visionguard-ai"] == package_version
     assert "executable" not in json.loads(environment_json("cpu"))["python"]["value"]
 
 

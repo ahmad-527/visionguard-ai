@@ -15,6 +15,9 @@ FREEZE_PATH = "reports/phase4d-b1-visa-evaluator-readiness/implementation-freeze
 
 def verify_readiness_freeze(repository: Path) -> dict:
     """Scientific rules AND executable source bytes are part of the fingerprint."""
+    from visionguard.ci_runtime_successor import historical_repository
+
+    repository = historical_repository(repository)
     snapshot = json.loads((repository / FREEZE_PATH).read_text(encoding="utf-8"))
     document = snapshot["document"]
     if canonical_fingerprint(document) != snapshot["fingerprint"]:

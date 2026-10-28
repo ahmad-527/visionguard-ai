@@ -17,6 +17,9 @@ from visionguard.visa_protocol import canonical_fingerprint
 
 
 def build(repository: Path) -> dict:
+    from visionguard.ci_runtime_successor import historical_repository
+
+    repository = historical_repository(repository)
     published = verify_published(repository)
     paths = set(published["execution_contract"]["source_hashes"])
     paths.update(

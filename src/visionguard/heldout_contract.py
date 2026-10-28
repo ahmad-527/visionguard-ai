@@ -14,6 +14,9 @@ FREEZE = "reports/phase4d-b2-controlled-activation/implementation-freeze.json"
 
 
 def context(repository: Path) -> dict:
+    from visionguard.ci_runtime_successor import historical_repository
+
+    repository = historical_repository(repository)
     old = readiness_context(repository)
     ready = verify_readiness(repository)
     protocol = json.loads((repository / PROTOCOL).read_text())
@@ -35,14 +38,14 @@ def context(repository: Path) -> dict:
 
 
 def build_freeze(repository: Path) -> dict:
-    """Explicit diagnostics v5 candidate; earlier freezes remain immutable."""
-    from visionguard.cleanup_successor import build_freeze as successor
+    """Explicit CI/runtime v6 candidate; historical freezes remain immutable."""
+    from visionguard.ci_runtime_successor import build_freeze as successor
 
     return successor(repository)
 
 
 def verify_freeze(repository: Path) -> dict:
     """Require the current successor AND immutable historical/scientific bindings."""
-    from visionguard.cleanup_successor import verify_freeze as successor
+    from visionguard.ci_runtime_successor import verify_freeze as successor
 
     return successor(repository)

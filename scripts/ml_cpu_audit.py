@@ -52,7 +52,7 @@ def main():
             "pip",
             "install",
             "pip==26.2.1",
-            "setuptools==84.0.0",
+            "setuptools==84.2.1",
             "pip-audit==2.10.1",
         ],
         root,

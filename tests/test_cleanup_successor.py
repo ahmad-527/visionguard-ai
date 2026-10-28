@@ -28,7 +28,12 @@ def test_v5_chain_preserves_exact_predecessors_and_scientific_inputs():
         "0334a17b5b5c8f954e692c4caa47f93eaead0228acb6c45a082a75ca3fbc1c47"
     )
     assert v4["fingerprint"] == successor.PREDECESSOR_FINGERPRINT
-    assert v5 == successor.build_freeze(REPO) == verify_current(REPO)
+    assert v5 == successor.build_freeze(REPO)
+    current = verify_current(REPO)
+    assert current["document"]["schema_version"] == 6
+    assert current["document"]["historical_fingerprint_v5"] == v5["fingerprint"]
+    assert current["fingerprint"] != v5["fingerprint"]
+    assert current["document"]["real_execution_authorized"] is False
     assert v5["document"]["schema_version"] == 5
     assert v5["fingerprint"] not in v5["document"]["historical_fingerprints"]
     assert v5["document"]["historical_fingerprints"] == (
@@ -63,6 +68,9 @@ def test_v5_changes_cannot_reuse_authorization_fingerprint(field):
 
 @pytest.fixture
 def manufactured_repository(tmp_path, monkeypatch):
+    from visionguard.ci_runtime_successor import historical_repository
+
+    historical_root = historical_repository(REPO)
     saved = successor.build_freeze(REPO)
     first, _ = historical(REPO)
     names = set(saved["document"]["source_sha256"]) | set(
@@ -72,7 +80,7 @@ def manufactured_repository(tmp_path, monkeypatch):
     for name in sorted(names):
         path = tmp_path / name
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_bytes((REPO / name).read_bytes())
+        path.write_bytes((historical_root / name).read_bytes())
     from visionguard import heldout_contract
 
     ctx = heldout_contract.context(REPO)

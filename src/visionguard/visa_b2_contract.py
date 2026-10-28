@@ -18,6 +18,9 @@ B1 = "0578ca3bc7765657fe568e7db670088490639ef5f011315ab043391c8a8fcb49"
 
 def context(repository: Path) -> dict:
     """Only canonical committed evidence; never touch a dataset root."""
+    from visionguard.ci_runtime_successor import historical_repository
+
+    repository = historical_repository(repository)
     b1 = verify_readiness_freeze(repository)
     require(b1["fingerprint"] == B1, "B1 fingerprint changed")
     protocol = json.loads((repository / PROTOCOL).read_text())
@@ -68,6 +71,9 @@ def context(repository: Path) -> dict:
 
 
 def build_freeze(repository: Path) -> dict:
+    from visionguard.ci_runtime_successor import historical_repository
+
+    repository = historical_repository(repository)
     ctx = context(repository)
     paths = [
         p.relative_to(repository).as_posix()
@@ -93,6 +99,9 @@ def build_freeze(repository: Path) -> dict:
 
 
 def verify_freeze(repository: Path) -> dict:
+    from visionguard.ci_runtime_successor import historical_repository
+
+    repository = historical_repository(repository)
     stored = json.loads((repository / FREEZE).read_text())
     require(stored == build_freeze(repository), "B2 readiness fingerprint/source drift")
     return stored

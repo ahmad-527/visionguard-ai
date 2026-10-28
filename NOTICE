@@ -1,0 +1,27 @@
+VisionGuard AI — local CPU inspection source
+
+To the extent Ahmad Sajjad Siddiqui owns or is authorised to license the
+relevant rights in the reviewed source-only distribution and authorised
+bounded successor changes,
+those contributions are licensed under the Apache License, Version 2.0.
+See LICENSE for the unmodified terms. Copyright 2026 Ahmad Sajjad Siddiqui
+applies only to those contributions.
+
+This does not relicense third-party material. Preserve every applicable
+third-party licence, notice, attribution, exception and contribution-specific
+term. No model, pretrained-weight, dataset, scientific-output, third-party mark
+or excluded-artifact right is granted.
+
+Development used AI assistance. This notice does not establish that every line
+is protected, independently original or controlled by the named licensor.
+Qualified wording cannot supply a missing permission. Third-party terms and
+the preserved historical component sections remain separate; see
+THIRD-PARTY-NOTICES.md and the upstream licence/notice texts.
+
+The source-only runtime distribution recipe includes no model/data payload,
+private evidence, credential,
+authority/consumption record, dependency/runtime/browser binary or original
+Git history. Source code for guards and protocols creates no trained authority.
+Source licensing is not approval for model redistribution or deployment.
+
+Held-out VisA evaluation with historical access independence unverified.

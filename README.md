@@ -1,11 +1,17 @@
 # VisionGuard AI
 
-Production-grade deep learning platform for industrial visual anomaly detection, defect localization, benchmarking, and real-time quality inspection.
+Deep-learning research and local inspection tooling for industrial visual anomaly detection and defect localization.
 
-> **Project status:** Phase 4C — VisA protocols frozen for review; integrity audit
-> and normal-only memory/restart engineering acceptance passed. No VisA test performance or
-> hybrid evaluation has been performed. Final-test lock CLOSED; full execution
-> still requires hardware/readiness review and separate authorization.
+> **Project status (28 October 2026):** PR37's CI/runtime repair uses the
+> explicit untagged 0.2.0 successor recipe and application-cpu-20261028-v2.
+> Actual integration/CI outcomes belong to their exact dated review records.
+> The historical 0.1.0 recipes, scientific pins and evidence are preserved.
+> This is not a production release or permission to load trained artifacts.
+> See [the current successor](docs/ci-runtime-successor-v6.md) and
+> [installation](docs/v1-application-installation.md).
+>
+> Held-out VisA evaluation with historical access independence unverified.
+> Historical GPU cleanup and native-crash root causes remain unproven.
 
 ## Mission
 

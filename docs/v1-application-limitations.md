@@ -72,7 +72,9 @@ see `v1-security-and-rights-inventory.md` and the external advisory reports.
 
 Manufactured intensity tests verify integration only. Manufactured CPU tensor
 tests verify adapter plumbing/identity rejection, not trained native model
-acceptance. No development checkpoint has been opened for application serving;
+acceptance. The prior bounded trained CPU workflow completed within its exact reviewed scope;
+its permanently consumed authority is not reusable. No trained artifact has been
+opened for this changed candidate;
 no held-out asset, metric, map or prediction has been inspected in this task.
 Linux checks use existing Ubuntu WSL, not a native Linux desktop/GPU deployment.
 Broader Python/platform/ML/browser support needs the declared hosted matrix and

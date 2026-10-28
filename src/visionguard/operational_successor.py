@@ -43,6 +43,9 @@ ADDITIONAL = (
 
 def historical(repository: Path) -> tuple[dict, dict]:
     """No execution fallback and no regeneration of the old freezes."""
+    from visionguard.ci_runtime_successor import historical_repository
+
+    repository = historical_repository(repository)
     from visionguard.accounting_successor import ARCHIVES as v4_archives
 
     first = json.loads((repository / v2.PREDECESSOR).read_text())
@@ -72,6 +75,9 @@ def historical(repository: Path) -> tuple[dict, dict]:
 
 
 def build_freeze(repository: Path) -> dict:
+    from visionguard.ci_runtime_successor import historical_repository
+
+    repository = historical_repository(repository)
     from visionguard.accounting_successor import ARCHIVES as v4_archives
     from visionguard.heldout_contract import context
 
@@ -110,6 +116,9 @@ def build_freeze(repository: Path) -> dict:
 
 
 def verify_freeze(repository: Path) -> dict:
+    from visionguard.ci_runtime_successor import historical_repository
+
+    repository = historical_repository(repository)
     saved = json.loads((repository / FREEZE).read_text())
     require(saved == build_freeze(repository), "Operational/source fingerprint drift")
     return saved

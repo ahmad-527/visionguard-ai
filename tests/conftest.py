@@ -50,3 +50,36 @@ def valid_dataset(tmp_path: Path) -> Path:
     for relative, value in values.items():
         write_image(tmp_path / "widget" / relative, value)
     return tmp_path
+
+
+def pytest_runtest_setup(item):
+    """Record actual capacity before affected synthetic tests; change no guard."""
+    import json
+    import os
+    import shutil
+    import tempfile
+    import time
+
+    if "heldout" in item.path.name or "successor" in item.path.name:
+        measured = Path(item.config.option.basetemp or tempfile.gettempdir())
+        while not measured.exists():
+            measured = measured.parent
+        usage = shutil.disk_usage(measured)
+        item.user_properties.append(("actual_free_bytes_before_test", usage.free))
+        item.user_properties.append(("production_reserve_bytes_unchanged", 20 * 2**30))
+        destination = os.environ.get("VISIONGUARD_PROJECT_TEMP") or os.environ.get(
+            "RUNNER_TEMP"
+        )
+        if destination:
+            event = {
+                "test": item.nodeid,
+                "unix_seconds": time.time(),
+                "actual_free_bytes": usage.free,
+                "measured_test_volume": str(measured),
+                "checkout_free_bytes": shutil.disk_usage(item.path.parent).free,
+                "production_reserve_bytes": 20 * 2**30,
+            }
+            with (Path(destination) / "resource-before-tests.jsonl").open("a") as out:
+                out.write(json.dumps(event) + "\n")
+                out.flush()
+                os.fsync(out.fileno())

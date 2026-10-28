@@ -4,3 +4,12 @@
 *.jpeg binary
 *.tif binary
 *.tiff binary
+
+# Preserve upstream licence and original-reference archive bytes exactly.
+/metadata/license-texts/** -text
+/reports/ci-runtime-successor-v6/predecessor/** -text
+/supplemental-license-texts/** -text
+
+/LICENSE -text
+/NOTICE -text
+/THIRD-PARTY-NOTICES.md -text

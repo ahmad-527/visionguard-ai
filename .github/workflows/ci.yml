@@ -25,10 +25,11 @@ jobs:
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: ${{ matrix.python-version }}
-          cache: pip
+      - name: Isolate project Python and record actual runner capacity
+        run: python scripts/ci_project_environment.py --output "${{ runner.temp }}/project-python" --observations "${{ runner.temp }}/resource-observations.json"
 
       - name: Install project and development tools
-        run: python -m pip install --upgrade pip && python -m pip install -e ".[analysis,dev]"
+        run: python scripts/install_successor.py --profile ordinary --source "${{ env.VISIONGUARD_PROJECT_TEMP }}/ordinary-successor-source"
 
       - name: Check formatting
         run: python -m ruff format --check .
@@ -45,7 +46,7 @@ jobs:
       - name: Verify closed B1 evaluator freeze and synthetic-only interfaces
         run: |
           python scripts/phase4d_b1_freeze.py
-          python -m visionguard.visa_evaluator_synthetic --repository . > /tmp/b1-synthetic.json
+          python -m visionguard.visa_evaluator_synthetic --repository . > "${{ env.VISIONGUARD_PROJECT_TEMP }}/b1-synthetic.json"
           python -m visionguard.visa_evaluator_artifacts --help
 
       - name: Verify VisA freeze and lightweight command interfaces
@@ -57,3 +58,14 @@ jobs:
           visionguard-visa-develop --help
           visionguard-visa-develop --model patchcore --output outputs/ci-plan --plan
           visionguard-visa-develop --model efficientad --output outputs/ci-plan --plan
+      - name: Verify current CI/runtime successor and historical source anchors
+        run: python scripts/ci_runtime_freeze.py
+      - name: Retain actual capacity observations only
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: resource-${{ github.job }}-${{ runner.os }}-${{ matrix.python }}-${{ matrix.python-version }}
+          path: |
+            ${{ runner.temp }}/resource-observations.json
+            ${{ env.VISIONGUARD_PROJECT_TEMP }}/resource-before-tests.jsonl
+          if-no-files-found: warn

@@ -42,6 +42,9 @@ ADDITIONAL = (
 
 def build_freeze(repository: Path) -> dict:
     """Bind current source, verified predecessors, and unchanged scientific identity."""
+    from visionguard.ci_runtime_successor import historical_repository
+
+    repository = historical_repository(repository)
     from visionguard.accounting_successor import FREEZE as old_path
     from visionguard.accounting_successor import verify_freeze as old_verify
     from visionguard.heldout_contract import context
@@ -83,6 +86,9 @@ def build_freeze(repository: Path) -> dict:
 
 def verify_freeze(repository: Path) -> dict:
     """No historical regeneration, fallback, or authorization fingerprint reuse."""
+    from visionguard.ci_runtime_successor import historical_repository
+
+    repository = historical_repository(repository)
     saved = json.loads((repository / FREEZE).read_bytes())
     require(saved == build_freeze(repository), "Cleanup/source fingerprint drift")
     return saved

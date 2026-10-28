@@ -12,9 +12,11 @@ from visionguard import authorization_amendment as amendment
 from visionguard import heldout_authorization as gate
 from visionguard import heldout_contract as contract
 from visionguard import operational_successor as operational
+from visionguard.ci_runtime_successor import historical_repository
 from visionguard.visa_protocol import canonical_fingerprint
 
 REPOSITORY = Path(__file__).resolve().parents[1]
+HISTORICAL = historical_repository(REPOSITORY)
 
 
 @pytest.fixture
@@ -32,7 +34,7 @@ def isolated(tmp_path, monkeypatch):
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(
             (
-                REPOSITORY
+                HISTORICAL
                 / (accounting.ARCHIVES | operational.ARCHIVES).get(relative, relative)
             ).read_bytes()
         )

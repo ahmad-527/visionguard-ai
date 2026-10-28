@@ -44,6 +44,9 @@ ADDITIONAL = (
 
 
 def build_freeze(repository: Path):
+    from visionguard.ci_runtime_successor import historical_repository
+
+    repository = historical_repository(repository)
     from visionguard.cleanup_successor import ARCHIVES as v5_archives
     from visionguard.heldout_contract import context
     from visionguard.operational_successor import FREEZE as old_path
@@ -86,6 +89,9 @@ def build_freeze(repository: Path):
 
 
 def verify_freeze(repository: Path):
+    from visionguard.ci_runtime_successor import historical_repository
+
+    repository = historical_repository(repository)
     saved = json.loads((repository / FREEZE).read_text())
     require(saved == build_freeze(repository), "Accounting/source fingerprint drift")
     return saved

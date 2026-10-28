@@ -8,12 +8,12 @@
       ".github/workflows/application-delivery.yml": "7f09f844e3fdcab2983e457ace539dc722b446733454365d2d6cc62d480eb8b2",
       ".github/workflows/authorization-amendment.yml": "3873de36ab577fd22f778239e1eff246f17c2b91d6e914358dc7c6ffaa04405e",
       ".github/workflows/b2-readiness.yml": "3892b4592b40b2955f0114e4ccf9c3e9817b49cd3e7fe7d99919190a6dcbdd10",
-      ".github/workflows/ci.yml": "590e1b2efe766e79ed1163218567c5ba4c29b557e9ebaecf5ea48d86ef68bc75",
+      ".github/workflows/ci.yml": "2437433790e8c520bc36fa56ed5825448b05e57c5f1a0f8f018eeee8b2e26acb",
       ".github/workflows/controlled-activation.yml": "beecbef435bb29e6678139ff26d2152520d1279e21fbef8f7c21f5a54ea1a004",
       ".github/workflows/controlled-pause.yml": "cd361651e5458ace175d7b5b80342a6678199358571acdc1d4d13a473b7b03f6",
       ".github/workflows/ml-cpu-successor.yml": "343e69d947835472e9cce42b12501584bd287c9c3b9414e5d6875954d881db9f",
       ".github/workflows/output-accounting.yml": "b11707bdc648e70ae386a17a1d102a9ccceda51543cbab1ce103b07fc6097bb1",
-      ".github/workflows/windows-ordinary.yml": "01753430fb0c363fceb3f216afb8c8565704ffa28a96f89943dc384bbd2ee962",
+      ".github/workflows/windows-ordinary.yml": "329d1ce99fe1c57774eb759e089693595cefa8c83db67349ba71578ba18626c8",
       ".gitignore": "37a0904807cea8e877ecf3427f969d27070001e63154981a976b9b9a5cfae8a9",
       "AGENTS.md": "e571f59e5e4c624b77157e2bace6d15a5694001b3482b1c295a0fb0fbcb4398a",
       "CHANGELOG-application.md": "7b64c5f84a5a1199f5ff14f9ef4dedeba44246792fe5aa3cbe8fd95292596f44",
@@ -792,5 +792,5 @@
       }
     }
   },
-  "fingerprint": "813e48ac7a2cc8e79e9a34d52eeb595b01130064fe308e5b3f648fb0c43c5184"
+  "fingerprint": "a2276c1041e82e389f351dc7f3315324739dc331776b32b0ce815f2efa0d5a73"
 }
